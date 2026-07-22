@@ -175,12 +175,37 @@ const nav = document.getElementById('nav');
 document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
 
 // ── FORM
-function handleSubmit(e) {
-  setTimeout(() => {
-    const s = document.getElementById('form-success');
-    if (s) s.style.display = 'block';
-  }, 500);
+async function handleSubmit(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalLabel = submitButton.textContent;
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Enviando...';
+
+  try {
+    const response = await fetch(form.action || '/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+
+    if (!response.ok) throw new Error(`Netlify respondió con ${response.status}`);
+
+    form.reset();
+    mostrarModal();
+  } catch (error) {
+    console.error('Error al enviar la reserva:', error);
+    alert('No se pudo enviar la reserva. Intentá nuevamente.');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalLabel;
+  }
 }
+
+document.getElementById('formularioContacto').addEventListener('submit', handleSubmit);
 
 // ── SCROLL NAV
 window.addEventListener('scroll', () => {
@@ -515,19 +540,19 @@ function elegirPago(btn, metodo) {
 
     // Función para mostrar el modal
     function mostrarModal() {
-        document.getElementById('modalGracias').style.display = 'flex';
+      document.getElementById('modalGracias').hidden = false;
     }
 
     // Función para cerrar el modal
     function cerrarModal() {
-        document.getElementById('modalGracias').style.display = 'none';
+      document.getElementById('modalGracias').hidden = true;
     }
 
     // Cerrar modal al hacer clic fuera de él
     window.onclick = function(event) {
         const modal = document.getElementById('modalGracias');
         if (event.target === modal) {
-            modal.style.display = 'none';
+          modal.hidden = true;
         }
     };
 
@@ -538,7 +563,4 @@ function elegirPago(btn, metodo) {
         }
     });
 
-    // Cuando el DOM esté cargado, enlazar el botón de cerrar
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
-    });
+    document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
