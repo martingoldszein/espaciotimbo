@@ -22,6 +22,10 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  button, input, select, textarea, .btn, .nav-reservar, .evento-card, .evento-cta, .evento-agotado,
+  .evento-badge, .servicio-item, .yurta-btn, .cal-resumen, .cal-error, .pago-bloque, .pago-metodo-btn,
+  .calendario-widget, .ical-config, .que-es-img, .quienes-foto, .glamping-img-grid img,
+  .galeria-strip img, .btn-submit { border-radius: 5px; }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', sans-serif;
@@ -157,7 +161,7 @@
 
   /* ── GALERÍA STRIP ── */
   .galeria-strip { padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); height: 320px; }
-  .galeria-strip img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .galeria-strip img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; border-radius: 0; }
   .galeria-strip div { overflow: hidden; }
   .galeria-strip div:hover img { transform: scale(1.06); }
 
