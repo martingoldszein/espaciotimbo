@@ -107,13 +107,13 @@ const TALLERES_EVENTOS = [
 
    Por ahora el calendario muestra disponibilidad de ejemplo.
 ═══════════════════════════════════════════════════════════════ */
-const ICAL_URL_YURTA1 = ""; // Ej: "https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL"
-const ICAL_URL_YURTA2 = ""; // Ej: "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"
+const ICAL_URL_YURTA1 = "https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL"; // Ej: "https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL"
+const ICAL_URL_YURTA2 = "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"; // Ej: "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"
 
 /* ─── DATOS DE EJEMPLO para el calendario (se usan hasta configurar iCal) ─── */
 const OCUPADOS_EJEMPLO = {
-  yurta1: [3,4,5,15,16,17,18,25],
-  yurta2: [1,2,10,11,12,20,21,22,26,27]
+  //yurta1: [3,4,5,15,16,17,18,25],
+  //yurta2: [1,2,10,11,12,20,21,22,26,27]
 };
 
 /* ═══════════════════════════════════════════════════════════════
