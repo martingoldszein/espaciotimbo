@@ -271,17 +271,24 @@ function fechaNorm(a, m, d) {
 function hoyNorm() {
   const h = new Date(); h.setHours(0,0,0,0); return h;
 }
+
 function ocupadosDeYurta(y) {
-  return (y === 1 ? OCUPADOS_EJEMPLO.yurta1 : OCUPADOS_EJEMPLO.yurta2) || [];
+  return (y === 1 ? OCUPADOS_ICAL.yurta1 : OCUPADOS_ICAL.yurta2) || [];
 }
+
 function esDiaOcupado(d, m, a) {
   const hoy = hoyNorm();
   const fecha = fechaNorm(a, m, d);
   if (fecha < hoy) return false;
-  if (m === hoy.getMonth() && a === hoy.getFullYear())
-    return ocupadosDeYurta(calState.yurta).includes(d);
-  return false;
+
+  const rangos = ocupadosDeYurta(calState.yurta);
+  // Airbnb marca DTEND como el día de checkout (no ocupado esa noche),
+  // por eso el chequeo es fecha >= start && fecha < end
+  return rangos.some(r => fecha >= r.start && fecha < r.end);
 }
+
+
+
 function rangoTieneOcupados(ini, fin) {
   let cur = new Date(ini); cur.setDate(cur.getDate()+1); cur.setHours(0,0,0,0);
   while (cur < fin) {
