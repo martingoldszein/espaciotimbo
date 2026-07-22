@@ -259,7 +259,7 @@
   }
 
   /* ── RESERVAS ── */
-  .reservas { background: var(--bosque-2); padding: 7rem 3rem; }
+  .reservas { background: var(--bosque-2); padding: 7rem 3rem; overflow: hidden; }
   .reservas-inner { max-width: 1100px; margin: 0 auto; }
   .reservas-header { margin-bottom: 4rem; }
   .reservas-header .section-title { color: var(--crema); }
@@ -338,7 +338,7 @@
   }
   .pago-info strong { color: rgba(242,234,216,0.85); font-weight: 500; }
   .pago-region-tabs {
-    display: flex; gap: 0; margin-bottom: 1.2rem;
+    display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 1.2rem;
     border-bottom: 1px solid rgba(242,234,216,0.12);
   }
   .pago-region-btn {
@@ -359,7 +359,7 @@
     background: rgba(255,255,255,0.04); border: 1px solid rgba(242,234,216,0.15);
     cursor: pointer; font-family: 'Inter', sans-serif;
     font-size: 0.78rem; color: rgba(242,234,216,0.55);
-    transition: all 0.2s; white-space: nowrap;
+    transition: all 0.2s; white-space: normal;
   }
   .pago-metodo-btn:hover { border-color: rgba(242,234,216,0.3); color: rgba(242,234,216,0.8); }
   .pago-metodo-btn.active { border-color: var(--tierra); background: rgba(139,107,71,0.15); color: var(--crema); }
@@ -376,7 +376,7 @@
   .reserva-cal-col {
     position: sticky; top: 6rem;
   }
-  .reserva-form-col { }
+  .reserva-cal-col, .reserva-form-col { min-width: 0; }
   .airbnb-info {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem; border-top: 1px solid rgba(242,234,216,0.12); padding-top: 2rem;
@@ -547,7 +547,28 @@
     .reserva-layout { grid-template-columns: 1fr; gap: 2.5rem; }
     .reserva-cal-col { position: static; }
     .calendarios-grid { grid-template-columns: 1fr; }
+    .reservas { padding: 5rem 1.4rem; }
+    .reservas-header { margin-bottom: 2.5rem; }
+    .reserva-layout { padding-top: 1rem; }
+    .calendario-widget, .pago-body { padding: 1rem; }
+    .calendario-widget-header { align-items: flex-start; gap: 0.75rem; }
+    .calendario-status { flex-shrink: 0; }
+    .cal-leyenda { gap: 0.6rem 1rem; flex-wrap: wrap; }
+    .airbnb-info { grid-template-columns: 1fr; gap: 1rem; }
+    .pago-header { padding: 0.9rem 1rem; }
+    .pago-region-btn { padding: 0.55rem 0.7rem; }
+    .form-submit { align-items: flex-start; }
     .talleres-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (max-width: 520px) {
+    .yurta-selector { grid-template-columns: 1fr; }
+    .pago-region-tabs { display: grid; grid-template-columns: 1fr; }
+    .pago-region-btn { text-align: left; border-bottom: 1px solid rgba(242,234,216,0.08); }
+    .pago-region-btn.active { border-bottom-color: var(--tierra); }
+    .pago-metodos.active { flex-direction: column; }
+    .pago-metodo-btn { width: 100%; }
+    .form-submit .btn-submit { width: 100%; }
   }
 
   /* Logo: fondo ya transparente, letras blancas → verde bosque #3A5240 */
