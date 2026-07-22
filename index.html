@@ -896,7 +896,7 @@
       <!-- COLUMNA DERECHA: Formulario -->
       <div class="reserva-form-col">
         <p class="ical-section-title">— Solicitud de reserva</p>
-      <form name="contacto" method="POST" data-netlify="true" action="/gracias.html">
+<form name="contacto" method="POST" data-netlify="true" id="formularioContacto" netlify>
 
           <input type="hidden" name="form-name" value="contacto" />
           <input type="hidden" name="_subject" value="Nueva reserva desde espaciotimbo.uy">
@@ -1514,6 +1514,35 @@ function elegirPago(btn, metodo) {
   initCalListeners();
   actualizarResumenYForm();
 })();
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('formularioContacto');
+        
+        form.addEventListener('submit', function(event) {
+            // Prevenir que la página se recargue
+            event.preventDefault();
+            
+            // Enviar los datos a Netlify mediante fetch
+            const formData = new FormData(form);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                // Limpiar el formulario
+                form.reset();
+                // Mostrar el modal
+                mostrarModal();
+            })
+            .catch((error) => {
+                alert('Hubo un error al enviar el mensaje. Intenta de nuevo.');
+                console.error('Error:', error);
+            });
+        });
+    });
 
 
 
