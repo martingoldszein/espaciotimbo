@@ -112,8 +112,8 @@ const ICAL_URL_YURTA2 = "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5
 
 /* ─── DATOS DE EJEMPLO para el calendario (se usan hasta configurar iCal) ─── */
 const OCUPADOS_EJEMPLO = {
-  //yurta1: [3,4,5,15,16,17,18,25],
-  //yurta2: [1,2,10,11,12,20,21,22,26,27]
+  yurta1: [],
+  yurta2: []
 };
 
 /* ═══════════════════════════════════════════════════════════════
@@ -222,7 +222,7 @@ function hoyNorm() {
   const h = new Date(); h.setHours(0,0,0,0); return h;
 }
 function ocupadosDeYurta(y) {
-  return y === 1 ? OCUPADOS_EJEMPLO.yurta1 : OCUPADOS_EJEMPLO.yurta2;
+  return (y === 1 ? OCUPADOS_EJEMPLO.yurta1 : OCUPADOS_EJEMPLO.yurta2) || [];
 }
 function esDiaOcupado(d, m, a) {
   const hoy = hoyNorm();
