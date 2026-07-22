@@ -7,628 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --crema:    #F2EAD8;
-    --crema-2:  #E8DEC8;
-    --bosque:   #3A5240;
-    --bosque-2: #2C3E30;
-    --tierra:   #8B6B47;
-    --tierra-2: #6B5035;
-    --blanco:   #FAFAF5;
-    --negro:    #1E1E1A;
-    --gris:     #5A5A52;
-    --linea:    rgba(58,82,64,0.18);
-  }
+<link rel="stylesheet" href="styles.css">
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  button { border-radius: 5px; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--crema);
-    color: var(--negro);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  #nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(242,234,216,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--linea);
-    transition: background 0.3s;
-  }
-  .logo-img-nav { height: 44px; width: auto; display: block; }
-  .logo-img-foot { height: 36px; width: auto; display: block; opacity: 0.6; }
-  .logo-img-foot:hover { opacity: 0.85; }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem; font-weight: 500; letter-spacing: 0.08em;
-    color: var(--bosque); text-decoration: none; text-transform: uppercase;
-  }
-  .nav-logo span { font-weight: 300; opacity: 0.7; font-size: 0.7em; display: block; letter-spacing: 0.2em; }
-  #nav ul { list-style: none; display: flex; gap: 2.5rem; }
-  #nav ul a {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--bosque-2); text-decoration: none; font-weight: 400; transition: color 0.2s;
-  }
-  #nav ul a:hover { color: var(--tierra); }
-  .nav-reservar {
-    background: var(--bosque); color: var(--blanco) !important;
-    padding: 0.5rem 1.4rem; border-radius: 5px; transition: background 0.2s !important;
-  }
-  .nav-reservar:hover { background: var(--tierra) !important; color: var(--blanco) !important; }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { width: 22px; height: 1.5px; background: var(--bosque); display: block; transition: all 0.3s; }
-
-  /* ── HERO ── */
-  .hero {
-    height: 100vh; min-height: 600px;
-    position: relative; display: flex; align-items: flex-end; overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    transform: scale(1.08);
-    animation: heroZoom 18s ease-out forwards;
-  }
-  @keyframes heroZoom { to { transform: scale(1); } }
-  .hero-overlay { position: absolute; inset: 0; background: rgba(73,99,58,0.45); }
-  .hero-content { position: relative; z-index: 2; padding: 0 3rem 4rem; max-width: 800px; }
-  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242,234,216,0.7); margin-bottom: 1.2rem; }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.2rem, 7vw, 6rem); font-weight: 300; line-height: 1.05;
-    color: var(--blanco); margin-bottom: 1.5rem;
-  }
-  .hero-title em { font-style: italic; font-weight: 300; }
-  .hero-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem; font-style: italic; font-weight: 300;
-    color: rgba(255,255,255,0.92); max-width: 560px; line-height: 1.6;
-    border-left: 2px solid rgba(255,255,255,0.5); padding-left: 1.2rem; margin-bottom: 2.5rem;
-  }
-  .hero-cta { display: inline-flex; gap: 1rem; flex-wrap: wrap; }
-  .btn {
-    display: inline-block; padding: 0.85rem 2rem;
-    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-    text-decoration: none; font-family: 'Inter', sans-serif;
-    transition: all 0.22s; cursor: pointer; border: none; font-weight: 400; border-radius: 5px;
-  }
-  .btn-primary { background: var(--tierra); color: var(--blanco); }
-  .btn-primary:hover { background: var(--tierra-2); }
-  .btn-outline { background: transparent; color: var(--blanco); border: 1px solid rgba(255,255,255,0.5); }
-  .btn-outline:hover { background: rgba(255,255,255,0.1); }
-
-  /* ── SECCIONES BASE ── */
-  section { padding: 7rem 3rem; }
-  .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tierra); margin-bottom: 0.8rem; }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.1;
-    color: var(--bosque-2); margin-bottom: 1.5rem;
-  }
-  .section-title em { font-style: italic; }
-  .section-body { font-size: 1rem; line-height: 1.75; color: var(--gris); max-width: 56ch; }
-  .divider { width: 48px; height: 1px; background: var(--tierra); margin: 1.5rem 0; }
-
-  /* ── QUÉ ES ── */
-  .que-es {
-    background: var(--blanco);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
-    align-items: center; max-width: 1280px; margin: 0 auto;
-  }
-  .que-es-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; border-radius: 5px; }
-  .que-es-text .section-body + .section-body { margin-top: 1.2rem; }
-
-  /* ── FRASE INTERMEDIA ── */
-  .frase-seccion { background: var(--bosque); padding: 5rem 3rem; text-align: center; }
-  .frase-seccion blockquote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.7rem, 3.5vw, 2.8rem); font-style: italic; font-weight: 300;
-    color: var(--crema); max-width: 800px; margin: 0 auto; line-height: 1.45;
-  }
-
-  /* ── GLAMPING ── */
-  .glamping {
-    background: var(--crema);
-    max-width: 1280px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-  }
-  .glamping-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-  .glamping-img-grid img { width: 100%; object-fit: cover; display: block; border-radius: 5px; }
-  .glamping-img-grid img:first-child { grid-column: 1/-1; aspect-ratio: 16/9; }
-  .glamping-img-grid img:not(:first-child) { aspect-ratio: 1; }
-
-  /* ── SERVICIOS ── */
-  .servicios { background: var(--blanco); }
-  .servicios-inner { max-width: 1280px; margin: 0 auto; }
-  .servicios-header { margin-bottom: 4rem; }
-  .servicios-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0; border-top: 1px solid var(--linea);
-  }
-  .servicio-item { padding: 2.5rem 2rem; border-bottom: 1px solid var(--linea); border-right: 1px solid var(--linea); transition: background 0.2s; }
-  .servicio-item:hover { background: var(--crema); }
-  .servicio-numero { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--crema-2); line-height: 1; margin-bottom: 1rem; }
-  .servicio-titulo { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 500; color: var(--bosque-2); margin-bottom: 0.8rem; line-height: 1.25; }
-  .servicio-desc { font-size: 0.88rem; line-height: 1.7; color: var(--gris); }
-
-  /* ── GALERÍA STRIP ── */
-  .galeria-strip { padding: 0; overflow: hidden; height: 320px; }
-  .galeria-track { display: flex; width: max-content; height: 100%; animation: galeriaScroll 52s linear infinite; }
-  .galeria-track:hover { animation-play-state: paused; }
-  .galeria-track > div { width: 25vw; min-width: 25vw; height: 100%; overflow: hidden; }
-  .galeria-strip img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-  .galeria-track > div:hover img { transform: scale(1.06); }
-  @keyframes galeriaScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ── QUIÉNES SOMOS ── */
-  .quienes { background: var(--crema); }
-  .quienes-inner { max-width: 1280px; margin: 0 auto; }
-  .quienes-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-bottom: 4rem; }
-  .quienes-foto { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-radius: 5px; }
-  .quienes-bios { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--linea); }
-  .bio-nombre { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--bosque-2); margin-bottom: 0.3rem; }
-  .bio-rol { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tierra); margin-bottom: 0.8rem; }
-  .bio-texto { font-size: 0.88rem; line-height: 1.75; color: var(--gris); }
-
-  /* ── TALLERES & EVENTOS ── */
-  .talleres { background: var(--crema); }
-  .talleres-inner { max-width: 1280px; margin: 0 auto; }
-  .talleres-header { margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; }
-  .talleres-filtros { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .filtro-btn {
-    background: none; border: 1px solid var(--linea); cursor: pointer;
-    padding: 0.45rem 1.1rem; font-family: 'Inter', sans-serif;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 5px;
-    color: var(--gris); transition: all 0.2s;
-  }
-  .filtro-btn:hover, .filtro-btn.active { background: var(--bosque); color: var(--crema); border-color: var(--bosque); }
-  .talleres-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
-  }
-  .evento-card {
-    background: var(--blanco); border: 1px solid var(--linea);
-    display: flex; flex-direction: column;
-    transition: box-shadow 0.2s, transform 0.2s;
-    overflow: hidden; border-radius: 5px;
-  }
-  .evento-card:hover { box-shadow: 0 8px 32px rgba(58,82,64,0.1); transform: translateY(-2px); }
-  .evento-card-img {
-    width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
-    background: var(--crema-2);
-  }
-  .evento-card-img-placeholder {
-    width: 100%; aspect-ratio: 16/9; background: var(--crema-2);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .evento-card-img-placeholder svg { width: 40px; height: 40px; opacity: 0.25; }
-  .evento-card-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
-  .evento-tipo {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--tierra); font-weight: 500;
-  }
-  .evento-titulo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem; font-weight: 500; color: var(--bosque-2); line-height: 1.25;
-  }
-  .evento-desc { font-size: 0.86rem; line-height: 1.65; color: var(--gris); flex: 1; }
-  .evento-meta {
-    margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--linea);
-    display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem;
-  }
-  .evento-meta-item {
-    display: flex; align-items: center; gap: 0.4rem;
-    font-size: 0.78rem; color: var(--gris);
-  }
-  .evento-meta-item svg { width: 14px; height: 14px; opacity: 0.5; flex-shrink: 0; }
-  .evento-precio {
-    margin-top: 0.8rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem; color: var(--bosque); font-weight: 500;
-  }
-  .evento-precio span { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--gris); font-weight: 400; }
-  .evento-cta {
-    margin-top: 1.2rem; display: inline-block;
-    background: var(--bosque); color: var(--crema);
-    padding: 0.7rem 1.5rem; font-size: 0.75rem; letter-spacing: 0.12em;
-    text-transform: uppercase; text-decoration: none;
-    font-family: 'Inter', sans-serif; transition: background 0.2s; cursor: pointer; border: none; border-radius: 5px;
-  }
-  .evento-cta:hover { background: var(--tierra); }
-  .evento-agotado {
-    margin-top: 1.2rem; display: inline-block;
-    background: rgba(90,90,82,0.12); color: var(--gris);
-    padding: 0.7rem 1.5rem; font-size: 0.75rem; letter-spacing: 0.12em;
-    text-transform: uppercase; font-family: 'Inter', sans-serif; border-radius: 5px;
-  }
-  .evento-badge {
-    display: inline-block; padding: 0.25rem 0.7rem;
-    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
-    background: var(--tierra); color: var(--crema); margin-bottom: 0.3rem;
-    align-self: flex-start; border-radius: 5px;
-  }
-  .evento-badge.nuevo { background: var(--bosque); }
-  .talleres-empty {
-    grid-column: 1/-1; text-align: center; padding: 4rem 2rem;
-    color: var(--gris); font-size: 0.9rem;
-    border: 1px dashed var(--linea); border-radius: 5px;
-  }
-
-  /* ── RESERVAS ── */
-  .reservas { background: var(--bosque-2); padding: 7rem 3rem; }
-  .reservas-inner { max-width: 1100px; margin: 0 auto; }
-  .reservas-header { margin-bottom: 4rem; }
-  .reservas-header .section-title { color: var(--crema); }
-  .reservas-header .section-eyebrow { color: rgba(242,234,216,0.6); }
-  .reservas-header .section-body { color: rgba(242,234,216,0.75); }
-  .reservas-header .divider { background: var(--tierra); }
-  /* Selector de yurta */
-  .yurta-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-  .yurta-btn {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(242,234,216,0.15);
-    cursor: pointer; padding: 0.9rem 1rem; text-align: left;
-    transition: all 0.2s; display: flex; flex-direction: column; gap: 0.2rem; border-radius: 5px;
-  }
-  .yurta-btn:hover { border-color: rgba(242,234,216,0.35); }
-  .yurta-btn.active { border-color: var(--tierra); background: rgba(139,107,71,0.15); }
-  .yurta-btn-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--crema); font-weight: 400; }
-  .yurta-btn-cap { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(242,234,216,0.4); }
-
-  /* Estados del calendario interactivo */
-  .mini-cal-day.rango { background: rgba(139,107,71,0.18); color: rgba(242,234,216,0.75); }
-  .mini-cal-day.inicio, .mini-cal-day.fin, .mini-cal-day.fin-preview {
-    background: var(--tierra); color: var(--crema); font-weight: 500;
-  }
-  .mini-cal-day.inicio { border-radius: 2px 0 0 2px; }
-  .mini-cal-day.fin, .mini-cal-day.fin-preview { border-radius: 0 2px 2px 0; }
-  .mini-cal-day.fin-preview { opacity: 0.65; }
-  .mini-cal-day.libre { cursor: pointer; }
-  .mini-cal-day.libre:hover { background: rgba(242,234,216,0.12); border-radius: 2px; }
-  .mini-cal-day.pasado { opacity: 0.25; cursor: not-allowed; }
-  /* input number sin flechas */
-  #display-noches::-webkit-inner-spin-button,
-  #display-noches::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-  #display-noches { -moz-appearance: textfield; }
-
-  /* Leyenda seleccionado */
-  .cal-leyenda-dot.seleccionado { background: var(--tierra); }
-
-  /* Resumen de fechas */
-  .cal-resumen {
-    display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
-    margin-top: 1rem; padding: 1rem 1.2rem;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(242,234,216,0.1); border-radius: 5px;
-  }
-  .cal-resumen-item { display: flex; flex-direction: column; gap: 0.15rem; }
-  .cal-resumen-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,234,216,0.35); }
-  .cal-resumen-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--crema); }
-  .cal-resumen-sep { color: rgba(242,234,216,0.25); font-size: 0.85rem; }
-
-  /* Error */
-  .cal-error {
-    margin-top: 0.6rem; padding: 0.7rem 1rem;
-    background: rgba(180,60,60,0.15); border-left: 2px solid rgba(200,80,80,0.6);
-    font-size: 0.78rem; color: rgba(242,234,216,0.7); line-height: 1.5;
-  }
-
-  /* ── BLOQUE DE PAGO ── */
-  .pago-bloque {
-    margin-top: 1.8rem;
-    border: 1px solid rgba(242,234,216,0.12);
-    background: rgba(255,255,255,0.03); border-radius: 5px;
-  }
-  .pago-header {
-    padding: 1rem 1.4rem;
-    border-bottom: 1px solid rgba(242,234,216,0.1);
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .pago-header svg { width: 15px; height: 15px; opacity: 0.5; flex-shrink: 0; }
-  .pago-header-txt {
-    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(242,234,216,0.45);
-  }
-  .pago-body { padding: 1.4rem; }
-  .pago-info {
-    font-size: 0.84rem; line-height: 1.65; color: rgba(242,234,216,0.6);
-    margin-bottom: 1.2rem;
-  }
-  .pago-info strong { color: rgba(242,234,216,0.85); font-weight: 500; }
-  .pago-region-tabs {
-    display: flex; gap: 0; margin-bottom: 1.2rem;
-    border-bottom: 1px solid rgba(242,234,216,0.12);
-  }
-  .pago-region-btn {
-    background: none; border: none; cursor: pointer;
-    padding: 0.55rem 1.1rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(242,234,216,0.35); border-bottom: 2px solid transparent;
-    margin-bottom: -1px; transition: all 0.2s;
-  }
-  .pago-region-btn.active { color: var(--crema); border-bottom-color: var(--tierra); }
-  .pago-region-btn:hover { color: rgba(242,234,216,0.7); }
-  .pago-metodos { display: none; }
-  .pago-metodos.active { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .pago-metodo-btn {
-    display: flex; align-items: center; gap: 0.5rem;
-    padding: 0.55rem 1rem;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(242,234,216,0.15);
-    cursor: pointer; font-family: 'Inter', sans-serif;
-    font-size: 0.78rem; color: rgba(242,234,216,0.55);
-    transition: all 0.2s; white-space: nowrap; border-radius: 5px;
-  }
-  .pago-metodo-btn:hover { border-color: rgba(242,234,216,0.3); color: rgba(242,234,216,0.8); }
-  .pago-metodo-btn.active { border-color: var(--tierra); background: rgba(139,107,71,0.15); color: var(--crema); }
-  .pago-metodo-btn .pago-icon { font-size: 1rem; line-height: 1; }
-  .pago-nota {
-    margin-top: 1rem; font-size: 0.75rem; color: rgba(242,234,216,0.35); line-height: 1.6;
-  }
-
-  /* Layout lado a lado */
-  .reserva-layout {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-    align-items: start; padding-top: 3rem;
-  }
-  .reserva-cal-col {
-    position: sticky; top: 6rem;
-  }
-  .reserva-form-col { }
-  .airbnb-info {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem; border-top: 1px solid rgba(242,234,216,0.12); padding-top: 2rem;
-  }
-  .airbnb-info-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,234,216,0.45); margin-bottom: 0.4rem; }
-  .airbnb-info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--crema); font-weight: 400; }
-
-  /* Calendarios iCal */
-  .ical-section { margin-top: 2.5rem; }
-  .ical-section-title {
-    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(242,234,216,0.45); margin-bottom: 1.5rem;
-    padding-bottom: 0.8rem; border-bottom: 1px solid rgba(242,234,216,0.12);
-  }
-  .calendarios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .calendario-widget {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(242,234,216,0.1);
-    padding: 1.5rem; border-radius: 5px;
-  }
-  .calendario-widget-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 1.2rem;
-  }
-  .calendario-widget-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; color: var(--crema); font-weight: 400;
-  }
-  .calendario-status {
-    display: flex; align-items: center; gap: 0.4rem;
-    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-  }
-  .calendario-status-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: #6dbf7e;
-    animation: pulse 2.5s infinite;
-  }
-  @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.4; } }
-  .calendario-status-text { color: rgba(242,234,216,0.45); }
-  .mini-calendar { width: 100%; }
-  .mini-cal-nav {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 0.8rem;
-  }
-  .mini-cal-nav button {
-    background: none; border: none; cursor: pointer;
-    color: rgba(242,234,216,0.5); font-size: 1rem; padding: 0.2rem 0.5rem;
-    transition: color 0.2s;
-  }
-  .mini-cal-nav button:hover { color: var(--crema); }
-  .mini-cal-month {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(242,234,216,0.6);
-  }
-  .mini-cal-grid {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    gap: 2px; text-align: center;
-  }
-  .mini-cal-day-header {
-    font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(242,234,216,0.3); padding: 0.3rem 0;
-  }
-  .mini-cal-day {
-    font-size: 0.78rem; color: rgba(242,234,216,0.55);
-    padding: 0.35rem 0; border-radius: 2px; cursor: default;
-    position: relative;
-  }
-  .mini-cal-day.today { color: var(--crema); font-weight: 500; }
-  .mini-cal-day.today::after {
-    content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-    width: 3px; height: 3px; border-radius: 50%; background: var(--tierra);
-  }
-  .mini-cal-day.ocupado {
-    background: rgba(139,107,71,0.25); color: rgba(242,234,216,0.35);
-    text-decoration: line-through; text-decoration-color: rgba(139,107,71,0.5);
-  }
-  .mini-cal-day.libre { color: rgba(109,191,126,0.8); }
-  .mini-cal-day.empty { opacity: 0; pointer-events: none; }
-  .cal-leyenda { display: flex; gap: 1.2rem; margin-top: 1rem; }
-  .cal-leyenda-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.65rem; color: rgba(242,234,216,0.35); }
-  .cal-leyenda-dot { width: 8px; height: 8px; border-radius: 1px; }
-  .cal-leyenda-dot.libre { background: rgba(109,191,126,0.5); }
-  .cal-leyenda-dot.ocupado { background: rgba(139,107,71,0.4); }
-  .ical-nota {
-    margin-top: 1.2rem; font-size: 0.72rem; color: rgba(242,234,216,0.3);
-    line-height: 1.6;
-  }
-  .ical-nota a { color: rgba(242,234,216,0.5); text-decoration: underline; }
-  .ical-config {
-    margin-top: 1.5rem; padding: 1rem 1.2rem;
-    background: rgba(139,107,71,0.12); border-left: 2px solid var(--tierra);
-  }
-  .ical-config p {
-    font-size: 0.75rem; color: rgba(242,234,216,0.45); line-height: 1.6;
-  }
-  .ical-config code {
-    font-size: 0.7rem; background: rgba(0,0,0,0.2);
-    padding: 0.1rem 0.4rem; color: rgba(242,234,216,0.6);
-  }
-
-  /* Consultas form */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-group.full { grid-column: 1/-1; }
-  .form-group label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,234,216,0.55); }
-  .form-group input, .form-group select, .form-group textarea {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(242,234,216,0.18);
-    color: var(--crema); padding: 0.85rem 1rem;
-    font-family: 'Inter', sans-serif; font-size: 0.9rem;
-    outline: none; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 5px;
-  }
-  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(242,234,216,0.3); }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--tierra); }
-  .form-group select option { background: var(--bosque-2); color: var(--crema); }
-  .form-group textarea { resize: vertical; min-height: 130px; }
-  .form-submit { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  .btn-submit {
-    background: var(--tierra); color: var(--blanco);
-    padding: 0.9rem 2.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-    border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; border-radius: 5px;
-  }
-  .btn-submit:hover { background: var(--tierra-2); }
-  .form-note { font-size: 0.78rem; color: rgba(242,234,216,0.4); }
-
-  /* ── CONTACTO ── */
-  .contacto { background: var(--bosque); display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
-  .contacto-left { padding: 5rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
-  .contacto-left .section-title { color: var(--crema); }
-  .contacto-left .section-eyebrow { color: rgba(242,234,216,0.55); }
-  .contacto-left .divider { background: var(--tierra); }
-  .contacto-datos { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
-  .contacto-dato { display: flex; align-items: center; gap: 1rem; font-size: 0.92rem; color: rgba(242,234,216,0.8); text-decoration: none; transition: color 0.2s; }
-  .contacto-dato:hover { color: var(--crema); }
-  .contacto-dato svg { width: 18px; height: 18px; opacity: 0.6; flex-shrink: 0; }
-  .contacto-right { min-height: 300px; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--bosque-2); padding: 2.5rem 3rem;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  footer .copy { font-size: 0.72rem; color: rgba(242,234,216,0.35); letter-spacing: 0.08em; }
-  footer nav ul { gap: 1.8rem; }
-  footer nav ul a { color: rgba(242,234,216,0.45); font-size: 0.72rem; }
-  footer nav ul a:hover { color: rgba(242,234,216,0.8); }
-
-  /* ── MOBILE ── */
-  @media (max-width: 900px) {
-    #nav { padding: 1rem 1.4rem; }
-    #nav ul { display: none; }
-    .hamburger { display: flex; }
-    #nav.open ul {
-      display: flex; flex-direction: column;
-      position: absolute; top: 100%; left: 0; right: 0;
-      background: var(--crema); padding: 1.5rem;
-      border-top: 1px solid var(--linea); gap: 1.2rem;
-    }
-    section { padding: 4rem 1.4rem; }
-    .que-es, .glamping, .quienes-top { grid-template-columns: 1fr; gap: 2.5rem; }
-    .quienes-bios { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .galeria-strip { height: 240px; }
-    .galeria-track > div { width: 50vw; min-width: 50vw; }
-    .contacto { grid-template-columns: 1fr; }
-    .contacto-right { display: none; }
-    footer { flex-direction: column; align-items: flex-start; }
-    footer nav { display: none; }
-    .hero-content { padding: 0 1.4rem 3rem; }
-    .servicios-grid { grid-template-columns: 1fr; }
-    .reserva-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .reserva-cal-col { position: static; }
-    .calendarios-grid { grid-template-columns: 1fr; }
-    .talleres-header { flex-direction: column; align-items: flex-start; }
-  }
-
-  /* Logo: fondo ya transparente, letras blancas → verde bosque #3A5240 */
-  .logo-verde {
-    filter: invert(1) sepia(1) saturate(1.2) hue-rotate(90deg) brightness(0.48);
-  }
-  /* Modal */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-contenido {
-    background: white;
-    padding: 40px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    animation: slideDown 0.3s ease;
-}
-
-.modal-icono {
-    font-size: 64px;
-    margin-bottom: 10px;
-}
-
-.modal-contenido h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.modal-contenido p {
-    color: #555;
-    margin: 5px 0;
-}
-
-.btn-modal {
-    margin-top: 20px;
-    padding: 10px 30px;
-    background: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-}
-
-.btn-modal:hover {
-    background: #34495e;
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideDown {
-    from {
-        transform: translateY(-30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-</style>
 </head>
 <body>
 
@@ -650,7 +30,7 @@
 <!-- DESPLIEGUE EXITOSO - 22 Julio 2026 -->
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-bg" style="background-image:url('./hero.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-quote">"Regenerar la tierra es también regenerar nuestra forma de habitarla."</p>
@@ -662,7 +42,7 @@
 </section>
 
 <!-- QUÉ ES -->
-<section id="que-es" style="background:var(--blanco); padding: 7rem 3rem;">
+<section id="que-es" class="section-light">
   <div class="que-es">
     <img class="que-es-img" src="./espacio.jpg" alt="Vista general Espacio Timbó">
     <div class="que-es-text">
@@ -670,8 +50,8 @@
       <h2 class="section-title">Un proyecto<br><em>regenerativo</em></h2>
       <div class="divider"></div>
       <p class="section-body">Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la naturaleza.</p>
-      <p class="section-body" style="margin-top:1.2rem;">Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad.</p>
-      <p class="section-body" style="margin-top:1.2rem;">Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.</p>
+      <p class="section-body section-body-spaced">Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad.</p>
+      <p class="section-body section-body-spaced">Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.</p>
     </div>
   </div>
 </section>
@@ -682,29 +62,29 @@
 </div>
 
 <!-- GLAMPING -->
-<section id="glamping" style="background:var(--crema); padding: 7rem 3rem;">
+<section id="glamping" class="section-cream">
   <div class="glamping">
     <div>
       <p class="section-eyebrow">— Glamping Regenerativo</p>
       <h2 class="section-title">Habitar<br><em>la naturaleza</em></h2>
       <div class="divider"></div>
       <p class="section-body">Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento en yurtas construidas artesanalmente con materiales naturales y reciclables.</p>
-      <p class="section-body" style="margin-top:1.2rem;">Contamos con dos yurtas equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.</p>
-      <p class="section-body" style="margin-top:1.2rem;">La experiencia incluye recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.</p>
-      <div style="margin-top:2.5rem;">
+      <p class="section-body section-body-spaced">Contamos con dos yurtas equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.</p>
+      <p class="section-body section-body-spaced">La experiencia incluye recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.</p>
+      <div class="glamping-cta">
         <a href="#reservas" class="btn btn-primary">Ver disponibilidad</a>
       </div>
     </div>
     <div class="glamping-img-grid">
-      <img src="./triptych1.jpg" alt="Huerta, yurta y jardín exterior" style="aspect-ratio:16/7; object-position:center;">
-      <img src="./interior.jpg" alt="Interior de la yurta" style="aspect-ratio:1; object-position:center top;">
-      <img src="./playa.jpg" alt="Playa de Santa Ana al atardecer" style="aspect-ratio:1; object-position:center;">
+      <img class="glamping-img-wide" src="./triptych1.jpg" alt="Huerta, yurta y jardín exterior">
+      <img class="glamping-img-square glamping-img-top" src="./interior.jpg" alt="Interior de la yurta">
+      <img class="glamping-img-square" src="./playa.jpg" alt="Playa de Santa Ana al atardecer">
     </div>
   </div>
 </section>
 
 <!-- SERVICIOS -->
-<section id="servicios" style="background:var(--blanco); padding: 7rem 3rem;">
+<section id="servicios" class="section-light">
   <div class="servicios-inner">
     <div class="servicios-header">
       <p class="section-eyebrow">— Servicios & Experiencias</p>
@@ -757,7 +137,7 @@
 </div>
 
 <!-- TALLERES & EVENTOS -->
-<section id="talleres" class="talleres" style="padding: 7rem 3rem;">
+<section id="talleres" class="talleres section-padded">
   <div class="talleres-inner">
     <div class="talleres-header">
       <div>
@@ -780,7 +160,7 @@
 </section>
 
 <!-- QUIÉNES SOMOS -->
-<section id="quienes" style="background:var(--crema); padding: 7rem 3rem;">
+<section id="quienes" class="section-cream">
   <div class="quienes-inner">
     <div class="quienes-top">
       <div>
@@ -788,8 +168,8 @@
         <h2 class="section-title">Julia &<br><em>Martín</em></h2>
         <div class="divider"></div>
         <p class="section-body">Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio.</p>
-        <p class="section-body" style="margin-top:1.2rem;">Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza.</p>
-        <p class="section-body" style="margin-top:1.2rem; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--bosque);">"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."</p>
+        <p class="section-body section-body-spaced">Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza.</p>
+        <p class="section-body section-body-quote">"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."</p>
       </div>
       <img class="quienes-foto" src="./julia_martin.jpg" alt="Julia y Martín">
     </div>
@@ -838,7 +218,7 @@
         </div>
 
         <!-- Calendario interactivo único -->
-        <div class="calendario-widget" style="margin-top:1.2rem;">
+        <div class="calendario-widget calendario-widget-spaced">
           <div class="calendario-widget-header">
             <span class="calendario-widget-name" id="cal-yurta-label">Yurta 1</span>
             <div class="calendario-status">
@@ -871,9 +251,9 @@
             <span class="cal-resumen-val" id="resumen-noches">—</span>
           </div>
         </div>
-        <div class="cal-error" id="cal-error" style="display:none;"></div>
+        <div class="cal-error" id="cal-error" hidden></div>
 
-        <div class="airbnb-info" style="margin-top:1.5rem;">
+        <div class="airbnb-info airbnb-info-spaced">
           <div class="airbnb-info-item">
             <p class="airbnb-info-label">Check-in / Check-out</p>
             <p class="airbnb-info-value">14:00 / 11:00</p>
@@ -888,8 +268,8 @@
           </div>
         </div>
 
-        <div class="ical-config" style="margin-top:1.5rem;">
-          <p><strong style="color:rgba(242,234,216,0.55);">Para configurar:</strong> reemplazá <code>ICAL_URL_YURTA1</code> y <code>ICAL_URL_YURTA2</code> en el script con las URLs iCal de Airbnb (Anuncio → Calendario → Exportar).</p>
+        <div class="ical-config ical-config-spaced">
+          <p><strong class="ical-config-label">Para configurar:</strong> reemplazá <code>ICAL_URL_YURTA1</code> y <code>ICAL_URL_YURTA2</code> en el script con las URLs iCal de Airbnb (Anuncio → Calendario → Exportar).</p>
         </div>
       </div>
 
@@ -924,21 +304,21 @@
             </div>
             <div class="form-group">
               <label>Yurta seleccionada</label>
-              <input type="text" id="display-yurta" placeholder="Elegí una yurta →" readonly style="cursor:default; opacity:0.7;">
+              <input type="text" id="display-yurta" placeholder="Elegí una yurta →" readonly class="input-readonly">
               <input type="hidden" id="yurta" name="yurta">
             </div>
             <div class="form-group">
               <label>Cantidad de noches</label>
-              <input type="text" id="display-noches" name="noches" placeholder="—" readonly style="cursor:default; opacity:0.7;">
+              <input type="text" id="display-noches" name="noches" placeholder="—" readonly class="input-readonly">
             </div>
             <div class="form-group">
               <label>Fecha de llegada</label>
-              <input type="text" id="display-llegada" placeholder="Seleccioná en el calendario" readonly style="cursor:default; opacity:0.7;">
+              <input type="text" id="display-llegada" placeholder="Seleccioná en el calendario" readonly class="input-readonly">
               <input type="hidden" id="llegada" name="llegada">
             </div>
             <div class="form-group">
               <label>Fecha de salida</label>
-              <input type="text" id="display-salida" placeholder="—" readonly style="cursor:default; opacity:0.7;">
+              <input type="text" id="display-salida" placeholder="—" readonly class="input-readonly">
               <input type="hidden" id="salida" name="salida">
             </div>
             <div class="form-group full">
@@ -1004,7 +384,7 @@
             <button type="submit" class="btn-submit">Enviar reserva</button>
             <p class="form-note">Respondemos en menos de 24 horas por correo o WhatsApp.</p>
           </div>
-          <div id="form-success" style="display:none; margin-top:1.5rem; padding:1rem 1.5rem; background:rgba(58,82,64,0.3); border-left:3px solid var(--tierra); color:var(--crema); font-size:0.9rem;">
+          <div id="form-success" class="form-success" hidden>
             ¡Gracias por tu reserva! Te responderemos pronto para confirmar disponibilidad.
           </div>
         </form>
@@ -1018,18 +398,18 @@
 <div class="contacto" id="contacto">
   <div class="contacto-left">
     <p class="section-eyebrow">— Contacto</p>
-    <h2 class="section-title" style="color:var(--crema);">Hablemos</h2>
+    <h2 class="section-title contacto-title">Hablemos</h2>
     <div class="divider"></div>
     <div class="contacto-datos">
-      <a href="https://instagram.com/espaciotimbo" target="_blank" class="contacto-dato" style="color:rgba(242,234,216,0.8);">
+      <a href="https://instagram.com/espaciotimbo" target="_blank" class="contacto-dato">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @espaciotimbo
       </a>
-      <a href="https://wa.me/59897328615" target="_blank" class="contacto-dato" style="color:rgba(242,234,216,0.8);">
+      <a href="https://wa.me/59897328615" target="_blank" class="contacto-dato">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
         +598 97 328 615
       </a>
-      <a href="mailto:espaciotimbo.uy@gmail.com" class="contacto-dato" style="color:rgba(242,234,216,0.8);">
+      <a href="mailto:espaciotimbo.uy@gmail.com" class="contacto-dato">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         espaciotimbo.uy@gmail.com
       </a>
@@ -1054,497 +434,9 @@
   <span class="copy">© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay</span>
 </footer>
 
-<script>
-/* ═══════════════════════════════════════════════════════════════
-   ▶ DATOS DE TALLERES Y EVENTOS — EDITAR AQUÍ
-   ═══════════════════════════════════════════════════════════════
-   Cada objeto es una tarjeta. Campos:
-   - tipo:       "taller" | "evento" | "experiencia"
-   - titulo:     string
-   - desc:       string (descripción corta)
-   - fecha:      string (ej. "14 de junio, 2025")
-   - hora:       string (ej. "10:00 – 14:00 hs")
-   - duracion:   string (ej. "4 horas")
-   - cupos:      number | null (null = sin límite)
-   - precio:     string (ej. "$ 800" o "Libre aporte")
-   - precio_nota: string (ej. "por persona · incluye materiales")
-   - badge:      "nuevo" | "pronto" | null
-   - agotado:    true | false
-   - imagen:     string (URL de imagen) | null
-   - whatsapp:   true (abre consulta WhatsApp) | false (usa formulario)
-═══════════════════════════════════════════════════════════════ */
 
-const TALLERES_EVENTOS = [
-/*  {
-    tipo: "taller",
-    titulo: "Introducción a la Permacultura",
-    desc: "Un día inmersivo en los principios del diseño permacultural. Recorremos el espacio, la huerta y conversamos sobre ética y diseño regenerativo para el hogar y la comunidad.",
-    fecha: "22 de junio, 2025",
-    hora: "9:00 – 17:00 hs",
-    duracion: "1 día",
-    cupos: 12,
-    precio: "$ 1.200",
-    precio_nota: "por persona · incluye almuerzo",
-    badge: "nuevo",
-    agotado: false,
-    imagen: null,
-    whatsapp: true
-  },
-  {
-    tipo: "taller",
-    titulo: "Bioconstrucción Natural",
-    desc: "Aprendemos técnicas de construcción con barro, paja y materiales del entorno. Trabajamos directamente en una estructura del espacio. Apto para todo público, sin experiencia previa.",
-    fecha: "5 y 6 de julio, 2025",
-    hora: "9:00 – 16:00 hs",
-    duracion: "2 días",
-    cupos: 8,
-    precio: "$ 2.000",
-    precio_nota: "por persona · fin de semana completo",
-    badge: null,
-    agotado: false,
-    imagen: null,
-    whatsapp: true
-  },
-  {
-    tipo: "experiencia",
-    titulo: "Recorrido Agroforestal",
-    desc: "Caminata guiada por el sistema agroforestal del Espacio Timbó. Conocemos las plantas, los ciclos del suelo y las estrategias de regeneración aplicadas en el predio.",
-    fecha: "Todos los sábados",
-    hora: "9:30 hs",
-    duracion: "2 horas",
-    cupos: 10,
-    precio: "Libre aporte",
-    precio_nota: "sugerido $ 300 por persona",
-    badge: null,
-    agotado: false,
-    imagen: null,
-    whatsapp: true
-  },
-  {
-    tipo: "evento",
-    titulo: "Encuentro de Economía Regenerativa",
-    desc: "Conversatorio abierto sobre monedas complementarias, economía solidaria y cooperativismo en el contexto rural. Con invitados de la región.",
-    fecha: "12 de julio, 2025",
-    hora: "16:00 – 19:00 hs",
-    duracion: "3 horas",
-    cupos: null,
-    precio: "Entrada libre",
-    precio_nota: "",
-    badge: "pronto",
-    agotado: false,
-    imagen: null,
-    whatsapp: false
-  },
-  {
-    tipo: "taller",
-    titulo: "Plantas Medicinales del Bosque Nativo",
-    desc: "Reconocimiento de plantas medicinales autóctonas, sus usos terapéuticos y culinarios. Incluye preparación de infusiones y aceites.",
-    fecha: "19 de julio, 2025",
-    hora: "10:00 – 13:00 hs",
-    duracion: "3 horas",
-    cupos: 15,
-    precio: "$ 700",
-    precio_nota: "por persona · incluye materiales",
-    badge: null,
-    agotado: true,
-    imagen: null,
-    whatsapp: true
-  } */
-];
-
-/* ═══════════════════════════════════════════════════════════════
-   ▶ iCAL — CONFIGURAR URLs de Airbnb
-   ═══════════════════════════════════════════════════════════════
-   Reemplazá estas URLs con las de tu calendario de Airbnb.
-   Airbnb → Anuncio → Calendario → Exportar calendario (iCal)
-
-   NOTA: Los navegadores bloquean peticiones directas a .ics por CORS.
-   Para producción, usar un proxy propio o un servicio como:
-   https://api.allorigins.win/raw?url=TU_URL_ICAL
-
-   Por ahora el calendario muestra disponibilidad de ejemplo.
-═══════════════════════════════════════════════════════════════ */
-const ICAL_URL_YURTA1 = ""; // Ej: "https://www.airbnb.com/calendar/ical/TU_ID.ics"
-const ICAL_URL_YURTA2 = ""; // Ej: "https://www.airbnb.com/calendar/ical/TU_ID.ics"
-
-/* ─── DATOS DE EJEMPLO para el calendario (se usan hasta configurar iCal) ─── */
-const OCUPADOS_EJEMPLO = {
-  yurta1: [3,4,5,15,16,17,18,25],
-  yurta2: [1,2,10,11,12,20,21,22,26,27]
-};
-
-/* ═══════════════════════════════════════════════════════════════
-   MOTOR — No editar salvo que sepas lo que hacés
-═══════════════════════════════════════════════════════════════ */
-
-// ── NAV
-const nav = document.getElementById('nav');
-document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
-
-// ── FORM
-function handleSubmit(e) {
-  setTimeout(() => {
-    const s = document.getElementById('form-success');
-    if (s) s.style.display = 'block';
-  }, 500);
-}
-
-// ── SCROLL NAV
-window.addEventListener('scroll', () => {
-  nav.style.background = window.scrollY > 60
-    ? 'rgba(242,234,216,0.97)'
-    : 'rgba(242,234,216,0.92)';
-});
-
-// ── TALLERES: render
-function renderEventos(filtro) {
-  const grid = document.getElementById('talleres-grid');
-  const items = filtro === 'todos'
-    ? TALLERES_EVENTOS
-    : TALLERES_EVENTOS.filter(e => e.tipo === filtro);
-
-  if (!items.length) {
-    const msg = (filtro === 'todos' || TALLERES_EVENTOS.length === 0)
-      ? 'Por el momento no hay talleres ni eventos programados. Seguinos en Instagram para enterarte de las próximas actividades.'
-      : 'No hay actividades programadas en esta categoría por el momento.';
-    grid.innerHTML = `<div class="talleres-empty">${msg}</div>`;
-    return;
-  }
-
-  const iconos = {
-    fecha: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
-    hora:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-    cupos: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    dur:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M12 8v4l3 3"/></svg>`
-  };
-
-  const badgeLabels = { nuevo: 'Nuevo', pronto: 'Próximamente' };
-  const tipoLabels  = { taller: 'Taller', evento: 'Evento', experiencia: 'Experiencia' };
-
-  grid.innerHTML = items.map(e => {
-    const cuposText = e.cupos ? `${e.cupos} cupos` : 'Abierto';
-    const msgWA = encodeURIComponent(`Hola! Me interesa el taller "${e.titulo}" (${e.fecha}). ¿Hay lugares disponibles?`);
-    const ctaHTML = e.agotado
-      ? `<span class="evento-agotado">Cupos agotados</span>`
-      : e.whatsapp
-        ? `<a href="https://wa.me/59897328615?text=${msgWA}" target="_blank" class="evento-cta">Consultar por WhatsApp</a>`
-        : `<a href="#reservas" class="evento-cta">Consultar</a>`;
-
-    return `
-    <div class="evento-card" data-tipo="${e.tipo}">
-      ${e.imagen
-        ? `<img class="evento-card-img" src="${e.imagen}" alt="${e.titulo}">`
-        : `<div class="evento-card-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>`}
-      <div class="evento-card-body">
-        ${e.badge ? `<span class="evento-badge ${e.badge}">${badgeLabels[e.badge]}</span>` : ''}
-        <p class="evento-tipo">${tipoLabels[e.tipo] || e.tipo}</p>
-        <h3 class="evento-titulo">${e.titulo}</h3>
-        <p class="evento-desc">${e.desc}</p>
-        <div class="evento-meta">
-          <div class="evento-meta-item">${iconos.fecha}<span>${e.fecha}</span></div>
-          <div class="evento-meta-item">${iconos.hora}<span>${e.hora}</span></div>
-          <div class="evento-meta-item">${iconos.dur}<span>${e.duracion}</span></div>
-          <div class="evento-meta-item">${iconos.cupos}<span>${cuposText}</span></div>
-        </div>
-        <p class="evento-precio">${e.precio} <span>${e.precio_nota}</span></p>
-        ${ctaHTML}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filtrarEventos(filtro, btn) {
-  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderEventos(filtro);
-}
-
-// ── MINI CALENDARIO INTERACTIVO
-const calState = {
-  yurta: 1,
-  mes: new Date().getMonth(),
-  anio: new Date().getFullYear(),
-  inicio: null,
-  fin: null,
-  hover: null
-};
-
-const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const DIAS_SEMANA = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
-
-function fechaNorm(a, m, d) {
-  const f = new Date(a, m, d); f.setHours(0,0,0,0); return f;
-}
-function hoyNorm() {
-  const h = new Date(); h.setHours(0,0,0,0); return h;
-}
-function ocupadosDeYurta(y) {
-  return y === 1 ? OCUPADOS_EJEMPLO.yurta1 : OCUPADOS_EJEMPLO.yurta2;
-}
-function esDiaOcupado(d, m, a) {
-  const hoy = hoyNorm();
-  const fecha = fechaNorm(a, m, d);
-  if (fecha < hoy) return false;
-  if (m === hoy.getMonth() && a === hoy.getFullYear())
-    return ocupadosDeYurta(calState.yurta).includes(d);
-  return false;
-}
-function rangoTieneOcupados(ini, fin) {
-  let cur = new Date(ini); cur.setDate(cur.getDate()+1); cur.setHours(0,0,0,0);
-  while (cur < fin) {
-    if (esDiaOcupado(cur.getDate(), cur.getMonth(), cur.getFullYear())) return true;
-    cur.setDate(cur.getDate()+1);
-  }
-  return false;
-}
-function formatoFecha(f) {
-  if (!f) return '—';
-  return `${f.getDate()} ${MESES[f.getMonth()].slice(0,3)} ${f.getFullYear()}`;
-}
-function formatoISO(f) {
-  if (!f) return '';
-  return `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`;
-}
-
-function actualizarResumenYForm() {
-  const { inicio, fin } = calState;
-  const n = (inicio && fin) ? Math.round((fin-inicio)/86400000) : null;
-
-  document.getElementById('resumen-llegada').textContent = formatoFecha(inicio);
-  document.getElementById('resumen-salida').textContent  = formatoFecha(fin);
-  document.getElementById('resumen-noches').textContent  = n !== null ? n+(n===1?' noche':' noches') : '—';
-
-  document.getElementById('display-llegada').value = inicio ? formatoFecha(inicio) : '';
-  document.getElementById('display-salida').value  = fin    ? formatoFecha(fin)    : '';
-  document.getElementById('display-noches').value  = n !== null ? n : '';
-  document.getElementById('llegada').value = formatoISO(inicio);
-  document.getElementById('salida').value  = formatoISO(fin);
-}
-
-function renderCalendario() {
-  const container = document.getElementById('cal-principal');
-  if (!container) return;
-
-  const { mes, anio, inicio, fin, hover } = calState;
-  const primerDia = new Date(anio, mes, 1).getDay();
-  const ajuste    = primerDia === 0 ? 6 : primerDia - 1;
-  const diasMes   = new Date(anio, mes+1, 0).getDate();
-  const hoy       = hoyNorm();
-
-  let html = `
-    <div class="mini-cal-nav">
-      <button data-nav="-1">‹</button>
-      <span class="mini-cal-month">${MESES[mes]} ${anio}</span>
-      <button data-nav="1">›</button>
-    </div>
-    <div class="mini-cal-grid" id="cal-grid">
-      ${DIAS_SEMANA.map(d=>`<div class="mini-cal-day-header">${d}</div>`).join('')}
-      ${Array(ajuste).fill('<div class="mini-cal-day empty"></div>').join('')}`;
-
-  for (let d = 1; d <= diasMes; d++) {
-    const fecha   = fechaNorm(anio, mes, d);
-    const pasado  = fecha < hoy;
-    const ocupado = esDiaOcupado(d, mes, anio);
-    const esHoy   = fecha.getTime() === hoy.getTime();
-    const esInicio = inicio && fecha.getTime() === inicio.getTime();
-    const esFin    = fin   && fecha.getTime() === fin.getTime();
-
-    // Para el preview del hover, usarlo solo si está después del inicio
-    const hoverValido = hover && inicio && hover > inicio;
-    const esHoverFin  = hoverValido && fecha.getTime() === hover.getTime();
-    // Rango: entre inicio y fin real; si hay hover reemplaza el fin para preview
-    const limiteRango = hoverValido ? hover : fin;
-    const enRango     = inicio && limiteRango && fecha > inicio && fecha < limiteRango;
-
-    let cls = 'mini-cal-day';
-    if      (pasado)    cls += ' pasado';
-    else if (ocupado)   cls += ' ocupado';
-    else if (esInicio)  cls += ' inicio';
-    else if (esFin)     cls += ' fin';
-    else if (esHoverFin)cls += ' fin-preview';
-    else if (enRango)   cls += ' rango';
-    else                cls += ' libre';
-
-    if (esHoy && !esInicio && !esFin) cls += ' today';
-
-    // data-d para los event listeners — sin onclick inline
-    const attrs = (!pasado && !ocupado) ? `data-d="${d}" data-m="${mes}" data-a="${anio}"` : '';
-    html += `<div class="${cls}" ${attrs}>${d}</div>`;
-  }
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-// Listeners adjuntados UNA SOLA VEZ al inicializar — no dentro de renderCalendario
-function initCalListeners() {
-  const container = document.getElementById('cal-principal');
-
-  // Click en días
-  container.addEventListener('click', function(e) {
-    // Botones de navegación de mes
-    const nav = e.target.closest('[data-nav]');
-    if (nav) { calNavMes(+nav.dataset.nav); return; }
-
-    // Días clickeables
-    const el = e.target.closest('[data-d]');
-    if (!el) return;
-    manejarClick(+el.dataset.d, +el.dataset.m, +el.dataset.a);
-  });
-
-  // Hover — solo actualiza estado y redibuja, no re-adjunta listeners
-  container.addEventListener('mouseover', function(e) {
-    if (!calState.inicio) return;
-    const el = e.target.closest('[data-d]');
-    if (!el) return;
-    const nueva = fechaNorm(+el.dataset.a, +el.dataset.m, +el.dataset.d);
-    if (!calState.hover || calState.hover.getTime() !== nueva.getTime()) {
-      calState.hover = nueva;
-      renderCalendario();
-    }
-  });
-
-  container.addEventListener('mouseleave', function() {
-    if (calState.hover) {
-      calState.hover = null;
-      renderCalendario();
-    }
-  });
-}
-
-function manejarClick(d, m, a) {
-  const fecha = fechaNorm(a, m, d);
-  const err = document.getElementById('cal-error');
-  err.style.display = 'none';
-  calState.hover = null; // limpiar hover antes de cualquier lógica
-
-  if (!calState.inicio) {
-    // Primer click: fijar llegada
-    calState.inicio = fecha;
-    calState.fin    = null;
-    renderCalendario();
-    actualizarResumenYForm();
-    return;
-  }
-
-  if (fecha.getTime() === calState.inicio.getTime()) {
-    // Mismo día: cancelar todo
-    calState.inicio = null;
-    calState.fin    = null;
-    renderCalendario();
-    actualizarResumenYForm();
-    return;
-  }
-
-  if (fecha < calState.inicio) {
-    // Antes del inicio: nuevo inicio
-    calState.inicio = fecha;
-    calState.fin    = null;
-    renderCalendario();
-    actualizarResumenYForm();
-    return;
-  }
-
-  // Después del inicio: fijar salida
-  if (rangoTieneOcupados(calState.inicio, fecha)) {
-    err.textContent = 'El rango incluye días no disponibles. Elegí otras fechas.';
-    err.style.display = 'block';
-    renderCalendario();
-    return;
-  }
-
-  const noches = Math.round((fecha - calState.inicio) / 86400000);
-  if (noches < 2) {
-    err.textContent = 'La estadía mínima es de 2 noches.';
-    err.style.display = 'block';
-    renderCalendario();
-    return;
-  }
-
-  calState.fin = fecha;
-  renderCalendario();
-  actualizarResumenYForm();
-}
-
-function calNavMes(dir) {
-  calState.mes += dir;
-  if (calState.mes > 11) { calState.mes = 0; calState.anio++; }
-  if (calState.mes < 0)  { calState.mes = 11; calState.anio--; }
-  renderCalendario();
-}
-
-function seleccionarYurta(n) {
-  calState.yurta  = n;
-  calState.inicio = null; calState.fin = null; calState.hover = null;
-  document.getElementById('cal-error').style.display = 'none';
-  document.getElementById('cal-yurta-label').textContent = `Yurta ${n}`;
-  document.getElementById('btn-yurta1').classList.toggle('active', n === 1);
-  document.getElementById('btn-yurta2').classList.toggle('active', n === 2);
-  document.getElementById('display-yurta').value = `Yurta ${n}`;
-  document.getElementById('yurta').value = `Yurta ${n}`;
-  renderCalendario();
-  actualizarResumenYForm();
-}
-
-// ── PAGO
-function cambiarRegion(region, btn) {
-  document.querySelectorAll('.pago-region-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.pago-metodos').forEach(m => m.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('metodos-' + region).classList.add('active');
-  // Limpiar método seleccionado al cambiar región
-  document.querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('metodo-pago').value = '';
-}
-
-function elegirPago(btn, metodo) {
-  // Deseleccionar todos los botones del grupo activo
-  btn.closest('.pago-metodos').querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('metodo-pago').value = metodo;
-}
-
-// ── INIT
-(function init() {
-  renderEventos('todos');
-  document.getElementById('display-yurta').value = 'Yurta 1';
-  document.getElementById('yurta').value = 'Yurta 1';
-  renderCalendario();
-  initCalListeners();
-  actualizarResumenYForm();
-})();
-
-    // Función para mostrar el modal
-    function mostrarModal() {
-        document.getElementById('modalGracias').style.display = 'flex';
-    }
-
-    // Función para cerrar el modal
-    function cerrarModal() {
-        document.getElementById('modalGracias').style.display = 'none';
-    }
-
-    // Cerrar modal al hacer clic fuera de él
-    window.onclick = function(event) {
-        const modal = document.getElementById('modalGracias');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
-
-    // Cerrar modal con la tecla ESC
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            cerrarModal();
-        }
-    });
-
-    // Cuando el DOM esté cargado, enlazar el botón de cerrar
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
-    });
-</script>
 <!-- Modal de confirmación -->
-<div id="modalGracias" class="modal" style="display: none;">
+<div id="modalGracias" class="modal" hidden>
     <div class="modal-contenido">
         <div class="modal-icono">🎉</div>
         <h2>¡Mensaje enviado con éxito!</h2>
@@ -1553,5 +445,6 @@ function elegirPago(btn, metodo) {
         <button id="cerrarModal" class="btn-modal">Cerrar</button>
     </div>
 </div>
+  <script src="scripts.js"></script>
 </body>
 </html>
