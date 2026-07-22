@@ -111,22 +111,60 @@ const TALLERES_EVENTOS = [
 //const ICAL_URL_YURTA2 = "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"; // Ej: "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"
 
 
-const icsUrl = 'https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL';
-const proxyUrl = `/.netlify/functions/ics-proxy?url=${encodeURIComponent(icsUrl)}`;
+/* ═══════════════════════════════════════════════════════════════
+   ▶ iCAL — Fetch y parseo de calendarios de Airbnb
+═══════════════════════════════════════════════════════════════ */
+const ICAL_URL_YURTA1 = 'https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL';
+const ICAL_URL_YURTA2 = 'https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL';
 
-
-
-fetch(proxyUrl)
-  .then(res => res.text())
-  .then(data => parseICS(data))
-  .catch(err => console.error('Error cargando ICS:', err));
-
-
-/* ─── DATOS DE EJEMPLO para el calendario (se usan hasta configurar iCal) ─── */
-const OCUPADOS_EJEMPLO = {
-  yurta1: [],
+// Acá guardamos los RANGOS ocupados (no solo números de día)
+const OCUPADOS_ICAL = {
+  yurta1: [], // array de { start: Date, end: Date }
   yurta2: []
 };
+
+// Parsea el texto crudo de un .ics y devuelve array de rangos {start, end}
+function parseICS(icsText) {
+  const rangos = [];
+  const eventos = icsText.split('BEGIN:VEVENT').slice(1);
+
+  eventos.forEach(bloque => {
+    const dtStartMatch = bloque.match(/DTSTART(?:;VALUE=DATE)?:(\d{8})/);
+    const dtEndMatch   = bloque.match(/DTEND(?:;VALUE=DATE)?:(\d{8})/);
+    if (!dtStartMatch || !dtEndMatch) return;
+
+    const start = parseFechaICS(dtStartMatch[1]);
+    const end   = parseFechaICS(dtEndMatch[1]);
+    rangos.push({ start, end });
+  });
+
+  return rangos;
+}
+
+// Convierte "20250620" a Date(2025, 5, 20)
+function parseFechaICS(str) {
+  const anio = +str.slice(0, 4);
+  const mes  = +str.slice(4, 6) - 1;
+  const dia  = +str.slice(6, 8);
+  const f = new Date(anio, mes, dia);
+  f.setHours(0, 0, 0, 0);
+  return f;
+}
+
+async function cargarICal(url, yurtaKey) {
+  try {
+    const proxyUrl = `/.netlify/functions/ics-proxy?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxyUrl);
+    const data = await res.text();
+    OCUPADOS_ICAL[yurtaKey] = parseICS(data);
+    renderCalendario(); // re-dibujar una vez que llegan los datos
+  } catch (err) {
+    console.error(`Error cargando ICS de ${yurtaKey}:`, err);
+  }
+}
+
+cargarICal(ICAL_URL_YURTA1, 'yurta1');
+cargarICal(ICAL_URL_YURTA2, 'yurta2');
 
 /* ═══════════════════════════════════════════════════════════════
    MOTOR — No editar salvo que sepas lo que hacés
