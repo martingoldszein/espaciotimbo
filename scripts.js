@@ -175,34 +175,36 @@ const nav = document.getElementById('nav');
 document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
 
 // ── FORM
-async function handleSubmit(e) {
-  e.preventDefault();
+// ── ENVÍO DEL FORMULARIO A NETLIFY (AJAX, sin recargar página)
+function initFormSubmit() {
+  const form = document.getElementById('formularioContacto');
+  if (!form) return;
 
-  const form = e.currentTarget;
-  const submitButton = form.querySelector('button[type="submit"]');
-  const originalLabel = submitButton.textContent;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // clave: evita la recarga nativa a "/"
 
-  submitButton.disabled = true;
-  submitButton.textContent = 'Enviando...';
+    const formData = new FormData(form);
+    const encoded = new URLSearchParams(formData).toString();
 
-  try {
-    const response = await fetch(form.action || '/', {
+    fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
-    });
-
-    if (!response.ok) throw new Error(`Netlify respondió con ${response.status}`);
-
-    form.reset();
-    mostrarModal();
-  } catch (error) {
-    console.error('Error al enviar la reserva:', error);
-    alert('No se pudo enviar la reserva. Intentá nuevamente.');
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = originalLabel;
-  }
+      body: encoded
+    })
+      .then(() => {
+        mostrarModal();
+        form.reset();
+        // Resetear también los campos manejados por JS (calendario, yurta)
+        calState.inicio = null;
+        calState.fin = null;
+        renderCalendario();
+        actualizarResumenYForm();
+      })
+      .catch((err) => {
+        console.error('Error al enviar el formulario:', err);
+        alert('Hubo un problema al enviar tu reserva. Probá de nuevo o escribinos por WhatsApp.');
+      });
+  });
 }
 
 document.getElementById('formularioContacto').addEventListener('submit', handleSubmit);
@@ -536,6 +538,7 @@ function elegirPago(btn, metodo) {
   renderCalendario();
   initCalListeners();
   actualizarResumenYForm();
+  initFormSubmit(); 
 })();
 
     // Función para mostrar el modal
