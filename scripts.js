@@ -495,6 +495,67 @@ function elegirPago(btn, metodo) {
   document.getElementById('metodo-pago').value = metodo;
 }
 
+function initFormSubmit() {
+  const form = document.getElementById('formularioContacto');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalLabel = submitButton.textContent;
+
+    // Validación básica
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+
+    if (!nombre || !email || !mensaje) {
+      alert('Por favor, completá todos los campos obligatorios.');
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
+
+    const formData = new FormData(form);
+    
+    // Asegurar que form-name esté presente
+    if (!formData.has('form-name')) {
+      formData.append('form-name', 'contacto');
+    }
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(response => {
+      if (response.ok) {
+        mostrarModal();
+        form.reset();
+        // Resetear campos del calendario
+        calState.inicio = null;
+        calState.fin = null;
+        renderCalendario();
+        actualizarResumenYForm();
+        // Resetear método de pago
+        document.querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('metodo-pago').value = '';
+      } else {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error('Error al enviar:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor, intentá de nuevo o contactanos directamente por WhatsApp.');
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      submitButton.textContent = originalLabel;
+    });
+  });
+}
 // ── INIT
 (function init() {
   renderEventos('todos');
@@ -503,6 +564,7 @@ function elegirPago(btn, metodo) {
   renderCalendario();
   initCalListeners();
   actualizarResumenYForm();
+  initFormSubmit();
 })();
 
     // Función para mostrar el modal
