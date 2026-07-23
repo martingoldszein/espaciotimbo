@@ -494,44 +494,32 @@ function elegirPago(btn, metodo) {
   btn.classList.add('active');
   document.getElementById('metodo-pago').value = metodo;
 }
-
 function initFormSubmit() {
   const form = document.getElementById('formularioContacto');
   if (!form) return;
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', function(e) {
+    // Prevenir el envío tradicional SOLO si usamos fetch
     e.preventDefault();
-
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalLabel = submitButton.textContent;
-
-    // Validación básica
-    const nombre = document.getElementById('nombre').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
-
-    if (!nombre || !email || !mensaje) {
-      alert('Por favor, completá todos los campos obligatorios.');
-      return;
-    }
-
-    submitButton.disabled = true;
-    submitButton.textContent = 'Enviando...';
-
-    const formData = new FormData(form);
     
-    // Asegurar que form-name esté presente
-    if (!formData.has('form-name')) {
-      formData.append('form-name', 'contacto');
-    }
+    console.log('🟡 Enviando formulario...');
+    
+    // Obtener los datos del formulario
+    const formData = new FormData(form);
+    formData.append('form-name', 'contacto');
 
+    // Enviar a Netlify - MÁS RÁPIDO
     fetch('/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       body: new URLSearchParams(formData).toString()
     })
     .then(response => {
+      console.log('✅ Respuesta HTTP:', response.status);
       if (response.ok) {
+        // Mostrar modal de éxito
         mostrarModal();
         form.reset();
         // Resetear campos del calendario
@@ -543,16 +531,12 @@ function initFormSubmit() {
         document.querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
         document.getElementById('metodo-pago').value = '';
       } else {
-        throw new Error(`Error HTTP: ${response.status}`);
+        throw new Error('Error en el servidor');
       }
     })
-    .catch((error) => {
-      console.error('Error al enviar:', error);
-      alert('Hubo un error al enviar el mensaje. Por favor, intentá de nuevo o contactanos directamente por WhatsApp.');
-    })
-    .finally(() => {
-      submitButton.disabled = false;
-      submitButton.textContent = originalLabel;
+    .catch(error => {
+      console.error('❌ Error:', error);
+      alert('Hubo un error al enviar. Por favor, intentá de nuevo o contactanos directamente por WhatsApp.');
     });
   });
 }
