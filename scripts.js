@@ -207,7 +207,7 @@ function initFormSubmit() {
   });
 }
 
-document.getElementById('formularioContacto').addEventListener('submit', handleSubmit);
+//document.getElementById('formularioContacto').addEventListener('submit', handleSubmit);
 
 // ── SCROLL NAV
 window.addEventListener('scroll', () => {
