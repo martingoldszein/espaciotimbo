@@ -548,7 +548,7 @@ function initFormSubmit() {
   renderCalendario();
   initCalListeners();
   actualizarResumenYForm();
-  initFormSubmit();
+ //  initFormSubmit();
 })();
 
     // Función para mostrar el modal
