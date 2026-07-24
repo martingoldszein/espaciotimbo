@@ -258,6 +258,46 @@
     padding: 0.7rem 1.5rem; font-size: 0.75rem; letter-spacing: 0.12em;
     text-transform: uppercase; font-family: 'Inter', sans-serif; border-radius: 5px;
   }
+
+  .whatsapp-float {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .whatsapp-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+  }
+
+  .whatsapp-float svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .whatsapp-float {
+      right: 0.9rem;
+      bottom: 0.9rem;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.8rem;
+    }
+  }
   .evento-badge {
     display: inline-block; padding: 0.25rem 0.7rem;
     font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
