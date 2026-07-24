@@ -42,8 +42,7 @@
   .nav-logo span { font-weight: 300; opacity: 0.7; font-size: 0.7em; display: block; letter-spacing: 0.2em; }
   #nav ul { list-style: none; display: flex; gap: 2.5rem; }
   #nav ul a {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--bosque-2); text-decoration: none; font-weight: 400; transition: color 0.2s;
+    font-size: 0.78rem; text-transform: uppercase; color: var(--bosque-2); text-decoration: none; font-weight: 600; transition: color 0.2s;
   }
   #nav ul a:hover { color: var(--tierra); }
   .nav-reservar {
