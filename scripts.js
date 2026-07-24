@@ -172,7 +172,29 @@ cargarICal(ICAL_URL_YURTA2, 'yurta2');
 
 // ── NAV
 const nav = document.getElementById('nav');
+const navLinks = document.querySelectorAll('#nav ul a');
 document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
+
+function activarLinkNav(link) {
+  navLinks.forEach(a => a.classList.remove('active'));
+  link.classList.add('active');
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function() {
+    activarLinkNav(this);
+  });
+});
+
+function activarLinkPorHash() {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const link = document.querySelector(`#nav ul a[href="${hash}"]`);
+  if (link) activarLinkNav(link);
+}
+
+window.addEventListener('load', activarLinkPorHash);
+window.addEventListener('hashchange', activarLinkPorHash);
 
 // ── SCROLL NAV
 window.addEventListener('scroll', () => {

@@ -40,9 +40,29 @@
     color: var(--bosque); text-decoration: none; text-transform: uppercase;
   }
   .nav-logo span { font-weight: 300; opacity: 0.7; font-size: 0.7em; display: block; letter-spacing: 0.2em; }
-  #nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  #nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+  #nav ul li { position: relative; display: flex; align-items: center; }
   #nav ul a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
     font-size: 0.78rem; text-transform: uppercase; color: var(--bosque-2); text-decoration: none; font-weight: 600; transition: color 0.2s;
+  }
+  #nav ul a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    width: 0;
+    background: var(--tierra);
+    border-radius: 0;
+    transition: width 0.22s ease;
+  }
+  #nav ul a.active::after {
+    width: 100%;
   }
   #nav ul a:hover { color: var(--tierra); }
   .nav-reservar {
@@ -313,7 +333,7 @@
   /* ── RESERVAS ── */
   .reservas { background: var(--bosque-2); padding: 7rem 3rem; }
   .reservas-inner { max-width: 1100px; margin: 0 auto; }
-  .reservas-header { margin-bottom: 4rem; }
+  .reservas-header { margin-bottom: 2rem; }
   .reservas-header .section-title { color: var(--crema); }
   .reservas-header .section-eyebrow { color: rgba(242,234,216,0.6); }
   .reservas-header .section-body { color: rgba(242,234,216,0.75); }
@@ -423,7 +443,7 @@
   /* Layout lado a lado */
   .reserva-layout {
     display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-    align-items: start; padding-top: 3rem;
+    align-items: start; 
   }
   .reserva-cal-col {
     position: sticky; top: 6rem;
@@ -451,10 +471,12 @@
   .calendario-widget-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(242,234,216,0.12);
+    padding-bottom: 0.5rem; 
   }
   .calendario-widget-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; color: var(--crema); font-weight: 400;
+
+    font-size: 1.8rem; color: var(--crema); font-weight: 400;
   }
   .calendario-status {
     display: flex; align-items: center; gap: 0.4rem;
