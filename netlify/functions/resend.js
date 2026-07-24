@@ -1,3 +1,6 @@
+// Función Netlify para enviar correos con Resend
+// Asegurate de configurar RESEND_API_KEY en el panel de Netlify o en tu entorno local.
+
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
@@ -58,11 +61,20 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(body),
     });
 
-    const result = await response.json();
+    const resultText = await response.text();
+    let result;
+
+    try {
+      result = JSON.parse(resultText);
+    } catch (parseError) {
+      result = { error: resultText };
+    }
+
     if (!response.ok) {
+      const errorMessage = result.error || result.message || 'Error de Resend';
       return {
         statusCode: response.status,
-        body: JSON.stringify({ error: result.error || 'Error de Resend' }),
+        body: JSON.stringify({ error: errorMessage, details: result }),
       };
     }
 
@@ -73,7 +85,7 @@ exports.handler = async function(event, context) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: error.message, stack: error.stack }),
     };
   }
 };
