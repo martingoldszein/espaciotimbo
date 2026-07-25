@@ -116,7 +116,7 @@
   section { padding: 7rem 3rem; }
   .section-light { background: var(--blanco); padding: 7rem 3rem; }
   .section-cream { background: var(--crema); padding: 7rem 3rem; }
-  .section-padded { padding: 7rem 3rem; }
+  .section-padded { padding: 2rem 3rem; }
   .section-body-spaced { margin-top: 1.2rem; }
   .section-body-quote {
     margin-top: 1.2rem; font-family: 'Cormorant Garamond', serif;
@@ -143,7 +143,7 @@
     color: var(--bosque-2); margin-bottom: 1.5rem;
   }
   .section-title em { font-style: italic; }
-  .section-body { font-size: 1rem; line-height: 1.75; color: var(--gris); max-width: 56ch; }
+  .section-body { font-size: 1.3rem; line-height: 1.75; color: var(--gris); max-width: 56ch; }
   .divider { width: 48px; height: 1px; background: var(--tierra); margin: 1.5rem 0; }
 
   /* ── QUÉ ES ── */

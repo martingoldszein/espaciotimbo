@@ -193,7 +193,38 @@ function activarLinkPorHash() {
   if (link) activarLinkNav(link);
 }
 
-window.addEventListener('load', activarLinkPorHash);
+function activarLinkPorSection(sectionId) {
+  const link = document.querySelector(`#nav ul a[href="#${sectionId}"]`);
+  if (link) activarLinkNav(link);
+}
+
+function setupScrollSpy() {
+  const sectionLinks = Array.from(navLinks).filter(a => a.hash.startsWith('#'));
+  const sections = sectionLinks
+    .map(a => document.getElementById(a.hash.slice(1)))
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.sort((a, b) => a.target.offsetTop - b.target.offsetTop);
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activarLinkPorSection(entry.target.id);
+      }
+    });
+  }, {
+    rootMargin: '-35% 0px -55% 0px',
+    threshold: 0,
+  });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+window.addEventListener('load', () => {
+  activarLinkPorHash();
+  setupScrollSpy();
+});
 window.addEventListener('hashchange', activarLinkPorHash);
 
 // ── SCROLL NAV
