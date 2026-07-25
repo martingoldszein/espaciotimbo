@@ -73,7 +73,7 @@ exports.handler = async function(event, context) {
   }
 
   const body = {
-    from: 'Espacio Timbó <hello@espaciotimbo.uy>',
+    from: 'Espacio Timbó <hello@espaciotimbo.netlify.app>',
     to: ['espaciotimbo.uy@gmail.com'],
     subject: asunto || 'Prueba Resend desde Espacio Timbó',
     html: `
