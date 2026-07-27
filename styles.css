@@ -440,15 +440,19 @@
     margin-top: 1rem; font-size: 0.75rem; color: rgba(242,234,216,0.35); line-height: 1.6;
   }
 
-  /* Layout lado a lado */
-  .reserva-layout {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-    align-items: start; 
+  /* Layout calendar + title top, form below */
+  .reserva-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
   }
   .reserva-cal-col {
     position: sticky; top: 6rem;
   }
-  .reserva-form-col { }
+  .reserva-form-col {
+    margin-top: 2.5rem;
+  }
   .airbnb-info {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem; border-top: 1px solid rgba(242,234,216,0.12); padding-top: 2rem;
@@ -619,7 +623,7 @@
     footer nav { display: none; }
     .hero-content { padding: 0 1.4rem 3rem; }
     .servicios-grid { grid-template-columns: 1fr; }
-    .reserva-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .reserva-top { grid-template-columns: 1fr; gap: 2.5rem; }
     .reserva-cal-col, .reserva-form-col { width: 100%; }
     .reserva-cal-col { position: static; }
     .calendario-widget, .mini-calendar, .mini-cal-grid, .cal-leyenda { width: 100%; min-width: 0; }
