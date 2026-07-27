@@ -601,7 +601,7 @@ function initFormSubmit() {
   renderCalendario();
   initCalListeners();
   actualizarResumenYForm();
- //  initFormSubmit();
+
 })();
 
     // Función para mostrar el modal
@@ -630,3 +630,56 @@ function initFormSubmit() {
     });
 
     document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
+
+    document.querySelector('form[name="contacto"]').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Evita la recarga
+    
+    // Mostrar estado de carga
+    const submitBtn = this.querySelector('.btn-submit');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+    
+    // Recopilar datos del formulario
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Añadir información extra si es necesario
+    data.timestamp = new Date().toISOString();
+    data.user_agent = navigator.userAgent;
+    
+    try {
+        const response = await fetch('https://formtorch.com/f/pguw3euojn', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (response.ok) {
+            // Mostrar mensaje de éxito
+            document.getElementById('form-success').hidden = false;
+            this.reset(); // Limpiar el formulario
+            
+            // Opcional: limpiar campos display
+            document.getElementById('display-yurta').value = '';
+            document.getElementById('display-noches').value = '';
+            document.getElementById('display-llegada').value = '';
+            document.getElementById('display-salida').value = '';
+            document.querySelectorAll('.pago-metodo-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Scroll al mensaje de éxito
+            document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error de conexión. Por favor, verifica tu internet y vuelve a intentar.');
+    } finally {
+        // Restaurar botón
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
