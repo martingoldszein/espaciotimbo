@@ -571,7 +571,7 @@
     color: var(--crema); padding: 0.85rem 1rem;
     font-family: 'Inter', sans-serif; font-size: 0.9rem;
     outline: none; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 5px;
-    background: none&y/ 76
+    background: none
   }
   .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(242,234,216,0.3); }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--tierra); }
