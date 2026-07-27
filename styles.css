@@ -455,7 +455,7 @@
   }
   .airbnb-info {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem; border-top: 1px solid rgba(242,234,216,0.12); padding-top: 2rem;
+    gap: 1.5rem; padding-top: 2rem;
   }
   .airbnb-info-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,234,216,0.45); margin-bottom: 0.4rem; }
   .airbnb-info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--crema); font-weight: 400; }
