@@ -583,6 +583,12 @@
     padding: 0.9rem 2.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
     border: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; border-radius: 5px;
   }
+  input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: none !important;
+    color: initial !important;
+}
   .btn-submit:hover { background: var(--tierra-2); }
   .form-note { font-size: 0.78rem; color: rgba(242,234,216,0.4); }
 
