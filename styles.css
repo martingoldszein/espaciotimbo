@@ -559,7 +559,7 @@
   .form-group.full { grid-column: 1/-1; }
   .form-group label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,234,216,0.55); }
   .form-group input, .form-group select, .form-group textarea {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(242,234,216,0.18);
+   border: 1px solid rgba(242,234,216,0.18);
     color: var(--crema); padding: 0.85rem 1rem;
     font-family: 'Inter', sans-serif; font-size: 0.9rem;
     outline: none; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 5px;
