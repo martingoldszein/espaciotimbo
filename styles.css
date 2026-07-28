@@ -562,7 +562,18 @@
   }
 
   /* Consultas form */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .reserva-form-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
   .form-group.full { grid-column: 1/-1; }
   .form-group label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,234,216,0.55); }
@@ -577,7 +588,8 @@
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--tierra); }
   .form-group select option { background: var(--bosque-2); color: var(--crema); }
   .form-group textarea { resize: vertical; min-height: 130px; }
-  .form-submit { margin-top: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .form-submit { margin-top: 0; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .pago-column { align-self: start; }
   .btn-submit {
     background: var(--tierra); color: var(--blanco);
     padding: 0.9rem 2.2rem; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;

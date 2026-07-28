@@ -274,117 +274,122 @@
     <!-- Formulario debajo -->
     <div class="reserva-form-col">
       <p class="ical-section-title">— Solicitud de reserva</p>
-  <form name="contacto" method="POST"  netlify  action="https://formtorch.com/f/pguw3euojn">
+      <form name="contacto" method="POST" netlify action="https://formtorch.com/f/pguw3euojn">
+        <div class="reserva-form-layout">
+          <div class="form-column">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nombre">Nombre completo *</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Correo electrónico *</label>
+                <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+              </div>
+              <div class="form-group">
+                <label for="whatsapp">WhatsApp / Teléfono</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+598 ··· ···">
+              </div>
+              <div class="form-group">
+                <label for="personas">Cantidad de personas</label>
+                <select id="personas" name="personas">
+                  <option value="">Seleccionar</option>
+                  <option value="1">1 persona</option>
+                  <option value="2">2 personas</option>
+                  <option value="3-4">3–4 personas (2 yurtas)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Yurta seleccionada</label>
+                <input type="text" id="display-yurta" placeholder="Elegí una yurta →" readonly class="input-readonly">
+                <input type="hidden" id="yurta" name="yurta">
+              </div>
+              <div class="form-group">
+                <label>Cantidad de noches</label>
+                <input type="text" id="display-noches" name="noches" placeholder="—" readonly class="input-readonly">
+              </div>
+              <div class="form-group">
+                <label>Fecha de llegada</label>
+                <input type="text" id="display-llegada" placeholder="Seleccioná en el calendario" readonly class="input-readonly">
+                <input type="hidden" id="llegada" name="llegada">
+              </div>
+              <div class="form-group">
+                <label>Fecha de salida</label>
+                <input type="text" id="display-salida" placeholder="—" readonly class="input-readonly">
+                <input type="hidden" id="salida" name="salida">
+              </div>
+              <div class="form-group full">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Contanos sobre tu visita, preguntas o lo que necesites saber…" required></textarea>
+              </div>
+            </div>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="nombre">Nombre completo *</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Correo electrónico *</label>
-              <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
-            </div>
-            <div class="form-group">
-              <label for="whatsapp">WhatsApp / Teléfono</label>
-              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+598 ··· ···">
-            </div>
-            <div class="form-group">
-              <label for="personas">Cantidad de personas</label>
-              <select id="personas" name="personas">
-                <option value="">Seleccionar</option>
-                <option value="1">1 persona</option>
-                <option value="2">2 personas</option>
-                <option value="3-4">3–4 personas (2 yurtas)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Yurta seleccionada</label>
-              <input type="text" id="display-yurta" placeholder="Elegí una yurta →" readonly class="input-readonly">
-              <input type="hidden" id="yurta" name="yurta">
-            </div>
-            <div class="form-group">
-              <label>Cantidad de noches</label>
-              <input type="text" id="display-noches" name="noches" placeholder="—" readonly class="input-readonly">
-            </div>
-            <div class="form-group">
-              <label>Fecha de llegada</label>
-              <input type="text" id="display-llegada" placeholder="Seleccioná en el calendario" readonly class="input-readonly">
-              <input type="hidden" id="llegada" name="llegada">
-            </div>
-            <div class="form-group">
-              <label>Fecha de salida</label>
-              <input type="text" id="display-salida" placeholder="—" readonly class="input-readonly">
-              <input type="hidden" id="salida" name="salida">
-            </div>
-            <div class="form-group full">
-              <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" placeholder="Contanos sobre tu visita, preguntas o lo que necesites saber…" required></textarea>
+            <div class="form-submit">
+              <button type="submit" class="btn-submit">Enviar reserva</button>
+              <p class="form-note">Respondemos en menos de 24 horas por correo o WhatsApp.</p>
             </div>
           </div>
 
-          <!-- BLOQUE DE PAGO -->
-          <div class="pago-bloque">
-            <div class="pago-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              <span class="pago-header-txt">Seña para confirmar reserva</span>
+          <div class="pago-column">
+            <div class="pago-bloque">
+              <div class="pago-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <span class="pago-header-txt">Seña para confirmar reserva</span>
+              </div>
+              <div class="pago-body">
+                <p class="pago-info">
+                  Para confirmar tu reserva se requiere abonar el <strong>50% del total por adelantado</strong>. El saldo restante se abona al momento del check-in. Una vez recibida tu consulta te enviamos el monto y el link de pago correspondiente.
+                </p>
+
+                <div class="pago-region-tabs">
+                  <button type="button" class="pago-region-btn active" onclick="cambiarRegion('uy', this)">Uruguay</button>
+                  <button type="button" class="pago-region-btn" onclick="cambiarRegion('ar', this)">Argentina</button>
+                  <button type="button" class="pago-region-btn" onclick="cambiarRegion('int', this)">Internacional</button>
+                </div>
+
+                <!-- Uruguay -->
+                <div class="pago-metodos active" id="metodos-uy">
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
+                    <span class="pago-icon">💙</span> MercadoPago
+                  </button>
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PREX')">
+                    <span class="pago-icon">💳</span> PREX
+                  </button>
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'BROU Pay')">
+                    <span class="pago-icon">🏦</span> BROU Pay
+                  </button>
+                </div>
+                <!-- Argentina -->
+                <div class="pago-metodos" id="metodos-ar">
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
+                    <span class="pago-icon">💙</span> MercadoPago
+                  </button>
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
+                    <span class="pago-icon">🅿️</span> PayPal
+                  </button>
+                </div>
+                <!-- Internacional -->
+                <div class="pago-metodos" id="metodos-int">
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
+                    <span class="pago-icon">🅿️</span> PayPal
+                  </button>
+                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'Tarjeta internacional (Stripe)')">
+                    <span class="pago-icon">💳</span> Tarjeta de crédito/débito
+                  </button>
+                </div>
+
+                <input type="hidden" id="metodo-pago" name="metodo_pago">
+                <p class="pago-nota">Podés seleccionar tu método preferido o indicarlo en el mensaje. Te enviamos el link de pago por correo o WhatsApp una vez confirmada la disponibilidad.</p>
+              </div>
             </div>
-            <div class="pago-body">
-              <p class="pago-info">
-                Para confirmar tu reserva se requiere abonar el <strong>50% del total por adelantado</strong>. El saldo restante se abona al momento del check-in. Una vez recibida tu consulta te enviamos el monto y el link de pago correspondiente.
-              </p>
-
-              <div class="pago-region-tabs">
-                <button type="button" class="pago-region-btn active" onclick="cambiarRegion('uy', this)">Uruguay</button>
-                <button type="button" class="pago-region-btn" onclick="cambiarRegion('ar', this)">Argentina</button>
-                <button type="button" class="pago-region-btn" onclick="cambiarRegion('int', this)">Internacional</button>
-              </div>
-
-              <!-- Uruguay -->
-              <div class="pago-metodos active" id="metodos-uy">
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
-                  <span class="pago-icon">💙</span> MercadoPago
-                </button>
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PREX')">
-                  <span class="pago-icon">💳</span> PREX
-                </button>
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'BROU Pay')">
-                  <span class="pago-icon">🏦</span> BROU Pay
-                </button>
-              </div>
-              <!-- Argentina -->
-              <div class="pago-metodos" id="metodos-ar">
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
-                  <span class="pago-icon">💙</span> MercadoPago
-                </button>
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
-                  <span class="pago-icon">🅿️</span> PayPal
-                </button>
-              </div>
-              <!-- Internacional -->
-              <div class="pago-metodos" id="metodos-int">
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
-                  <span class="pago-icon">🅿️</span> PayPal
-                </button>
-                <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'Tarjeta internacional (Stripe)')">
-                  <span class="pago-icon">💳</span> Tarjeta de crédito/débito
-                </button>
-              </div>
-
-              <input type="hidden" id="metodo-pago" name="metodo_pago">
-              <p class="pago-nota">Podés seleccionar tu método preferido o indicarlo en el mensaje. Te enviamos el link de pago por correo o WhatsApp una vez confirmada la disponibilidad.</p>
-            </div>
           </div>
+        </div>
 
-          <div class="form-submit">
-            <button type="submit" class="btn-submit">Enviar reserva</button>
-            <p class="form-note">Respondemos en menos de 24 horas por correo o WhatsApp.</p>
-          </div>
-          <div id="form-success" class="form-success" hidden>
-            ¡Gracias por tu reserva!  Te responderemos pronto para confirmar disponibilidad.
-          </div>
-        </form>
-      </div>
+        <div id="form-success" class="form-success" hidden>
+          ¡Gracias por tu reserva!  Te responderemos pronto para confirmar disponibilidad.
+        </div>
+      </form>
+    </div>
 
   </div>
 </section>
