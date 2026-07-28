@@ -586,7 +586,7 @@
   input:-internal-autofill-selected {
     appearance: menulist-button;
     background-image: none !important;
-    background-color: none !important;
+    background: none !important;
     color: initial !important;
 }
   .btn-submit:hover { background: var(--tierra-2); }
