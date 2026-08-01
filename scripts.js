@@ -227,6 +227,38 @@ window.addEventListener('load', () => {
 });
 window.addEventListener('hashchange', activarLinkPorHash);
 
+// ── SLIDESHOWS DE YURTAS
+function activarSlide(slideshow, index) {
+  const slides = slideshow.querySelectorAll('.yurta-slide');
+  slides.forEach((slide, slideIndex) => {
+    slide.classList.toggle('is-active', slideIndex === index);
+  });
+}
+
+function setupYurtaSlideshow(slideshow) {
+  const slides = slideshow.querySelectorAll('.yurta-slide');
+  if (!slides.length) return;
+
+  let currentIndex = Number(slideshow.dataset.startIndex || 0);
+  currentIndex = Math.max(0, Math.min(currentIndex, slides.length - 1));
+  activarSlide(slideshow, currentIndex);
+
+  const prevBtn = slideshow.querySelector('.yurta-slide-btn.prev');
+  const nextBtn = slideshow.querySelector('.yurta-slide-btn.next');
+
+  prevBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    activarSlide(slideshow, currentIndex);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    activarSlide(slideshow, currentIndex);
+  });
+}
+
+document.querySelectorAll('.yurta-slideshow').forEach(setupYurtaSlideshow);
+
 // ── SCROLL NAV
 window.addEventListener('scroll', () => {
   nav.style.background = window.scrollY > 60

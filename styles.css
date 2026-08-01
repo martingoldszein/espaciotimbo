@@ -174,6 +174,79 @@
   .glamping-img-grid img:first-child { grid-column: 1/-1; aspect-ratio: 16/9; }
   .glamping-img-grid img:not(:first-child) { aspect-ratio: 1; }
 
+  .glamping-yurta-list {
+    max-width: 1280px; margin: 4rem auto 0;
+    display: grid; gap: 1.5rem;
+  }
+  .yurta-detail-card {
+    display: grid; grid-template-columns: 1.05fr 0.95fr;
+    gap: 2rem; align-items: stretch;
+    background: rgba(255,255,255,0.24);
+    border: 1px solid var(--linea);
+    border-radius: 10px;
+    padding: 2rem;
+  }
+  .yurta-detail-copy {
+    display: flex; flex-direction: column;
+    justify-content: center;
+  }
+  .yurta-detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 500; color: var(--bosque-2);
+    margin-bottom: 0.9rem;
+  }
+  .yurta-detail-text {
+    font-size: 0.95rem; line-height: 1.75; color: var(--gris);
+    max-width: 56ch;
+  }
+  .yurta-detail-text + .yurta-detail-text { margin-top: 0.8rem; }
+  .yurta-detail-list {
+    list-style: none; margin: 1.2rem 0 1.4rem;
+    display: grid; gap: 0.7rem;
+  }
+  .yurta-detail-list li {
+    position: relative; padding-left: 1.15rem;
+    font-size: 0.88rem; line-height: 1.6; color: var(--gris);
+  }
+  .yurta-detail-list li::before {
+    content: '•'; position: absolute; left: 0; top: 0;
+    color: var(--tierra);
+  }
+  .yurta-detail-photo { min-height: 100%; }
+  .yurta-slideshow {
+    position: relative; width: 100%; height: 100%; min-height: 420px;
+    overflow: hidden; border-radius: 5px;
+  }
+  .yurta-slide {
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .yurta-slide.is-active {
+    opacity: 1; pointer-events: auto;
+  }
+  .yurta-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; border-radius: 5px;
+  }
+  .yurta-slide-controls {
+    position: absolute; left: 1rem; right: 1rem; bottom: 1rem;
+    display: flex; justify-content: space-between; gap: 0.8rem;
+    z-index: 2;
+  }
+  .yurta-slide-btn {
+
+    color: var(--crema);
+    font-size: 2rem;
+    background:none;
+    cursor: pointer;
+    border: none
+  }
+  .yurta-slide-btn:hover { opacity:40%; 
+                 
+                         }
+
   /* ── SERVICIOS ── */
   .servicios { background: var(--blanco); }
   .servicios-inner {
