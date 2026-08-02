@@ -175,6 +175,12 @@ const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('#nav ul a');
 document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
 
+function cerrarMenuMovil() {
+  if (nav.classList.contains('open')) {
+    nav.classList.remove('open');
+  }
+}
+
 function activarLinkNav(link) {
   navLinks.forEach(a => a.classList.remove('active'));
   link.classList.add('active');
@@ -183,6 +189,7 @@ function activarLinkNav(link) {
 navLinks.forEach(link => {
   link.addEventListener('click', function() {
     activarLinkNav(this);
+    cerrarMenuMovil();
   });
 });
 
@@ -245,6 +252,28 @@ function setupYurtaSlideshow(slideshow) {
 
   const prevBtn = slideshow.querySelector('.yurta-slide-btn.prev');
   const nextBtn = slideshow.querySelector('.yurta-slide-btn.next');
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slideshow.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+
+  slideshow.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    const delta = touchEndX - touchStartX;
+
+    if (Math.abs(delta) < 40) return;
+
+    if (delta < 0) {
+      currentIndex = (currentIndex + 1) % slides.length;
+    } else {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    }
+
+    activarSlide(slideshow, currentIndex);
+  }, { passive: true });
 
   prevBtn?.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;

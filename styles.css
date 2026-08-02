@@ -113,10 +113,10 @@
   .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
   /* ── SECCIONES BASE ── */
-  section { padding: 7rem 3rem; }
-  .section-light { background: var(--blanco); padding: 7rem 3rem; }
-  .section-cream { background: var(--crema); padding: 7rem 3rem; }
-  .section-padded { padding: 2rem 3rem; }
+  section { padding: 4.9rem 2.1rem; }
+  .section-light { background: var(--blanco); padding: 4.9rem 2.1rem; }
+  .section-cream { background: var(--crema); padding: 4.9rem 2.1rem; }
+  .section-padded { padding: 1.4rem 2.1rem; }
   .section-body-spaced { margin-top: 1.2rem; }
   .section-body-quote {
     margin-top: 1.2rem; font-family: 'Cormorant Garamond', serif;
@@ -712,6 +712,28 @@
       border-top: 1px solid var(--linea); gap: 1.2rem;
     }
     section { padding: 4rem 1.4rem; }
+    .section-light, .section-cream { padding: 4rem 1.4rem; }
+    .section-body,
+    .yurta-detail-text,
+    .yurta-detail-list li,
+    .servicio-desc,
+    .bio-texto,
+    .evento-desc,
+    .pago-info,
+    .form-note,
+    .contacto-dato,
+    .section-body-quote {
+      font-size: 0.7rem;
+      line-height: 1.45;
+    }
+    .section-title {
+      font-size: clamp(2rem, 6vw, 2.7rem);
+      line-height: 1.18;
+    }
+    .section-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+    }
     .que-es, .glamping, .quienes-top { grid-template-columns: 1fr; gap: 2.5rem; }
     .quienes-bios { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
@@ -725,6 +747,7 @@
     .servicios-inner { grid-template-columns: 1fr; }
     .servicios-grid { grid-template-columns: 1fr; }
     .reserva-top { grid-template-columns: 1fr; gap: 2.5rem; }
+    .reserva-form-layout { grid-template-columns: 1fr; }
     .reserva-cal-col, .reserva-form-col { width: 100%; }
     .reserva-cal-col { position: static; }
     .calendario-widget, .mini-calendar, .mini-cal-grid, .cal-leyenda { width: 100%; min-width: 0; }
