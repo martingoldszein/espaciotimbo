@@ -604,7 +604,7 @@ function cambiarRegion(region, btn) {
 
 function elegirPago(btn, metodo) {
   // Deseleccionar todos los botones del grupo activo
-  btn.closest('.pago-metodos').querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pago-metodo-btn, .pago-form-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('metodo-pago').value = metodo;
 }

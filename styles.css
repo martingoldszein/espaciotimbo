@@ -120,7 +120,7 @@
   .section-body-spaced { margin-top: 1.2rem; }
   .section-body-quote {
     margin-top: 1.2rem; font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 1.1rem; color: var(--bosque);
+    font-style: italic; font-size: 1.4rem !important; color: var(--bosque);
   }
   .glamping-cta { margin-top: 2.5rem; }
   .glamping-img-wide { aspect-ratio: 16/7; object-position: center; }
@@ -251,20 +251,46 @@
   .servicios { background: var(--blanco); }
   .servicios-inner {
     max-width: 1280px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    display: block;
   }
-  .servicios-header { margin-bottom: 0; }
+  .servicios-header { margin-bottom: 2rem; }
   .servicios-grid {
-    display: grid; grid-template-columns: repeat(2, minmax(280px, 1fr));
-    gap: 1.5rem;
+    display: grid; gap: 1.25rem;
+    width: 100%;
   }
   .servicio-item {
-    padding: 2.5rem 2rem;
+    display: grid; grid-template-columns: minmax(220px, 280px) 1fr;
+    gap: 1.5rem; align-items: center;
+    width: 100%;
+    padding: 1.4rem;
     border: 1px solid var(--linea);
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
     border-radius: 5px;
   }
-  .servicio-item:hover { background: var(--crema); }
+  .servicio-item:hover {
+    background: var(--crema);
+    transform: translateY(-2px);
+  }
+  .servicio-visual {
+    background: var(--crema-2);
+    border-radius: 5px;
+    min-height: 170px;
+    overflow: hidden;
+  }
+  .servicio-placeholder {
+    width: 100%; height: 100%; min-height: 170px;
+    background:
+      linear-gradient(135deg, rgba(58,82,64,0.12), rgba(58,82,64,0.02)),
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.34),
+        rgba(255,255,255,0.34) 12px,
+        rgba(255,255,255,0.08) 12px,
+        rgba(255,255,255,0.08) 24px
+      );
+    opacity: 0.9;
+  }
+  .servicio-content { display: flex; flex-direction: column; }
   .servicio-numero { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--crema-2); line-height: 1; margin-bottom: 1rem; }
   .servicio-titulo { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 500; color: var(--bosque-2); margin-bottom: 0.8rem; line-height: 1.25; }
   .servicio-desc { font-size: 0.88rem; line-height: 1.7; color: var(--gris); }
@@ -657,6 +683,31 @@
     outline: none; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 5px;
     background: none
   }
+  .pago-form-group { gap: 0.7rem; }
+  .pago-form-buttons {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+  }
+  .pago-form-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; padding: 0;
+    border: 1px solid rgba(242,234,216,0.2);
+    background: rgba(255,255,255,0.04); color: rgba(242,234,216,0.78);
+    cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.78rem;
+    border-radius: 5px; transition: all 0.2s;
+  }
+  .pago-form-btn:hover, .pago-form-btn.active {
+    border-color: var(--tierra); background: rgba(139,107,71,0.16); color: var(--crema);
+  }
+  .pago-form-btn .pago-icon {
+    width: 100%; height: 100%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.66rem; font-weight: 700; line-height: 1;
+    border-radius: 3px;
+  }
+  .pago-icon--mp { background: #0f7dff; color: #fff; }
+  .pago-icon--prex { background: #5b2a9d; color: #fff; }
+  .pago-icon--brou { background: #0e4ba8; color: #fff; }
+  .pago-icon--paypal { background: #0a3f93; color: #fff; }
   .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(242,234,216,0.3); }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--tierra); }
   .form-group select option { background: var(--bosque-2); color: var(--crema); }

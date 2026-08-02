@@ -145,31 +145,56 @@
       <p class="section-body">We develop proposals that integrate nature, regeneration, learning, culture, and well-being, strengthening the bond between people and the territory.</p>
     </div>
     <div class="servicios-grid">
-      <div class="servicio-item">
-        <div class="servicio-numero">01</div>
-        <h3 class="servicio-titulo">Regenerative Glamping</h3>
-        <p class="servicio-desc">Accommodation in yurts built with natural and recyclable materials, in a setting of forest, river, and beach. Rest, contemplation, and a deep connection with nature.</p>
-      </div>
-      <div class="servicio-item">
-        <div class="servicio-numero">02</div>
-        <h3 class="servicio-titulo">Workshops & Regenerative Experiences</h3>
-        <p class="servicio-desc">Workshops and guided activities linked to permaculture, bioconstruction, agroecological gardens, medicinal plants, and ecosystem regeneration.</p>
-      </div>
-      <div class="servicio-item">
-        <div class="servicio-numero">03</div>
-        <h3 class="servicio-titulo">Cultural & Artistic Activities</h3>
-        <p class="servicio-desc">Cultural gatherings, exhibitions, conversations, and creative workshops that strengthen community ties and the exchange of knowledge.</p>
-      </div>
-      <div class="servicio-item">
-        <div class="servicio-numero">04</div>
-        <h3 class="servicio-titulo">Design & Project Support</h3>
-        <p class="servicio-desc">We share experience in permaculture design, agroforestry gardens, ecological water management, and natural construction.</p>
-      </div>
-      <div class="servicio-item">
-        <div class="servicio-numero">05</div>
-        <h3 class="servicio-titulo">Conscious Café & Shop</h3>
-        <p class="servicio-desc">A meeting space with artisanal products, local food, and local-economy enterprises based on conscious consumption.</p>
-      </div>
+      <article class="servicio-item">
+        <div class="servicio-visual">
+          <div class="servicio-placeholder"></div>
+        </div>
+        <div class="servicio-content">
+          <div class="servicio-numero">01</div>
+          <h3 class="servicio-titulo">Regenerative Glamping</h3>
+          <p class="servicio-desc">Accommodation in yurts built with natural and recyclable materials, in a setting of forest, river, and beach. Rest, contemplation, and a deep connection with nature.</p>
+        </div>
+      </article>
+      <article class="servicio-item">
+        <div class="servicio-visual">
+          <div class="servicio-placeholder"></div>
+        </div>
+        <div class="servicio-content">
+          <div class="servicio-numero">02</div>
+          <h3 class="servicio-titulo">Workshops & Regenerative Experiences</h3>
+          <p class="servicio-desc">Workshops and guided activities linked to permaculture, bioconstruction, agroecological gardens, medicinal plants, and ecosystem regeneration.</p>
+        </div>
+      </article>
+      <article class="servicio-item">
+        <div class="servicio-visual">
+          <div class="servicio-placeholder"></div>
+        </div>
+        <div class="servicio-content">
+          <div class="servicio-numero">03</div>
+          <h3 class="servicio-titulo">Cultural & Artistic Activities</h3>
+          <p class="servicio-desc">Cultural gatherings, exhibitions, conversations, and creative workshops that strengthen community ties and the exchange of knowledge.</p>
+        </div>
+      </article>
+      <article class="servicio-item">
+        <div class="servicio-visual">
+          <div class="servicio-placeholder"></div>
+        </div>
+        <div class="servicio-content">
+          <div class="servicio-numero">04</div>
+          <h3 class="servicio-titulo">Design & Project Support</h3>
+          <p class="servicio-desc">We share experience in permaculture design, agroforestry gardens, ecological water management, and natural construction.</p>
+        </div>
+      </article>
+      <article class="servicio-item">
+        <div class="servicio-visual">
+          <div class="servicio-placeholder"></div>
+        </div>
+        <div class="servicio-content">
+          <div class="servicio-numero">05</div>
+          <h3 class="servicio-titulo">Conscious Café & Shop</h3>
+          <p class="servicio-desc">A meeting space with artisanal products, local food, and local-economy enterprises based on conscious consumption.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -351,8 +376,24 @@
                 <label>Departure date</label>
                 <input type="text" id="display-salida" placeholder="—" readonly class="input-readonly">
                 <input type="hidden" id="salida" name="salida">
-              </div>
-              <div class="form-group full">
+              </div>              <div class="form-group full pago-form-group">
+                <label>Payment method for the deposit</label>
+                <div class="pago-form-buttons">
+                  <button type="button" class="pago-form-btn" aria-label="Mercado Pago" onclick="elegirPago(this, 'MercadoPago')">
+                    <span class="pago-icon pago-icon--mp">MP</span>
+                  </button>
+                  <button type="button" class="pago-form-btn" aria-label="PREX" onclick="elegirPago(this, 'PREX')">
+                    <span class="pago-icon pago-icon--prex">P</span>
+                  </button>
+                  <button type="button" class="pago-form-btn" aria-label="BROU Pay" onclick="elegirPago(this, 'BROU Pay')">
+                    <span class="pago-icon pago-icon--brou">B</span>
+                  </button>
+                  <button type="button" class="pago-form-btn" aria-label="PayPal" onclick="elegirPago(this, 'PayPal')">
+                    <span class="pago-icon pago-icon--paypal">PP</span>
+                  </button>
+                </div>
+                <input type="hidden" id="metodo-pago" name="metodo_pago">
+              </div>              <div class="form-group full">
                 <label for="mensaje">Message</label>
                 <textarea id="mensaje" name="mensaje" placeholder="Tell us about your visit, questions, or anything you need to know…" required></textarea>
               </div>
@@ -374,43 +415,7 @@
                 <p class="pago-info">
                   To confirm your reservation, it is necessary to pay <strong>50% of the total in advance</strong>. The remaining balance is paid at check-in. Once we receive your request, we will send you the amount and the payment link.
                 </p>
-
-                <div class="pago-region-tabs">
-                  <button type="button" class="pago-region-btn active" onclick="cambiarRegion('uy', this)">Uruguay</button>
-                  <button type="button" class="pago-region-btn" onclick="cambiarRegion('ar', this)">Argentina</button>
-                  <button type="button" class="pago-region-btn" onclick="cambiarRegion('int', this)">International</button>
-                </div>
-
-                <div class="pago-metodos active" id="metodos-uy">
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
-                    <span class="pago-icon">💙</span> MercadoPago
-                  </button>
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PREX')">
-                    <span class="pago-icon">💳</span> PREX
-                  </button>
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'BROU Pay')">
-                    <span class="pago-icon">🏦</span> BROU Pay
-                  </button>
-                </div>
-                <div class="pago-metodos" id="metodos-ar">
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'MercadoPago')">
-                    <span class="pago-icon">💙</span> MercadoPago
-                  </button>
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
-                    <span class="pago-icon">🅿️</span> PayPal
-                  </button>
-                </div>
-                <div class="pago-metodos" id="metodos-int">
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'PayPal')">
-                    <span class="pago-icon">🅿️</span> PayPal
-                  </button>
-                  <button type="button" class="pago-metodo-btn" onclick="elegirPago(this, 'Tarjeta internacional (Stripe)')">
-                    <span class="pago-icon">💳</span> Credit/debit card
-                  </button>
-                </div>
-
-                <input type="hidden" id="metodo-pago" name="metodo_pago">
-                <p class="pago-nota">You can choose your preferred method or mention it in the message. We will send the payment link by email or WhatsApp once availability is confirmed.</p>
+                <p class="pago-nota">You can specify your preferred payment method in the message or select it above before sending the request.</p>
               </div>
             </div>
           </div>
