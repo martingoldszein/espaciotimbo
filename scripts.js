@@ -579,8 +579,8 @@ function calNavMes(dir) {
 }
 
 const NOMBRES_YURTAS = {
-  1: 'Yurta Ceibo (yurta 1)',
-  2: 'Yurta Canelon (yurta 2)'
+  1: 'Yurta Ceibo',
+  2: 'Yurta Canelon'
 };
 
 function seleccionarYurta(n) {
