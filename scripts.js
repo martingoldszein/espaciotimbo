@@ -578,15 +578,21 @@ function calNavMes(dir) {
   renderCalendario();
 }
 
+const NOMBRES_YURTAS = {
+  1: 'Yurta Ceibo (yurta 1)',
+  2: 'Yurta Canelon (yurta 2)'
+};
+
 function seleccionarYurta(n) {
   calState.yurta  = n;
   calState.inicio = null; calState.fin = null; calState.hover = null;
   document.getElementById('cal-error').style.display = 'none';
-  document.getElementById('cal-yurta-label').textContent = `Yurta ${n}`;
+  const nombreYurta = NOMBRES_YURTAS[n] || `Yurta ${n}`;
+  document.getElementById('cal-yurta-label').textContent = nombreYurta;
   document.getElementById('btn-yurta1').classList.toggle('active', n === 1);
   document.getElementById('btn-yurta2').classList.toggle('active', n === 2);
-  document.getElementById('display-yurta').value = `Yurta ${n}`;
-  document.getElementById('yurta').value = `Yurta ${n}`;
+  document.getElementById('display-yurta').value = nombreYurta;
+  document.getElementById('yurta').value = nombreYurta;
   renderCalendario();
   actualizarResumenYForm();
 }
@@ -657,8 +663,9 @@ function initFormSubmit() {
 // ── INIT
 (function init() {
   renderEventos('todos');
-  document.getElementById('display-yurta').value = 'Yurta 1';
-  document.getElementById('yurta').value = 'Yurta 1';
+  const nombreYurtaInicial = NOMBRES_YURTAS[1];
+  document.getElementById('display-yurta').value = nombreYurtaInicial;
+  document.getElementById('yurta').value = nombreYurtaInicial;
   renderCalendario();
   initCalListeners();
   actualizarResumenYForm();

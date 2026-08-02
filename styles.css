@@ -15,7 +15,8 @@
   button { border-radius: 5px; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Inter', sans-serif;
+ /*   font-family: 'Inter', sans-serif; */
+    font-family: 'Work Sans', sans-serif; 
     background: var(--crema);
     color: var(--negro);
     overflow-x: hidden;
@@ -47,14 +48,14 @@
     display: inline-flex;
     align-items: center;
     padding-bottom: 0.5rem;
-    font-size: 0.78rem; text-transform: uppercase; color: var(--bosque-2); text-decoration: none; font-weight: 600; transition: color 0.2s;
+    font-size: 0.78rem; text-transform: uppercase; color: var(--bosque-2); text-decoration: none; font-weight:900; transition: color 0.2s;
   }
   #nav ul a::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -30px;
     height: 5px;
     width: 0;
     background: var(--tierra);
@@ -69,7 +70,15 @@
     background: var(--bosque); color: var(--blanco) !important;
     padding: 0.5rem 1.4rem; border-radius: 5px; transition: background 0.2s !important;
   }
-  .nav-reservar:hover { background: var(--tierra) !important; color: var(--blanco) !important; }
+  .nav-reservar::after {
+    display: none !important;
+    width: 0 !important;
+  }
+  .nav-reservar:hover,
+  .nav-reservar.active {
+    background: var(--tierra) !important;
+    color: var(--blanco) !important;
+  }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .hamburger span { width: 22px; height: 1.5px; background: var(--bosque); display: block; transition: all 0.3s; }
 
