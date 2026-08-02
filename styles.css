@@ -733,6 +733,11 @@
     .pago-metodo-btn { white-space: normal; }
     .calendarios-grid { grid-template-columns: 1fr; }
     .talleres-header { flex-direction: column; align-items: flex-start; }
+    .glamping-yurta-list { gap: 1rem; }
+    .yurta-detail-card { grid-template-columns: 1fr; gap: 1.4rem; padding: 1.4rem; }
+    .yurta-slideshow { min-height: 300px; }
+    .yurta-slide-controls { left: 0.75rem; right: 0.75rem; bottom: 0.75rem; }
+    .yurta-slide-btn { font-size: 1.4rem; }
   }
 
   /* Logo: fondo ya transparente, letras blancas → verde bosque #3A5240 */
