@@ -790,6 +790,16 @@
     .hero-content { padding: 0 1.4rem 3rem; }
     .servicios-inner { grid-template-columns: 1fr; }
     .servicios-grid { grid-template-columns: 1fr; }
+    .servicio-item {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .servicio-visual,
+    .servicio-placeholder {
+      min-height: 180px;
+      width: 100%;
+    }
     .reserva-top { grid-template-columns: 1fr; gap: 2.5rem; }
     .reserva-form-layout { grid-template-columns: 1fr; }
     .reserva-cal-col, .reserva-form-col { width: 100%; }
