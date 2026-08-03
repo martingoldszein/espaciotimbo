@@ -151,7 +151,21 @@
     font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.1;
     color: var(--bosque-2); margin-bottom: 1.5rem;
   }
+  .section-title.is-animated {
+    animation: sectionTitleParallax 2s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+    will-change: transform;
+  }
   .section-title em { font-style: italic; }
+  @keyframes sectionTitleParallax {
+    from {
+      transform: translateY(10px);
+      opacity: 0.2;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
   .section-body { font-size: 1rem; line-height: 1.75; color: var(--gris); max-width: 56ch; }
   .divider { width: 48px; height: 1px; background: var(--tierra); margin: 1.5rem 0; }
 

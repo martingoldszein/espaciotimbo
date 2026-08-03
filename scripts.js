@@ -228,9 +228,28 @@ function setupScrollSpy() {
   sections.forEach(section => observer.observe(section));
 }
 
+function setupSectionTitleReveal() {
+  const titles = document.querySelectorAll('.section-title');
+  if (!titles.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-animated');
+      obs.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.25,
+    rootMargin: '0px 0px -8% 0px'
+  });
+
+  titles.forEach(title => observer.observe(title));
+}
+
 window.addEventListener('load', () => {
   activarLinkPorHash();
   setupScrollSpy();
+  setupSectionTitleReveal();
 });
 window.addEventListener('hashchange', activarLinkPorHash);
 
