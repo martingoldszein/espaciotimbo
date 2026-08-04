@@ -933,3 +933,140 @@
         opacity: 1;
     }
 }
+/* --- ESTILOS PARA RESEÑAS AIRBNB --- */
+.resenas-airbnb {
+  padding: 3rem 1.5rem;
+  background-color: #f8f5f0; /* Un color cálido y neutro */
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.container-resenas {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Encabezado */
+.encabezado-resenas {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.encabezado-resenas h2 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+.calificacion {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3a6b4e; /* Un tono verde que puede combinar con tu marca */
+  margin: 0.5rem 0;
+}
+.subtitulo {
+  color: #555;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Grid de reseñas */
+.grid-resenas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Tarjeta individual */
+.tarjeta-resena {
+  background: white;
+  padding: 1.8rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eae3d9;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tarjeta-resena:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* Perfil del huésped */
+.perfil-huésped {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.avatar, .avatar-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d4c5b2;
+}
+.avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3a6b4e;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.info-huésped {
+  display: flex;
+  flex-direction: column;
+}
+.nombre {
+  font-weight: 700;
+  color: #1e2b32;
+  font-size: 1.1rem;
+}
+.fecha {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Texto de la reseña */
+.texto-resena {
+  color: #2d3e4a;
+  line-height: 1.6;
+  font-size: 0.98rem;
+  margin: 0;
+  font-style: italic;
+}
+.texto-resena::before {
+  content: '"';
+  font-size: 1.8rem;
+  color: #b8a390;
+  line-height: 0;
+  vertical-align: sub;
+}
+.texto-resena::after {
+  content: '"';
+  font-size: 1.8rem;
+  color: #b8a390;
+  line-height: 0;
+  vertical-align: sub;
+}
+
+/* Enlace final */
+.enlace-airbnb {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.enlace-airbnb a {
+  display: inline-block;
+  background-color: #ff5a5f; /* Color característico de Airbnb */
+  color: white !important;
+  padding: 0.8rem 2rem;
+  border-radius: 40px;
+  text-decoration: none !important;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 4px 10px rgba(255, 90, 95, 0.25);
+}
+.enlace-airbnb a:hover {
+  background-color: #e0484d;
+  transform: scale(1.02);
+}

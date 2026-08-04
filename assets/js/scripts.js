@@ -18,21 +18,22 @@
 ═══════════════════════════════════════════════════════════════ */
 
 const TALLERES_EVENTOS = [
-/*  {
-    tipo: "taller",
-    titulo: "Introducción a la Permacultura",
-    desc: "Un día inmersivo en los principios del diseño permacultural. Recorremos el espacio, la huerta y conversamos sobre ética y diseño regenerativo para el hogar y la comunidad.",
-    fecha: "22 de junio, 2025",
-    hora: "9:00 – 17:00 hs",
+  {
+    tipo: "experiencia",
+    titulo: "Retiro Vivencial: Retorno al Origen",
+    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fueg• Limpieza e Inmersión con Sahumos • Ceremonia con Plantas Maestras",
+    fecha: "Sábado 19 de Septiembre",
+    hora: " 10:00 hs",
     duracion: "1 día",
     cupos: 12,
-    precio: "$ 1.200",
+    precio: "",
     precio_nota: "por persona · incluye almuerzo",
     badge: "nuevo",
     agotado: false,
-    imagen: null,
+    imagen: "../assets/images/experiencia1.png",
     whatsapp: true
-  },
+  }
+  /*,
   {
     tipo: "taller",
     titulo: "Bioconstrucción Natural",
