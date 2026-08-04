@@ -98,10 +98,10 @@
     transition: opacity 1.2s ease-in-out;
   }
   .hero-slide-1 {
-    background-image: url('../images/slide1.jpg');
+    background-image: url('./slide1.jpg');
   }
   .hero-slide-2 {
-    background-image: url('../images/slide2.jpg');
+    background-image: url('./slide2.jpg');
   }
   .hero-slide.is-active {
     opacity: 1;
