@@ -409,6 +409,13 @@
     font-size: 1.15rem; color: var(--bosque); font-weight: 500;
   }
   .evento-precio span { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: var(--gris); font-weight: 400; }
+  .evento-link {
+    margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--tierra); text-decoration: none; font-size: 0.78rem;
+    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .evento-link i { font-size: 0.82rem; }
+  .evento-link:hover { color: var(--bosque); }
   .evento-cta {
     margin-top: 1.2rem; display: inline-block;
     background: var(--bosque); color: var(--crema);

@@ -14,6 +14,7 @@
    - badge:      "nuevo" | "pronto" | null
    - agotado:    true | false
    - imagen:     string (URL de imagen) | null
+   - linkURL:    string (URL externa para detalle o publicación)
    - whatsapp:   true (abre consulta WhatsApp) | false (usa formulario)
 ═══════════════════════════════════════════════════════════════ */
 
@@ -21,15 +22,16 @@ const TALLERES_EVENTOS = [
   {
     tipo: "experiencia",
     titulo: "Retiro Vivencial: Retorno al Origen",
-    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fueg• Limpieza e Inmersión con Sahumos • Ceremonia con Plantas Maestras",
+    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fuego\n• Limpieza e Inmersión con Sahumos\n • Ceremonia con Plantas Maestras",
     fecha: "Sábado 19 de Septiembre",
     hora: " 10:00 hs",
     duracion: "1 día",
-    cupos: 12,
+    cupos: "0",
     precio: "",
     precio_nota: "por persona · incluye almuerzo",
     badge: "nuevo",
     agotado: false,
+    linkURL:"https://www.instagram.com/p/DagfVcWlZD7/?img_index=1",
     imagen: "../assets/images/experiencia1.png",
     whatsapp: true
   }
@@ -360,8 +362,18 @@ function renderEventos(filtro) {
   const tipoLabels  = { taller: 'Taller', evento: 'Evento', experiencia: 'Experiencia' };
 
   grid.innerHTML = items.map(e => {
-    const cuposText = e.cupos ? `${e.cupos} cupos` : 'Abierto';
+    const cuposText = e.cupos ? `${e.cupos} cupos` : '';
     const msgWA = encodeURIComponent(`Hola! Me interesa el taller "${e.titulo}" (${e.fecha}). ¿Hay lugares disponibles?`);
+    const descHTML = (e.desc || '').replace(/\r?\n/g, '<br>');
+    const linkHTML = e.linkURL
+      ? `<a href="${e.linkURL}" target="_blank" rel="noopener noreferrer" class="evento-link"><i class="fa-solid fa-link"></i><span>Ver más información</span></a>`
+      : '';
+    const precioHTML = e.precio?.trim()
+      ? `<p class="evento-precio">${e.precio} <span>${e.precio_nota || ''}</span></p>`
+      : '';
+    const cuposHTML = typeof e.cupos === 'number'
+      ? `<div class="evento-meta-item">${iconos.cupos}<span>${cuposText}</span></div>`
+      : '';
     const ctaHTML = e.agotado
       ? `<span class="evento-agotado">Cupos agotados</span>`
       : e.whatsapp
@@ -377,14 +389,15 @@ function renderEventos(filtro) {
         ${e.badge ? `<span class="evento-badge ${e.badge}">${badgeLabels[e.badge]}</span>` : ''}
         <p class="evento-tipo">${tipoLabels[e.tipo] || e.tipo}</p>
         <h3 class="evento-titulo">${e.titulo}</h3>
-        <p class="evento-desc">${e.desc}</p>
+        <p class="evento-desc">${descHTML}</p>
         <div class="evento-meta">
           <div class="evento-meta-item">${iconos.fecha}<span>${e.fecha}</span></div>
           <div class="evento-meta-item">${iconos.hora}<span>${e.hora}</span></div>
           <div class="evento-meta-item">${iconos.dur}<span>${e.duracion}</span></div>
-          <div class="evento-meta-item">${iconos.cupos}<span>${cuposText}</span></div>
+          ${cuposHTML}
         </div>
-        <p class="evento-precio">${e.precio} <span>${e.precio_nota}</span></p>
+        ${precioHTML}
+        ${linkHTML}
         ${ctaHTML}
       </div>
     </div>`;
