@@ -103,9 +103,27 @@
 
   }
   .hero-slide-2 {
-     
+
     background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('../images/slide2.jpg');
   }
+    .hero-slide-3 {
+    
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/slide3.jpg');
+
+  }
+  .hero-slide-4 {
+
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('../images/slide4.jpg');
+  }
+  .hero-slide-5 {
+
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/slide5.jpg');
+  }
+  .hero-slide-6 {
+
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('../images/slide6.jpg');
+  }
+
   .hero-slide.is-active {
     opacity: 1;
   }
@@ -163,7 +181,7 @@
     background: rgba(58,82,64,0.3); border-left: 3px solid var(--tierra);
     color: var(--crema); font-size: 0.9rem;
   }
-  .contacto-title { color: var(--crema); }
+  .contacto-title { color: var(--crema); line-height: 45px;}
   .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tierra); margin-bottom: 0.8rem; }
   .section-title {
     font-family: 'Cormorant Garamond', serif;
@@ -1075,22 +1093,9 @@
 
 /* Enlace final */
 .enlace-airbnb {
-  text-align: center;
+
   margin-top: 1.5rem;
 }
 .enlace-airbnb a {
-  display: inline-block;
-  background-color: #ff5a5f; /* Color característico de Airbnb */
-  color: white !important;
-  padding: 0.8rem 2rem;
-  border-radius: 20px;
-  text-decoration: none !important;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 4px 10px rgba(255, 90, 95, 0.25);
-}
-.enlace-airbnb a:hover {
-  background-color: #e0484d;
-  transform: scale(1.02);
+text-decoration: none;
 }
