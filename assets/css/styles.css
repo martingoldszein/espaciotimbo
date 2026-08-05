@@ -229,10 +229,31 @@
     max-width: 1280px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
   }
-  .glamping-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-  .glamping-img-grid img { width: 100%; object-fit: cover; display: block; border-radius: 5px; }
-  .glamping-img-grid img:first-child { grid-column: 1/-1; aspect-ratio: 16/9; }
-  .glamping-img-grid img:not(:first-child) { aspect-ratio: 1; }
+  .glamping-slideshow {
+    position: relative;
+    width: 100%;
+    min-height: 520px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  .glamping-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.1s ease-in-out;
+  }
+  .glamping-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .glamping-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px;
+  }
 
   .glamping-yurta-list {
     max-width: 1280px; margin: 4rem auto 0;

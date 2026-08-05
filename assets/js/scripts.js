@@ -275,6 +275,25 @@ function setupHeroSlideshow() {
 
 window.addEventListener('load', setupHeroSlideshow);
 
+// ── GLAMPING SLIDESHOW
+function setupGlampingSlideshow() {
+  const slides = document.querySelectorAll('.glamping-slide');
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  slides[currentIndex].classList.add('is-active');
+
+  setInterval(() => {
+    const currentSlide = slides[currentIndex];
+    currentSlide.classList.remove('is-active');
+
+    currentIndex = (currentIndex + 1) % slides.length;
+    slides[currentIndex].classList.add('is-active');
+  }, 4200);
+}
+
+window.addEventListener('load', setupGlampingSlideshow);
+
 // ── SLIDESHOWS DE YURTAS
 function activarSlide(slideshow, index) {
   const slides = slideshow.querySelectorAll('.yurta-slide');
