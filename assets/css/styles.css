@@ -278,7 +278,7 @@
     margin-bottom: 0.9rem;
   }
   .yurta-detail-text {
-    font-size: 0.95rem; line-height: 1.75; color: var(--gris);
+    font-size: 0.95rem; line-height: 1.2; color: var(--gris);
     max-width: 56ch;
   }
   .yurta-detail-text + .yurta-detail-text { margin-top: 0.8rem; }
