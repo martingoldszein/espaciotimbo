@@ -836,6 +836,12 @@
     .hero-slide-1 {
       background-position: -150px center;
     }
+      .hero-slide-5 {
+      background-position:  60% center;
+    }
+          .hero-slide-6 {
+       background-position:  60% center;
+    }
     section { padding: 4rem 1.4rem; }
     .section-light, .section-cream { padding: 4rem 1.4rem; }
     .section-body,
@@ -859,6 +865,13 @@
       font-size: 0.62rem;
       letter-spacing: 0.18em;
     }
+    .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+
+    line-height: 1.1;
+
+}
     .que-es, .glamping, .quienes-top { grid-template-columns: 1fr; gap: 2.5rem; }
     .quienes-bios { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
