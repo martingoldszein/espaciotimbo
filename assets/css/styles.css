@@ -103,7 +103,8 @@
 
   }
   .hero-slide-2 {
-    background-image: url('../images/slide2.jpg');
+     
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url('../images/slide2.jpg');
   }
   .hero-slide.is-active {
     opacity: 1;
