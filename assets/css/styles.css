@@ -100,6 +100,7 @@
   .hero-slide-1 {
     
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/slide1.jpg');
+
   }
   .hero-slide-2 {
     background-image: url('../images/slide2.jpg');
@@ -812,6 +813,9 @@
     }
     #nav.open ul a.active {
       color: var(--tierra);
+    }
+    .hero-slide-1 {
+      background-position: -250px center;
     }
     section { padding: 4rem 1.4rem; }
     .section-light, .section-cream { padding: 4rem 1.4rem; }
