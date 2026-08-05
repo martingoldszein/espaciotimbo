@@ -572,7 +572,7 @@
   }
   .cal-resumen-item { display: flex; flex-direction: column; gap: 0.15rem; }
   .cal-resumen-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(242,234,216,0.35); }
-  .cal-resumen-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--crema); }
+  .cal-resumen-val { font-size: 1rem; color: var(--crema); }
   .cal-resumen-sep { color: rgba(242,234,216,0.25); font-size: 0.85rem; }
 
   /* Error */
@@ -653,7 +653,7 @@
     gap: 1.5rem; padding-top: 2rem;
   }
   .airbnb-info-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,234,216,0.45); margin-bottom: 0.4rem; }
-  .airbnb-info-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--crema); font-weight: 400; }
+  .airbnb-info-value {  font-size: 1.1rem; color: var(--crema); font-weight: 400; }
 
   /* Calendarios iCal */
   .ical-section { margin-top: 2.5rem; }
