@@ -182,7 +182,7 @@
     color: var(--crema); font-size: 0.9rem;
   }
   .contacto-title { color: var(--crema); line-height: 45px;}
-  .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tierra); margin-bottom: 0.8rem; }
+  .section-eyebrow { font-size: 1rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--tierra); margin-bottom: 0.8rem; }
   .section-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.1;
