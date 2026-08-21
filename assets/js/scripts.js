@@ -692,9 +692,9 @@ function initFormSubmit() {
   form.addEventListener('submit', function(e) {
     // Prevenir el envío tradicional SOLO si usamos fetch
     e.preventDefault();
-    
+
     console.log('🟡 Enviando formulario...');
-    
+
     // Obtener los datos del formulario
     const formData = new FormData(form);
     formData.append('form-name', 'contacto');
@@ -772,21 +772,21 @@ function initFormSubmit() {
 
     document.querySelector('form[name="contacto"]').addEventListener('submit', async function(e) {
     e.preventDefault(); // Evita la recarga
-    
+
     // Mostrar estado de carga
     const submitBtn = this.querySelector('.btn-submit');
     const originalText = submitBtn.textContent;
     submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
-    
+
     // Recopilar datos del formulario
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
-    
+
     // Añadir información extra si es necesario
     data.timestamp = new Date().toISOString();
     data.user_agent = navigator.userAgent;
-    
+
     try {
         const response = await fetch('https://formtorch.com/f/pguw3euojn', {
             method: 'POST',
@@ -795,19 +795,19 @@ function initFormSubmit() {
             },
             body: JSON.stringify(data)
         });
-        
+
         if (response.ok) {
             // Mostrar mensaje de éxito
             document.getElementById('form-success').hidden = false;
             this.reset(); // Limpiar el formulario
-            
+
             // Opcional: limpiar campos display
             document.getElementById('display-yurta').value = '';
             document.getElementById('display-noches').value = '';
             document.getElementById('display-llegada').value = '';
             document.getElementById('display-salida').value = '';
             document.querySelectorAll('.pago-metodo-btn').forEach(btn => btn.classList.remove('active'));
-            
+
             // Scroll al mensaje de éxito
             document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
         } else {
@@ -821,4 +821,739 @@ function initFormSubmit() {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }
+});
+// ============================================================
+// DATOS DE PRODUCTOS - CATÁLOGO ESPACIO TIMBÓ
+// ============================================================
+
+const productos = [
+  // ACEITES
+  { id: 1, nombre: 'Aceite de Cannabis', categoria: 'aceites', precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.', imagen: 'assets/images/productos/aceite-calendula.jpg', stock: false },
+
+  // POMADAS
+  { id: 5, nombre: 'Pomada de Caléndula & Cannabis', categoria: 'pomadas', precio: 380, descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.', imagen: 'assets/images/productos/pomada-calendula.jpg', stock: true },
+
+  // JABONES
+  { id: 9, nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela', categoria: 'jabones', precio: 280, descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.', imagen: 'assets/images/productos/jabon-lavanda.jpg', stock: true },
+
+  // TINTURAS
+  { id: 13, nombre: 'Tintura de MBURUCUYÁ', categoria: 'tinturas', precio: 320, descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.', imagen: 'assets/images/productos/tintura-propoleo.jpg', stock: true },
+  { id: 14, nombre: 'Tintura de MILENRAMA', categoria: 'tinturas', precio: 350, descripcion: 'Tintura de equinácea para reforzar defensas.', imagen: 'assets/images/productos/tintura-equipacea.jpg', stock: true },
+  { id: 15, nombre: 'Tintura de ARTEMISIA', categoria: 'tinturas', precio: 310, descripcion: 'Tintura de ajo, antibiótico natural.', imagen: 'assets/images/productos/tintura-ajo.jpg', stock: false }, // SIN STOCK
+
+  // SAHÚMOS
+  { id: 16, nombre: 'Sahúmo de Salvia', categoria: 'sahunos', precio: 250, descripcion: 'Sahúmo de salvia blanca para limpieza energética.', imagen: 'assets/images/productos/sahumo-salvia.jpg', stock: true },
+  { id: 17, nombre: 'Sahúmo de Palo Santo', categoria: 'sahunos', precio: 300, descripcion: 'Palo Santo para aromaterapia y meditación.', imagen: 'assets/images/productos/sahumo-palo.jpg', stock: true },
+  { id: 18, nombre: 'Sahúmo de Romero', categoria: 'sahunos', precio: 230, descripcion: 'Sahúmo de romero para claridad mental.', imagen: 'assets/images/productos/sahumo-romero.jpg', stock: false }, // SIN STOCK
+
+  // HIERBAS MEDICINALES
+  { id: 19, nombre: 'Manzanilla', categoria: 'hierbas', precio: 180, descripcion: 'Flores de manzanilla secas, digestivas y relajantes.', imagen: 'assets/images/productos/hierba-manzanilla.jpg', stock: true },
+  { id: 20, nombre: 'Menta', categoria: 'hierbas', precio: 160, descripcion: 'Hojas de menta secas, aromáticas y digestivas.', imagen: 'assets/images/productos/hierba-menta.jpg', stock: true },
+  { id: 21, nombre: 'Hipérico', categoria: 'hierbas', precio: 200, descripcion: 'Planta de hipérico seca, para infusiones calmantes.', imagen: 'assets/images/productos/hierba-hiperico.jpg', stock: false }, // SIN STOCK
+  { id: 22, nombre: 'Romero', categoria: 'hierbas', precio: 170, descripcion: 'Romero seco, estimulante y antioxidante.', imagen: 'assets/images/productos/hierba-romero.jpg', stock: true },
+
+  // SEMILLAS Y PLANTINES
+  { id: 23, nombre: 'Semillas de Aromáticas (mix)', categoria: 'semillas', precio: 220, descripcion: 'Mix de semillas de albahaca, perejil, cilantro y eneldo.', imagen: 'assets/images/productos/semillas-aromaticas.jpg', stock: true },
+  { id: 24, nombre: 'Plantín de Lavanda', categoria: 'semillas', precio: 350, descripcion: 'Plantín de lavanda para tu jardín o maceta.', imagen: 'assets/images/productos/plantin-lavanda.jpg', stock: true },
+  { id: 25, nombre: 'Semillas de Caléndula', categoria: 'semillas', precio: 190, descripcion: 'Semillas de caléndula, flor medicinal y ornamental.', imagen: 'assets/images/productos/semillas-calendula.jpg', stock: false }, // SIN STOCK
+  { id: 26, nombre: 'Plantín de Romero', categoria: 'semillas', precio: 320, descripcion: 'Plantín de romero para cultivar en casa.', imagen: 'assets/images/productos/plantin-romero.jpg', stock: true },
+];
+// ============================================================
+// ESTADO DEL CARRITO
+// ============================================================
+
+let carrito = [];
+let categoriaActual = 'todos';
+
+// ============================================================
+// FUNCIONES DEL CATÁLOGO
+// ============================================================
+
+// Renderizar productos
+// Renderizar productos
+function renderizarProductos(categoria = 'todos') {
+  const grid = document.getElementById('catalogo-grid');
+  if (!grid) return;
+
+  const filtrados = categoria === 'todos'
+    ? productos
+    : productos.filter(p => p.categoria === categoria);
+
+  if (filtrados.length === 0) {
+    grid.innerHTML = `<p class="sin-productos">No hay productos en esta categoría.</p>`;
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(p => {
+    // Determinar si tiene stock
+    const tieneStock = p.stock !== undefined ? p.stock : true;
+    const stockClass = tieneStock ? '' : 'sin-stock';
+    const stockBadge = tieneStock
+      ? ''
+      : `<span class="badge-sin-stock">Sin stock</span>`;
+    const botonAgregar = tieneStock
+      ? `<button class="btn-agregar" onclick="agregarAlCarrito(${p.id})">
+          <i class="fas fa-plus"></i> Agregar
+        </button>`
+      : `<button class="btn-agregar btn-sin-stock" disabled>
+          <i class="fas fa-times"></i> No disponible
+        </button>`;
+
+    return `
+      <div class="producto-card ${stockClass}" data-id="${p.id}">
+        <div class="producto-imagen">
+          <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/images/productos/placeholder.jpg'">
+          ${stockBadge}
+        </div>
+        <div class="producto-info">
+          <span class="producto-categoria">${p.categoria}</span>
+          <h3 class="producto-nombre">${p.nombre}</h3>
+          <p class="producto-descripcion">${p.descripcion}</p>
+          <div class="producto-footer">
+            <span class="producto-precio">$${p.precio}</span>
+            ${botonAgregar}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Filtrar productos por categoría
+function filtrarProductos(categoria, btn) {
+  categoriaActual = categoria;
+  renderizarProductos(categoria);
+
+  // Actualizar botones activos
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// ============================================================
+// FUNCIONES DEL CARRITO
+// ============================================================
+
+// Agregar producto al carrito
+function agregarAlCarrito(productoId) {
+  const producto = productos.find(p => p.id === productoId);
+  if (!producto) return;
+
+  // Verificar stock
+  if (producto.stock === false) {
+    mostrarNotificacion('⚠️ Este producto no está disponible actualmente');
+    return;
+  }
+
+  const existente = carrito.find(p => p.id === productoId);
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ ...producto, cantidad: 1 });
+  }
+
+  actualizarCarrito();
+  mostrarNotificacion(`✅ ${producto.nombre} agregado al carrito`);
+}
+
+// Eliminar producto del carrito
+function eliminarDelCarrito(productoId) {
+  carrito = carrito.filter(p => p.id !== productoId);
+  actualizarCarrito();
+}
+
+// Actualizar cantidad de un producto
+function actualizarCantidad(productoId, nuevaCantidad) {
+  const item = carrito.find(p => p.id === productoId);
+  if (!item) return;
+
+  if (nuevaCantidad <= 0) {
+    eliminarDelCarrito(productoId);
+    return;
+  }
+
+  item.cantidad = nuevaCantidad;
+  actualizarCarrito();
+}
+
+// Vaciar carrito completamente
+function vaciarCarrito() {
+  if (carrito.length === 0) return;
+  carrito = [];
+  actualizarCarrito();
+  mostrarNotificacion('🔄 Carrito vaciado');
+}
+
+// Calcular total del carrito
+function calcularTotal() {
+  return carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
+}
+
+// Calcular cantidad total de items
+function calcularCantidadTotal() {
+  return carrito.reduce((sum, p) => sum + p.cantidad, 0);
+}
+
+// Actualizar toda la UI del carrito
+// Actualizar toda la UI del carrito
+function actualizarCarrito() {
+  // 1. Actualizar contador en el header
+  const count = calcularCantidadTotal();
+  const countEl = document.getElementById('nav-carrito-count');
+  if (countEl) countEl.textContent = count;
+
+  // 2. Actualizar lista del panel
+  const lista = document.getElementById('carrito-lista-header');
+  const totalEl = document.getElementById('carrito-total-monto-header');
+
+  if (!lista || !totalEl) return;
+
+  if (carrito.length === 0) {
+    lista.innerHTML = '<p class="carrito-vacio">El carrito está vacío</p>';
+    totalEl.textContent = '$0';
+    return;
+  }
+
+  lista.innerHTML = carrito.map(p => `
+    <div class="carrito-item">
+      <div class="carrito-item-info">
+        <span class="carrito-item-nombre">${p.nombre}</span>
+        <span class="carrito-item-precio">$${p.precio}</span>
+      </div>
+      <div class="carrito-item-controls">
+        <button class="carrito-qty-btn" onclick="actualizarCantidad(event, ${p.id}, ${p.cantidad - 1})">
+          −
+        </button>
+        <span class="carrito-item-qty">${p.cantidad}</span>
+        <button class="carrito-qty-btn" onclick="actualizarCantidad(event, ${p.id}, ${p.cantidad + 1})">
+          +
+        </button>
+        <button class="carrito-eliminar" onclick="eliminarDelCarrito(event, ${p.id})">
+          ✕
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  totalEl.textContent = `$${calcularTotal()}`;
+}
+
+// Actualizar cantidad - CON stopPropagation
+function actualizarCantidad(event, productoId, nuevaCantidad) {
+  // Evitar que el evento burbujee y cierre el carrito
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  const item = carrito.find(p => p.id === productoId);
+  if (!item) return;
+
+  if (nuevaCantidad <= 0) {
+    eliminarDelCarrito(event, productoId);
+    return;
+  }
+
+  item.cantidad = nuevaCantidad;
+  actualizarCarrito();
+}
+
+// Eliminar del carrito - CON stopPropagation
+function eliminarDelCarrito(event, productoId) {
+  // Evitar que el evento burbujee y cierre el carrito
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  carrito = carrito.filter(p => p.id !== productoId);
+  actualizarCarrito();
+}
+
+// Vaciar carrito - CON stopPropagation
+function vaciarCarrito(event) {
+  // Evitar que el evento burbujee y cierre el carrito
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  if (carrito.length === 0) return;
+  if (confirm('¿Vaciar todo el carrito?')) {
+    carrito = [];
+    actualizarCarrito();
+    mostrarNotificacion('🔄 Carrito vaciado');
+  }
+}
+
+// Enviar pedido - CON stopPropagation
+function enviarPedido(event) {
+  // Evitar que el evento burbujee y cierre el carrito
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  if (carrito.length === 0) {
+    mostrarNotificacion('⚠️ El carrito está vacío');
+    return;
+  }
+
+  // ... resto del código de enviar pedido ...
+}
+
+// Función para cerrar el carrito SOLO con la X
+function cerrarCarrito(event) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const panel = document.getElementById('carrito-panel-header');
+  if (panel) {
+    panel.hidden = true;
+  }
+}
+
+// Toggle carrito - solo para abrir/cerrar con el ícono
+function toggleCarrito(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  const panel = document.getElementById('carrito-panel-header');
+  if (panel) {
+    // Si está oculto, lo mostramos
+    if (panel.hidden) {
+      panel.hidden = false;
+      actualizarCarrito();
+    } else {
+      // Si está visible, lo ocultamos SOLO si el clic fue en el ícono
+      // (no en los botones internos)
+      const target = event ? event.target : null;
+      if (target && target.closest('.carrito-panel-header')) {
+        // El clic fue dentro del panel, no hacemos nada
+        return;
+      }
+      panel.hidden = true;
+    }
+  }
+}
+
+// Cerrar carrito al hacer clic fuera (modificado)
+document.addEventListener('click', function(event) {
+  const panel = document.getElementById('carrito-panel-header');
+  const btn = document.querySelector('.nav-carrito');
+
+  if (panel && !panel.hidden) {
+    const isClickInside = panel.contains(event.target) || (btn && btn.contains(event.target));
+    if (!isClickInside) {
+      panel.hidden = true;
+    }
+  }
+});
+
+// ============================================================
+// PANEL DEL CARRITO
+// ============================================================
+
+// Abrir/cerrar el panel del carrito
+function toggleCarrito(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  const panel = document.getElementById('carrito-panel-header');
+  if (panel) {
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) {
+      actualizarCarrito();
+    }
+  }
+}
+
+// Cerrar carrito al hacer clic fuera
+document.addEventListener('click', function(event) {
+  const panel = document.getElementById('carrito-panel-header');
+  const btn = document.querySelector('.nav-carrito');
+  if (panel && !panel.hidden) {
+    const isClickInside = panel.contains(event.target) || (btn && btn.contains(event.target));
+    if (!isClickInside) {
+      panel.hidden = true;
+    }
+  }
+});
+
+// ============================================================
+// NOTIFICACIONES
+// ============================================================
+
+function mostrarNotificacion(mensaje) {
+  // Eliminar notificaciones existentes
+  document.querySelectorAll('.notificacion').forEach(n => n.remove());
+
+  const notif = document.createElement('div');
+  notif.className = 'notificacion';
+  notif.textContent = mensaje;
+  document.body.appendChild(notif);
+
+  // Animación de entrada
+  requestAnimationFrame(() => {
+    notif.classList.add('visible');
+  });
+
+  // Auto-eliminar después de 3 segundos
+  setTimeout(() => {
+    notif.classList.remove('visible');
+    setTimeout(() => notif.remove(), 400);
+  }, 3000);
+}
+
+// ============================================================
+// ENVIAR PEDIDO POR EMAIL
+// ============================================================
+
+function enviarPedido() {
+  if (carrito.length === 0) {
+    mostrarNotificacion('⚠️ El carrito está vacío');
+    return;
+  }
+
+  // Construir mensaje
+  let mensaje = '📦 NUEVO PEDIDO - ESPACIO TIMBÓ\n';
+  mensaje += '═'.repeat(40) + '\n\n';
+  mensaje += '🔹 PRODUCTOS SOLICITADOS:\n';
+  mensaje += '─'.repeat(30) + '\n';
+
+  carrito.forEach((p, index) => {
+    mensaje += `  ${index + 1}. ${p.nombre}\n`;
+    mensaje += `     Cantidad: ${p.cantidad}\n`;
+    mensaje += `     Precio unitario: $${p.precio}\n`;
+    mensaje += `     Subtotal: $${p.precio * p.cantidad}\n\n`;
+  });
+
+  mensaje += '─'.repeat(30) + '\n';
+  mensaje += `💰 TOTAL DEL PEDIDO: $${calcularTotal()}\n\n`;
+
+  mensaje += '═'.repeat(40) + '\n';
+  mensaje += '📋 DATOS DE CONTACTO:\n';
+  mensaje += '  • Nombre completo: \n';
+  mensaje += '  • Correo electrónico: \n';
+  mensaje += '  • Teléfono/WhatsApp: \n';
+  mensaje += '  • Método de pago preferido: \n\n';
+
+  mensaje += '📝 OBSERVACIONES:\n';
+  mensaje += '  • \n\n';
+
+  mensaje += '═'.repeat(40) + '\n';
+  mensaje += '🌿 Gracias por elegir Espacio Timbó\n';
+  mensaje += '📍 Santa Ana, Colonia, Uruguay\n';
+  mensaje += '📧 espaciotimbo.uy@gmail.com\n';
+  mensaje += '📱 +598 97 328 615';
+
+  // Enviar por email
+  const asunto = encodeURIComponent('📦 Nuevo pedido de productos - Espacio Timbó');
+  const cuerpo = encodeURIComponent(mensaje);
+  const email = 'espaciotimbo.uy@gmail.com';
+
+  window.location.href = `mailto:${email}?subject=${asunto}&body=${cuerpo}`;
+
+  // Opcional: también abrir WhatsApp con el mismo mensaje
+  // const whatsappMsg = encodeURIComponent(mensaje);
+  // window.open(`https://wa.me/59897328615?text=${whatsappMsg}`, '_blank');
+
+  // Cerrar carrito
+  const panel = document.getElementById('carrito-panel-header');
+  if (panel) panel.hidden = true;
+
+  mostrarNotificacion('📨 Pedido enviado por email');
+}
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Renderizar catálogo
+  renderizarProductos();
+
+  // Inicializar carrito
+  actualizarCarrito();
+
+  // Marcar el botón "Todos" como activo
+  const todosBtn = document.querySelector('.cat-btn[data-categoria="todos"]');
+  if (todosBtn) todosBtn.classList.add('active');
+
+  console.log('🌿 Espacio Timbó - Catálogo y Carrito cargado correctamente');
+  console.log(`📦 ${productos.length} productos disponibles en ${new Set(productos.map(p => p.categoria)).size} categorías`);
+});
+// ============================================================
+// SISTEMA DE ADMINISTRACIÓN - ESPACIO TIMBÓ
+// ============================================================
+
+// Credenciales (en producción usar hash y servidor)
+const ADMIN_CREDENTIALS = {
+  usuario: 'admin',
+  contraseña: 'timbó2025'
+};
+
+let productosAdmin = [];
+let adminLogueado = false;
+let productoEditando = null;
+
+// ============================================================
+// LOGIN
+// ============================================================
+
+function abrirLogin() {
+  document.getElementById('loginModal').hidden = false;
+  document.getElementById('loginError').hidden = true;
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginUser').focus();
+}
+
+function cerrarLogin() {
+  document.getElementById('loginModal').hidden = true;
+}
+
+function loginAdmin(event) {
+  event.preventDefault();
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+
+  if (user === ADMIN_CREDENTIALS.usuario && pass === ADMIN_CREDENTIALS.contraseña) {
+    adminLogueado = true;
+    cerrarLogin();
+    abrirAdmin();
+    mostrarNotificacion('🔐 Sesión iniciada como administrador');
+  } else {
+    document.getElementById('loginError').hidden = false;
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+}
+
+// Cerrar login con ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    cerrarLogin();
+    cerrarEdit();
+  }
+});
+
+// ============================================================
+// PANEL DE ADMINISTRACIÓN
+// ============================================================
+
+function abrirAdmin() {
+  if (!adminLogueado) return;
+
+  // Cargar datos desde localStorage o usar los productos por defecto
+  cargarProductosDesdeStorage();
+
+  document.getElementById('adminPanel').hidden = false;
+  renderizarAdmin();
+  document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function cerrarAdmin() {
+  document.getElementById('adminPanel').hidden = true;
+  adminLogueado = false;
+  mostrarNotificacion('🔒 Sesión cerrada');
+}
+
+// ============================================================
+// GESTIÓN DE PRODUCTOS (localStorage)
+// ============================================================
+
+function cargarProductosDesdeStorage() {
+  const stored = localStorage.getItem('productos_timbo');
+  if (stored) {
+    try {
+      productosAdmin = JSON.parse(stored);
+      // Sincronizar con la variable global productos
+      sincronizarProductosGlobales();
+    } catch (e) {
+      productosAdmin = [...productos];
+      guardarProductosEnStorage();
+    }
+  } else {
+    productosAdmin = [...productos];
+    guardarProductosEnStorage();
+  }
+}
+
+function guardarProductosEnStorage() {
+  localStorage.setItem('productos_timbo', JSON.stringify(productosAdmin));
+  sincronizarProductosGlobales();
+}
+
+function sincronizarProductosGlobales() {
+  // Sincronizar con la variable global 'productos' usada en el catálogo
+  if (typeof productos !== 'undefined') {
+    // Reemplazar el array global
+    productos.length = 0;
+    productosAdmin.forEach(p => productos.push(p));
+    // Re-renderizar catálogo
+    renderizarProductos(categoriaActual || 'todos');
+  }
+}
+
+// ============================================================
+// RENDERIZAR TABLA ADMIN
+// ============================================================
+
+function renderizarAdmin() {
+  const tbody = document.getElementById('adminTableBody');
+  if (!tbody) return;
+
+  const search = document.getElementById('adminSearch')?.value.toLowerCase() || '';
+  const filtrados = productosAdmin.filter(p =>
+    p.nombre.toLowerCase().includes(search) ||
+    p.categoria.toLowerCase().includes(search)
+  );
+
+  // Actualizar estadísticas
+  document.getElementById('adminTotal').textContent = productosAdmin.length;
+  document.getElementById('adminStock').textContent = productosAdmin.filter(p => p.stock !== false).length;
+  document.getElementById('adminSinStock').textContent = productosAdmin.filter(p => p.stock === false).length;
+
+  tbody.innerHTML = filtrados.map(p => `
+    <tr>
+      <td>${p.id}</td>
+      <td><img src="${p.imagen}" alt="${p.nombre}" class="admin-img" onerror="this.src='assets/images/productos/placeholder.jpg'"></td>
+      <td><strong>${p.nombre}</strong></td>
+      <td><span class="admin-categoria">${p.categoria}</span></td>
+      <td>$${p.precio}</td>
+      <td>
+        <span class="admin-stock-badge ${p.stock !== false ? 'stock-ok' : 'stock-no'}">
+          ${p.stock !== false ? '✅ Disponible' : '❌ Sin stock'}
+        </span>
+      </td>
+      <td>
+        <button class="admin-action-btn edit" onclick="editarProducto(${p.id})" title="Editar">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="admin-action-btn delete" onclick="eliminarProducto(${p.id})" title="Eliminar">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+
+  if (filtrados.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="admin-empty">No hay productos que coincidan con la búsqueda</td></tr>`;
+  }
+}
+
+function filtrarAdmin() {
+  renderizarAdmin();
+}
+
+// ============================================================
+// CRUD - CREAR, EDITAR, ELIMINAR
+// ============================================================
+
+function agregarProducto() {
+  productoEditando = null;
+  document.getElementById('editModalTitle').textContent = '➕ Nuevo Producto';
+  document.getElementById('editForm').reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('editModal').hidden = false;
+}
+
+function editarProducto(id) {
+  const producto = productosAdmin.find(p => p.id === id);
+  if (!producto) return;
+
+  productoEditando = producto;
+  document.getElementById('editModalTitle').textContent = `✏️ Editar: ${producto.nombre}`;
+  document.getElementById('editId').value = producto.id;
+  document.getElementById('editNombre').value = producto.nombre;
+  document.getElementById('editCategoria').value = producto.categoria;
+  document.getElementById('editPrecio').value = producto.precio;
+  document.getElementById('editDescripcion').value = producto.descripcion;
+  document.getElementById('editImagen').value = producto.imagen || '';
+  document.getElementById('editStock').value = producto.stock !== false ? 'true' : 'false';
+
+  document.getElementById('editModal').hidden = false;
+}
+
+function cerrarEdit() {
+  document.getElementById('editModal').hidden = true;
+  productoEditando = null;
+}
+
+function guardarProducto(event) {
+  event.preventDefault();
+
+  const id = parseInt(document.getElementById('editId').value) || null;
+  const nombre = document.getElementById('editNombre').value.trim();
+  const categoria = document.getElementById('editCategoria').value;
+  const precio = parseInt(document.getElementById('editPrecio').value);
+  const descripcion = document.getElementById('editDescripcion').value.trim();
+  const imagen = document.getElementById('editImagen').value.trim() || 'assets/images/productos/placeholder.jpg';
+  const stock = document.getElementById('editStock').value === 'true';
+
+  if (!nombre || !descripcion || !precio) {
+    mostrarNotificacion('⚠️ Todos los campos obligatorios deben estar completos');
+    return;
+  }
+
+  if (id) {
+    // Editar producto existente
+    const index = productosAdmin.findIndex(p => p.id === id);
+    if (index !== -1) {
+      productosAdmin[index] = { ...productosAdmin[index], nombre, categoria, precio, descripcion, imagen, stock };
+    }
+    mostrarNotificacion(`✅ Producto "${nombre}" actualizado`);
+  } else {
+    // Crear nuevo producto
+    const newId = Math.max(...productosAdmin.map(p => p.id), 0) + 1;
+    productosAdmin.push({ id: newId, nombre, categoria, precio, descripcion, imagen, stock });
+    mostrarNotificacion(`✅ Producto "${nombre}" creado`);
+  }
+
+  guardarProductosEnStorage();
+  renderizarAdmin();
+  cerrarEdit();
+}
+
+function eliminarProducto(id) {
+  const producto = productosAdmin.find(p => p.id === id);
+  if (!producto) return;
+
+  if (confirm(`¿Eliminar definitivamente "${producto.nombre}"?`)) {
+    productosAdmin = productosAdmin.filter(p => p.id !== id);
+    guardarProductosEnStorage();
+    renderizarAdmin();
+    mostrarNotificacion(`🗑️ Producto "${producto.nombre}" eliminado`);
+  }
+}
+
+// ============================================================
+// INICIALIZACIÓN - Cargar datos
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Cargar productos desde localStorage
+  cargarProductosDesdeStorage();
+
+  // Renderizar catálogo
+  renderizarProductos();
+
+  // Inicializar carrito
+  actualizarCarrito();
+
+  console.log('🌿 Espacio Timbó - Sistema de Administración cargado');
+  console.log(`📦 ${productosAdmin.length} productos en el catálogo`);
+});
+
+// En scripts.js - acceso oculto al admin
+  // Ctrl+Shift+A (o Cmd+Shift+A en Mac)
+  document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'a' || e.key === 'A')) {
+    e.preventDefault();
+    window.location.href = 'admin.html';
+  }
 });

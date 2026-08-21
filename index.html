@@ -68,10 +68,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   ]
 }
 </script>
-
-
-
-
 <title>Espacio Timbó</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,8 +85,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">
-
-  <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150">
+    <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150">
   </a>
 
   <ul>
@@ -98,13 +93,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#glamping">Glamping</a></li>
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#talleres">Talleres</a></li>
+    <li><a href="#catalogo">Catalogo</a></li>
     <li><a href="#quienes">Quiénes somos</a></li>
     <li><a href="#reservas" class="nav-reservar">Reservar</a></li>
   </ul>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
+
+  <!-- Contenedor para íconos de la derecha (carrito + hamburguesa) -->
+  <div class="nav-actions">
+    <!-- Ícono del carrito -->
+    <a href="#" class="nav-carrito" onclick="toggleCarrito(event)" aria-label="Abrir carrito">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="nav-carrito-count" id="nav-carrito-count">0</span>
+    </a>
+    <!-- Botón hamburguesa -->
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
+
+
+
+<!-- Panel del carrito -->
+<div class="carrito-panel-header" id="carrito-panel-header" hidden>
+  <div class="carrito-header-panel">
+    <h3>🛒 Tu Carrito</h3>
+    <div class="carrito-acciones-header">
+      <button class="carrito-vaciar" onclick="vaciarCarrito()" title="Vaciar carrito">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+      <button class="carrito-cerrar" onclick="cerrarCarrito(event)">✕</button>
+    </div>
+  </div>
+  <div class="carrito-lista" id="carrito-lista-header">
+    <p class="carrito-vacio">El carrito está vacío</p>
+  </div>
+  <div class="carrito-footer">
+    <div class="carrito-total">
+      <span>Total:</span>
+      <span class="carrito-total-monto" id="carrito-total-monto-header">$0</span>
+    </div>
+    <button class="btn-submit" onclick="enviarPedido()">
+      <i class="fas fa-envelope"></i> Enviar pedido por email
+    </button>
+  </div>
+</div>
+
 <!-- DESPLIEGUE EXITOSO - 22 Julio 2026 -->
 <!-- HERO -->
 <section class="hero" id="inicio">
@@ -342,7 +376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <!-- TALLERES & EVENTOS -->
-<section id="talleres" class="talleres section-padded">
+<section id="talleres" class="talleres ">
   <div class="talleres-inner">
     <div class="talleres-header">
       <div>
@@ -363,7 +397,143 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+<!-- CATÁLOGO DE PRODUCTOS -->
+<section id="catalogo" class="section-light">
+  <div class="catalogo-inner">
+    <div class="catalogo-header">
+      <p class="section-eyebrow">— Productos</p>
+      <h2 class="section-title">Nuestro<br><em>catálogo</em></h2>
+      <div class="divider"></div>
+      <p class="section-body">Productos elaborados con amor y respeto por la naturaleza. Hechos a mano con ingredientes naturales y procesos artesanales.</p>
+    </div>
 
+    <!-- Categorías -->
+    <div class="catalogo-categorias" id="categorias">
+      <button class="cat-btn active" data-categoria="todos" onclick="filtrarProductos('todos', this)">Todos</button>
+      <button class="cat-btn" data-categoria="aceites" onclick="filtrarProductos('aceites', this)">Aceites</button>
+      <button class="cat-btn" data-categoria="pomadas" onclick="filtrarProductos('pomadas', this)">Pomadas</button>
+      <button class="cat-btn" data-categoria="jabones" onclick="filtrarProductos('jabones', this)">Jabones</button>
+      <button class="cat-btn" data-categoria="tinturas" onclick="filtrarProductos('tinturas', this)">Tinturas</button>
+      <button class="cat-btn" data-categoria="sahunos" onclick="filtrarProductos('sahunos', this)">Sahúmos</button>
+      <button class="cat-btn" data-categoria="hierbas" onclick="filtrarProductos('hierbas', this)">Hierbas Medicinales</button>
+      <button class="cat-btn" data-categoria="semillas" onclick="filtrarProductos('semillas', this)">Semillas y Plantines</button>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="catalogo-grid" id="catalogo-grid">
+      <!-- Generado por JS -->
+    </div>
+
+    <!-- Carrito -->
+>
+    </div>
+  </div>
+</section>
+<!-- PANEL DE ADMINISTRACIÓN -->
+<div id="adminPanel" class="admin-panel" hidden>
+  <div class="admin-header">
+    <h2><i class="fas fa-cog"></i> Panel de Administración</h2>
+    <div class="admin-actions">
+      <button class="admin-btn-small" onclick="agregarProducto()">
+        <i class="fas fa-plus"></i> Nuevo Producto
+      </button>
+      <button class="admin-btn-small admin-btn-danger" onclick="cerrarAdmin()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </button>
+    </div>
+  </div>
+
+  <div class="admin-toolbar">
+    <div class="admin-search">
+      <input type="text" id="adminSearch" placeholder="🔍 Buscar productos..." oninput="filtrarAdmin()">
+    </div>
+    <div class="admin-stats">
+      <span>Total: <strong id="adminTotal">0</strong></span>
+      <span>Con stock: <strong id="adminStock">0</strong></span>
+      <span>Sin stock: <strong id="adminSinStock">0</strong></span>
+    </div>
+  </div>
+
+  <div class="admin-table-container">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody">
+        <!-- Generado por JS -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL EDITAR PRODUCTO -->
+<div id="editModal" class="modal-overlay" hidden>
+  <div class="edit-container">
+    <div class="edit-card">
+      <div class="edit-header">
+        <h2 id="editModalTitle">✏️ Editar Producto</h2>
+        <button class="edit-close" onclick="cerrarEdit()">✕</button>
+      </div>
+      <form id="editForm" onsubmit="guardarProducto(event)">
+        <input type="hidden" id="editId">
+
+        <div class="edit-grid">
+          <div class="edit-field">
+            <label for="editNombre">Nombre *</label>
+            <input type="text" id="editNombre" required>
+          </div>
+          <div class="edit-field">
+            <label for="editCategoria">Categoría *</label>
+            <select id="editCategoria" required>
+              <option value="aceites">Aceites</option>
+              <option value="pomadas">Pomadas</option>
+              <option value="jabones">Jabones</option>
+              <option value="tinturas">Tinturas</option>
+              <option value="sahunos">Sahúmos</option>
+              <option value="hierbas">Hierbas Medicinales</option>
+              <option value="semillas">Semillas y Plantines</option>
+            </select>
+          </div>
+          <div class="edit-field">
+            <label for="editPrecio">Precio ($) *</label>
+            <input type="number" id="editPrecio" min="0" step="10" required>
+          </div>
+          <div class="edit-field">
+            <label for="editStock">Stock</label>
+            <select id="editStock">
+              <option value="true">Disponible</option>
+              <option value="false">Sin stock</option>
+            </select>
+          </div>
+          <div class="edit-field full-width">
+            <label for="editDescripcion">Descripción *</label>
+            <textarea id="editDescripcion" rows="3" required></textarea>
+          </div>
+          <div class="edit-field full-width">
+            <label for="editImagen">URL de la imagen</label>
+            <input type="text" id="editImagen" placeholder="assets/images/productos/nombre.jpg">
+            <small class="edit-hint">Ejemplo: assets/images/productos/aceite-calendula.jpg</small>
+          </div>
+        </div>
+
+        <div class="edit-actions">
+          <button type="button" class="btn-secondary" onclick="cerrarEdit()">Cancelar</button>
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-save"></i> Guardar Producto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 <!-- QUIÉNES SOMOS -->
 <section id="quienes" class="section-cream">
   <div class="quienes-inner">

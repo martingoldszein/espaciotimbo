@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Administración - Espacio Timbó</title>
+
+    <!-- Ocultar de motores de búsqueda -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/admin.css" />
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="loginPage" class="login-page">
+      <div class="login-container">
+        <div class="login-card">
+          <div class="login-header">
+            <div class="login-icon">🔐</div>
+            <h2>Panel de Administración</h2>
+            <p class="login-subtitle">Espacio Timbó · Gestión de Catálogo</p>
+          </div>
+          <form id="loginForm" onsubmit="loginAdmin(event)">
+            <div class="login-field">
+              <label for="loginUser">Usuario</label>
+              <input type="text" id="loginUser" placeholder="admin" required />
+            </div>
+            <div class="login-field">
+              <label for="loginPass">Contraseña</label>
+              <input
+                type="password"
+                id="loginPass"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div id="loginError" class="login-error" hidden>
+              ❌ Usuario o contraseña incorrectos
+            </div>
+            <button type="submit" class="btn-submit login-btn">
+              <i class="fas fa-sign-in-alt"></i> Ingresar
+            </button>
+          </form>
+          <div class="login-footer">
+            <a href="index.html">← Volver al sitio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="admin-panel" hidden>
+      <div class="admin-header">
+        <div class="admin-header-left">
+          <h1><i class="fas fa-cog"></i> Administración</h1>
+          <span class="admin-badge">Espacio Timbó</span>
+        </div>
+        <div class="admin-header-right">
+          <button
+            class="admin-btn-small admin-btn-danger"
+            onclick="cerrarAdmin()"
+          >
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
+          <a href="index.html" class="admin-btn-small" target="_blank">
+            <i class="fas fa-eye"></i> Ver Sitio
+          </a>
+        </div>
+      </div>
+
+      <div class="admin-toolbar">
+        <div class="admin-search">
+          <input
+            type="text"
+            id="adminSearch"
+            placeholder="🔍 Buscar productos..."
+            oninput="filtrarAdmin()"
+          />
+        </div>
+        <div class="admin-actions">
+          <button class="admin-btn-small" onclick="agregarProducto()">
+            <i class="fas fa-plus"></i> Nuevo Producto
+          </button>
+          <button
+            class="admin-btn-small admin-btn-secondary"
+            onclick="exportarDatos()"
+          >
+            <i class="fas fa-download"></i> Exportar
+          </button>
+          <button
+            class="admin-btn-small admin-btn-secondary"
+            onclick="importarDatos()"
+          >
+            <i class="fas fa-upload"></i> Importar
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-stats">
+        <div class="stat-card">
+          <span class="stat-number" id="adminTotal">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-card stat-green">
+          <span class="stat-number" id="adminStock">0</span>
+          <span class="stat-label">Con Stock</span>
+        </div>
+        <div class="stat-card stat-red">
+          <span class="stat-number" id="adminSinStock">0</span>
+          <span class="stat-label">Sin Stock</span>
+        </div>
+      </div>
+
+      <div class="admin-table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODAL EDITAR -->
+    <div id="editModal" class="modal-overlay" hidden>
+      <div class="edit-container">
+        <div class="edit-card">
+          <div class="edit-header">
+            <h2 id="editModalTitle">✏️ Editar Producto</h2>
+            <button class="edit-close" onclick="cerrarEdit()">✕</button>
+          </div>
+          <form id="editForm" onsubmit="guardarProducto(event)">
+            <input type="hidden" id="editId" />
+            <div class="edit-grid">
+              <div class="edit-field">
+                <label for="editNombre">Nombre *</label>
+                <input type="text" id="editNombre" required />
+              </div>
+              <div class="edit-field">
+                <label for="editCategoria">Categoría *</label>
+                <select id="editCategoria" required>
+                  <option value="aceites">Aceites</option>
+                  <option value="pomadas">Pomadas</option>
+                  <option value="jabones">Jabones</option>
+                  <option value="tinturas">Tinturas</option>
+                  <option value="sahunos">Sahúmos</option>
+                  <option value="hierbas">Hierbas Medicinales</option>
+                  <option value="semillas">Semillas y Plantines</option>
+                </select>
+              </div>
+              <div class="edit-field">
+                <label for="editPrecio">Precio ($) *</label>
+                <input
+                  type="number"
+                  id="editPrecio"
+                  min="0"
+                  step="10"
+                  required
+                />
+              </div>
+              <div class="edit-field">
+                <label for="editStock">Stock</label>
+                <select id="editStock">
+                  <option value="true">Disponible</option>
+                  <option value="false">Sin stock</option>
+                </select>
+              </div>
+              <div class="edit-field full-width">
+                <label for="editDescripcion">Descripción *</label>
+                <textarea id="editDescripcion" rows="3" required></textarea>
+              </div>
+              <div class="edit-field full-width">
+                <label for="editImagen">URL de la imagen</label>
+                <input
+                  type="text"
+                  id="editImagen"
+                  placeholder="assets/images/productos/nombre.jpg"
+                />
+                <small class="edit-hint"
+                  >Ejemplo: assets/images/productos/aceite-calendula.jpg</small
+                >
+              </div>
+            </div>
+            <div class="edit-actions">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="cerrarEdit()"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-save"></i> Guardar Producto
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+  </body>
+</html>

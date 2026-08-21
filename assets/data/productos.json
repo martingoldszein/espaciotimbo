@@ -1,0 +1,22 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Aceite de Caléndula",
+      "categoria": "aceites",
+      "precio": 450,
+      "descripcion": "Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.",
+      "imagen": "assets/images/productos/aceite-calendula.jpg",
+      "stock": true
+    },
+    {
+      "id": 2,
+      "nombre": "Aceite de Hipérico",
+      "categoria": "aceites",
+      "precio": 480,
+      "descripcion": "Aceite de hipérico (hierba de San Juan) para aliviar dolores musculares y articulares.",
+      "imagen": "assets/images/productos/aceite-hiperico.jpg",
+      "stock": true
+    }
+  ]
+}

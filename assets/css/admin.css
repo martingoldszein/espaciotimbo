@@ -1,0 +1,726 @@
+/* ============================================================
+   ADMIN - ESTILOS COMPLETOS
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #f5f0e8;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d4 100%);
+  padding: 1rem;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: #fffdf7;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-header h2 {
+  font-size: 1.5rem;
+  color: #3a2a1a;
+  margin: 0.5rem 0;
+}
+
+.login-subtitle {
+  color: #8a7a6a;
+  font-size: 0.85rem;
+}
+
+.login-field {
+  margin-bottom: 1.2rem;
+}
+
+.login-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5a4a3a;
+  margin-bottom: 0.3rem;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e8e0d4;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.login-field input:focus {
+  outline: none;
+  border-color: #5a7a5a;
+}
+
+.login-error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  background: #5a7a5a;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+.login-btn:hover {
+  background: #3a5a3a;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.login-footer a {
+  color: #8a7a6a;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+  color: #5a7a5a;
+}
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+
+.admin-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.admin-panel[hidden] {
+  display: none !important;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e8e0d4;
+}
+
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-header-left h1 {
+  font-size: 1.5rem;
+  color: #3a2a1a;
+}
+
+.admin-badge {
+  background: #5a7a5a;
+  color: #fff;
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.admin-header-right {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-btn-small {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #5a7a5a;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.admin-btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admin-btn-danger {
+  background: #c0392b;
+}
+
+.admin-btn-danger:hover {
+  background: #a93226;
+}
+
+.admin-btn-secondary {
+  background: #d4c5a0;
+  color: #3a2a1a;
+}
+
+.admin-btn-secondary:hover {
+  background: #c4b590;
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.admin-search input {
+  padding: 0.6rem 1rem;
+  border: 2px solid #e8e0d4;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  min-width: 200px;
+  background: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+.admin-search input:focus {
+  outline: none;
+  border-color: #5a7a5a;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3a2a1a;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #8a7a6a;
+}
+
+.stat-green .stat-number {
+  color: #2a7a2a;
+}
+
+.stat-red .stat-number {
+  color: #c0392b;
+}
+
+/* ============================================================
+   TABLA ADMIN
+   ============================================================ */
+
+.admin-table-container {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-table thead {
+  background: #f0ebe2;
+}
+
+.admin-table th {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #5a4a3a;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #f0ebe2;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover {
+  background: #faf8f4;
+}
+
+.admin-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e8e0d4;
+}
+
+.admin-categoria {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  background: #e8e0d4;
+  font-size: 0.75rem;
+  color: #5a4a3a;
+}
+
+.admin-stock-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.admin-stock-badge.stock-ok {
+  background: #d5e8d5;
+  color: #2a5a2a;
+}
+
+.admin-stock-badge.stock-no {
+  background: #fde8e8;
+  color: #a93226;
+}
+
+.admin-action-btn {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.admin-action-btn.edit {
+  color: #2a6a8a;
+}
+
+.admin-action-btn.edit:hover {
+  background: #e8f0f5;
+}
+
+.admin-action-btn.delete {
+  color: #c0392b;
+}
+
+.admin-action-btn.delete:hover {
+  background: #fde8e8;
+}
+
+.admin-empty {
+  text-align: center;
+  color: #8a7a6a;
+  padding: 2rem !important;
+}
+
+/* ============================================================
+   MODAL EDITAR
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.modal-overlay[hidden] {
+  display: none !important;
+}
+
+.edit-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.edit-card {
+  background: #fffdf7;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.edit-header h2 {
+  font-size: 1.3rem;
+  color: #3a2a1a;
+  margin: 0;
+}
+
+.edit-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #8a7a6a;
+  cursor: pointer;
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.edit-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #5a4a3a;
+  margin-bottom: 0.3rem;
+}
+
+.edit-field input,
+.edit-field select,
+.edit-field textarea {
+  padding: 0.7rem 1rem;
+  border: 2px solid #e8e0d4;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.edit-field input:focus,
+.edit-field select:focus,
+.edit-field textarea:focus {
+  outline: none;
+  border-color: #5a7a5a;
+}
+
+.edit-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-hint {
+  font-size: 0.75rem;
+  color: #8a7a6a;
+  margin-top: 0.2rem;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee8dd;
+}
+
+.btn-secondary {
+  padding: 0.7rem 1.5rem;
+  border: 2px solid #d4c5a0;
+  border-radius: 50px;
+  background: transparent;
+  color: #5a4a3a;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-secondary:hover {
+  background: #f0ebe2;
+}
+
+.btn-submit {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background: #5a7a5a;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: #3a5a3a;
+}
+
+/* ============================================================
+   NOTIFICACIONES (continuación)
+   ============================================================ */
+
+.notificacion-admin {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  padding: 0.8rem 2rem;
+  background: #2a3a2a;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 99999;
+  pointer-events: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.notificacion-admin.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  .admin-header-left {
+    flex-wrap: wrap;
+  }
+
+  .admin-header-right {
+    flex-wrap: wrap;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-search input {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .admin-actions {
+    justify-content: center;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-stats .stat-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table {
+    font-size: 0.8rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .admin-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .login-card,
+  .edit-card {
+    padding: 1.5rem;
+  }
+
+  .edit-actions {
+    flex-direction: column-reverse;
+  }
+
+  .edit-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stats .stat-card:last-child {
+    grid-column: 1;
+  }
+
+  .admin-table td:not(:first-child):not(:nth-child(2)) {
+    font-size: 0.7rem;
+  }
+
+  .admin-table th {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .admin-table td {
+    padding: 0.4rem 0.3rem;
+  }
+
+  .admin-btn-small {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .admin-header-left h1 {
+    font-size: 1.1rem;
+  }
+
+  .login-card {
+    padding: 1.2rem;
+  }
+
+  .edit-card {
+    padding: 1.2rem;
+    margin: 0.5rem;
+  }
+}
+
+/* ============================================================
+   SCROLLBAR PERSONALIZADA
+   ============================================================ */
+
+.admin-table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.admin-table-container::-webkit-scrollbar-track {
+  background: #f0ebe2;
+  border-radius: 4px;
+}
+
+.admin-table-container::-webkit-scrollbar-thumb {
+  background: #d4c5a0;
+  border-radius: 4px;
+}
+
+.admin-table-container::-webkit-scrollbar-thumb:hover {
+  background: #c4b590;
+}
