@@ -3448,3 +3448,26 @@ footer nav ul a:hover {
     height: 35px;
   }
 }
+@media (max-width: 768px) {
+  .catalogo-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .producto-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .producto-card .producto-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .producto-card .btn-agregar {
+    width: 100%;
+    margin-top: 4px;
+  }
+}
