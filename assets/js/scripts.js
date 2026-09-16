@@ -1,41 +1,29 @@
 /* ═══════════════════════════════════════════════════════════════
-   ▶ DATOS DE TALLERES Y EVENTOS — EDITAR AQUÍ
-   ═══════════════════════════════════════════════════════════════
-   Cada objeto es una tarjeta. Campos:
-   - tipo:       "taller" | "evento" | "experiencia"
-   - titulo:     string
-   - desc:       string (descripción corta)
-   - fecha:      string (ej. "14 de junio, 2025")
-   - hora:       string (ej. "10:00 – 14:00 hs")
-   - duracion:   string (ej. "4 horas")
-   - cupos:      number | null (null = sin límite)
-   - precio:     string (ej. "$ 800" o "Libre aporte")
-   - precio_nota: string (ej. "por persona · incluye materiales")
-   - badge:      "nuevo" | "pronto" | null
-   - agotado:    true | false
-   - imagen:     string (URL de imagen) | null
-   - linkURL:    string (URL externa para detalle o publicación)
-   - whatsapp:   true (abre consulta WhatsApp) | false (usa formulario)
-═══════════════════════════════════════════════════════════════ */
+   ESPACIO TIMBÓ · scripts.js
+   Versión unificada y ordenada
+   ═══════════════════════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════
+   1. DATOS · TALLERES Y EVENTOS
+   ═══════════════════════════════════════════════════════════════ */
 const TALLERES_EVENTOS = [
+  /* Descomentá y editá estos talleres cuando quieras mostrarlos:
   {
     tipo: "experiencia",
     titulo: "Retiro Vivencial: Retorno al Origen",
-    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fuego\n• Limpieza e Inmersión con Sahumos\n • Ceremonia con Plantas Maestras",
+    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fuego\n• Limpieza e Inmersión con Sahumos\n• Ceremonia con Plantas Maestras",
     fecha: "Sábado 19 de Septiembre",
-    hora: " 10:00 hs",
+    hora: "10:00 hs",
     duracion: "1 día",
     cupos: "0",
     precio: "",
     precio_nota: "por persona · incluye almuerzo",
     badge: "nuevo",
     agotado: false,
-    linkURL:"https://www.instagram.com/p/DagfVcWlZD7/?img_index=1",
+    linkURL: "https://www.instagram.com/p/DagfVcWlZD7/?img_index=1",
     imagen: "../assets/images/experiencia1.png",
     whatsapp: true
-  }
-  /*,
+  },
   {
     tipo: "taller",
     titulo: "Bioconstrucción Natural",
@@ -51,146 +39,118 @@ const TALLERES_EVENTOS = [
     imagen: null,
     whatsapp: true
   },
-  {
-    tipo: "experiencia",
-    titulo: "Recorrido Agroforestal",
-    desc: "Caminata guiada por el sistema agroforestal del Espacio Timbó. Conocemos las plantas, los ciclos del suelo y las estrategias de regeneración aplicadas en el predio.",
-    fecha: "Todos los sábados",
-    hora: "9:30 hs",
-    duracion: "2 horas",
-    cupos: 10,
-    precio: "Libre aporte",
-    precio_nota: "sugerido $ 300 por persona",
-    badge: null,
-    agotado: false,
-    imagen: null,
-    whatsapp: true
-  },
-  {
-    tipo: "evento",
-    titulo: "Encuentro de Economía Regenerativa",
-    desc: "Conversatorio abierto sobre monedas complementarias, economía solidaria y cooperativismo en el contexto rural. Con invitados de la región.",
-    fecha: "12 de julio, 2025",
-    hora: "16:00 – 19:00 hs",
-    duracion: "3 horas",
-    cupos: null,
-    precio: "Entrada libre",
-    precio_nota: "",
-    badge: "pronto",
-    agotado: false,
-    imagen: null,
-    whatsapp: false
-  },
-  {
-    tipo: "taller",
-    titulo: "Plantas Medicinales del Bosque Nativo",
-    desc: "Reconocimiento de plantas medicinales autóctonas, sus usos terapéuticos y culinarios. Incluye preparación de infusiones y aceites.",
-    fecha: "19 de julio, 2025",
-    hora: "10:00 – 13:00 hs",
-    duracion: "3 horas",
-    cupos: 15,
-    precio: "$ 700",
-    precio_nota: "por persona · incluye materiales",
-    badge: null,
-    agotado: true,
-    imagen: null,
-    whatsapp: true
-  } */
+  */
 ];
 
 /* ═══════════════════════════════════════════════════════════════
-   ▶ iCAL — CONFIGURAR URLs de Airbnb
-   ═══════════════════════════════════════════════════════════════
-   Reemplazá estas URLs con las de tu calendario de Airbnb.
-   Airbnb → Anuncio → Calendario → Exportar calendario (iCal)
-
-   NOTA: Los navegadores bloquean peticiones directas a .ics por CORS.
-   Para producción, usar un proxy propio o un servicio como:
-   https://api.allorigins.win/raw?url=TU_URL_ICAL
-
-   Por ahora el calendario muestra disponibilidad de ejemplo.
-═══════════════════════════════════════════════════════════════ */
-//const ICAL_URL_YURTA1 = "https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL"; // Ej: "https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL"
-//const ICAL_URL_YURTA2 = "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"; // Ej: "https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL"
-
-
-/* ═══════════════════════════════════════════════════════════════
-   ▶ iCAL — Fetch y parseo de calendarios de Airbnb
-═══════════════════════════════════════════════════════════════ */
+   2. CONFIGURACIÓN iCAL (Airbnb)
+   ═══════════════════════════════════════════════════════════════ */
 const ICAL_URL_YURTA1 = 'https://www.airbnb.com/calendar/ical/1267620632342788641.ics?t=28be1aecaa5c4cb1b4213a716fd00a8d&locale=es-XL';
 const ICAL_URL_YURTA2 = 'https://www.airbnb.com/calendar/ical/47333689.ics?t=2c5799a6fea7496fa0030b5b3e5302bd&locale=es-XL';
 
-// Acá guardamos los RANGOS ocupados (no solo números de día)
 const OCUPADOS_ICAL = {
-  yurta1: [], // array de { start: Date, end: Date }
+  yurta1: [],
   yurta2: []
 };
 
-// Parsea el texto crudo de un .ics y devuelve array de rangos {start, end}
-function parseICS(icsText) {
-  const rangos = [];
-  const eventos = icsText.split('BEGIN:VEVENT').slice(1);
+/* ═══════════════════════════════════════════════════════════════
+   3. DATOS · PRODUCTOS DEL CATÁLOGO
+   ═══════════════════════════════════════════════════════════════ */
+const PRODUCTOS_BASE = [
+  { id: 1,  nombre: 'Aceite de Cannabis',                                categoria: 'aceites',  precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.',                       imagen: 'assets/images/productos/aceite-calendula.jpg',   stock: false },
+  { id: 5,  nombre: 'Pomada de Caléndula & Cannabis',                    categoria: 'pomadas',  precio: 380, descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.',                        imagen: 'assets/images/productos/pomada-calendula.jpg',   stock: true  },
+  { id: 9,  nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela', categoria: 'jabones',  precio: 280, descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.',                              imagen: 'assets/images/productos/jabon-lavanda.jpg',      stock: true  },
+  { id: 13, nombre: 'Tintura de MBURUCUYÁ',                              categoria: 'tinturas', precio: 320, descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.',                     imagen: 'assets/images/productos/tintura-propoleo.jpg',   stock: true  },
+  { id: 14, nombre: 'Tintura de MILENRAMA',                              categoria: 'tinturas', precio: 350, descripcion: 'Tintura de equinácea para reforzar defensas.',                                                   imagen: 'assets/images/productos/tintura-equipacea.jpg',  stock: true  },
+  { id: 15, nombre: 'Tintura de ARTEMISIA',                              categoria: 'tinturas', precio: 310, descripcion: 'Tintura de ajo, antibiótico natural.',                                                           imagen: 'assets/images/productos/tintura-ajo.jpg',        stock: false },
+  { id: 16, nombre: 'Sahúmo de Salvia',                                  categoria: 'sahunos',  precio: 250, descripcion: 'Sahúmo de salvia blanca para limpieza energética.',                                              imagen: 'assets/images/productos/sahumo-salvia.jpg',      stock: true  },
+  { id: 17, nombre: 'Sahúmo de Palo Santo',                              categoria: 'sahunos',  precio: 300, descripcion: 'Palo Santo para aromaterapia y meditación.',                                                     imagen: 'assets/images/productos/sahumo-palo.jpg',        stock: true  },
+  { id: 18, nombre: 'Sahúmo de Romero',                                  categoria: 'sahunos',  precio: 230, descripcion: 'Sahúmo de romero para claridad mental.',                                                         imagen: 'assets/images/productos/sahumo-romero.jpg',      stock: false },
+  { id: 19, nombre: 'Manzanilla',                                        categoria: 'hierbas',  precio: 180, descripcion: 'Flores de manzanilla secas, digestivas y relajantes.',                                           imagen: 'assets/images/productos/hierba-manzanilla.jpg',   stock: true  },
+  { id: 20, nombre: 'Menta',                                             categoria: 'hierbas',  precio: 160, descripcion: 'Hojas de menta secas, aromáticas y digestivas.',                                                 imagen: 'assets/images/productos/hierba-menta.jpg',       stock: true  },
+  { id: 21, nombre: 'Hipérico',                                          categoria: 'hierbas',  precio: 200, descripcion: 'Planta de hipérico seca, para infusiones calmantes.',                                            imagen: 'assets/images/productos/hierba-hiperico.jpg',    stock: false },
+  { id: 22, nombre: 'Romero',                                            categoria: 'hierbas',  precio: 170, descripcion: 'Romero seco, estimulante y antioxidante.',                                                       imagen: 'assets/images/productos/hierba-romero.jpg',      stock: true  },
+  { id: 23, nombre: 'Semillas de Aromáticas (mix)',                      categoria: 'semillas', precio: 220, descripcion: 'Mix de semillas de albahaca, perejil, cilantro y eneldo.',                                       imagen: 'assets/images/productos/semillas-aromaticas.jpg',stock: true  },
+  { id: 24, nombre: 'Plantín de Lavanda',                                categoria: 'semillas', precio: 350, descripcion: 'Plantín de lavanda para tu jardín o maceta.',                                                    imagen: 'assets/images/productos/plantin-lavanda.jpg',    stock: true  },
+  { id: 25, nombre: 'Semillas de Caléndula',                             categoria: 'semillas', precio: 190, descripcion: 'Semillas de caléndula, flor medicinal y ornamental.',                                            imagen: 'assets/images/productos/semillas-calendula.jpg', stock: false },
+  { id: 26, nombre: 'Plantín de Romero',                                 categoria: 'semillas', precio: 320, descripcion: 'Plantín de romero para cultivar en casa.',                                                       imagen: 'assets/images/productos/plantin-romero.jpg',     stock: true  }
+];
 
-  eventos.forEach(bloque => {
-    const dtStartMatch = bloque.match(/DTSTART(?:;VALUE=DATE)?:(\d{8})/);
-    const dtEndMatch   = bloque.match(/DTEND(?:;VALUE=DATE)?:(\d{8})/);
-    if (!dtStartMatch || !dtEndMatch) return;
+/* ═══════════════════════════════════════════════════════════════
+   4. ESTADO GLOBAL
+   ═══════════════════════════════════════════════════════════════ */
+const filtros = {
+  categoria: 'todos',
+  texto: '',
+  orden: 'relevancia'
+};
 
-    const start = parseFechaICS(dtStartMatch[1]);
-    const end   = parseFechaICS(dtEndMatch[1]);
-    rangos.push({ start, end });
-  });
+let carrito = [];
+let productosAdmin = [];
+let adminLogueado = false;
+let productoEditando = null;
 
-  return rangos;
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DIAS_SEMANA = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+const NOMBRES_YURTAS = { 1: 'Yurta Ceibo', 2: 'Yurta Canelón' };
+const ADMIN_CREDENTIALS = { usuario: 'admin', contraseña: 'timbó2025' };
+
+/* ═══════════════════════════════════════════════════════════════
+   5. HELPERS GENERALES
+   ═══════════════════════════════════════════════════════════════ */
+function normalizar(texto) {
+  return (texto || '')
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
 }
 
-// Convierte "20250620" a Date(2025, 5, 20)
-function parseFechaICS(str) {
-  const anio = +str.slice(0, 4);
-  const mes  = +str.slice(4, 6) - 1;
-  const dia  = +str.slice(6, 8);
-  const f = new Date(anio, mes, dia);
+function fechaNorm(a, m, d) {
+  const f = new Date(a, m, d);
   f.setHours(0, 0, 0, 0);
   return f;
 }
 
-async function cargarICal(url, yurtaKey) {
-  try {
-    const proxyUrl = `/.netlify/functions/ics-proxy?url=${encodeURIComponent(url)}`;
-    const res = await fetch(proxyUrl);
-    const data = await res.text();
-    OCUPADOS_ICAL[yurtaKey] = parseICS(data);
-    renderCalendario(); // re-dibujar una vez que llegan los datos
-  } catch (err) {
-    console.error(`Error cargando ICS de ${yurtaKey}:`, err);
-  }
+function hoyNorm() {
+  const h = new Date();
+  h.setHours(0, 0, 0, 0);
+  return h;
 }
 
-cargarICal(ICAL_URL_YURTA1, 'yurta1');
-cargarICal(ICAL_URL_YURTA2, 'yurta2');
+function formatoFecha(f) {
+  if (!f) return '—';
+  return `${f.getDate()} ${MESES[f.getMonth()].slice(0, 3)} ${f.getFullYear()}`;
+}
+
+function formatoISO(f) {
+  if (!f) return '';
+  return `${f.getFullYear()}-${String(f.getMonth() + 1).padStart(2, '0')}-${String(f.getDate()).padStart(2, '0')}`;
+}
 
 /* ═══════════════════════════════════════════════════════════════
-   MOTOR — No editar salvo que sepas lo que hacés
-═══════════════════════════════════════════════════════════════ */
-
-// ── NAV
+   6. NAVEGACIÓN
+   ═══════════════════════════════════════════════════════════════ */
 const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('#nav ul a');
-document.getElementById('hamburger').addEventListener('click', () => { nav.classList.toggle('open'); });
+
+if (document.getElementById('hamburger')) {
+  document.getElementById('hamburger').addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+}
 
 function cerrarMenuMovil() {
-  if (nav.classList.contains('open')) {
-    nav.classList.remove('open');
-  }
+  if (nav && nav.classList.contains('open')) nav.classList.remove('open');
 }
 
 function activarLinkNav(link) {
   navLinks.forEach(a => a.classList.remove('active'));
-  link.classList.add('active');
+  if (link) link.classList.add('active');
 }
 
 navLinks.forEach(link => {
-  link.addEventListener('click', function() {
+  link.addEventListener('click', function () {
     activarLinkNav(this);
     cerrarMenuMovil();
   });
@@ -209,7 +169,7 @@ function activarLinkPorSection(sectionId) {
 }
 
 function setupScrollSpy() {
-  const sectionLinks = Array.from(navLinks).filter(a => a.hash.startsWith('#'));
+  const sectionLinks = Array.from(navLinks).filter(a => a.hash && a.hash.startsWith('#'));
   const sections = sectionLinks
     .map(a => document.getElementById(a.hash.slice(1)))
     .filter(Boolean);
@@ -219,13 +179,11 @@ function setupScrollSpy() {
   const observer = new IntersectionObserver((entries) => {
     entries.sort((a, b) => a.target.offsetTop - b.target.offsetTop);
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        activarLinkPorSection(entry.target.id);
-      }
+      if (entry.isIntersecting) activarLinkPorSection(entry.target.id);
     });
   }, {
     rootMargin: '-35% 0px -55% 0px',
-    threshold: 0,
+    threshold: 0
   });
 
   sections.forEach(section => observer.observe(section));
@@ -256,50 +214,43 @@ window.addEventListener('load', () => {
 });
 window.addEventListener('hashchange', activarLinkPorHash);
 
-// ── HERO SLIDESHOW
+window.addEventListener('scroll', () => {
+  if (!nav) return;
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(242,234,216,0.97)'
+    : 'rgba(242,234,216,0.92)';
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   7. SLIDESHOWS (HERO + GLAMPING + YURTAS)
+   ═══════════════════════════════════════════════════════════════ */
 function setupHeroSlideshow() {
   const slides = document.querySelectorAll('.hero-slide');
   if (!slides.length) return;
-
   let currentIndex = 0;
   slides[currentIndex].classList.add('is-active');
-
   setInterval(() => {
-    const currentSlide = slides[currentIndex];
-    currentSlide.classList.remove('is-active');
-
+    slides[currentIndex].classList.remove('is-active');
     currentIndex = (currentIndex + 1) % slides.length;
     slides[currentIndex].classList.add('is-active');
   }, 4500);
 }
 
-window.addEventListener('load', setupHeroSlideshow);
-
-// ── GLAMPING SLIDESHOW
 function setupGlampingSlideshow() {
   const slides = document.querySelectorAll('.glamping-slide');
   if (!slides.length) return;
-
   let currentIndex = 0;
   slides[currentIndex].classList.add('is-active');
-
   setInterval(() => {
-    const currentSlide = slides[currentIndex];
-    currentSlide.classList.remove('is-active');
-
+    slides[currentIndex].classList.remove('is-active');
     currentIndex = (currentIndex + 1) % slides.length;
     slides[currentIndex].classList.add('is-active');
   }, 4200);
 }
 
-window.addEventListener('load', setupGlampingSlideshow);
-
-// ── SLIDESHOWS DE YURTAS
 function activarSlide(slideshow, index) {
   const slides = slideshow.querySelectorAll('.yurta-slide');
-  slides.forEach((slide, slideIndex) => {
-    slide.classList.toggle('is-active', slideIndex === index);
-  });
+  slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
 }
 
 function setupYurtaSlideshow(slideshow) {
@@ -316,22 +267,16 @@ function setupYurtaSlideshow(slideshow) {
   let touchStartX = 0;
   let touchEndX = 0;
 
-  slideshow.addEventListener('touchstart', (event) => {
-    touchStartX = event.changedTouches[0].clientX;
+  slideshow.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
   }, { passive: true });
 
-  slideshow.addEventListener('touchend', (event) => {
-    touchEndX = event.changedTouches[0].clientX;
+  slideshow.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].clientX;
     const delta = touchEndX - touchStartX;
-
     if (Math.abs(delta) < 40) return;
-
-    if (delta < 0) {
-      currentIndex = (currentIndex + 1) % slides.length;
-    } else {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    }
-
+    if (delta < 0) currentIndex = (currentIndex + 1) % slides.length;
+    else currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     activarSlide(slideshow, currentIndex);
   }, { passive: true });
 
@@ -339,25 +284,23 @@ function setupYurtaSlideshow(slideshow) {
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     activarSlide(slideshow, currentIndex);
   });
-
   nextBtn?.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % slides.length;
     activarSlide(slideshow, currentIndex);
   });
 }
 
+window.addEventListener('load', setupHeroSlideshow);
+window.addEventListener('load', setupGlampingSlideshow);
 document.querySelectorAll('.yurta-slideshow').forEach(setupYurtaSlideshow);
 
-// ── SCROLL NAV
-window.addEventListener('scroll', () => {
-  nav.style.background = window.scrollY > 60
-    ? 'rgba(242,234,216,0.97)'
-    : 'rgba(242,234,216,0.92)';
-});
-
-// ── TALLERES: render
+/* ═══════════════════════════════════════════════════════════════
+   8. TALLERES / EVENTOS
+   ═══════════════════════════════════════════════════════════════ */
 function renderEventos(filtro) {
   const grid = document.getElementById('talleres-grid');
+  if (!grid) return;
+
   const items = filtro === 'todos'
     ? TALLERES_EVENTOS
     : TALLERES_EVENTOS.filter(e => e.tipo === filtro);
@@ -425,11 +368,13 @@ function renderEventos(filtro) {
 
 function filtrarEventos(filtro, btn) {
   document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
   renderEventos(filtro);
 }
 
-// ── MINI CALENDARIO INTERACTIVO
+/* ═══════════════════════════════════════════════════════════════
+   9. CALENDARIO INTERACTIVO (RESERVAS)
+   ═══════════════════════════════════════════════════════════════ */
 const calState = {
   yurta: 1,
   mes: new Date().getMonth(),
@@ -439,15 +384,43 @@ const calState = {
   hover: null
 };
 
-const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const DIAS_SEMANA = ['Lu','Ma','Mi','Ju','Vi','Sá','Do'];
+function parseICS(icsText) {
+  const rangos = [];
+  const eventos = icsText.split('BEGIN:VEVENT').slice(1);
+  eventos.forEach(bloque => {
+    const dtStartMatch = bloque.match(/DTSTART(?:;VALUE=DATE)?:(\d{8})/);
+    const dtEndMatch   = bloque.match(/DTEND(?:;VALUE=DATE)?:(\d{8})/);
+    if (!dtStartMatch || !dtEndMatch) return;
+    const start = parseFechaICS(dtStartMatch[1]);
+    const end   = parseFechaICS(dtEndMatch[1]);
+    rangos.push({ start, end });
+  });
+  return rangos;
+}
 
-function fechaNorm(a, m, d) {
-  const f = new Date(a, m, d); f.setHours(0,0,0,0); return f;
+function parseFechaICS(str) {
+  const anio = +str.slice(0, 4);
+  const mes  = +str.slice(4, 6) - 1;
+  const dia  = +str.slice(6, 8);
+  const f = new Date(anio, mes, dia);
+  f.setHours(0, 0, 0, 0);
+  return f;
 }
-function hoyNorm() {
-  const h = new Date(); h.setHours(0,0,0,0); return h;
+
+async function cargarICal(url, yurtaKey) {
+  try {
+    const proxyUrl = `/.netlify/functions/ics-proxy?url=${encodeURIComponent(url)}`;
+    const res = await fetch(proxyUrl);
+    const data = await res.text();
+    OCUPADOS_ICAL[yurtaKey] = parseICS(data);
+    renderCalendario();
+  } catch (err) {
+    console.error(`Error cargando ICS de ${yurtaKey}:`, err);
+  }
 }
+
+cargarICal(ICAL_URL_YURTA1, 'yurta1');
+cargarICal(ICAL_URL_YURTA2, 'yurta2');
 
 function ocupadosDeYurta(y) {
   return (y === 1 ? OCUPADOS_ICAL.yurta1 : OCUPADOS_ICAL.yurta2) || [];
@@ -457,45 +430,43 @@ function esDiaOcupado(d, m, a) {
   const hoy = hoyNorm();
   const fecha = fechaNorm(a, m, d);
   if (fecha < hoy) return false;
-
   const rangos = ocupadosDeYurta(calState.yurta);
-  // Airbnb marca DTEND como el día de checkout (no ocupado esa noche),
-  // por eso el chequeo es fecha >= start && fecha < end
   return rangos.some(r => fecha >= r.start && fecha < r.end);
 }
 
-
-
 function rangoTieneOcupados(ini, fin) {
-  let cur = new Date(ini); cur.setDate(cur.getDate()+1); cur.setHours(0,0,0,0);
+  let cur = new Date(ini);
+  cur.setDate(cur.getDate() + 1);
+  cur.setHours(0, 0, 0, 0);
   while (cur < fin) {
     if (esDiaOcupado(cur.getDate(), cur.getMonth(), cur.getFullYear())) return true;
-    cur.setDate(cur.getDate()+1);
+    cur.setDate(cur.getDate() + 1);
   }
   return false;
-}
-function formatoFecha(f) {
-  if (!f) return '—';
-  return `${f.getDate()} ${MESES[f.getMonth()].slice(0,3)} ${f.getFullYear()}`;
-}
-function formatoISO(f) {
-  if (!f) return '';
-  return `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`;
 }
 
 function actualizarResumenYForm() {
   const { inicio, fin } = calState;
-  const n = (inicio && fin) ? Math.round((fin-inicio)/86400000) : null;
+  const n = (inicio && fin) ? Math.round((fin - inicio) / 86400000) : null;
 
-  document.getElementById('resumen-llegada').textContent = formatoFecha(inicio);
-  document.getElementById('resumen-salida').textContent  = formatoFecha(fin);
-  document.getElementById('resumen-noches').textContent  = n !== null ? n+(n===1?' noche':' noches') : '—';
+  const elResLlegada = document.getElementById('resumen-llegada');
+  const elResSalida  = document.getElementById('resumen-salida');
+  const elResNoches  = document.getElementById('resumen-noches');
+  const elDisLlegada = document.getElementById('display-llegada');
+  const elDisSalida  = document.getElementById('display-salida');
+  const elDisNoches  = document.getElementById('display-noches');
+  const elLlegada    = document.getElementById('llegada');
+  const elSalida     = document.getElementById('salida');
 
-  document.getElementById('display-llegada').value = inicio ? formatoFecha(inicio) : '';
-  document.getElementById('display-salida').value  = fin    ? formatoFecha(fin)    : '';
-  document.getElementById('display-noches').value  = n !== null ? n : '';
-  document.getElementById('llegada').value = formatoISO(inicio);
-  document.getElementById('salida').value  = formatoISO(fin);
+  if (elResLlegada) elResLlegada.textContent = formatoFecha(inicio);
+  if (elResSalida)  elResSalida.textContent  = formatoFecha(fin);
+  if (elResNoches)  elResNoches.textContent  = n !== null ? n + (n === 1 ? ' noche' : ' noches') : '—';
+
+  if (elDisLlegada) elDisLlegada.value = inicio ? formatoFecha(inicio) : '';
+  if (elDisSalida)  elDisSalida.value  = fin ? formatoFecha(fin) : '';
+  if (elDisNoches)  elDisNoches.value  = n !== null ? n : '';
+  if (elLlegada)    elLlegada.value    = formatoISO(inicio);
+  if (elSalida)     elSalida.value     = formatoISO(fin);
 }
 
 function renderCalendario() {
@@ -505,7 +476,7 @@ function renderCalendario() {
   const { mes, anio, inicio, fin, hover } = calState;
   const primerDia = new Date(anio, mes, 1).getDay();
   const ajuste    = primerDia === 0 ? 6 : primerDia - 1;
-  const diasMes   = new Date(anio, mes+1, 0).getDate();
+  const diasMes   = new Date(anio, mes + 1, 0).getDate();
   const hoy       = hoyNorm();
 
   let html = `
@@ -515,7 +486,7 @@ function renderCalendario() {
       <button data-nav="1">›</button>
     </div>
     <div class="mini-cal-grid" id="cal-grid">
-      ${DIAS_SEMANA.map(d=>`<div class="mini-cal-day-header">${d}</div>`).join('')}
+      ${DIAS_SEMANA.map(d => `<div class="mini-cal-day-header">${d}</div>`).join('')}
       ${Array(ajuste).fill('<div class="mini-cal-day empty"></div>').join('')}`;
 
   for (let d = 1; d <= diasMes; d++) {
@@ -524,27 +495,24 @@ function renderCalendario() {
     const ocupado = esDiaOcupado(d, mes, anio);
     const esHoy   = fecha.getTime() === hoy.getTime();
     const esInicio = inicio && fecha.getTime() === inicio.getTime();
-    const esFin    = fin   && fecha.getTime() === fin.getTime();
+    const esFin    = fin && fecha.getTime() === fin.getTime();
 
-    // Para el preview del hover, usarlo solo si está después del inicio
     const hoverValido = hover && inicio && hover > inicio;
-    const esHoverFin  = hoverValido && fecha.getTime() === hover.getTime();
-    // Rango: entre inicio y fin real; si hay hover reemplaza el fin para preview
+    const esHoverFin = hoverValido && fecha.getTime() === hover.getTime();
     const limiteRango = hoverValido ? hover : fin;
-    const enRango     = inicio && limiteRango && fecha > inicio && fecha < limiteRango;
+    const enRango = inicio && limiteRango && fecha > inicio && fecha < limiteRango;
 
     let cls = 'mini-cal-day';
-    if      (pasado)    cls += ' pasado';
-    else if (ocupado)   cls += ' ocupado';
-    else if (esInicio)  cls += ' inicio';
-    else if (esFin)     cls += ' fin';
-    else if (esHoverFin)cls += ' fin-preview';
-    else if (enRango)   cls += ' rango';
-    else                cls += ' libre';
+    if (pasado)          cls += ' pasado';
+    else if (ocupado)    cls += ' ocupado';
+    else if (esInicio)   cls += ' inicio';
+    else if (esFin)      cls += ' fin';
+    else if (esHoverFin) cls += ' fin-preview';
+    else if (enRango)    cls += ' rango';
+    else                 cls += ' libre';
 
     if (esHoy && !esInicio && !esFin) cls += ' today';
 
-    // data-d para los event listeners — sin onclick inline
     const attrs = (!pasado && !ocupado) ? `data-d="${d}" data-m="${mes}" data-a="${anio}"` : '';
     html += `<div class="${cls}" ${attrs}>${d}</div>`;
   }
@@ -552,24 +520,20 @@ function renderCalendario() {
   container.innerHTML = html;
 }
 
-// Listeners adjuntados UNA SOLA VEZ al inicializar — no dentro de renderCalendario
 function initCalListeners() {
   const container = document.getElementById('cal-principal');
+  if (!container) return;
 
-  // Click en días
-  container.addEventListener('click', function(e) {
-    // Botones de navegación de mes
-    const nav = e.target.closest('[data-nav]');
-    if (nav) { calNavMes(+nav.dataset.nav); return; }
+  container.addEventListener('click', function (e) {
+    const navBtn = e.target.closest('[data-nav]');
+    if (navBtn) { calNavMes(+navBtn.dataset.nav); return; }
 
-    // Días clickeables
     const el = e.target.closest('[data-d]');
     if (!el) return;
     manejarClick(+el.dataset.d, +el.dataset.m, +el.dataset.a);
   });
 
-  // Hover — solo actualiza estado y redibuja, no re-adjunta listeners
-  container.addEventListener('mouseover', function(e) {
+  container.addEventListener('mouseover', function (e) {
     if (!calState.inicio) return;
     const el = e.target.closest('[data-d]');
     if (!el) return;
@@ -580,7 +544,7 @@ function initCalListeners() {
     }
   });
 
-  container.addEventListener('mouseleave', function() {
+  container.addEventListener('mouseleave', function () {
     if (calState.hover) {
       calState.hover = null;
       renderCalendario();
@@ -591,48 +555,48 @@ function initCalListeners() {
 function manejarClick(d, m, a) {
   const fecha = fechaNorm(a, m, d);
   const err = document.getElementById('cal-error');
-  err.style.display = 'none';
-  calState.hover = null; // limpiar hover antes de cualquier lógica
+  if (err) err.style.display = 'none';
+  calState.hover = null;
 
   if (!calState.inicio) {
-    // Primer click: fijar llegada
     calState.inicio = fecha;
-    calState.fin    = null;
+    calState.fin = null;
     renderCalendario();
     actualizarResumenYForm();
     return;
   }
 
   if (fecha.getTime() === calState.inicio.getTime()) {
-    // Mismo día: cancelar todo
     calState.inicio = null;
-    calState.fin    = null;
+    calState.fin = null;
     renderCalendario();
     actualizarResumenYForm();
     return;
   }
 
   if (fecha < calState.inicio) {
-    // Antes del inicio: nuevo inicio
     calState.inicio = fecha;
-    calState.fin    = null;
+    calState.fin = null;
     renderCalendario();
     actualizarResumenYForm();
     return;
   }
 
-  // Después del inicio: fijar salida
   if (rangoTieneOcupados(calState.inicio, fecha)) {
-    err.textContent = 'El rango incluye días no disponibles. Elegí otras fechas.';
-    err.style.display = 'block';
+    if (err) {
+      err.textContent = 'El rango incluye días no disponibles. Elegí otras fechas.';
+      err.style.display = 'block';
+    }
     renderCalendario();
     return;
   }
 
   const noches = Math.round((fecha - calState.inicio) / 86400000);
   if (noches < 2) {
-    err.textContent = 'La estadía mínima es de 2 noches.';
-    err.style.display = 'block';
+    if (err) {
+      err.textContent = 'La estadía mínima es de 2 noches.';
+      err.style.display = 'block';
+    }
     renderCalendario();
     return;
   }
@@ -649,248 +613,97 @@ function calNavMes(dir) {
   renderCalendario();
 }
 
-const NOMBRES_YURTAS = {
-  1: 'Yurta Ceibo',
-  2: 'Yurta Canelon'
-};
-
 function seleccionarYurta(n) {
-  calState.yurta  = n;
-  calState.inicio = null; calState.fin = null; calState.hover = null;
-  document.getElementById('cal-error').style.display = 'none';
+  calState.yurta = n;
+  calState.inicio = null;
+  calState.fin = null;
+  calState.hover = null;
+
+  const err = document.getElementById('cal-error');
+  if (err) err.style.display = 'none';
+
   const nombreYurta = NOMBRES_YURTAS[n] || `Yurta ${n}`;
-  document.getElementById('cal-yurta-label').textContent = nombreYurta;
-  document.getElementById('btn-yurta1').classList.toggle('active', n === 1);
-  document.getElementById('btn-yurta2').classList.toggle('active', n === 2);
-  document.getElementById('display-yurta').value = nombreYurta;
-  document.getElementById('yurta').value = nombreYurta;
+  const label = document.getElementById('cal-yurta-label');
+  if (label) label.textContent = nombreYurta;
+
+  const btn1 = document.getElementById('btn-yurta1');
+  const btn2 = document.getElementById('btn-yurta2');
+  if (btn1) btn1.classList.toggle('active', n === 1);
+  if (btn2) btn2.classList.toggle('active', n === 2);
+
+  const inputYurta = document.getElementById('display-yurta');
+  const hiddenYurta = document.getElementById('yurta');
+  if (inputYurta) inputYurta.value = nombreYurta;
+  if (hiddenYurta) hiddenYurta.value = nombreYurta;
+
   renderCalendario();
   actualizarResumenYForm();
 }
 
-// ── PAGO
-function cambiarRegion(region, btn) {
-  document.querySelectorAll('.pago-region-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.pago-metodos').forEach(m => m.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('metodos-' + region).classList.add('active');
-  // Limpiar método seleccionado al cambiar región
-  document.querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('metodo-pago').value = '';
+/* ═══════════════════════════════════════════════════════════════
+   10. CATÁLOGO · FILTROS + RENDER
+   ═══════════════════════════════════════════════════════════════ */
+function ordenarProductos(arr, orden) {
+  const copia = [...arr];
+  switch (orden) {
+    case 'nombre-asc':  return copia.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    case 'nombre-desc': return copia.sort((a, b) => b.nombre.localeCompare(a.nombre, 'es'));
+    case 'precio-asc':  return copia.sort((a, b) => a.precio - b.precio);
+    case 'precio-desc': return copia.sort((a, b) => b.precio - a.precio);
+    default:            return copia;
+  }
 }
 
-function elegirPago(btn, metodo) {
-  // Deseleccionar todos los botones del grupo activo
-  document.querySelectorAll('.pago-metodo-btn, .pago-form-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('metodo-pago').value = metodo;
-}
-function initFormSubmit() {
-  const form = document.getElementById('formularioContacto');
-  if (!form) return;
-
-  form.addEventListener('submit', function(e) {
-    // Prevenir el envío tradicional SOLO si usamos fetch
-    e.preventDefault();
-
-    console.log('🟡 Enviando formulario...');
-
-    // Obtener los datos del formulario
-    const formData = new FormData(form);
-    formData.append('form-name', 'contacto');
-
-    // Enviar a Netlify - MÁS RÁPIDO
-    fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams(formData).toString()
-    })
-    .then(response => {
-      console.log('✅ Respuesta HTTP:', response.status);
-      if (response.ok) {
-        // Mostrar modal de éxito
-        mostrarModal();
-        form.reset();
-        // Resetear campos del calendario
-        calState.inicio = null;
-        calState.fin = null;
-        renderCalendario();
-        actualizarResumenYForm();
-        // Resetear método de pago
-        document.querySelectorAll('.pago-metodo-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('metodo-pago').value = '';
-      } else {
-        throw new Error('Error en el servidor');
-      }
-    })
-    .catch(error => {
-      console.error('❌ Error:', error);
-      alert('Hubo un error al enviar. Por favor, intentá de nuevo o contactanos directamente por WhatsApp.');
-    });
-  });
-}
-// ── INIT
-(function init() {
-  renderEventos('todos');
-  const nombreYurtaInicial = NOMBRES_YURTAS[1];
-  document.getElementById('display-yurta').value = nombreYurtaInicial;
-  document.getElementById('yurta').value = nombreYurtaInicial;
-  renderCalendario();
-  initCalListeners();
-  actualizarResumenYForm();
-
-})();
-
-    // Función para mostrar el modal
-    function mostrarModal() {
-      document.getElementById('modalGracias').hidden = false;
-    }
-
-    // Función para cerrar el modal
-    function cerrarModal() {
-      document.getElementById('modalGracias').hidden = true;
-    }
-
-    // Cerrar modal al hacer clic fuera de él
-    window.onclick = function(event) {
-        const modal = document.getElementById('modalGracias');
-        if (event.target === modal) {
-          modal.hidden = true;
-        }
-    };
-
-    // Cerrar modal con la tecla ESC
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            cerrarModal();
-        }
-    });
-
-    document.getElementById('cerrarModal').addEventListener('click', cerrarModal);
-
-    document.querySelector('form[name="contacto"]').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Evita la recarga
-
-    // Mostrar estado de carga
-    const submitBtn = this.querySelector('.btn-submit');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.disabled = true;
-
-    // Recopilar datos del formulario
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
-
-    // Añadir información extra si es necesario
-    data.timestamp = new Date().toISOString();
-    data.user_agent = navigator.userAgent;
-
-    try {
-        const response = await fetch('https://formtorch.com/f/pguw3euojn', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            // Mostrar mensaje de éxito
-            document.getElementById('form-success').hidden = false;
-            this.reset(); // Limpiar el formulario
-
-            // Opcional: limpiar campos display
-            document.getElementById('display-yurta').value = '';
-            document.getElementById('display-noches').value = '';
-            document.getElementById('display-llegada').value = '';
-            document.getElementById('display-salida').value = '';
-            document.querySelectorAll('.pago-metodo-btn').forEach(btn => btn.classList.remove('active'));
-
-            // Scroll al mensaje de éxito
-            document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
-        } else {
-            alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error de conexión. Por favor, verifica tu internet y vuelve a intentar.');
-    } finally {
-        // Restaurar botón
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }
-});
-// ============================================================
-// DATOS DE PRODUCTOS - CATÁLOGO ESPACIO TIMBÓ
-// ============================================================
-
-const productos = [
-  // ACEITES
-  { id: 1, nombre: 'Aceite de Cannabis', categoria: 'aceites', precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.', imagen: 'assets/images/productos/aceite-calendula.jpg', stock: false },
-
-  // POMADAS
-  { id: 5, nombre: 'Pomada de Caléndula & Cannabis', categoria: 'pomadas', precio: 380, descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.', imagen: 'assets/images/productos/pomada-calendula.jpg', stock: true },
-
-  // JABONES
-  { id: 9, nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela', categoria: 'jabones', precio: 280, descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.', imagen: 'assets/images/productos/jabon-lavanda.jpg', stock: true },
-
-  // TINTURAS
-  { id: 13, nombre: 'Tintura de MBURUCUYÁ', categoria: 'tinturas', precio: 320, descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.', imagen: 'assets/images/productos/tintura-propoleo.jpg', stock: true },
-  { id: 14, nombre: 'Tintura de MILENRAMA', categoria: 'tinturas', precio: 350, descripcion: 'Tintura de equinácea para reforzar defensas.', imagen: 'assets/images/productos/tintura-equipacea.jpg', stock: true },
-  { id: 15, nombre: 'Tintura de ARTEMISIA', categoria: 'tinturas', precio: 310, descripcion: 'Tintura de ajo, antibiótico natural.', imagen: 'assets/images/productos/tintura-ajo.jpg', stock: false }, // SIN STOCK
-
-  // SAHÚMOS
-  { id: 16, nombre: 'Sahúmo de Salvia', categoria: 'sahunos', precio: 250, descripcion: 'Sahúmo de salvia blanca para limpieza energética.', imagen: 'assets/images/productos/sahumo-salvia.jpg', stock: true },
-  { id: 17, nombre: 'Sahúmo de Palo Santo', categoria: 'sahunos', precio: 300, descripcion: 'Palo Santo para aromaterapia y meditación.', imagen: 'assets/images/productos/sahumo-palo.jpg', stock: true },
-  { id: 18, nombre: 'Sahúmo de Romero', categoria: 'sahunos', precio: 230, descripcion: 'Sahúmo de romero para claridad mental.', imagen: 'assets/images/productos/sahumo-romero.jpg', stock: false }, // SIN STOCK
-
-  // HIERBAS MEDICINALES
-  { id: 19, nombre: 'Manzanilla', categoria: 'hierbas', precio: 180, descripcion: 'Flores de manzanilla secas, digestivas y relajantes.', imagen: 'assets/images/productos/hierba-manzanilla.jpg', stock: true },
-  { id: 20, nombre: 'Menta', categoria: 'hierbas', precio: 160, descripcion: 'Hojas de menta secas, aromáticas y digestivas.', imagen: 'assets/images/productos/hierba-menta.jpg', stock: true },
-  { id: 21, nombre: 'Hipérico', categoria: 'hierbas', precio: 200, descripcion: 'Planta de hipérico seca, para infusiones calmantes.', imagen: 'assets/images/productos/hierba-hiperico.jpg', stock: false }, // SIN STOCK
-  { id: 22, nombre: 'Romero', categoria: 'hierbas', precio: 170, descripcion: 'Romero seco, estimulante y antioxidante.', imagen: 'assets/images/productos/hierba-romero.jpg', stock: true },
-
-  // SEMILLAS Y PLANTINES
-  { id: 23, nombre: 'Semillas de Aromáticas (mix)', categoria: 'semillas', precio: 220, descripcion: 'Mix de semillas de albahaca, perejil, cilantro y eneldo.', imagen: 'assets/images/productos/semillas-aromaticas.jpg', stock: true },
-  { id: 24, nombre: 'Plantín de Lavanda', categoria: 'semillas', precio: 350, descripcion: 'Plantín de lavanda para tu jardín o maceta.', imagen: 'assets/images/productos/plantin-lavanda.jpg', stock: true },
-  { id: 25, nombre: 'Semillas de Caléndula', categoria: 'semillas', precio: 190, descripcion: 'Semillas de caléndula, flor medicinal y ornamental.', imagen: 'assets/images/productos/semillas-calendula.jpg', stock: false }, // SIN STOCK
-  { id: 26, nombre: 'Plantín de Romero', categoria: 'semillas', precio: 320, descripcion: 'Plantín de romero para cultivar en casa.', imagen: 'assets/images/productos/plantin-romero.jpg', stock: true },
-];
-// ============================================================
-// ESTADO DEL CARRITO
-// ============================================================
-
-let carrito = [];
-let categoriaActual = 'todos';
-
-// ============================================================
-// FUNCIONES DEL CATÁLOGO
-// ============================================================
-
-// Renderizar productos
-// Renderizar productos
-function renderizarProductos(categoria = 'todos') {
+function renderizarProductos() {
   const grid = document.getElementById('catalogo-grid');
+  const contador = document.getElementById('catalogoContador');
+  const vacio = document.getElementById('catalogoVacio');
+  const resetBtn = document.getElementById('catalogoReset');
+  const limpiarBtn = document.getElementById('filtroLimpiar');
+
   if (!grid) return;
 
-  const filtrados = categoria === 'todos'
-    ? productos
-    : productos.filter(p => p.categoria === categoria);
+  const lista = (window.productos && window.productos.length) ? window.productos : PRODUCTOS_BASE;
 
+  // Filtrar
+  const textoNorm = normalizar(filtros.texto);
+  let filtrados = lista.filter(p => {
+    const coincideCat = filtros.categoria === 'todos' || p.categoria === filtros.categoria;
+    const nombreNorm = normalizar(p.nombre);
+    const descNorm = normalizar(p.descripcion || '');
+    const coincideTexto = !textoNorm || nombreNorm.includes(textoNorm) || descNorm.includes(textoNorm);
+    return coincideCat && coincideTexto;
+  });
+
+  // Ordenar
+  filtrados = ordenarProductos(filtrados, filtros.orden);
+
+  // Contador
+  if (contador) {
+    contador.textContent = filtrados.length === 1
+      ? 'Mostrando 1 producto'
+      : `Mostrando ${filtrados.length} productos`;
+  }
+
+  // Vacío
+  if (vacio) vacio.hidden = filtrados.length > 0;
+  grid.hidden = filtrados.length === 0;
+
+  // Reset buttons
+  const hayFiltros = filtros.texto || filtros.categoria !== 'todos' || filtros.orden !== 'relevancia';
+  if (resetBtn) resetBtn.hidden = !hayFiltros;
+  if (limpiarBtn) limpiarBtn.hidden = !filtros.texto;
+
+  // Render
   if (filtrados.length === 0) {
-    grid.innerHTML = `<p class="sin-productos">No hay productos en esta categoría.</p>`;
+    grid.innerHTML = '';
     return;
   }
 
   grid.innerHTML = filtrados.map(p => {
-    // Determinar si tiene stock
     const tieneStock = p.stock !== undefined ? p.stock : true;
     const stockClass = tieneStock ? '' : 'sin-stock';
-    const stockBadge = tieneStock
-      ? ''
-      : `<span class="badge-sin-stock">Sin stock</span>`;
+    const stockBadge = tieneStock ? '' : `<span class="badge-sin-stock">Sin stock</span>`;
     const botonAgregar = tieneStock
       ? `<button class="btn-agregar" onclick="agregarAlCarrito(${p.id})">
           <i class="fas fa-plus"></i> Agregar
@@ -914,97 +727,95 @@ function renderizarProductos(categoria = 'todos') {
             ${botonAgregar}
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
 }
 
-// Filtrar productos por categoría
-function filtrarProductos(categoria, btn) {
-  categoriaActual = categoria;
-  renderizarProductos(categoria);
+function filtrarProductos(categoria) {
+  filtros.categoria = categoria;
+  renderizarProductos();
 
-  // Actualizar botones activos
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
+  // Auto-cerrar sidebar en mobile (opcional)
+  if (window.innerWidth <= 900) {
+    const sidebar = document.getElementById('catalogoSidebar');
+    if (sidebar) sidebar.classList.remove('is-open');
+  }
 }
 
-// ============================================================
-// FUNCIONES DEL CARRITO
-// ============================================================
+function resetearFiltros() {
+  filtros.categoria = 'todos';
+  filtros.texto = '';
+  filtros.orden = 'relevancia';
 
-// Agregar producto al carrito
+  const input = document.getElementById('filtroTexto');
+  const selectOrden = document.getElementById('filtroOrden');
+  const selectCat = document.getElementById('filtroCategoria');
+
+  if (input) input.value = '';
+  if (selectOrden) selectOrden.value = 'relevancia';
+  if (selectCat) selectCat.value = 'todos';
+
+  renderizarProductos();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. CARRITO
+   ═══════════════════════════════════════════════════════════════ */
 function agregarAlCarrito(productoId) {
-  const producto = productos.find(p => p.id === productoId);
+  const lista = (window.productos && window.productos.length) ? window.productos : PRODUCTOS_BASE;
+  const producto = lista.find(p => p.id === productoId);
   if (!producto) return;
 
-  // Verificar stock
   if (producto.stock === false) {
     mostrarNotificacion('⚠️ Este producto no está disponible actualmente');
     return;
   }
 
   const existente = carrito.find(p => p.id === productoId);
-  if (existente) {
-    existente.cantidad += 1;
-  } else {
-    carrito.push({ ...producto, cantidad: 1 });
-  }
+  if (existente) existente.cantidad += 1;
+  else carrito.push({ ...producto, cantidad: 1 });
 
   actualizarCarrito();
   mostrarNotificacion(`✅ ${producto.nombre} agregado al carrito`);
 }
 
-// Eliminar producto del carrito
+function actualizarCantidad(productoId, nuevaCantidad) {
+  const item = carrito.find(p => p.id === productoId);
+  if (!item) return;
+  if (nuevaCantidad <= 0) { eliminarDelCarrito(productoId); return; }
+  item.cantidad = nuevaCantidad;
+  actualizarCarrito();
+}
+
 function eliminarDelCarrito(productoId) {
   carrito = carrito.filter(p => p.id !== productoId);
   actualizarCarrito();
 }
 
-// Actualizar cantidad de un producto
-function actualizarCantidad(productoId, nuevaCantidad) {
-  const item = carrito.find(p => p.id === productoId);
-  if (!item) return;
-
-  if (nuevaCantidad <= 0) {
-    eliminarDelCarrito(productoId);
-    return;
-  }
-
-  item.cantidad = nuevaCantidad;
-  actualizarCarrito();
-}
-
-// Vaciar carrito completamente
-function vaciarCarrito() {
+function vaciarCarrito(event) {
+  if (event) event.stopPropagation();
   if (carrito.length === 0) return;
-  carrito = [];
-  actualizarCarrito();
-  mostrarNotificacion('🔄 Carrito vaciado');
+  if (confirm('¿Vaciar todo el carrito?')) {
+    carrito = [];
+    actualizarCarrito();
+    mostrarNotificacion('🔄 Carrito vaciado');
+  }
 }
 
-// Calcular total del carrito
 function calcularTotal() {
   return carrito.reduce((sum, p) => sum + (p.precio * p.cantidad), 0);
 }
 
-// Calcular cantidad total de items
 function calcularCantidadTotal() {
   return carrito.reduce((sum, p) => sum + p.cantidad, 0);
 }
 
-// Actualizar toda la UI del carrito
-// Actualizar toda la UI del carrito
 function actualizarCarrito() {
-  // 1. Actualizar contador en el header
-  const count = calcularCantidadTotal();
   const countEl = document.getElementById('nav-carrito-count');
-  if (countEl) countEl.textContent = count;
+  if (countEl) countEl.textContent = calcularCantidadTotal();
 
-  // 2. Actualizar lista del panel
   const lista = document.getElementById('carrito-lista-header');
   const totalEl = document.getElementById('carrito-total-monto-header');
-
   if (!lista || !totalEl) return;
 
   if (carrito.length === 0) {
@@ -1020,16 +831,10 @@ function actualizarCarrito() {
         <span class="carrito-item-precio">$${p.precio}</span>
       </div>
       <div class="carrito-item-controls">
-        <button class="carrito-qty-btn" onclick="actualizarCantidad(event, ${p.id}, ${p.cantidad - 1})">
-          −
-        </button>
+        <button class="carrito-qty-btn" onclick="event.stopPropagation(); actualizarCantidad(${p.id}, ${p.cantidad - 1})">−</button>
         <span class="carrito-item-qty">${p.cantidad}</span>
-        <button class="carrito-qty-btn" onclick="actualizarCantidad(event, ${p.id}, ${p.cantidad + 1})">
-          +
-        </button>
-        <button class="carrito-eliminar" onclick="eliminarDelCarrito(event, ${p.id})">
-          ✕
-        </button>
+        <button class="carrito-qty-btn" onclick="event.stopPropagation(); actualizarCantidad(${p.id}, ${p.cantidad + 1})">+</button>
+        <button class="carrito-eliminar" onclick="event.stopPropagation(); eliminarDelCarrito(${p.id})">✕</button>
       </div>
     </div>
   `).join('');
@@ -1037,180 +842,20 @@ function actualizarCarrito() {
   totalEl.textContent = `$${calcularTotal()}`;
 }
 
-// Actualizar cantidad - CON stopPropagation
-function actualizarCantidad(event, productoId, nuevaCantidad) {
-  // Evitar que el evento burbujee y cierre el carrito
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  const item = carrito.find(p => p.id === productoId);
-  if (!item) return;
-
-  if (nuevaCantidad <= 0) {
-    eliminarDelCarrito(event, productoId);
-    return;
-  }
-
-  item.cantidad = nuevaCantidad;
-  actualizarCarrito();
-}
-
-// Eliminar del carrito - CON stopPropagation
-function eliminarDelCarrito(event, productoId) {
-  // Evitar que el evento burbujee y cierre el carrito
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  carrito = carrito.filter(p => p.id !== productoId);
-  actualizarCarrito();
-}
-
-// Vaciar carrito - CON stopPropagation
-function vaciarCarrito(event) {
-  // Evitar que el evento burbujee y cierre el carrito
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  if (carrito.length === 0) return;
-  if (confirm('¿Vaciar todo el carrito?')) {
-    carrito = [];
-    actualizarCarrito();
-    mostrarNotificacion('🔄 Carrito vaciado');
-  }
-}
-
-// Enviar pedido - CON stopPropagation
-function enviarPedido(event) {
-  // Evitar que el evento burbujee y cierre el carrito
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
-
-  if (carrito.length === 0) {
-    mostrarNotificacion('⚠️ El carrito está vacío');
-    return;
-  }
-
-  // ... resto del código de enviar pedido ...
-}
-
-// Función para cerrar el carrito SOLO con la X
 function cerrarCarrito(event) {
-  if (event) {
-    event.stopPropagation();
-    event.preventDefault();
-  }
+  if (event) { event.stopPropagation(); event.preventDefault(); }
   const panel = document.getElementById('carrito-panel-header');
-  if (panel) {
-    panel.hidden = true;
-  }
+  if (panel) panel.hidden = true;
 }
 
-// Toggle carrito - solo para abrir/cerrar con el ícono
 function toggleCarrito(event) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  const panel = document.getElementById('carrito-panel-header');
-  if (panel) {
-    // Si está oculto, lo mostramos
-    if (panel.hidden) {
-      panel.hidden = false;
-      actualizarCarrito();
-    } else {
-      // Si está visible, lo ocultamos SOLO si el clic fue en el ícono
-      // (no en los botones internos)
-      const target = event ? event.target : null;
-      if (target && target.closest('.carrito-panel-header')) {
-        // El clic fue dentro del panel, no hacemos nada
-        return;
-      }
-      panel.hidden = true;
-    }
-  }
-}
-
-// Cerrar carrito al hacer clic fuera (modificado)
-document.addEventListener('click', function(event) {
-  const panel = document.getElementById('carrito-panel-header');
-  const btn = document.querySelector('.nav-carrito');
-
-  if (panel && !panel.hidden) {
-    const isClickInside = panel.contains(event.target) || (btn && btn.contains(event.target));
-    if (!isClickInside) {
-      panel.hidden = true;
-    }
-  }
-});
-
-// ============================================================
-// PANEL DEL CARRITO
-// ============================================================
-
-// Abrir/cerrar el panel del carrito
-function toggleCarrito(event) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+  if (event) { event.preventDefault(); event.stopPropagation(); }
   const panel = document.getElementById('carrito-panel-header');
   if (panel) {
     panel.hidden = !panel.hidden;
-    if (!panel.hidden) {
-      actualizarCarrito();
-    }
+    if (!panel.hidden) actualizarCarrito();
   }
 }
-
-// Cerrar carrito al hacer clic fuera
-document.addEventListener('click', function(event) {
-  const panel = document.getElementById('carrito-panel-header');
-  const btn = document.querySelector('.nav-carrito');
-  if (panel && !panel.hidden) {
-    const isClickInside = panel.contains(event.target) || (btn && btn.contains(event.target));
-    if (!isClickInside) {
-      panel.hidden = true;
-    }
-  }
-});
-
-// ============================================================
-// NOTIFICACIONES
-// ============================================================
-
-function mostrarNotificacion(mensaje) {
-  // Eliminar notificaciones existentes
-  document.querySelectorAll('.notificacion').forEach(n => n.remove());
-
-  const notif = document.createElement('div');
-  notif.className = 'notificacion';
-  notif.textContent = mensaje;
-  document.body.appendChild(notif);
-
-  // Animación de entrada
-  requestAnimationFrame(() => {
-    notif.classList.add('visible');
-  });
-
-  // Auto-eliminar después de 3 segundos
-  setTimeout(() => {
-    notif.classList.remove('visible');
-    setTimeout(() => notif.remove(), 400);
-  }, 3000);
-}
-
-// ============================================================
-// ENVIAR PEDIDO POR EMAIL
-// ============================================================
 
 function enviarPedido() {
   if (carrito.length === 0) {
@@ -1218,7 +863,6 @@ function enviarPedido() {
     return;
   }
 
-  // Construir mensaje
   let mensaje = '📦 NUEVO PEDIDO - ESPACIO TIMBÓ\n';
   mensaje += '═'.repeat(40) + '\n\n';
   mensaje += '🔹 PRODUCTOS SOLICITADOS:\n';
@@ -1233,190 +877,112 @@ function enviarPedido() {
 
   mensaje += '─'.repeat(30) + '\n';
   mensaje += `💰 TOTAL DEL PEDIDO: $${calcularTotal()}\n\n`;
-
   mensaje += '═'.repeat(40) + '\n';
   mensaje += '📋 DATOS DE CONTACTO:\n';
   mensaje += '  • Nombre completo: \n';
   mensaje += '  • Correo electrónico: \n';
   mensaje += '  • Teléfono/WhatsApp: \n';
   mensaje += '  • Método de pago preferido: \n\n';
-
-  mensaje += '📝 OBSERVACIONES:\n';
-  mensaje += '  • \n\n';
-
+  mensaje += '📝 OBSERVACIONES:\n  • \n\n';
   mensaje += '═'.repeat(40) + '\n';
   mensaje += '🌿 Gracias por elegir Espacio Timbó\n';
   mensaje += '📍 Santa Ana, Colonia, Uruguay\n';
   mensaje += '📧 espaciotimbo.uy@gmail.com\n';
   mensaje += '📱 +598 97 328 615';
 
-  // Enviar por email
   const asunto = encodeURIComponent('📦 Nuevo pedido de productos - Espacio Timbó');
   const cuerpo = encodeURIComponent(mensaje);
   const email = 'espaciotimbo.uy@gmail.com';
 
   window.location.href = `mailto:${email}?subject=${asunto}&body=${cuerpo}`;
 
-  // Opcional: también abrir WhatsApp con el mismo mensaje
-  // const whatsappMsg = encodeURIComponent(mensaje);
-  // window.open(`https://wa.me/59897328615?text=${whatsappMsg}`, '_blank');
-
-  // Cerrar carrito
   const panel = document.getElementById('carrito-panel-header');
   if (panel) panel.hidden = true;
 
   mostrarNotificacion('📨 Pedido enviado por email');
 }
 
-// ============================================================
-// INICIALIZACIÓN
-// ============================================================
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Renderizar catálogo
-  renderizarProductos();
-
-  // Inicializar carrito
-  actualizarCarrito();
-
-  // Marcar el botón "Todos" como activo
-  const todosBtn = document.querySelector('.cat-btn[data-categoria="todos"]');
-  if (todosBtn) todosBtn.classList.add('active');
-
-  console.log('🌿 Espacio Timbó - Catálogo y Carrito cargado correctamente');
-  console.log(`📦 ${productos.length} productos disponibles en ${new Set(productos.map(p => p.categoria)).size} categorías`);
-});
-// ============================================================
-// SISTEMA DE ADMINISTRACIÓN - ESPACIO TIMBÓ
-// ============================================================
-
-// Credenciales (en producción usar hash y servidor)
-const ADMIN_CREDENTIALS = {
-  usuario: 'admin',
-  contraseña: 'timbó2025'
-};
-
-let productosAdmin = [];
-let adminLogueado = false;
-let productoEditando = null;
-
-// ============================================================
-// LOGIN
-// ============================================================
-
-function abrirLogin() {
-  document.getElementById('loginModal').hidden = false;
-  document.getElementById('loginError').hidden = true;
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-  document.getElementById('loginUser').focus();
+function mostrarNotificacion(mensaje) {
+  document.querySelectorAll('.notificacion').forEach(n => n.remove());
+  const notif = document.createElement('div');
+  notif.className = 'notificacion';
+  notif.textContent = mensaje;
+  document.body.appendChild(notif);
+  requestAnimationFrame(() => notif.classList.add('visible'));
+  setTimeout(() => {
+    notif.classList.remove('visible');
+    setTimeout(() => notif.remove(), 400);
+  }, 3000);
 }
 
-function cerrarLogin() {
-  document.getElementById('loginModal').hidden = true;
+/* ═══════════════════════════════════════════════════════════════
+   12. PAGO
+   ═══════════════════════════════════════════════════════════════ */
+function elegirPago(btn, metodo) {
+  document.querySelectorAll('.pago-metodo-btn, .pago-form-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const input = document.getElementById('metodo-pago');
+  if (input) input.value = metodo;
 }
 
-function loginAdmin(event) {
-  event.preventDefault();
-  const user = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value.trim();
-
-  if (user === ADMIN_CREDENTIALS.usuario && pass === ADMIN_CREDENTIALS.contraseña) {
-    adminLogueado = true;
-    cerrarLogin();
-    abrirAdmin();
-    mostrarNotificacion('🔐 Sesión iniciada como administrador');
-  } else {
-    document.getElementById('loginError').hidden = false;
-    document.getElementById('loginPass').value = '';
-    document.getElementById('loginPass').focus();
-  }
-}
-
-// Cerrar login con ESC
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    cerrarLogin();
-    cerrarEdit();
-  }
-});
-
-// ============================================================
-// PANEL DE ADMINISTRACIÓN
-// ============================================================
-
-function abrirAdmin() {
-  if (!adminLogueado) return;
-
-  // Cargar datos desde localStorage o usar los productos por defecto
-  cargarProductosDesdeStorage();
-
-  document.getElementById('adminPanel').hidden = false;
-  renderizarAdmin();
-  document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
-}
-
-function cerrarAdmin() {
-  document.getElementById('adminPanel').hidden = true;
-  adminLogueado = false;
-  mostrarNotificacion('🔒 Sesión cerrada');
-}
-
-// ============================================================
-// GESTIÓN DE PRODUCTOS (localStorage)
-// ============================================================
-
+/* ═══════════════════════════════════════════════════════════════
+   13. PANEL DE ADMINISTRACIÓN
+   ═══════════════════════════════════════════════════════════════ */
 function cargarProductosDesdeStorage() {
   const stored = localStorage.getItem('productos_timbo');
   if (stored) {
     try {
-      productosAdmin = JSON.parse(stored);
-      // Sincronizar con la variable global productos
-      sincronizarProductosGlobales();
+      const parsed = JSON.parse(stored);
+      productosAdmin = Array.isArray(parsed) && parsed.length ? parsed : [...PRODUCTOS_BASE];
     } catch (e) {
-      productosAdmin = [...productos];
-      guardarProductosEnStorage();
+      productosAdmin = [...PRODUCTOS_BASE];
     }
   } else {
-    productosAdmin = [...productos];
-    guardarProductosEnStorage();
+    productosAdmin = [...PRODUCTOS_BASE];
   }
+  window.productos = [...productosAdmin];
 }
 
 function guardarProductosEnStorage() {
   localStorage.setItem('productos_timbo', JSON.stringify(productosAdmin));
-  sincronizarProductosGlobales();
+  window.productos = [...productosAdmin];
+  renderizarProductos();
 }
 
-function sincronizarProductosGlobales() {
-  // Sincronizar con la variable global 'productos' usada en el catálogo
-  if (typeof productos !== 'undefined') {
-    // Reemplazar el array global
-    productos.length = 0;
-    productosAdmin.forEach(p => productos.push(p));
-    // Re-renderizar catálogo
-    renderizarProductos(categoriaActual || 'todos');
+function abrirAdmin() {
+  if (!adminLogueado) return;
+  cargarProductosDesdeStorage();
+  const panel = document.getElementById('adminPanel');
+  if (panel) {
+    panel.hidden = false;
+    renderizarAdmin();
+    panel.scrollIntoView({ behavior: 'smooth' });
   }
 }
 
-// ============================================================
-// RENDERIZAR TABLA ADMIN
-// ============================================================
+function cerrarAdmin() {
+  const panel = document.getElementById('adminPanel');
+  if (panel) panel.hidden = true;
+  adminLogueado = false;
+  mostrarNotificacion('🔒 Sesión cerrada');
+}
 
 function renderizarAdmin() {
   const tbody = document.getElementById('adminTableBody');
   if (!tbody) return;
 
-  const search = document.getElementById('adminSearch')?.value.toLowerCase() || '';
+  const search = (document.getElementById('adminSearch')?.value || '').toLowerCase();
   const filtrados = productosAdmin.filter(p =>
     p.nombre.toLowerCase().includes(search) ||
     p.categoria.toLowerCase().includes(search)
   );
 
-  // Actualizar estadísticas
-  document.getElementById('adminTotal').textContent = productosAdmin.length;
-  document.getElementById('adminStock').textContent = productosAdmin.filter(p => p.stock !== false).length;
-  document.getElementById('adminSinStock').textContent = productosAdmin.filter(p => p.stock === false).length;
+  const adminTotal = document.getElementById('adminTotal');
+  const adminStock = document.getElementById('adminStock');
+  const adminSinStock = document.getElementById('adminSinStock');
+  if (adminTotal) adminTotal.textContent = productosAdmin.length;
+  if (adminStock) adminStock.textContent = productosAdmin.filter(p => p.stock !== false).length;
+  if (adminSinStock) adminSinStock.textContent = productosAdmin.filter(p => p.stock === false).length;
 
   tbody.innerHTML = filtrados.map(p => `
     <tr>
@@ -1450,16 +1016,16 @@ function filtrarAdmin() {
   renderizarAdmin();
 }
 
-// ============================================================
-// CRUD - CREAR, EDITAR, ELIMINAR
-// ============================================================
-
 function agregarProducto() {
   productoEditando = null;
-  document.getElementById('editModalTitle').textContent = '➕ Nuevo Producto';
-  document.getElementById('editForm').reset();
-  document.getElementById('editId').value = '';
-  document.getElementById('editModal').hidden = false;
+  const title = document.getElementById('editModalTitle');
+  if (title) title.textContent = '➕ Nuevo Producto';
+  const form = document.getElementById('editForm');
+  if (form) form.reset();
+  const idField = document.getElementById('editId');
+  if (idField) idField.value = '';
+  const modal = document.getElementById('editModal');
+  if (modal) modal.hidden = false;
 }
 
 function editarProducto(id) {
@@ -1467,20 +1033,30 @@ function editarProducto(id) {
   if (!producto) return;
 
   productoEditando = producto;
-  document.getElementById('editModalTitle').textContent = `✏️ Editar: ${producto.nombre}`;
-  document.getElementById('editId').value = producto.id;
-  document.getElementById('editNombre').value = producto.nombre;
-  document.getElementById('editCategoria').value = producto.categoria;
-  document.getElementById('editPrecio').value = producto.precio;
-  document.getElementById('editDescripcion').value = producto.descripcion;
-  document.getElementById('editImagen').value = producto.imagen || '';
-  document.getElementById('editStock').value = producto.stock !== false ? 'true' : 'false';
+  const title = document.getElementById('editModalTitle');
+  if (title) title.textContent = `✏️ Editar: ${producto.nombre}`;
+  const idField = document.getElementById('editId');
+  if (idField) idField.value = producto.id;
+  const nombre = document.getElementById('editNombre');
+  if (nombre) nombre.value = producto.nombre;
+  const cat = document.getElementById('editCategoria');
+  if (cat) cat.value = producto.categoria;
+  const precio = document.getElementById('editPrecio');
+  if (precio) precio.value = producto.precio;
+  const desc = document.getElementById('editDescripcion');
+  if (desc) desc.value = producto.descripcion;
+  const img = document.getElementById('editImagen');
+  if (img) img.value = producto.imagen || '';
+  const stock = document.getElementById('editStock');
+  if (stock) stock.value = producto.stock !== false ? 'true' : 'false';
 
-  document.getElementById('editModal').hidden = false;
+  const modal = document.getElementById('editModal');
+  if (modal) modal.hidden = false;
 }
 
 function cerrarEdit() {
-  document.getElementById('editModal').hidden = true;
+  const modal = document.getElementById('editModal');
+  if (modal) modal.hidden = true;
   productoEditando = null;
 }
 
@@ -1501,14 +1077,12 @@ function guardarProducto(event) {
   }
 
   if (id) {
-    // Editar producto existente
     const index = productosAdmin.findIndex(p => p.id === id);
     if (index !== -1) {
       productosAdmin[index] = { ...productosAdmin[index], nombre, categoria, precio, descripcion, imagen, stock };
     }
     mostrarNotificacion(`✅ Producto "${nombre}" actualizado`);
   } else {
-    // Crear nuevo producto
     const newId = Math.max(...productosAdmin.map(p => p.id), 0) + 1;
     productosAdmin.push({ id: newId, nombre, categoria, precio, descripcion, imagen, stock });
     mostrarNotificacion(`✅ Producto "${nombre}" creado`);
@@ -1522,7 +1096,6 @@ function guardarProducto(event) {
 function eliminarProducto(id) {
   const producto = productosAdmin.find(p => p.id === id);
   if (!producto) return;
-
   if (confirm(`¿Eliminar definitivamente "${producto.nombre}"?`)) {
     productosAdmin = productosAdmin.filter(p => p.id !== id);
     guardarProductosEnStorage();
@@ -1531,29 +1104,237 @@ function eliminarProducto(id) {
   }
 }
 
-// ============================================================
-// INICIALIZACIÓN - Cargar datos
-// ============================================================
+/* ═══════════════════════════════════════════════════════════════
+   14. FORMULARIO DE RESERVAS
+   ═══════════════════════════════════════════════════════════════ */
+function initFormReservas() {
+  const form = document.querySelector('form[name="contacto"]');
+  if (!form) return;
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Cargar productos desde localStorage
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('.btn-submit');
+    const originalText = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn) {
+      submitBtn.textContent = 'Enviando...';
+      submitBtn.disabled = true;
+    }
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    data.timestamp = new Date().toISOString();
+    data.user_agent = navigator.userAgent;
+
+    try {
+      const response = await fetch('https://formtorch.com/f/pguw3euojn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        const success = document.getElementById('form-success');
+        if (success) {
+          success.hidden = false;
+          success.scrollIntoView({ behavior: 'smooth' });
+        }
+        this.reset();
+
+        // Limpiar campos del calendario
+        ['display-yurta','display-noches','display-llegada','display-salida'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        document.querySelectorAll('.pago-metodo-btn').forEach(btn => btn.classList.remove('active'));
+        const metodo = document.getElementById('metodo-pago');
+        if (metodo) metodo.value = '';
+
+        calState.inicio = null;
+        calState.fin = null;
+        renderCalendario();
+        actualizarResumenYForm();
+      } else {
+        alert('Hubo un error al enviar el formulario. Por favor, intenta nuevamente.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error de conexión. Por favor, verifica tu internet y vuelve a intentar.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   15. INICIALIZACIÓN GENERAL
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  // Productos: base o storage
   cargarProductosDesdeStorage();
 
-  // Renderizar catálogo
+  // Render catálogo + carrito
   renderizarProductos();
-
-  // Inicializar carrito
   actualizarCarrito();
 
-  console.log('🌿 Espacio Timbó - Sistema de Administración cargado');
-  console.log(`📦 ${productosAdmin.length} productos en el catálogo`);
+  // Marcar "Todos" como activo
+  const todosBtn = document.querySelector('.cat-btn[data-categoria="todos"]');
+  if (todosBtn) todosBtn.classList.add('active');
+
+  // Talleres
+  renderEventos('todos');
+
+  // Calendario
+  const nombreYurtaInicial = NOMBRES_YURTAS[1];
+  const inputYurta = document.getElementById('display-yurta');
+  const hiddenYurta = document.getElementById('yurta');
+  if (inputYurta) inputYurta.value = nombreYurtaInicial;
+  if (hiddenYurta) hiddenYurta.value = nombreYurtaInicial;
+  renderCalendario();
+  initCalListeners();
+  actualizarResumenYForm();
+
+  // Formulario de reservas
+  initFormReservas();
+
+  // ── Listeners de filtros del catálogo ──
+  const inputFiltro = document.getElementById('filtroTexto');
+  const selectOrden = document.getElementById('filtroOrden');
+  const limpiar = document.getElementById('filtroLimpiar');
+  const reset1 = document.getElementById('catalogoReset');
+  const reset2 = document.getElementById('catalogoReset2');
+
+  let timeoutBusqueda;
+  if (inputFiltro) {
+    inputFiltro.addEventListener('input', function (e) {
+      clearTimeout(timeoutBusqueda);
+      timeoutBusqueda = setTimeout(() => {
+        filtros.texto = e.target.value.trim();
+        renderizarProductos();
+      }, 200);
+    });
+  }
+
+  if (limpiar) {
+    limpiar.addEventListener('click', function () {
+      filtros.texto = '';
+      if (inputFiltro) { inputFiltro.value = ''; inputFiltro.focus(); }
+      renderizarProductos();
+    });
+  }
+
+  if (selectOrden) {
+    selectOrden.addEventListener('change', function (e) {
+      filtros.orden = e.target.value;
+      renderizarProductos();
+      // Auto-cerrar sidebar en mobile
+      if (window.innerWidth <= 900) {
+        const sidebar = document.getElementById('catalogoSidebar');
+        if (sidebar) sidebar.classList.remove('is-open');
+      }
+    });
+  }
+
+  if (reset1) reset1.addEventListener('click', resetearFiltros);
+  if (reset2) reset2.addEventListener('click', resetearFiltros);
+
+  // ── Cerrar carrito al hacer clic fuera ──
+  document.addEventListener('click', function (event) {
+    const panel = document.getElementById('carrito-panel-header');
+    const btn = document.querySelector('.nav-carrito');
+    if (panel && !panel.hidden) {
+      const isClickInside = panel.contains(event.target) || (btn && btn.contains(event.target));
+      if (!isClickInside) panel.hidden = true;
+    }
+  });
+
+  // ── Login admin (por si se usa modal en el HTML) ──
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const user = document.getElementById('loginUser').value.trim();
+      const pass = document.getElementById('loginPass').value.trim();
+      if (user === ADMIN_CREDENTIALS.usuario && pass === ADMIN_CREDENTIALS.contraseña) {
+        adminLogueado = true;
+        const modal = document.getElementById('loginModal');
+        if (modal) modal.hidden = true;
+        abrirAdmin();
+        mostrarNotificacion('🔐 Sesión iniciada como administrador');
+      } else {
+        const err = document.getElementById('loginError');
+        if (err) err.hidden = false;
+        const passInput = document.getElementById('loginPass');
+        if (passInput) { passInput.value = ''; passInput.focus(); }
+      }
+    });
+  }
+
+  // ── Cerrar modales con ESC ──
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      const loginModal = document.getElementById('loginModal');
+      if (loginModal) loginModal.hidden = true;
+      const editModal = document.getElementById('editModal');
+      if (editModal) editModal.hidden = true;
+    }
+  });
+
+  // ── Modal de gracias (formulario reservas) ──
+  const cerrarModalBtn = document.getElementById('cerrarModal');
+  if (cerrarModalBtn) {
+    cerrarModalBtn.addEventListener('click', function () {
+      const modal = document.getElementById('modalGracias');
+      if (modal) modal.hidden = true;
+    });
+  }
+
+  window.addEventListener('click', function (event) {
+    const modal = document.getElementById('modalGracias');
+    if (modal && event.target === modal) modal.hidden = true;
+  });
+
+  console.log('🌿 Espacio Timbó · scripts.js cargado correctamente');
+  console.log(`📦 ${(window.productos || []).length} productos en catálogo`);
+
+// Listener de categorías (dropdown)
+const selectCat = document.getElementById('filtroCategoria');
+if (selectCat) {
+  selectCat.addEventListener('change', function (e) {
+    filtros.categoria = e.target.value;
+    renderizarProductos();
+
+    // Auto-cerrar sidebar en mobile
+    if (window.innerWidth <= 900) {
+      const sidebar = document.getElementById('catalogoSidebar');
+      if (sidebar) sidebar.classList.remove('is-open');
+    }
+  });
+}
+
+
+
+
 });
 
-// En scripts.js - acceso oculto al admin
-  // Ctrl+Shift+A (o Cmd+Shift+A en Mac)
-  document.addEventListener('keydown', function(e) {
+/* ═══════════════════════════════════════════════════════════════
+   16. ACCESO OCULTO AL ADMIN (Ctrl + Shift + A)
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('keydown', function (e) {
   if (e.ctrlKey && e.shiftKey && (e.key === 'a' || e.key === 'A')) {
     e.preventDefault();
     window.location.href = 'admin.html';
   }
 });
+
+/* ─── TOGGLE DE FILTROS EN MOBILE ─── */
+const sidebarToggle = document.getElementById('catalogoSidebarToggle');
+const sidebar = document.getElementById('catalogoSidebar');
+if (sidebarToggle && sidebar) {
+  sidebarToggle.addEventListener('click', function () {
+    sidebar.classList.toggle('is-open');
+  });
+}
