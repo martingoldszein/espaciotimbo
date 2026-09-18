@@ -1806,7 +1806,7 @@ function initLangSelector() {
   const langMenu = document.getElementById('navLangMenu');
   if (!langWrapper || !langBtn || !langMenu) return;
 
-  // Toggle del menú
+  // Toggle del menú de idiomas — independiente del hamburger
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -1842,12 +1842,12 @@ function initLangSelector() {
     }
   });
 
-  // ── Prioridad: URL > localStorage > español ──
+  // Prioridad: URL > localStorage > español
   const urlLang = detectarIdiomaPorURL();
   const langFinal = urlLang || localStorage.getItem('timbo_idioma') || 'es';
   aplicarIdioma(langFinal);
 
-  // ── Manejar botón "atrás" del navegador ──
+  // Botón atrás del navegador
   window.addEventListener('popstate', () => {
     const urlLang = detectarIdiomaPorURL();
     if (urlLang) aplicarIdioma(urlLang);
