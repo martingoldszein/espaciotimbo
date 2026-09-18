@@ -1339,25 +1339,32 @@ if (sidebarToggle && sidebar) {
   });
 }
 /* ═══════════════════════════════════════════════════════════════
-   17. SCROLL SUAVE CON INERCIA (ESTILO NOHO.INK)
+   17. SCROLL SUAVE CON INERCIA (VERSIÓN AJUSTADA)
    ═══════════════════════════════════════════════════════════════ */
 (function initLenisScroll() {
-  // Respetar accesibilidad
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
-  // Cargar Lenis desde CDN
+  // Evitar doble inicialización
+  if (window.__lenisInitialized) return;
+  window.__lenisInitialized = true;
+
   const script = document.createElement('script');
-  script.src = 'https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js';
+  script.src = 'https://unpkg.com/lenis@1.1.14/dist/lenis.min.js';
   script.onload = () => {
+    // Desactivar el scroll-behavior smooth del CSS si existe
+    document.documentElement.style.scrollBehavior = 'auto';
+
     const lenis = new Lenis({
-      duration: 1.4,          // Duración del "deslizamiento" (más alto = más lento/inercia)
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing exponencial
-      smoothWheel: true,      // Suaviza la rueda del mouse
-      wheelMultiplier: 1,     // Sensibilidad de la rueda
-      touchMultiplier: 2,     // Sensibilidad en táctil
+      duration: 1.0,            // 🔽 Más bajo = menos "frenado", más respuesta directa
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1.4,      // 🔼 Más sensibilidad: la rueda responde mejor
+      touchMultiplier: 1.8,
       infinite: false,
       autoResize: true,
+      lerp: 0.12,                // 🔽 Un poco más directo que el default (0.1)
+      syncTouch: false,          // En táctil, dejar el scroll nativo
     });
 
     function raf(time) {
@@ -1366,10 +1373,9 @@ if (sidebarToggle && sidebar) {
     }
     requestAnimationFrame(raf);
 
-    // Exponer lenis globalmente (opcional, útil para anclas o scroll programático)
     window.lenis = lenis;
 
-    // Integrar con los enlaces del nav para que el scroll sea suave también ahí
+    // ── Integrar anclas del nav ──
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', (e) => {
         const href = anchor.getAttribute('href');
@@ -1377,19 +1383,467 @@ if (sidebarToggle && sidebar) {
         const target = document.querySelector(href);
         if (!target) return;
         e.preventDefault();
-        lenis.scrollTo(target, { offset: -80 }); // -80 para compensar el header sticky
+        lenis.scrollTo(target, { offset: -80, duration: 1.2 });
       });
     });
 
-    // Sincronizar con el scroll spy de IntersectionObserver (ya existente)
+    // ── Sincronizar el nav con Lenis SIN forzar repintados ──
+    let navRaf = null;
+    let lastScroll = 0;
     lenis.on('scroll', ({ scroll }) => {
-      // Actualiza el fondo del nav (ya lo hace tu código, pero lo reforzamos)
-      if (window.nav) {
-        window.nav.style.background = scroll > 60
-          ? 'rgba(242,234,216,0.97)'
-          : 'rgba(242,234,216,0.92)';
-      }
+      lastScroll = scroll;
+      if (navRaf) return;
+      navRaf = requestAnimationFrame(() => {
+        navRaf = null;
+        if (window.nav) {
+          window.nav.style.background = lastScroll > 60
+            ? 'rgba(242,234,216,0.97)'
+            : 'rgba(242,234,216,0.92)';
+        }
+      });
     });
   };
   document.head.appendChild(script);
 })();
+/* ═══════════════════════════════════════════════════════════════
+   18. SISTEMA DE IDIOMAS (ES / EN)
+   ═══════════════════════════════════════════════════════════════ */
+const TRADUCCIONES = {
+  es: {
+    // NAV
+    "nav.proyecto": "El Proyecto",
+    "nav.glamping": "Glamping",
+    "nav.servicios": "Servicios",
+    "nav.talleres": "Talleres",
+    "nav.catalogo": "Catálogo",
+    "nav.quienes": "Quiénes somos",
+    "nav.reservar": "Reservar",
+
+    // HERO
+    "hero.quote": '"Regenerar la tierra es también regenerar nuestra forma de habitarla."',
+    "hero.cta1": "Reservar estadía",
+    "hero.cta2": "Conocer el proyecto",
+
+    // QUÉ ES
+    "que.eyebrow": "— Qué es",
+    "que.title": "Un proyecto<br><em>regenerativo</em>",
+    "que.p1": "Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la naturaleza.",
+    "que.p2": "Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad.",
+    "que.p3": "Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.",
+
+    // FRASE
+    "frase": '"Ponemos la vida en el centro para regenerar el territorio que habitamos y el vínculo que tenemos con él."',
+
+    // GLAMPING
+    "glamping.eyebrow": "— Habitar la naturaleza",
+    "glamping.title": "Glamping<br><em>Regenerativo</em>",
+    "glamping.p1": "Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento en yurtas construidas artesanalmente con materiales naturales y reciclables.",
+    "glamping.p2": "Contamos con dos yurtas equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.",
+    "glamping.p3": "La experiencia incluye recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.",
+    "glamping.cta": "Ver disponibilidad",
+    "glamping.yurta1.title": "Yurta Ceibo",
+    "glamping.yurta1.p1": "Una experiencia de alojamiento más abierta y luminosa, ideal para compartir momentos de pausa y observación.",
+    "glamping.yurta1.p2": "Su diseño favorece la ventilación, el descanso y el encuentro con el entorno natural que la rodea.",
+    "glamping.yurta1.li1": "Diseño acogedor con ventilación natural",
+    "glamping.yurta1.li2": "Zona de descanso y lectura en entorno tranquilo",
+    "glamping.yurta1.li3": "Baño privado con atención al detalle",
+    "glamping.yurta1.li4": "Vista al conjunto de huerta y bosque cercano",
+    "glamping.yurta2.title": "Yurta Canelón",
+    "glamping.yurta2.p1": "Un refugio cálido y sereno pensado para dos personas, con un ritmo pausado y una mirada hacia el bosque.",
+    "glamping.yurta2.p2": "La propuesta combina descanso, lectura y conexión directa con la naturaleza desde una base sencilla y elegante.",
+    "glamping.yurta2.li1": "Cocina compacta con equipamiento esencial",
+    "glamping.yurta2.li2": "Baño privado y calefacción para noches frescas",
+    "glamping.yurta2.li3": "Espacio exterior para contemplar el paisaje",
+    "glamping.yurta2.li4": "Ambiente íntimo para una estadía tranquila",
+
+    // SERVICIOS
+    "serv.eyebrow": "— Servicios & Experiencias",
+    "serv.title": "Un espacio vivo de<br><em>aprendizaje y cultura</em>",
+    "serv.p": "Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.",
+    "serv.1.t": "Talleres & Experiencias Regenerativas",
+    "serv.1.d": "Talleres y recorridos vinculados a la permacultura, bioconstrucción, huerta agroecológica, plantas medicinales y regeneración de ecosistemas.",
+    "serv.2.t": "Actividades Culturales y Artísticas",
+    "serv.2.d": "Encuentros culturales, exposiciones, conversatorios y talleres creativos que fortalecen el tejido comunitario y el intercambio de saberes.",
+    "serv.3.t": "Bosque-Huerta Agroecológica",
+    "serv.3.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.4.t": "Voluntariado",
+    "serv.4.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.5.t": "Visitas guiadas",
+    "serv.5.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.6.t": "Café & Tienda Consciente",
+    "serv.6.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+
+    // TALLERES
+    "tall.eyebrow": "— Talleres & Eventos",
+    "tall.title": "Próximas<br><em>experiencias</em>",
+    "tall.p": "Talleres, encuentros y experiencias para conectar con la tierra, los saberes y la comunidad. Cupos limitados.",
+    "tall.filtro.todos": "Todos",
+    "tall.filtro.taller": "Talleres",
+    "tall.filtro.evento": "Eventos",
+    "tall.filtro.experiencia": "Experiencias",
+    "tall.empty": "Por el momento no hay talleres ni eventos programados. Seguinos en Instagram para enterarte de las próximas actividades.",
+    "tall.empty.cat": "No hay actividades programadas en esta categoría por el momento.",
+
+    // CATÁLOGO
+    "cat.eyebrow": "— Productos",
+    "cat.title": "Nuestro<br><em>catálogo</em>",
+    "cat.p": "Productos elaborados con amor y respeto por la naturaleza. <br> Hechos a mano con ingredientes naturales y procesos artesanales.",
+    "cat.buscar": "Buscar:",
+    "cat.buscar.ph": "Nombre o descripción...",
+    "cat.categoria": "Categoría:",
+    "cat.cat.todos": "Todas las categorías",
+    "cat.cat.aceites": "Aceites",
+    "cat.cat.pomadas": "Pomadas",
+    "cat.cat.jabones": "Jabones",
+    "cat.cat.tinturas": "Tinturas",
+    "cat.cat.sahunos": "Sahúmos",
+    "cat.cat.hierbas": "Hierbas Medicinales",
+    "cat.cat.semillas": "Semillas y Plantines",
+    "cat.orden": "Ordenar por:",
+    "cat.orden.relevancia": "Relevancia",
+    "cat.orden.nombre-asc": "Nombre (A–Z)",
+    "cat.orden.nombre-desc": "Nombre (Z–A)",
+    "cat.orden.precio-asc": "Precio (menor a mayor)",
+    "cat.orden.precio-desc": "Precio (mayor a menor)",
+    "cat.reset": "Limpiar filtros",
+    "cat.contador": "Mostrando {n} productos",
+    "cat.contador.1": "Mostrando 1 producto",
+    "cat.vacio.t": "No encontramos productos",
+    "cat.vacio.p": "Probá con otros filtros o limpiá la búsqueda.",
+    "cat.vacio.btn": "Ver todos los productos",
+    "cat.stock": "Sin stock",
+    "cat.agregar": "Agregar",
+    "cat.no.disponible": "No disponible",
+
+    // QUIÉNES SOMOS
+    "quienes.eyebrow": "— Quiénes somos",
+    "quienes.title": "Julia &<br><em>Martín</em>",
+    "quienes.p1": "Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio.",
+    "quienes.p2": "Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza.",
+    "quienes.quote": '"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."',
+
+    // RESEÑAS
+    "res.eyebrow": "— Reseñas",
+    "res.title": "Lo que dicen nuestros<br><em>huéspedes</em>",
+    "res.btn": "Ver todas las reseñas",
+
+    // RESERVAS
+    "reservas.eyebrow": "— Reservas",
+    "reservas.title": "Planificá<br><em>tu experiencia</em>",
+    "reservas.checkin": "Check-in / Check-out",
+    "reservas.min": "Estadía mínima",
+    "reservas.p": "Verificá la disponibilidad de las yurtas y envianos tu solicitud.<br> Te respondemos en menos de 24 horas.",
+    "reservas.yurta.eyebrow": "— Elegí tu yurta y fechas",
+    "reservas.yurta1": "Yurta Ceibo",
+    "reservas.yurta2": "Yurta Canelón",
+    "reservas.personas": "2 personas",
+    "reservas.sync": "Sincronizado",
+    "reservas.leyenda.libre": "Disponible",
+    "reservas.leyenda.ocupado": "Ocupado",
+    "reservas.leyenda.sel": "Seleccionado",
+    "reservas.llegada": "Llegada",
+    "reservas.salida": "Salida",
+    "reservas.noches": "Noches",
+    "reservas.form.eyebrow": "— Solicitud de reserva",
+    "reservas.form.nombre": "Nombre completo *",
+    "reservas.form.nombre.ph": "Tu nombre",
+    "reservas.form.email": "Correo electrónico *",
+    "reservas.form.email.ph": "tu@correo.com",
+    "reservas.form.whatsapp": "WhatsApp / Teléfono",
+    "reservas.form.personas": "Cantidad de personas",
+    "reservas.form.personas.sel": "Seleccionar",
+    "reservas.form.personas.1": "1 persona",
+    "reservas.form.personas.2": "2 personas",
+    "reservas.form.personas.3": "3–4 personas (2 yurtas)",
+    "reservas.form.yurta": "Yurta seleccionada",
+    "reservas.form.yurta.ph": "Elegí una yurta →",
+    "reservas.form.noches": "Cantidad de noches",
+    "reservas.form.llegada": "Fecha de llegada",
+    "reservas.form.llegada.ph": "Seleccioná en el calendario",
+    "reservas.form.salida": "Fecha de salida",
+    "reservas.form.pago": "Método de pago para la seña",
+    "reservas.form.mensaje": "Mensaje",
+    "reservas.form.mensaje.ph": "Contanos sobre tu visita, preguntas o lo que necesites saber…",
+    "reservas.form.submit": "Enviar reserva",
+    "reservas.form.note": "Respondemos en menos de 24 horas por correo o WhatsApp.",
+    "reservas.pago.t": "Seña para confirmar reserva",
+    "reservas.pago.p": "Para confirmar tu reserva se requiere abonar el <strong>50% del total por adelantado</strong>. El saldo restante se abona al momento del check-in. Una vez recibida tu consulta te enviamos el monto y el link de pago correspondiente.",
+    "reservas.pago.nota": "Podés indicar tu método preferido en el mensaje o seleccionarlo arriba, antes de enviar la solicitud.",
+    "reservas.success": "¡Gracias por tu reserva! Te responderemos pronto para confirmar disponibilidad.",
+
+    // CONTACTO
+    "contacto.eyebrow": "— Contacto",
+    "contacto.title": "Hablemos",
+
+    // CARRITO
+    "carrito.t": "🛒 Tu Carrito",
+    "carrito.vacio": "El carrito está vacío",
+    "carrito.total": "Total:",
+    "carrito.enviar": "Enviar pedido por email",
+
+    // FOOTER
+    "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
+  },
+
+  en: {
+    // NAV
+    "nav.proyecto": "The Project",
+    "nav.glamping": "Glamping",
+    "nav.servicios": "Services",
+    "nav.talleres": "Workshops",
+    "nav.catalogo": "Catalog",
+    "nav.quienes": "About us",
+    "nav.reservar": "Book now",
+
+    // HERO
+    "hero.quote": '"Regenerating the land is also regenerating the way we inhabit it."',
+    "hero.cta1": "Book your stay",
+    "hero.cta2": "Discover the project",
+
+    // QUÉ ES
+    "que.eyebrow": "— What is it",
+    "que.title": "A <em>regenerative</em><br>project",
+    "que.p1": "Espacio Timbó is a regenerative project located on the coast of Colonia, Uruguay, that integrates lodging, education, art, permaculture and ecological design. It was born with the purpose of contributing to the ecosocial regeneration of the territory we inhabit, promoting ways of life in harmony with nature.",
+    "que.p2": "Our space is designed under permaculture and regeneration principles, incorporating natural building, organic farming, ecological sanitation systems, responsible waste management and gardens that promote biodiversity.",
+    "que.p3": "Every element of the place seeks to demonstrate that it is possible to inhabit consciously, reducing impacts and generating benefits for the land and the community.",
+
+    // FRASE
+    "frase": '"We put life at the center to regenerate the territory we inhabit and the bond we have with it."',
+
+    // GLAMPING
+    "glamping.eyebrow": "— Inhabiting nature",
+    "glamping.title": "Regenerative<br><em>Glamping</em>",
+    "glamping.p1": "Between the forest, the river and Santa Ana beach, we offer lodging experiences in yurts handcrafted with natural and recyclable materials.",
+    "glamping.p2": "We have two yurts equipped with a kitchen and private bathroom, heating, ventilation and outdoor spaces to rest, contemplate nature and share around the fire.",
+    "glamping.p3": "The experience includes exploring the forest and river of Santa Ana, enjoying the beach, visiting the agroecological garden and participating in regenerative practice workshops.",
+    "glamping.cta": "Check availability",
+    "glamping.yurta1.title": "Ceibo Yurt",
+    "glamping.yurta1.p1": "A more open and luminous lodging experience, ideal for sharing moments of pause and observation.",
+    "glamping.yurta1.p2": "Its design favors ventilation, rest and connection with the natural surroundings.",
+    "glamping.yurta1.li1": "Cozy design with natural ventilation",
+    "glamping.yurta1.li2": "Rest and reading area in a quiet environment",
+    "glamping.yurta1.li3": "Private bathroom with attention to detail",
+    "glamping.yurta1.li4": "View of the garden and nearby forest",
+    "glamping.yurta2.title": "Canelón Yurt",
+    "glamping.yurta2.p1": "A warm and serene refuge designed for two people, with a slow rhythm and a view towards the forest.",
+    "glamping.yurta2.p2": "The proposal combines rest, reading and direct connection with nature from a simple and elegant base.",
+    "glamping.yurta2.li1": "Compact kitchen with essential equipment",
+    "glamping.yurta2.li2": "Private bathroom and heating for cool nights",
+    "glamping.yurta2.li3": "Outdoor space to contemplate the landscape",
+    "glamping.yurta2.li4": "Intimate atmosphere for a quiet stay",
+
+    // SERVICIOS
+    "serv.eyebrow": "— Services & Experiences",
+    "serv.title": "A living space of<br><em>learning and culture</em>",
+    "serv.p": "We develop proposals that integrate nature, regeneration, learning, culture and well-being, strengthening the bond between people and the territory.",
+    "serv.1.t": "Regenerative Workshops & Experiences",
+    "serv.1.d": "Workshops and tours related to permaculture, natural building, agroecological gardening, medicinal plants and ecosystem regeneration.",
+    "serv.2.t": "Cultural and Artistic Activities",
+    "serv.2.d": "Cultural gatherings, exhibitions, talks and creative workshops that strengthen the community fabric and the exchange of knowledge.",
+    "serv.3.t": "Agroecological Forest-Garden",
+    "serv.3.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.4.t": "Volunteering",
+    "serv.4.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.5.t": "Guided visits",
+    "serv.5.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.6.t": "Conscious Café & Shop",
+    "serv.6.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+
+    // TALLERES
+    "tall.eyebrow": "— Workshops & Events",
+    "tall.title": "Upcoming<br><em>experiences</em>",
+    "tall.p": "Workshops, gatherings and experiences to connect with the land, knowledge and community. Limited spots.",
+    "tall.filtro.todos": "All",
+    "tall.filtro.taller": "Workshops",
+    "tall.filtro.evento": "Events",
+    "tall.filtro.experiencia": "Experiences",
+    "tall.empty": "There are no workshops or events scheduled at the moment. Follow us on Instagram to find out about upcoming activities.",
+    "tall.empty.cat": "No activities scheduled in this category at the moment.",
+
+    // CATÁLOGO
+    "cat.eyebrow": "— Products",
+    "cat.title": "Our<br><em>catalog</em>",
+    "cat.p": "Products made with love and respect for nature. <br> Handmade with natural ingredients and artisanal processes.",
+    "cat.buscar": "Search:",
+    "cat.buscar.ph": "Name or description...",
+    "cat.categoria": "Category:",
+    "cat.cat.todos": "All categories",
+    "cat.cat.aceites": "Oils",
+    "cat.cat.pomadas": "Ointments",
+    "cat.cat.jabones": "Soaps",
+    "cat.cat.tinturas": "Tinctures",
+    "cat.cat.sahunos": "Smudge sticks",
+    "cat.cat.hierbas": "Medicinal Herbs",
+    "cat.cat.semillas": "Seeds and Seedlings",
+    "cat.orden": "Sort by:",
+    "cat.orden.relevancia": "Relevance",
+    "cat.orden.nombre-asc": "Name (A–Z)",
+    "cat.orden.nombre-desc": "Name (Z–A)",
+    "cat.orden.precio-asc": "Price (low to high)",
+    "cat.orden.precio-desc": "Price (high to low)",
+    "cat.reset": "Clear filters",
+    "cat.contador": "Showing {n} products",
+    "cat.contador.1": "Showing 1 product",
+    "cat.vacio.t": "No products found",
+    "cat.vacio.p": "Try other filters or clear the search.",
+    "cat.vacio.btn": "See all products",
+    "cat.stock": "Out of stock",
+    "cat.agregar": "Add",
+    "cat.no.disponible": "Not available",
+
+    // QUIÉNES SOMOS
+    "quienes.eyebrow": "— About us",
+    "quienes.title": "Julia &<br><em>Martín</em>",
+    "quienes.p1": "Espacio Timbó was born in 2019 as a family life project driven by the desire to find more conscious and regenerative ways of inhabiting the world. Since then, we have dedicated our time and energy to designing, building and caring for this territory.",
+    "quienes.p2": "We believe in a way of life based on simplicity, self-sufficiency, the recovery of traditional knowledge and crafts, and continuous learning alongside nature.",
+    "quienes.quote": '"A life project born from the desire to live in coherence with our values."',
+
+    // RESEÑAS
+    "res.eyebrow": "— Reviews",
+    "res.title": "What our<br><em>guests</em> say",
+    "res.btn": "See all reviews",
+
+    // RESERVAS
+    "reservas.eyebrow": "— Bookings",
+    "reservas.title": "Plan<br><em>your experience</em>",
+    "reservas.checkin": "Check-in / Check-out",
+    "reservas.min": "Minimum stay",
+    "reservas.p": "Check yurt availability and send us your request.<br> We reply in less than 24 hours.",
+    "reservas.yurta.eyebrow": "— Choose your yurt and dates",
+    "reservas.yurta1": "Ceibo Yurt",
+    "reservas.yurta2": "Canelón Yurt",
+    "reservas.personas": "2 people",
+    "reservas.sync": "Synced",
+    "reservas.leyenda.libre": "Available",
+    "reservas.leyenda.ocupado": "Booked",
+    "reservas.leyenda.sel": "Selected",
+    "reservas.llegada": "Arrival",
+    "reservas.salida": "Departure",
+    "reservas.noches": "Nights",
+    "reservas.form.eyebrow": "— Booking request",
+    "reservas.form.nombre": "Full name *",
+    "reservas.form.nombre.ph": "Your name",
+    "reservas.form.email": "Email *",
+    "reservas.form.email.ph": "you@email.com",
+    "reservas.form.whatsapp": "WhatsApp / Phone",
+    "reservas.form.personas": "Number of guests",
+    "reservas.form.personas.sel": "Select",
+    "reservas.form.personas.1": "1 person",
+    "reservas.form.personas.2": "2 people",
+    "reservas.form.personas.3": "3–4 people (2 yurts)",
+    "reservas.form.yurta": "Selected yurt",
+    "reservas.form.yurta.ph": "Choose a yurt →",
+    "reservas.form.noches": "Number of nights",
+    "reservas.form.llegada": "Arrival date",
+    "reservas.form.llegada.ph": "Select on the calendar",
+    "reservas.form.salida": "Departure date",
+    "reservas.form.pago": "Payment method for the deposit",
+    "reservas.form.mensaje": "Message",
+    "reservas.form.mensaje.ph": "Tell us about your visit, questions or anything you need to know…",
+    "reservas.form.submit": "Send booking",
+    "reservas.form.note": "We reply in less than 24 hours by email or WhatsApp.",
+    "reservas.pago.t": "Deposit to confirm booking",
+    "reservas.pago.p": "To confirm your booking, a <strong>50% deposit in advance</strong> is required. The remaining balance is paid at check-in. Once we receive your request, we will send you the amount and the corresponding payment link.",
+    "reservas.pago.nota": "You can indicate your preferred method in the message or select it above, before sending the request.",
+    "reservas.success": "Thank you for your booking! We will reply soon to confirm availability.",
+
+    // CONTACTO
+    "contacto.eyebrow": "— Contact",
+    "contacto.title": "Let's talk",
+
+    // CARRITO
+    "carrito.t": "🛒 Your Cart",
+    "carrito.vacio": "Your cart is empty",
+    "carrito.total": "Total:",
+    "carrito.enviar": "Send order by email",
+
+    // FOOTER
+    "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
+  }
+};
+
+let idiomaActual = localStorage.getItem('timbo_idioma') || 'es';
+
+function t(key) {
+  return TRADUCCIONES[idiomaActual]?.[key] || TRADUCCIONES.es[key] || key;
+}
+
+function aplicarIdioma(lang) {
+  idiomaActual = lang;
+  localStorage.setItem('timbo_idioma', lang);
+
+  document.documentElement.lang = lang;
+
+  // Actualizar todos los elementos con data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const translation = t(key);
+    if (translation) el.innerHTML = translation;
+  });
+
+  // Actualizar placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const translation = t(key);
+    if (translation) el.placeholder = translation;
+  });
+
+  // Actualizar el botón del selector
+  const langBtn = document.getElementById('navLangCurrent');
+  if (langBtn) langBtn.textContent = lang.toUpperCase();
+
+  // Actualizar opciones activas del menú
+  document.querySelectorAll('.nav-lang-opt').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Re-renderizar componentes dinámicos
+  if (typeof renderEventos === 'function') renderEventos('todos');
+  if (typeof renderizarProductos === 'function') renderizarProductos();
+  if (typeof actualizarCarrito === 'function') actualizarCarrito();
+  if (typeof renderCalendario === 'function') renderCalendario();
+
+  // Cerrar menú
+  document.getElementById('navLang')?.classList.remove('open');
+}
+
+function initLangSelector() {
+  const langWrapper = document.getElementById('navLang');
+  const langBtn = document.getElementById('navLangBtn');
+  const langMenu = document.getElementById('navLangMenu');
+  if (!langWrapper || !langBtn || !langMenu) return;
+
+  // Toggle del menú
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langWrapper.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', langWrapper.classList.contains('open'));
+  });
+
+  // Selección de idioma
+  langMenu.querySelectorAll('.nav-lang-opt').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      aplicarIdioma(btn.dataset.lang);
+    });
+  });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    if (!langWrapper.contains(e.target)) {
+      langWrapper.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') langWrapper.classList.remove('open');
+  });
+
+  // Aplicar idioma guardado
+  aplicarIdioma(idiomaActual);
+}
+
+// Iniciar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', initLangSelector);

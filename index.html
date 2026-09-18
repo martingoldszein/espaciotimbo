@@ -15,7 +15,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
   <!-- SEO básico -->
   <title>Espacio Timbó | Glamping Regenerativo en Santa Ana, Colonia, Uruguay</title>
   <meta name="description"
@@ -31,7 +30,7 @@
   <link rel="alternate" hreflang="en" href="https://espaciotimbo.netlify.app/index_es.html">
   <link rel="alternate" hreflang="x-default" href="https://espaciotimbo.netlify.app/index.html">
 
-  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Espacio Timbó | Glamping Regenerativo en Santa Ana, Colonia, Uruguay">
   <meta property="og:description"
@@ -49,10 +48,7 @@
     content="Alojamiento en yurtas, permacultura, bioconstrucción y talleres de eco-educación frente al río y la playa.">
   <meta name="twitter:image" content="https://espaciotimbo.netlify.app/assets/images/espacio.jpg">
 
-  <!-- Verificación de Google Search Console: reemplazar CONTENT-AQUI por el código que te da Search Console -->
-  <!-- <meta name="google-site-verification" content="CONTENT-AQUI"> -->
-
-  <!-- Datos estructurados (Google) -->
+  <!-- Datos estructurados -->
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,11 +72,6 @@
   ]
 }
 </script>
-  <title>Espacio Timbó</title>
-
-
-
-
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +81,6 @@
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
@@ -106,22 +96,37 @@
     </a>
 
     <ul>
-      <li><a href="#que-es">El Proyecto</a></li>
-      <li><a href="#glamping">Glamping</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#talleres">Talleres</a></li>
-      <li><a href="#catalogo">Catalogo</a></li>
-      <li><a href="#quienes">Quiénes somos</a></li>
-      <li><a href="#reservas" class="nav-reservar">Reservar</a></li>
+      <li><a href="#que-es" data-i18n="nav.proyecto">El Proyecto</a></li>
+      <li><a href="#glamping" data-i18n="nav.glamping">Glamping</a></li>
+      <li><a href="#servicios" data-i18n="nav.servicios">Servicios</a></li>
+      <li><a href="#talleres" data-i18n="nav.talleres">Talleres</a></li>
+      <li><a href="#catalogo" data-i18n="nav.catalogo">Catálogo</a></li>
+      <li><a href="#quienes" data-i18n="nav.quienes">Quiénes somos</a></li>
+      <li><a href="#reservas" class="nav-reservar" data-i18n="nav.reservar">Reservar</a></li>
     </ul>
 
-    <!-- Contenedor para íconos de la derecha (carrito + hamburguesa) -->
+    <!-- Contenedor para íconos de la derecha (idioma + carrito + hamburguesa) -->
     <div class="nav-actions">
+
+      <!-- Selector de idioma -->
+      <div class="nav-lang" id="navLang">
+        <button class="nav-lang-btn" id="navLangBtn" aria-label="Cambiar idioma" aria-expanded="false">
+          <i class="fas fa-globe"></i>
+          <span id="navLangCurrent">ES</span>
+          <i class="fas fa-chevron-down nav-lang-arrow"></i>
+        </button>
+        <ul class="nav-lang-menu" id="navLangMenu">
+          <li><button data-lang="es" class="nav-lang-opt active">🇪🇸 Español</button></li>
+          <li><button data-lang="en" class="nav-lang-opt">🇬🇧 English</button></li>
+        </ul>
+      </div>
+
       <!-- Ícono del carrito -->
       <a href="#" class="nav-carrito" onclick="toggleCarrito(event)" aria-label="Abrir carrito">
         <i class="fas fa-shopping-cart"></i>
         <span class="nav-carrito-count" id="nav-carrito-count">0</span>
       </a>
+
       <!-- Botón hamburguesa -->
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -129,12 +134,10 @@
     </div>
   </nav>
 
-
-
   <!-- Panel del carrito -->
   <div class="carrito-panel-header" id="carrito-panel-header" hidden>
     <div class="carrito-header-panel">
-      <h3>🛒 Tu Carrito</h3>
+      <h3 data-i18n="carrito.t">🛒 Tu Carrito</h3>
       <div class="carrito-acciones-header">
         <button class="carrito-vaciar" onclick="vaciarCarrito()" title="Vaciar carrito">
           <i class="fas fa-trash-alt"></i>
@@ -143,20 +146,19 @@
       </div>
     </div>
     <div class="carrito-lista" id="carrito-lista-header">
-      <p class="carrito-vacio">El carrito está vacío</p>
+      <p class="carrito-vacio" data-i18n="carrito.vacio">El carrito está vacío</p>
     </div>
     <div class="carrito-footer">
       <div class="carrito-total">
-        <span>Total:</span>
+        <span data-i18n="carrito.total">Total:</span>
         <span class="carrito-total-monto" id="carrito-total-monto-header">$0</span>
       </div>
       <button class="btn-submit" onclick="enviarPedido()">
-        <i class="fas fa-envelope"></i> Enviar pedido por email
+        <i class="fas fa-envelope"></i> <span data-i18n="carrito.enviar">Enviar pedido por email</span>
       </button>
     </div>
   </div>
 
-  <!-- DESPLIEGUE EXITOSO - 22 Julio 2026 -->
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-slides" aria-hidden="true">
@@ -166,19 +168,14 @@
       <div class="hero-slide hero-slide-4"></div>
       <div class="hero-slide hero-slide-5"></div>
       <div class="hero-slide hero-slide-6"></div>
-
-
-
-
-
-
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-quote">"Regenerar la tierra es también regenerar nuestra forma de habitarla."</p>
+      <p class="hero-quote" data-i18n="hero.quote">"Regenerar la tierra es también regenerar nuestra forma de
+        habitarla."</p>
       <div class="hero-cta">
-        <a href="#reservas" class="btn btn-primary">Reservar estadía</a>
-        <a href="#que-es" class="btn btn-outline">Conocer el proyecto</a>
+        <a href="#reservas" class="btn btn-primary" data-i18n="hero.cta1">Reservar estadía</a>
+        <a href="#que-es" class="btn btn-outline" data-i18n="hero.cta2">Conocer el proyecto</a>
       </div>
     </div>
   </section>
@@ -188,45 +185,46 @@
     <div class="que-es">
       <img class="que-es-img" src="assets/images/espacio.jpg" alt="Vista general Espacio Timbó" loading="lazy">
       <div class="que-es-text">
-        <p class="section-eyebrow">— Qué es</p>
-        <h2 class="section-title">Un proyecto<br><em>regenerativo</em></h2>
+        <p class="section-eyebrow" data-i18n="que.eyebrow">— Qué es</p>
+        <h2 class="section-title" data-i18n="que.title">Un proyecto<br><em>regenerativo</em></h2>
         <div class="divider"></div>
-        <p class="section-body">Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que
-          integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a
-          la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la
-          naturaleza.</p>
-        <p class="section-body section-body-spaced">Nuestro espacio está diseñado bajo principios de permacultura y
-          regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo
-          responsable de residuos y jardines que promueven la biodiversidad.</p>
-        <p class="section-body section-body-spaced">Cada elemento del lugar busca demostrar que es posible habitar de
-          manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.</p>
+        <p class="section-body" data-i18n="que.p1">Espacio Timbó es un proyecto regenerativo ubicado en la costa de
+          Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el
+          propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida
+          en armonía con la naturaleza.</p>
+        <p class="section-body section-body-spaced" data-i18n="que.p2">Nuestro espacio está diseñado bajo principios de
+          permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico,
+          manejo responsable de residuos y jardines que promueven la biodiversidad.</p>
+        <p class="section-body section-body-spaced" data-i18n="que.p3">Cada elemento del lugar busca demostrar que es
+          posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la
+          comunidad.</p>
       </div>
     </div>
   </section>
 
   <!-- FRASE -->
   <div class="frase-seccion">
-    <blockquote>"Ponemos la vida en el centro para regenerar el territorio que habitamos y el vínculo que tenemos con
-      él."</blockquote>
+    <blockquote data-i18n="frase">"Ponemos la vida en el centro para regenerar el territorio que habitamos y el vínculo
+      que tenemos con él."</blockquote>
   </div>
 
   <!-- GLAMPING -->
   <section id="glamping" class="section-cream">
     <div class="glamping">
       <div>
-        <p class="section-eyebrow">- Habitar la naturaleza</p>
-        <h2 class="section-title"> Glamping<br><em>Regenerativo</em></h2>
+        <p class="section-eyebrow" data-i18n="glamping.eyebrow">- Habitar la naturaleza</p>
+        <h2 class="section-title" data-i18n="glamping.title"> Glamping<br><em>Regenerativo</em></h2>
         <div class="divider"></div>
-        <p class="section-body">Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento
-          en yurtas construidas artesanalmente con materiales naturales y reciclables.</p>
-        <p class="section-body section-body-spaced">Contamos con dos yurtas equipadas con cocina y baño privado,
-          calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor
-          del fuego.</p>
-        <p class="section-body section-body-spaced">La experiencia incluye recorrer el bosque y el río de Santa Ana,
-          disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.
-        </p>
+        <p class="section-body" data-i18n="glamping.p1">Entre el bosque, el río y la playa de Santa Ana, ofrecemos
+          experiencias de alojamiento en yurtas construidas artesanalmente con materiales naturales y reciclables.</p>
+        <p class="section-body section-body-spaced" data-i18n="glamping.p2">Contamos con dos yurtas equipadas con cocina
+          y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y
+          compartir alrededor del fuego.</p>
+        <p class="section-body section-body-spaced" data-i18n="glamping.p3">La experiencia incluye recorrer el bosque y
+          el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de
+          prácticas regenerativas.</p>
         <div class="glamping-cta">
-          <a href="#reservas" class="btn btn-primary">Ver disponibilidad</a>
+          <a href="#reservas" class="btn btn-primary" data-i18n="glamping.cta">Ver disponibilidad</a>
         </div>
       </div>
       <div class="glamping-slideshow" aria-label="Galería automática de glamping">
@@ -246,17 +244,16 @@
     <div class="glamping-yurta-list">
       <article class="yurta-detail-card">
         <div class="yurta-detail-copy">
-
-          <h3 class="yurta-detail-title">Yurta Ceibo</h3>
-          <p class="yurta-detail-text">Una experiencia de alojamiento más abierta y luminosa, ideal para compartir
-            momentos de pausa y observación.</p>
-          <p class="yurta-detail-text">Su diseño favorece la ventilación, el descanso y el encuentro con el entorno
-            natural que la rodea.</p>
+          <h3 class="yurta-detail-title" data-i18n="glamping.yurta1.title">Yurta Ceibo</h3>
+          <p class="yurta-detail-text" data-i18n="glamping.yurta1.p1">Una experiencia de alojamiento más abierta y
+            luminosa, ideal para compartir momentos de pausa y observación.</p>
+          <p class="yurta-detail-text" data-i18n="glamping.yurta1.p2">Su diseño favorece la ventilación, el descanso y
+            el encuentro con el entorno natural que la rodea.</p>
           <ul class="yurta-detail-list">
-            <li>Diseño acogedor con ventilación natural</li>
-            <li>Zona de descanso y lectura en entorno tranquilo</li>
-            <li>Baño privado con atención al detalle</li>
-            <li>Vista al conjunto de huerta y bosque cercano</li>
+            <li data-i18n="glamping.yurta1.li1">Diseño acogedor con ventilación natural</li>
+            <li data-i18n="glamping.yurta1.li2">Zona de descanso y lectura en entorno tranquilo</li>
+            <li data-i18n="glamping.yurta1.li3">Baño privado con atención al detalle</li>
+            <li data-i18n="glamping.yurta1.li4">Vista al conjunto de huerta y bosque cercano</li>
           </ul>
         </div>
         <div class="yurta-detail-photo">
@@ -278,18 +275,19 @@
           </div>
         </div>
       </article>
+
       <article class="yurta-detail-card">
         <div class="yurta-detail-copy">
-          <h3 class="yurta-detail-title">Yurta Canelón</h3>
-          <p class="yurta-detail-text">Un refugio cálido y sereno pensado para dos personas, con un ritmo pausado y una
-            mirada hacia el bosque.</p>
-          <p class="yurta-detail-text">La propuesta combina descanso, lectura y conexión directa con la naturaleza desde
-            una base sencilla y elegante.</p>
+          <h3 class="yurta-detail-title" data-i18n="glamping.yurta2.title">Yurta Canelón</h3>
+          <p class="yurta-detail-text" data-i18n="glamping.yurta2.p1">Un refugio cálido y sereno pensado para dos
+            personas, con un ritmo pausado y una mirada hacia el bosque.</p>
+          <p class="yurta-detail-text" data-i18n="glamping.yurta2.p2">La propuesta combina descanso, lectura y conexión
+            directa con la naturaleza desde una base sencilla y elegante.</p>
           <ul class="yurta-detail-list">
-            <li>Cocina compacta con equipamiento esencial</li>
-            <li>Baño privado y calefacción para noches frescas</li>
-            <li>Espacio exterior para contemplar el paisaje</li>
-            <li>Ambiente íntimo para una estadía tranquila</li>
+            <li data-i18n="glamping.yurta2.li1">Cocina compacta con equipamiento esencial</li>
+            <li data-i18n="glamping.yurta2.li2">Baño privado y calefacción para noches frescas</li>
+            <li data-i18n="glamping.yurta2.li3">Espacio exterior para contemplar el paisaje</li>
+            <li data-i18n="glamping.yurta2.li4">Ambiente íntimo para una estadía tranquila</li>
           </ul>
         </div>
         <div class="yurta-detail-photo">
@@ -306,31 +304,7 @@
                 loading="lazy"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
                 loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelon 08"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon02.jpg" alt="Yurta Canelón 02"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
-                loading="lazy"></div>
-            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelón 08"
-                loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"
-                loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"
-                loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"
-                loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
-                loading="lazy"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelón 08"
-                loading="lazy"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon09.jpg" alt="Yurta Canelón 09"
                 loading="lazy"></div>
             <div class="yurta-slide-controls">
               <button type="button" class="yurta-slide-btn prev"><i
@@ -341,8 +315,6 @@
           </div>
         </div>
       </article>
-
-
     </div>
   </section>
 
@@ -350,24 +322,22 @@
   <section id="servicios" class="section-light">
     <div class="servicios-inner">
       <div class="servicios-header">
-        <p class="section-eyebrow">— Servicios & Experiencias</p>
-        <h2 class="section-title">Un espacio vivo de<br><em>aprendizaje y cultura</em></h2>
+        <p class="section-eyebrow" data-i18n="serv.eyebrow">— Servicios & Experiencias</p>
+        <h2 class="section-title" data-i18n="serv.title">Un espacio vivo de<br><em>aprendizaje y cultura</em></h2>
         <div class="divider"></div>
-        <p class="section-body">Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y
-          bienestar, fortaleciendo el vínculo entre las personas y el territorio.</p>
+        <p class="section-body" data-i18n="serv.p">Desarrollamos propuestas que integran naturaleza, regeneración,
+          aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.</p>
       </div>
       <div class="servicios-grid">
-
-        </article>
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder"></div>
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">01</div>
-            <h3 class="servicio-titulo">Talleres & Experiencias Regenerativas</h3>
-            <p class="servicio-desc">Talleres y recorridos vinculados a la permacultura, bioconstrucción, huerta
-              agroecológica, plantas medicinales y regeneración de ecosistemas.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.1.t">Talleres & Experiencias Regenerativas</h3>
+            <p class="servicio-desc" data-i18n="serv.1.d">Talleres y recorridos vinculados a la permacultura,
+              bioconstrucción, huerta agroecológica, plantas medicinales y regeneración de ecosistemas.</p>
           </div>
         </article>
         <article class="servicio-item">
@@ -376,21 +346,20 @@
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">02</div>
-            <h3 class="servicio-titulo">Actividades Culturales y Artísticas</h3>
-            <p class="servicio-desc">Encuentros culturales, exposiciones, conversatorios y talleres creativos que
-              fortalecen el tejido comunitario y el intercambio de saberes.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.2.t">Actividades Culturales y Artísticas</h3>
+            <p class="servicio-desc" data-i18n="serv.2.d">Encuentros culturales, exposiciones, conversatorios y talleres
+              creativos que fortalecen el tejido comunitario y el intercambio de saberes.</p>
           </div>
         </article>
-
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder"></div>
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">03</div>
-            <h3 class="servicio-titulo">Bosque-Huerta Agroecológica</h3>
-            <p class="servicio-desc">Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos
-              de economía local y consumo consciente.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.3.t">Bosque-Huerta Agroecológica</h3>
+            <p class="servicio-desc" data-i18n="serv.3.d">Espacio de encuentro con productos artesanales, alimentos
+              locales y emprendimientos de economía local y consumo consciente.</p>
           </div>
         </article>
         <article class="servicio-item">
@@ -399,9 +368,9 @@
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">04</div>
-            <h3 class="servicio-titulo">Voluntariado</h3>
-            <p class="servicio-desc">Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos
-              de economía local y consumo consciente.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.4.t">Voluntariado</h3>
+            <p class="servicio-desc" data-i18n="serv.4.d">Espacio de encuentro con productos artesanales, alimentos
+              locales y emprendimientos de economía local y consumo consciente.</p>
           </div>
         </article>
         <article class="servicio-item">
@@ -410,20 +379,9 @@
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">05</div>
-            <h3 class="servicio-titulo">Visitas guiadas</h3>
-            <p class="servicio-desc">Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos
-              de economía local y consumo consciente.</p>
-          </div>
-        </article>
-        <article class="servicio-item">
-          <div class="servicio-visual">
-            <div class="servicio-placeholder"></div>
-          </div>
-          <div class="servicio-content">
-            <div class="servicio-numero">05</div>
-            <h3 class="servicio-titulo">Café & Tienda Consciente</h3>
-            <p class="servicio-desc">Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos
-              de economía local y consumo consciente.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.5.t">Visitas guiadas</h3>
+            <p class="servicio-desc" data-i18n="serv.5.d">Espacio de encuentro con productos artesanales, alimentos
+              locales y emprendimientos de economía local y consumo consciente.</p>
           </div>
         </article>
         <article class="servicio-item">
@@ -432,9 +390,9 @@
           </div>
           <div class="servicio-content">
             <div class="servicio-numero">06</div>
-            <h3 class="servicio-titulo">Café & Tienda Consciente</h3>
-            <p class="servicio-desc">Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos
-              de economía local y consumo consciente.</p>
+            <h3 class="servicio-titulo" data-i18n="serv.6.t">Café & Tienda Consciente</h3>
+            <p class="servicio-desc" data-i18n="serv.6.d">Espacio de encuentro con productos artesanales, alimentos
+              locales y emprendimientos de economía local y consumo consciente.</p>
           </div>
         </article>
       </div>
@@ -455,50 +413,45 @@
     </div>
   </div>
 
-  <!-- TALLERES & EVENTOS -->
+  <!-- TALLERES -->
   <section id="talleres" class="talleres ">
     <div class="talleres-inner">
       <div class="talleres-header">
         <div>
-          <p class="section-eyebrow">— Talleres & Eventos</p>
-          <h2 class="section-title">Próximas<br><em>experiencias</em></h2>
+          <p class="section-eyebrow" data-i18n="tall.eyebrow">— Talleres & Eventos</p>
+          <h2 class="section-title" data-i18n="tall.title">Próximas<br><em>experiencias</em></h2>
           <div class="divider"></div>
-          <p class="section-body">Talleres, encuentros y experiencias para conectar con la tierra, los saberes y la
-            comunidad. Cupos limitados.</p>
+          <p class="section-body" data-i18n="tall.p">Talleres, encuentros y experiencias para conectar con la tierra,
+            los saberes y la comunidad. Cupos limitados.</p>
         </div>
         <div class="talleres-filtros" id="filtros">
-          <button class="filtro-btn active" data-filtro="todos" onclick="filtrarEventos('todos', this)">Todos</button>
-          <button class="filtro-btn" data-filtro="taller" onclick="filtrarEventos('taller', this)">Talleres</button>
-          <button class="filtro-btn" data-filtro="evento" onclick="filtrarEventos('evento', this)">Eventos</button>
-          <button class="filtro-btn" data-filtro="experiencia"
-            onclick="filtrarEventos('experiencia', this)">Experiencias</button>
+          <button class="filtro-btn active" data-filtro="todos" onclick="filtrarEventos('todos', this)"
+            data-i18n="tall.filtro.todos">Todos</button>
+          <button class="filtro-btn" data-filtro="taller" onclick="filtrarEventos('taller', this)"
+            data-i18n="tall.filtro.taller">Talleres</button>
+          <button class="filtro-btn" data-filtro="evento" onclick="filtrarEventos('evento', this)"
+            data-i18n="tall.filtro.evento">Eventos</button>
+          <button class="filtro-btn" data-filtro="experiencia" onclick="filtrarEventos('experiencia', this)"
+            data-i18n="tall.filtro.experiencia">Experiencias</button>
         </div>
       </div>
-      <div class="talleres-grid" id="talleres-grid">
-        <!-- Generado por JS -->
-      </div>
+      <div class="talleres-grid" id="talleres-grid"></div>
     </div>
   </section>
-  <!-- CATÁLOGO DE PRODUCTOS -->
-  <!-- CATÁLOGO DE PRODUCTOS -->
+
+  <!-- CATÁLOGO -->
   <section id="catalogo" class="section-light">
     <div class="catalogo-inner">
-
-      <!-- HEADER -->
       <div class="catalogo-header">
-        <p class="section-eyebrow">— Productos</p>
-        <h2 class="section-title">Nuestro<br><em>catálogo</em></h2>
+        <p class="section-eyebrow" data-i18n="cat.eyebrow">— Productos</p>
+        <h2 class="section-title" data-i18n="cat.title">Nuestro<br><em>catálogo</em></h2>
         <div class="divider"></div>
-        <p class="section-body">Productos elaborados con amor y respeto por la naturaleza. <br> Hechos a mano con
-          ingredientes naturales y procesos artesanales.</p>
+        <p class="section-body" data-i18n="cat.p">Productos elaborados con amor y respeto por la naturaleza. <br> Hechos
+          a mano con ingredientes naturales y procesos artesanales.</p>
       </div>
 
-      <!-- LAYOUT: 1 COL FILTROS + 3 COL PRODUCTOS -->
       <div class="catalogo-layout">
-
-        <!-- ═══ COLUMNA IZQUIERDA: FILTROS (STICKY) ═══ -->
         <aside class="catalogo-sidebar" id="catalogoSidebar">
-          <!-- Botón para abrir/cerrar en mobile -->
           <button class="catalogo-sidebar-toggle" id="catalogoSidebarToggle" aria-label="Mostrar filtros">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
               <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -509,90 +462,71 @@
           </button>
 
           <div class="catalogo-sidebar-inner" id="catalogoSidebarInner">
-
-            <!-- BUSCADOR -->
             <div class="filtro-bloque">
-              <label class="filtro-label" for="filtroTexto">Buscar:</label>
+              <label class="filtro-label" for="filtroTexto" data-i18n="cat.buscar">Buscar:</label>
               <div class="filtro-busqueda">
                 <svg class="filtro-busqueda__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2">
                   <circle cx="11" cy="11" r="8"></circle>
                   <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input type="text" id="filtroTexto" placeholder="Nombre o descripción..."
-                  aria-label="Buscar productos" />
+                <input type="text" id="filtroTexto" data-i18n-placeholder="cat.buscar.ph"
+                  placeholder="Nombre o descripción..." aria-label="Buscar productos" />
                 <button type="button" class="filtro-busqueda__clear" id="filtroLimpiar" aria-label="Limpiar búsqueda"
                   hidden>✕</button>
               </div>
             </div>
-            <!-- CATEGORÍAS (dropdown) -->
             <div class="filtro-bloque">
-              <label class="filtro-label" for="filtroCategoria">Categoría:</label>
+              <label class="filtro-label" for="filtroCategoria" data-i18n="cat.categoria">Categoría:</label>
               <div class="filtro-orden">
                 <select id="filtroCategoria">
-                  <option value="todos">Todas las categorías</option>
-                  <option value="aceites">Aceites</option>
-                  <option value="pomadas">Pomadas</option>
-                  <option value="jabones">Jabones</option>
-                  <option value="tinturas">Tinturas</option>
-                  <option value="sahunos">Sahúmos</option>
-                  <option value="hierbas">Hierbas Medicinales</option>
-                  <option value="semillas">Semillas y Plantines</option>
+                  <option value="todos" data-i18n="cat.cat.todos">Todas las categorías</option>
+                  <option value="aceites" data-i18n="cat.cat.aceites">Aceites</option>
+                  <option value="pomadas" data-i18n="cat.cat.pomadas">Pomadas</option>
+                  <option value="jabones" data-i18n="cat.cat.jabones">Jabones</option>
+                  <option value="tinturas" data-i18n="cat.cat.tinturas">Tinturas</option>
+                  <option value="sahunos" data-i18n="cat.cat.sahunos">Sahúmos</option>
+                  <option value="hierbas" data-i18n="cat.cat.hierbas">Hierbas Medicinales</option>
+                  <option value="semillas" data-i18n="cat.cat.semillas">Semillas y Plantines</option>
                 </select>
               </div>
             </div>
 
-            <!-- ORDEN -->
             <div class="filtro-bloque">
-              <label class="filtro-label" for="filtroOrden">Ordenar por:</label>
+              <label class="filtro-label" for="filtroOrden" data-i18n="cat.orden">Ordenar por:</label>
               <div class="filtro-orden">
                 <select id="filtroOrden">
-                  <option value="relevancia">Relevancia</option>
-                  <option value="nombre-asc">Nombre (A–Z)</option>
-                  <option value="nombre-desc">Nombre (Z–A)</option>
-                  <option value="precio-asc">Precio (menor a mayor)</option>
-                  <option value="precio-desc">Precio (mayor a menor)</option>
+                  <option value="relevancia" data-i18n="cat.orden.relevancia">Relevancia</option>
+                  <option value="nombre-asc" data-i18n="cat.orden.nombre-asc">Nombre (A–Z)</option>
+                  <option value="nombre-desc" data-i18n="cat.orden.nombre-desc">Nombre (Z–A)</option>
+                  <option value="precio-asc" data-i18n="cat.orden.precio-asc">Precio (menor a mayor)</option>
+                  <option value="precio-desc" data-i18n="cat.orden.precio-desc">Precio (mayor a menor)</option>
                 </select>
               </div>
             </div>
-
-
-
           </div>
           <div class="catalogo-meta">
-
-            <button type="button" id="catalogoReset" class="catalogo-reset" hidden>
-              Limpiar filtros
-            </button>
-            <span id="catalogoContador">Mostrando 0 productos</span>
+            <button type="button" id="catalogoReset" class="catalogo-reset" hidden data-i18n="cat.reset">Limpiar
+              filtros</button>
+            <span id="catalogoContador" data-i18n="cat.contador">Mostrando 0 productos</span>
           </div>
         </aside>
 
-        <!-- ═══ COLUMNA DERECHA: GRILLA DE PRODUCTOS ═══ -->
         <div class="catalogo-main">
-          <!-- CONTADOR + RESET -->
+          <div class="catalogo-grid" id="catalogo-grid"></div>
 
-          <!-- Grid de productos -->
-          <div class="catalogo-grid" id="catalogo-grid">
-            <!-- Generado por JS -->
-          </div>
-
-          <!-- Estado vacío -->
           <div class="catalogo-vacio" id="catalogoVacio" hidden>
             <p class="catalogo-vacio-icon">🔍</p>
-            <h3>No encontramos productos</h3>
-            <p>Probá con otros filtros o limpiá la búsqueda.</p>
-            <button type="button" class="catalogo-reset catalogo-reset--big" id="catalogoReset2">
-              Ver todos los productos
-            </button>
+            <h3 data-i18n="cat.vacio.t">No encontramos productos</h3>
+            <p data-i18n="cat.vacio.p">Probá con otros filtros o limpiá la búsqueda.</p>
+            <button type="button" class="catalogo-reset catalogo-reset--big" id="catalogoReset2"
+              data-i18n="cat.vacio.btn">Ver todos los productos</button>
           </div>
-
         </div>
-
       </div>
-
     </div>
   </section>
+
   <!-- PANEL DE ADMINISTRACIÓN -->
   <div id="adminPanel" class="admin-panel" hidden>
     <div class="admin-header">
@@ -631,9 +565,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="adminTableBody">
-          <!-- Generado por JS -->
-        </tbody>
+        <tbody id="adminTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -648,7 +580,6 @@
         </div>
         <form id="editForm" onsubmit="guardarProducto(event)">
           <input type="hidden" id="editId">
-
           <div class="edit-grid">
             <div class="edit-field">
               <label for="editNombre">Nombre *</label>
@@ -687,33 +618,31 @@
               <small class="edit-hint">Ejemplo: assets/images/productos/aceite-calendula.jpg</small>
             </div>
           </div>
-
           <div class="edit-actions">
             <button type="button" class="btn-secondary" onclick="cerrarEdit()">Cancelar</button>
-            <button type="submit" class="btn-submit">
-              <i class="fas fa-save"></i> Guardar Producto
-            </button>
+            <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Guardar Producto</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+
   <!-- QUIÉNES SOMOS -->
   <section id="quienes" class="section-cream">
     <div class="quienes-inner">
       <div class="quienes-top">
         <div>
-          <p class="section-eyebrow">— Quiénes somos</p>
-          <h2 class="section-title">Julia &<br><em>Martín</em></h2>
+          <p class="section-eyebrow" data-i18n="quienes.eyebrow">— Quiénes somos</p>
+          <h2 class="section-title" data-i18n="quienes.title">Julia &<br><em>Martín</em></h2>
           <div class="divider"></div>
-          <p class="section-body">Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo
-            de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado
-            nuestro tiempo y energía a diseñar, construir y cuidar este territorio.</p>
-          <p class="section-body section-body-spaced">Creemos en una forma de vida basada en la simplicidad, la
-            autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la
-            naturaleza.</p>
-          <p class="section-body section-body-quote">"Un proyecto de vida que nace del deseo de vivir en coherencia con
-            nuestros valores."</p>
+          <p class="section-body" data-i18n="quienes.p1">Espacio Timbó nació en 2019 como un proyecto de vida familiar
+            impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde
+            entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio.</p>
+          <p class="section-body section-body-spaced" data-i18n="quienes.p2">Creemos en una forma de vida basada en la
+            simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje
+            continuo junto a la naturaleza.</p>
+          <p class="section-body section-body-quote" data-i18n="quienes.quote">"Un proyecto de vida que nace del deseo
+            de vivir en coherencia con nuestros valores."</p>
         </div>
         <img class="quienes-foto" src="assets/images/quienes.jpg" alt="Julia y Martín">
       </div>
@@ -738,150 +667,120 @@
     </div>
   </section>
 
-  <!-- RESERVAS -->
-  <!-- SECCIÓN DE RESEÑAS DE AIRBNB -->
+  <!-- RESEÑAS -->
   <section class="resenas-airbnb">
     <div class="container-resenas">
-      <!-- Encabezado de la sección -->
       <div class="encabezado-resenas">
-        <p class="section-eyebrow">— Reseñas</p>
-        <h2 class="section-title"> Lo que dicen nuestros <br><em>huéspedes</em></h2>
+        <p class="section-eyebrow" data-i18n="res.eyebrow">— Reseñas</p>
+        <h2 class="section-title" data-i18n="res.title"> Lo que dicen nuestros <br><em>huéspedes</em></h2>
         <div class="divider"></div>
       </div>
-
-      <!-- Grid de reseñas -->
       <div class="grid-resenas">
-
-        <!-- RESEÑA 1 -->
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
-            <div class="info-huésped">
-              <span class="nombre">Ana</span>
-              <span class="fecha">Enero 2026</span>
-            </div>
+            <div class="info-huésped"><span class="nombre">Ana</span><span class="fecha">Enero 2026</span></div>
           </div>
-          <p class="texto-resena">
-            "La yurta es increíble, súper cómoda y en un entorno de paz total. Julia y Martín son unos anfitriones muy
-            atentos y generosos. La experiencia de desconexión y conexión con la naturaleza es única. ¡Volveremos!"
-          </p>
+          <p class="texto-resena">"La yurta es increíble, súper cómoda y en un entorno de paz total. Julia y Martín son
+            unos anfitriones muy atentos y generosos. La experiencia de desconexión y conexión con la naturaleza es
+            única. ¡Volveremos!"</p>
         </div>
-
-        <!-- RESEÑA 2 -->
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
-            <div class="info-huésped">
-              <span class="nombre">Carlos</span>
-              <span class="fecha">Diciembre 2025</span>
-            </div>
+            <div class="info-huésped"><span class="nombre">Carlos</span><span class="fecha">Diciembre 2025</span></div>
           </div>
-          <p class="texto-resena">
-            "Una experiencia regeneradora. El espacio está pensado con mucho cariño y respeto por el entorno.
-            Disfrutamos mucho de la huerta, el fogón y el silencio del bosque. Ideal para recargar energías."
-          </p>
+          <p class="texto-resena">"Una experiencia regeneradora. El espacio está pensado con mucho cariño y respeto por
+            el entorno. Disfrutamos mucho de la huerta, el fogón y el silencio del bosque. Ideal para recargar
+            energías."</p>
         </div>
-
-        <!-- RESEÑA 3 -->
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
-            <!-- Si no tienes foto de perfil, usa un placeholder -->
-            <div class="info-huésped">
-              <span class="nombre">Familia Pérez</span>
-              <span class="fecha">Noviembre 2025</span>
+            <div class="info-huésped"><span class="nombre">Familia Pérez</span><span class="fecha">Noviembre 2025</span>
             </div>
           </div>
-          <p class="texto-resena">
-            "Un lugar mágico. A nuestros hijos les encantó explorar el bosque y el río. Las yurtas están muy bien
-            equipadas y son muy acogedoras. Aprendimos mucho sobre permacultura. ¡Recomendadísimo!"
-          </p>
+          <p class="texto-resena">"Un lugar mágico. A nuestros hijos les encantó explorar el bosque y el río. Las yurtas
+            están muy bien equipadas y son muy acogedoras. Aprendimos mucho sobre permacultura. ¡Recomendadísimo!"</p>
         </div>
-
       </div>
-      <!-- Fin del grid -->
-
-      <!-- Enlace a Airbnb -->
       <div class="enlace-airbnb">
         <a href="https://es.airbnb.com/rooms/1267620632342788641" class="btn-submit" target="_blank"
-          rel="noopener noreferrer">
-          Ver todas las reseñas
-        </a>
+          rel="noopener noreferrer" data-i18n="res.btn">Ver todas las reseñas</a>
       </div>
     </div>
   </section>
+
+  <!-- RESERVAS -->
   <section id="reservas" class="reservas">
     <div class="reservas-inner">
       <div class="reserva-top">
         <div class="reservas-header">
-          <p class="section-eyebrow">— Reservas</p>
-          <h2 class="section-title">Planificá<br><em>tu experiencia</em></h2>
+          <p class="section-eyebrow" data-i18n="reservas.eyebrow">— Reservas</p>
+          <h2 class="section-title" data-i18n="reservas.title">Planificá<br><em>tu experiencia</em></h2>
           <div class="divider"></div>
           <div class="airbnb-info airbnb-info-spaced">
             <div class="airbnb-info-item">
-              <p class="airbnb-info-label">Check-in / Check-out</p>
+              <p class="airbnb-info-label" data-i18n="reservas.checkin">Check-in / Check-out</p>
               <p class="airbnb-info-value">14:00 / 11:00</p>
             </div>
             <div class="airbnb-info-item">
-              <p class="airbnb-info-label">Estadía mínima</p>
+              <p class="airbnb-info-label" data-i18n="reservas.min">Estadía mínima</p>
               <p class="airbnb-info-value">2 noches</p>
             </div>
           </div>
           <div class="divider"></div>
-          <p class="section-body">Verificá la disponibilidad de las yurtas y envianos tu solicitud.<br> Te respondemos
-            en menos de 24 horas.</p>
+          <p class="section-body" data-i18n="reservas.p">Verificá la disponibilidad de las yurtas y envianos tu
+            solicitud.<br> Te respondemos en menos de 24 horas.</p>
         </div>
 
-        <!-- COLUMNA DERECHA: Calendario -->
         <div class="reserva-cal-col">
-          <p class="ical-section-title">— Elegí tu yurta y fechas</p>
+          <p class="ical-section-title" data-i18n="reservas.yurta.eyebrow">— Elegí tu yurta y fechas</p>
 
-          <!-- Selector de yurta -->
           <div class="yurta-selector">
             <button class="yurta-btn active" id="btn-yurta1" onclick="seleccionarYurta(1)">
-              <span class="yurta-btn-name">Yurta Ceibo</span>
-              <span class="yurta-btn-cap">2 personas</span>
+              <span class="yurta-btn-name" data-i18n="reservas.yurta1">Yurta Ceibo</span>
+              <span class="yurta-btn-cap" data-i18n="reservas.personas">2 personas</span>
             </button>
             <button class="yurta-btn" id="btn-yurta2" onclick="seleccionarYurta(2)">
-              <span class="yurta-btn-name">Yurta Canelón</span>
-              <span class="yurta-btn-cap">2 personas</span>
+              <span class="yurta-btn-name" data-i18n="reservas.yurta2">Yurta Canelón</span>
+              <span class="yurta-btn-cap" data-i18n="reservas.personas">2 personas</span>
             </button>
           </div>
 
-          <!-- Calendario interactivo único -->
           <div class="calendario-widget calendario-widget-spaced">
             <div class="calendario-widget-header">
-              <span class="calendario-widget-name" id="cal-yurta-label">Yurta Ceibo</span>
+              <span class="calendario-widget-name" id="cal-yurta-label" data-i18n="reservas.yurta1">Yurta Ceibo</span>
               <div class="calendario-status">
                 <span class="calendario-status-dot"></span>
-                <span class="calendario-status-text">Sincronizado</span>
+                <span class="calendario-status-text" data-i18n="reservas.sync">Sincronizado</span>
               </div>
             </div>
             <div class="mini-calendar" id="cal-principal"></div>
             <div class="cal-leyenda">
               <div class="cal-leyenda-item">
-                <div class="cal-leyenda-dot libre"></div> Disponible
+                <div class="cal-leyenda-dot libre"></div> <span data-i18n="reservas.leyenda.libre">Disponible</span>
               </div>
               <div class="cal-leyenda-item">
-                <div class="cal-leyenda-dot ocupado"></div> Ocupado
+                <div class="cal-leyenda-dot ocupado"></div> <span data-i18n="reservas.leyenda.ocupado">Ocupado</span>
               </div>
               <div class="cal-leyenda-item">
-                <div class="cal-leyenda-dot seleccionado"></div> Seleccionado
+                <div class="cal-leyenda-dot seleccionado"></div> <span
+                  data-i18n="reservas.leyenda.sel">Seleccionado</span>
               </div>
             </div>
           </div>
 
-          <!-- Resumen de selección -->
           <div class="cal-resumen" id="cal-resumen">
             <div class="cal-resumen-item">
-              <span class="cal-resumen-label">Llegada</span>
+              <span class="cal-resumen-label" data-i18n="reservas.llegada">Llegada</span>
               <span class="cal-resumen-val" id="resumen-llegada">—</span>
             </div>
             <div class="cal-resumen-sep">→</div>
             <div class="cal-resumen-item">
-              <span class="cal-resumen-label">Salida</span>
+              <span class="cal-resumen-label" data-i18n="reservas.salida">Salida</span>
               <span class="cal-resumen-val" id="resumen-salida">—</span>
             </div>
             <div class="cal-resumen-sep">·</div>
             <div class="cal-resumen-item">
-              <span class="cal-resumen-label">Noches</span>
+              <span class="cal-resumen-label" data-i18n="reservas.noches">Noches</span>
               <span class="cal-resumen-val" id="resumen-noches">—</span>
             </div>
           </div>
@@ -889,56 +788,58 @@
         </div>
       </div>
 
-      <!-- Formulario debajo -->
       <div class="reserva-form-col">
-        <p class="ical-section-title">— Solicitud de reserva</p>
+        <p class="ical-section-title" data-i18n="reservas.form.eyebrow">— Solicitud de reserva</p>
         <form name="contacto" method="POST" netlify action="https://formtorch.com/f/pguw3euojn">
           <div class="reserva-form-layout">
             <div class="form-column">
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="nombre">Nombre completo *</label>
-                  <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                  <label for="nombre" data-i18n="reservas.form.nombre">Nombre completo *</label>
+                  <input type="text" id="nombre" name="nombre" data-i18n-placeholder="reservas.form.nombre.ph"
+                    placeholder="Tu nombre" required>
                 </div>
                 <div class="form-group">
-                  <label for="email">Correo electrónico *</label>
-                  <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                  <label for="email" data-i18n="reservas.form.email">Correo electrónico *</label>
+                  <input type="email" id="email" name="email" data-i18n-placeholder="reservas.form.email.ph"
+                    placeholder="tu@correo.com" required>
                 </div>
                 <div class="form-group">
-                  <label for="whatsapp">WhatsApp / Teléfono</label>
+                  <label for="whatsapp" data-i18n="reservas.form.whatsapp">WhatsApp / Teléfono</label>
                   <input type="tel" id="whatsapp" name="whatsapp" placeholder="+598 ··· ···">
                 </div>
                 <div class="form-group">
-                  <label for="personas">Cantidad de personas</label>
+                  <label for="personas" data-i18n="reservas.form.personas">Cantidad de personas</label>
                   <select id="personas" name="personas">
-                    <option value="">Seleccionar</option>
-                    <option value="1">1 persona</option>
-                    <option value="2">2 personas</option>
-                    <option value="3-4">3–4 personas (2 yurtas)</option>
+                    <option value="" data-i18n="reservas.form.personas.sel">Seleccionar</option>
+                    <option value="1" data-i18n="reservas.form.personas.1">1 persona</option>
+                    <option value="2" data-i18n="reservas.form.personas.2">2 personas</option>
+                    <option value="3-4" data-i18n="reservas.form.personas.3">3–4 personas (2 yurtas)</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label>Yurta seleccionada</label>
-                  <input type="text" id="display-yurta" placeholder="Elegí una yurta →" readonly class="input-readonly">
+                  <label data-i18n="reservas.form.yurta">Yurta seleccionada</label>
+                  <input type="text" id="display-yurta" data-i18n-placeholder="reservas.form.yurta.ph"
+                    placeholder="Elegí una yurta →" readonly class="input-readonly">
                   <input type="hidden" id="yurta" name="yurta">
                 </div>
                 <div class="form-group">
-                  <label>Cantidad de noches</label>
+                  <label data-i18n="reservas.form.noches">Cantidad de noches</label>
                   <input type="text" id="display-noches" name="noches" placeholder="—" readonly class="input-readonly">
                 </div>
                 <div class="form-group">
-                  <label>Fecha de llegada</label>
-                  <input type="text" id="display-llegada" placeholder="Seleccioná en el calendario" readonly
-                    class="input-readonly">
+                  <label data-i18n="reservas.form.llegada">Fecha de llegada</label>
+                  <input type="text" id="display-llegada" data-i18n-placeholder="reservas.form.llegada.ph"
+                    placeholder="Seleccioná en el calendario" readonly class="input-readonly">
                   <input type="hidden" id="llegada" name="llegada">
                 </div>
                 <div class="form-group">
-                  <label>Fecha de salida</label>
+                  <label data-i18n="reservas.form.salida">Fecha de salida</label>
                   <input type="text" id="display-salida" placeholder="—" readonly class="input-readonly">
                   <input type="hidden" id="salida" name="salida">
                 </div>
                 <div class="form-group full pago-form-group">
-                  <label>Método de pago para la seña</label>
+                  <label data-i18n="reservas.form.pago">Método de pago para la seña</label>
                   <div class="pago-form-buttons">
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'MercadoPago')"
                       aria-label="MercadoPago">
@@ -947,7 +848,6 @@
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'PREX')" aria-label="PREX">
                       <img class="pago-icon" src="assets/images/prex.png" alt="PREX" width="32" height="32">
                     </button>
-
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'PayPal')"
                       aria-label="PayPal">
                       <img class="pago-icon" src="assets/images/paypal.jpg" alt="PayPal" width="32" height="32">
@@ -956,15 +856,16 @@
                   <input type="hidden" id="metodo-pago" name="metodo_pago">
                 </div>
                 <div class="form-group full">
-                  <label for="mensaje">Mensaje</label>
-                  <textarea id="mensaje" name="mensaje"
+                  <label for="mensaje" data-i18n="reservas.form.mensaje">Mensaje</label>
+                  <textarea id="mensaje" name="mensaje" data-i18n-placeholder="reservas.form.mensaje.ph"
                     placeholder="Contanos sobre tu visita, preguntas o lo que necesites saber…" required></textarea>
                 </div>
               </div>
 
               <div class="form-submit">
-                <button type="submit" class="btn-submit">Enviar reserva</button>
-                <p class="form-note">Respondemos en menos de 24 horas por correo o WhatsApp.</p>
+                <button type="submit" class="btn-submit" data-i18n="reservas.form.submit">Enviar reserva</button>
+                <p class="form-note" data-i18n="reservas.form.note">Respondemos en menos de 24 horas por correo o
+                  WhatsApp.</p>
               </div>
             </div>
 
@@ -975,35 +876,32 @@
                     <rect x="1" y="4" width="22" height="16" rx="2" />
                     <line x1="1" y1="10" x2="23" y2="10" />
                   </svg>
-                  <span class="pago-header-txt">Seña para confirmar reserva</span>
+                  <span class="pago-header-txt" data-i18n="reservas.pago.t">Seña para confirmar reserva</span>
                 </div>
                 <div class="pago-body">
-                  <p class="pago-info">
-                    Para confirmar tu reserva se requiere abonar el <strong>50% del total por adelantado</strong>. El
-                    saldo restante se abona al momento del check-in. Una vez recibida tu consulta te enviamos el monto y
-                    el link de pago correspondiente.
+                  <p class="pago-info" data-i18n="reservas.pago.p">Para confirmar tu reserva se requiere abonar el
+                    <strong>50% del total por adelantado</strong>. El saldo restante se abona al momento del check-in.
+                    Una vez recibida tu consulta te enviamos el monto y el link de pago correspondiente.
                   </p>
-                  <p class="pago-nota">Podés indicar tu método preferido en el mensaje o seleccionarlo arriba, antes de
-                    enviar la solicitud.</p>
+                  <p class="pago-nota" data-i18n="reservas.pago.nota">Podés indicar tu método preferido en el mensaje o
+                    seleccionarlo arriba, antes de enviar la solicitud.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div id="form-success" class="form-success" hidden>
-            ¡Gracias por tu reserva! Te responderemos pronto para confirmar disponibilidad.
-          </div>
+          <div id="form-success" class="form-success" hidden data-i18n="reservas.success">¡Gracias por tu reserva! Te
+            responderemos pronto para confirmar disponibilidad.</div>
         </form>
       </div>
-
     </div>
   </section>
 
   <!-- CONTACTO -->
   <div class="contacto" id="contacto">
     <div class="contacto-left">
-      <p class="section-eyebrow">— Contacto</p>
-      <h2 class="section-title contacto-title">Hablemos</h2>
+      <p class="section-eyebrow" data-i18n="contacto.eyebrow">— Contacto</p>
+      <h2 class="section-title contacto-title" data-i18n="contacto.title">Hablemos</h2>
       <div class="divider"></div>
       <div class="contacto-datos">
         <a href="https://maps.app.goo.gl/pYwv2KDHUouxFxEA6" target="_blank" class="contacto-dato">
@@ -1044,8 +942,9 @@
   <!-- FOOTER -->
   <footer>
     <img src="assets/images/logo.png" alt="Logo de Espacio Timbó" class="logo" width="150">
-    <span class="copy">© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay</span>
+    <span class="copy" data-i18n="footer.copy">© 2026 Espacio Timbó · Santa Ana, Colonia, Uruguay</span>
   </footer>
+
   <!-- Modal de confirmación -->
   <div id="modalGracias" class="modal" hidden>
     <div class="modal-contenido">
@@ -1056,6 +955,7 @@
       <button id="cerrarModal" class="btn-modal">Cerrar</button>
     </div>
   </div>
+
   <script src="assets/js/scripts.js"></script>
   <a href="https://wa.me/59892328615?text=Hola%20Espacio%20Timb%C3%B3%2C%20quiero%20consultar%20por%20una%20estadia"
     class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp a Espacio Timbó">
