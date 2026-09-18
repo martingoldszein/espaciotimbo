@@ -1338,3 +1338,58 @@ if (sidebarToggle && sidebar) {
     sidebar.classList.toggle('is-open');
   });
 }
+/* ═══════════════════════════════════════════════════════════════
+   17. SCROLL SUAVE CON INERCIA (ESTILO NOHO.INK)
+   ═══════════════════════════════════════════════════════════════ */
+(function initLenisScroll() {
+  // Respetar accesibilidad
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  // Cargar Lenis desde CDN
+  const script = document.createElement('script');
+  script.src = 'https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js';
+  script.onload = () => {
+    const lenis = new Lenis({
+      duration: 1.4,          // Duración del "deslizamiento" (más alto = más lento/inercia)
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing exponencial
+      smoothWheel: true,      // Suaviza la rueda del mouse
+      wheelMultiplier: 1,     // Sensibilidad de la rueda
+      touchMultiplier: 2,     // Sensibilidad en táctil
+      infinite: false,
+      autoResize: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Exponer lenis globalmente (opcional, útil para anclas o scroll programático)
+    window.lenis = lenis;
+
+    // Integrar con los enlaces del nav para que el scroll sea suave también ahí
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -80 }); // -80 para compensar el header sticky
+      });
+    });
+
+    // Sincronizar con el scroll spy de IntersectionObserver (ya existente)
+    lenis.on('scroll', ({ scroll }) => {
+      // Actualiza el fondo del nav (ya lo hace tu código, pero lo reforzamos)
+      if (window.nav) {
+        window.nav.style.background = scroll > 60
+          ? 'rgba(242,234,216,0.97)'
+          : 'rgba(242,234,216,0.92)';
+      }
+    });
+  };
+  document.head.appendChild(script);
+})();
