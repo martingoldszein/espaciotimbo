@@ -2328,7 +2328,6 @@ footer nav ul a:hover {
   flex-direction: column;
   gap: 0.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--linea);
   font-family: "Inter", sans-serif;
   font-size: 0.78rem;
   color: var(--gris);
