@@ -1781,15 +1781,20 @@ function initLangSelector() {
   // Toggle del menú
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    langWrapper.classList.toggle('open');
-    langBtn.setAttribute('aria-expanded', langWrapper.classList.contains('open'));
+    e.preventDefault();
+    const isOpen = langWrapper.classList.toggle('open');
+    langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
   // Selección de idioma
   langMenu.querySelectorAll('.nav-lang-opt').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      aplicarIdioma(btn.dataset.lang);
+      e.preventDefault();
+      const lang = btn.dataset.lang;
+      langWrapper.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+      aplicarIdioma(lang);
     });
   });
 
@@ -1803,7 +1808,10 @@ function initLangSelector() {
 
   // Cerrar con ESC
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') langWrapper.classList.remove('open');
+    if (e.key === 'Escape') {
+      langWrapper.classList.remove('open');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 
   // ── Prioridad: URL > localStorage > español ──

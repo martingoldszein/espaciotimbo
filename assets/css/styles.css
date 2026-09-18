@@ -4111,3 +4111,107 @@ footer nav ul a:hover {
     right: 0;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   SELECTOR DE IDIOMA · AJUSTES PARA MÓVIL
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Base (desktop) — ya la tenés, pero la repito por si acaso */
+.nav-lang {
+  position: relative;
+  margin-right: 8px;
+  z-index: 1002; /* aseguramos que quede por encima del nav */
+}
+
+.nav-lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: #fff;
+  border: 1px solid rgba(33, 56, 69, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(33, 56, 69, 0.12);
+  padding: 6px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+  z-index: 1003; /* por encima del resto */
+  pointer-events: none; /* evita clics cuando está cerrado */
+}
+
+.nav-lang.open .nav-lang-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto; /* reactiva clics cuando está abierto */
+}
+
+/* ── AJUSTE MÓVIL ── */
+@media (max-width: 900px) {
+
+  /* El contenedor de acciones debe estar por encima del menú hamburguesa */
+  .nav-actions {
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* El botón del idioma: que sea táctil y cómodo */
+  .nav-lang-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+    min-height: 40px;
+    min-width: 56px;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* En móvil, el texto del idioma puede ir oculto para ahorrar espacio */
+  .nav-lang-btn #navLangCurrent {
+    display: inline-block;
+  }
+
+  /* El menú desplegable en móvil: alineado a la derecha del botón,
+     sin salirse de la pantalla */
+  .nav-lang-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: auto;
+    min-width: 180px;
+    max-width: calc(100vw - 24px);
+    z-index: 2000;
+  }
+
+  /* Botones del menú: más grandes para dedos */
+  .nav-lang-opt {
+    padding: 12px 14px;
+    font-size: 15px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Aseguramos que el nav entero no tape el menú */
+  #nav {
+    z-index: 1000;
+  }
+
+  /* Cuando el menú hamburguesa está abierto, el menú de idioma no debe
+     quedar detrás. Le damos un z-index aún más alto al wrapper. */
+  #nav.open .nav-lang {
+    z-index: 3000;
+  }
+
+  #nav.open .nav-lang-menu {
+    z-index: 3001;
+  }
+}
+
