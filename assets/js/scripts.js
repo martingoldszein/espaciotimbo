@@ -307,8 +307,8 @@ function renderEventos(filtro) {
 
   if (!items.length) {
     const msg = (filtro === 'todos' || TALLERES_EVENTOS.length === 0)
-      ? 'Por el momento no hay talleres ni eventos programados. Seguinos en Instagram para enterarte de las próximas actividades.'
-      : 'No hay actividades programadas en esta categoría por el momento.';
+      ? t('tall.empty')
+      : t('tall.empty.cat');
     grid.innerHTML = `<div class="talleres-empty">${msg}</div>`;
     return;
   }
@@ -681,8 +681,8 @@ function renderizarProductos() {
   // Contador
   if (contador) {
     contador.textContent = filtrados.length === 1
-      ? 'Mostrando 1 producto'
-      : `Mostrando ${filtrados.length} productos`;
+      ? t('cat.contador.1')
+      : t('cat.contador').replace('{n}', filtrados.length);
   }
 
   // Vacío
@@ -703,13 +703,13 @@ function renderizarProductos() {
   grid.innerHTML = filtrados.map(p => {
     const tieneStock = p.stock !== undefined ? p.stock : true;
     const stockClass = tieneStock ? '' : 'sin-stock';
-    const stockBadge = tieneStock ? '' : `<span class="badge-sin-stock">Sin stock</span>`;
+    const stockBadge = tieneStock ? '' : `<span class="badge-sin-stock">${t('cat.stock')}</span>`;
     const botonAgregar = tieneStock
       ? `<button class="btn-agregar" onclick="agregarAlCarrito(${p.id})">
-          <i class="fas fa-plus"></i> Agregar
+          <i class="fas fa-plus"></i> ${t('cat.agregar')}
         </button>`
       : `<button class="btn-agregar btn-sin-stock" disabled>
-          <i class="fas fa-times"></i> No disponible
+          <i class="fas fa-times"></i> ${t('cat.no.disponible')}
         </button>`;
 
     return `
@@ -819,7 +819,7 @@ function actualizarCarrito() {
   if (!lista || !totalEl) return;
 
   if (carrito.length === 0) {
-    lista.innerHTML = '<p class="carrito-vacio">El carrito está vacío</p>';
+    lista.innerHTML = `<p class="carrito-vacio">${t('carrito.vacio')}</p>`;
     totalEl.textContent = '$0';
     return;
   }
@@ -1300,24 +1300,20 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('🌿 Espacio Timbó · scripts.js cargado correctamente');
   console.log(`📦 ${(window.productos || []).length} productos en catálogo`);
 
-// Listener de categorías (dropdown)
-const selectCat = document.getElementById('filtroCategoria');
-if (selectCat) {
-  selectCat.addEventListener('change', function (e) {
-    filtros.categoria = e.target.value;
-    renderizarProductos();
+  // Listener de categorías (dropdown)
+  const selectCat = document.getElementById('filtroCategoria');
+  if (selectCat) {
+    selectCat.addEventListener('change', function (e) {
+      filtros.categoria = e.target.value;
+      renderizarProductos();
 
-    // Auto-cerrar sidebar en mobile
-    if (window.innerWidth <= 900) {
-      const sidebar = document.getElementById('catalogoSidebar');
-      if (sidebar) sidebar.classList.remove('is-open');
-    }
-  });
-}
-
-
-
-
+      // Auto-cerrar sidebar en mobile
+      if (window.innerWidth <= 900) {
+        const sidebar = document.getElementById('catalogoSidebar');
+        if (sidebar) sidebar.classList.remove('is-open');
+      }
+    });
+  }
 });
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1338,6 +1334,7 @@ if (sidebarToggle && sidebar) {
     sidebar.classList.toggle('is-open');
   });
 }
+
 /* ═══════════════════════════════════════════════════════════════
    17. SCROLL SUAVE CON INERCIA (VERSIÓN AJUSTADA)
    ═══════════════════════════════════════════════════════════════ */
@@ -1405,12 +1402,14 @@ if (sidebarToggle && sidebar) {
   };
   document.head.appendChild(script);
 })();
+
 /* ═══════════════════════════════════════════════════════════════
-   18. SISTEMA DE IDIOMAS (ES / EN)
+   18. SISTEMA DE IDIOMAS (ES / EN) — VERSIÓN CON URL
    ═══════════════════════════════════════════════════════════════ */
-const TRADUCCIONES = {
+
+// ⚠️ GLOBAL: fuera de IIFE para que aplicarIdioma sea accesible
+var TRADUCCIONES = {
   es: {
-    // NAV
     "nav.proyecto": "El Proyecto",
     "nav.glamping": "Glamping",
     "nav.servicios": "Servicios",
@@ -1418,25 +1417,17 @@ const TRADUCCIONES = {
     "nav.catalogo": "Catálogo",
     "nav.quienes": "Quiénes somos",
     "nav.reservar": "Reservar",
-
-    // HERO
     "hero.quote": '"Regenerar la tierra es también regenerar nuestra forma de habitarla."',
     "hero.cta1": "Reservar estadía",
     "hero.cta2": "Conocer el proyecto",
-
-    // QUÉ ES
     "que.eyebrow": "— Qué es",
     "que.title": "Un proyecto<br><em>regenerativo</em>",
     "que.p1": "Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la naturaleza.",
     "que.p2": "Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad.",
     "que.p3": "Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.",
-
-    // FRASE
     "frase": '"Ponemos la vida en el centro para regenerar el territorio que habitamos y el vínculo que tenemos con él."',
-
-    // GLAMPING
-    "glamping.eyebrow": "— Habitar la naturaleza",
-    "glamping.title": "Glamping<br><em>Regenerativo</em>",
+    "glamping.eyebrow": "- Habitar la naturaleza",
+    "glamping.title": " Glamping<br><em>Regenerativo</em>",
     "glamping.p1": "Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento en yurtas construidas artesanalmente con materiales naturales y reciclables.",
     "glamping.p2": "Contamos con dos yurtas equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.",
     "glamping.p3": "La experiencia incluye recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.",
@@ -1455,8 +1446,6 @@ const TRADUCCIONES = {
     "glamping.yurta2.li2": "Baño privado y calefacción para noches frescas",
     "glamping.yurta2.li3": "Espacio exterior para contemplar el paisaje",
     "glamping.yurta2.li4": "Ambiente íntimo para una estadía tranquila",
-
-    // SERVICIOS
     "serv.eyebrow": "— Servicios & Experiencias",
     "serv.title": "Un espacio vivo de<br><em>aprendizaje y cultura</em>",
     "serv.p": "Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.",
@@ -1472,8 +1461,6 @@ const TRADUCCIONES = {
     "serv.5.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
     "serv.6.t": "Café & Tienda Consciente",
     "serv.6.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
-
-    // TALLERES
     "tall.eyebrow": "— Talleres & Eventos",
     "tall.title": "Próximas<br><em>experiencias</em>",
     "tall.p": "Talleres, encuentros y experiencias para conectar con la tierra, los saberes y la comunidad. Cupos limitados.",
@@ -1483,8 +1470,6 @@ const TRADUCCIONES = {
     "tall.filtro.experiencia": "Experiencias",
     "tall.empty": "Por el momento no hay talleres ni eventos programados. Seguinos en Instagram para enterarte de las próximas actividades.",
     "tall.empty.cat": "No hay actividades programadas en esta categoría por el momento.",
-
-    // CATÁLOGO
     "cat.eyebrow": "— Productos",
     "cat.title": "Nuestro<br><em>catálogo</em>",
     "cat.p": "Productos elaborados con amor y respeto por la naturaleza. <br> Hechos a mano con ingredientes naturales y procesos artesanales.",
@@ -1514,20 +1499,14 @@ const TRADUCCIONES = {
     "cat.stock": "Sin stock",
     "cat.agregar": "Agregar",
     "cat.no.disponible": "No disponible",
-
-    // QUIÉNES SOMOS
     "quienes.eyebrow": "— Quiénes somos",
     "quienes.title": "Julia &<br><em>Martín</em>",
     "quienes.p1": "Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio.",
     "quienes.p2": "Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza.",
     "quienes.quote": '"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."',
-
-    // RESEÑAS
     "res.eyebrow": "— Reseñas",
-    "res.title": "Lo que dicen nuestros<br><em>huéspedes</em>",
+    "res.title": " Lo que dicen nuestros <br><em>huéspedes</em>",
     "res.btn": "Ver todas las reseñas",
-
-    // RESERVAS
     "reservas.eyebrow": "— Reservas",
     "reservas.title": "Planificá<br><em>tu experiencia</em>",
     "reservas.checkin": "Check-in / Check-out",
@@ -1570,23 +1549,15 @@ const TRADUCCIONES = {
     "reservas.pago.p": "Para confirmar tu reserva se requiere abonar el <strong>50% del total por adelantado</strong>. El saldo restante se abona al momento del check-in. Una vez recibida tu consulta te enviamos el monto y el link de pago correspondiente.",
     "reservas.pago.nota": "Podés indicar tu método preferido en el mensaje o seleccionarlo arriba, antes de enviar la solicitud.",
     "reservas.success": "¡Gracias por tu reserva! Te responderemos pronto para confirmar disponibilidad.",
-
-    // CONTACTO
     "contacto.eyebrow": "— Contacto",
     "contacto.title": "Hablemos",
-
-    // CARRITO
     "carrito.t": "🛒 Tu Carrito",
     "carrito.vacio": "El carrito está vacío",
     "carrito.total": "Total:",
     "carrito.enviar": "Enviar pedido por email",
-
-    // FOOTER
     "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
   },
-
   en: {
-    // NAV
     "nav.proyecto": "The Project",
     "nav.glamping": "Glamping",
     "nav.servicios": "Services",
@@ -1594,23 +1565,15 @@ const TRADUCCIONES = {
     "nav.catalogo": "Catalog",
     "nav.quienes": "About us",
     "nav.reservar": "Book now",
-
-    // HERO
     "hero.quote": '"Regenerating the land is also regenerating the way we inhabit it."',
     "hero.cta1": "Book your stay",
     "hero.cta2": "Discover the project",
-
-    // QUÉ ES
     "que.eyebrow": "— What is it",
     "que.title": "A <em>regenerative</em><br>project",
     "que.p1": "Espacio Timbó is a regenerative project located on the coast of Colonia, Uruguay, that integrates lodging, education, art, permaculture and ecological design. It was born with the purpose of contributing to the ecosocial regeneration of the territory we inhabit, promoting ways of life in harmony with nature.",
     "que.p2": "Our space is designed under permaculture and regeneration principles, incorporating natural building, organic farming, ecological sanitation systems, responsible waste management and gardens that promote biodiversity.",
     "que.p3": "Every element of the place seeks to demonstrate that it is possible to inhabit consciously, reducing impacts and generating benefits for the land and the community.",
-
-    // FRASE
     "frase": '"We put life at the center to regenerate the territory we inhabit and the bond we have with it."',
-
-    // GLAMPING
     "glamping.eyebrow": "— Inhabiting nature",
     "glamping.title": "Regenerative<br><em>Glamping</em>",
     "glamping.p1": "Between the forest, the river and Santa Ana beach, we offer lodging experiences in yurts handcrafted with natural and recyclable materials.",
@@ -1631,8 +1594,6 @@ const TRADUCCIONES = {
     "glamping.yurta2.li2": "Private bathroom and heating for cool nights",
     "glamping.yurta2.li3": "Outdoor space to contemplate the landscape",
     "glamping.yurta2.li4": "Intimate atmosphere for a quiet stay",
-
-    // SERVICIOS
     "serv.eyebrow": "— Services & Experiences",
     "serv.title": "A living space of<br><em>learning and culture</em>",
     "serv.p": "We develop proposals that integrate nature, regeneration, learning, culture and well-being, strengthening the bond between people and the territory.",
@@ -1648,8 +1609,6 @@ const TRADUCCIONES = {
     "serv.5.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
     "serv.6.t": "Conscious Café & Shop",
     "serv.6.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
-
-    // TALLERES
     "tall.eyebrow": "— Workshops & Events",
     "tall.title": "Upcoming<br><em>experiences</em>",
     "tall.p": "Workshops, gatherings and experiences to connect with the land, knowledge and community. Limited spots.",
@@ -1659,8 +1618,6 @@ const TRADUCCIONES = {
     "tall.filtro.experiencia": "Experiences",
     "tall.empty": "There are no workshops or events scheduled at the moment. Follow us on Instagram to find out about upcoming activities.",
     "tall.empty.cat": "No activities scheduled in this category at the moment.",
-
-    // CATÁLOGO
     "cat.eyebrow": "— Products",
     "cat.title": "Our<br><em>catalog</em>",
     "cat.p": "Products made with love and respect for nature. <br> Handmade with natural ingredients and artisanal processes.",
@@ -1690,20 +1647,14 @@ const TRADUCCIONES = {
     "cat.stock": "Out of stock",
     "cat.agregar": "Add",
     "cat.no.disponible": "Not available",
-
-    // QUIÉNES SOMOS
     "quienes.eyebrow": "— About us",
     "quienes.title": "Julia &<br><em>Martín</em>",
     "quienes.p1": "Espacio Timbó was born in 2019 as a family life project driven by the desire to find more conscious and regenerative ways of inhabiting the world. Since then, we have dedicated our time and energy to designing, building and caring for this territory.",
     "quienes.p2": "We believe in a way of life based on simplicity, self-sufficiency, the recovery of traditional knowledge and crafts, and continuous learning alongside nature.",
     "quienes.quote": '"A life project born from the desire to live in coherence with our values."',
-
-    // RESEÑAS
     "res.eyebrow": "— Reviews",
     "res.title": "What our<br><em>guests</em> say",
     "res.btn": "See all reviews",
-
-    // RESERVAS
     "reservas.eyebrow": "— Bookings",
     "reservas.title": "Plan<br><em>your experience</em>",
     "reservas.checkin": "Check-in / Check-out",
@@ -1746,26 +1697,27 @@ const TRADUCCIONES = {
     "reservas.pago.p": "To confirm your booking, a <strong>50% deposit in advance</strong> is required. The remaining balance is paid at check-in. Once we receive your request, we will send you the amount and the corresponding payment link.",
     "reservas.pago.nota": "You can indicate your preferred method in the message or select it above, before sending the request.",
     "reservas.success": "Thank you for your booking! We will reply soon to confirm availability.",
-
-    // CONTACTO
     "contacto.eyebrow": "— Contact",
     "contacto.title": "Let's talk",
-
-    // CARRITO
     "carrito.t": "🛒 Your Cart",
     "carrito.vacio": "Your cart is empty",
     "carrito.total": "Total:",
     "carrito.enviar": "Send order by email",
-
-    // FOOTER
     "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
   }
 };
 
-let idiomaActual = localStorage.getItem('timbo_idioma') || 'es';
+var idiomaActual = localStorage.getItem('timbo_idioma') || 'es';
 
 function t(key) {
-  return TRADUCCIONES[idiomaActual]?.[key] || TRADUCCIONES.es[key] || key;
+  return (TRADUCCIONES[idiomaActual] && TRADUCCIONES[idiomaActual][key]) || TRADUCCIONES.es[key] || key;
+}
+
+function detectarIdiomaPorURL() {
+  const path = window.location.pathname;
+  if (path.startsWith('/en')) return 'en';
+  if (path.startsWith('/es')) return 'es';
+  return null;
 }
 
 function aplicarIdioma(lang) {
@@ -1773,6 +1725,18 @@ function aplicarIdioma(lang) {
   localStorage.setItem('timbo_idioma', lang);
 
   document.documentElement.lang = lang;
+
+  // Cambiar la URL para que sea compartible
+  let basePath = window.location.pathname
+    .replace(/\/en\/?$/, '')
+    .replace(/\/es\/?$/, '')
+    .replace(/\/$/, ''); // quitar slash final si quedó uno
+
+  const newPath = lang === 'en' ? `${basePath}/en` : (basePath || '/');
+
+  if (window.location.pathname !== newPath) {
+    window.history.pushState({ lang }, '', newPath);
+  }
 
   // Actualizar todos los elementos con data-i18n
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1804,7 +1768,8 @@ function aplicarIdioma(lang) {
   if (typeof renderCalendario === 'function') renderCalendario();
 
   // Cerrar menú
-  document.getElementById('navLang')?.classList.remove('open');
+  const langWrapper = document.getElementById('navLang');
+  if (langWrapper) langWrapper.classList.remove('open');
 }
 
 function initLangSelector() {
@@ -1841,9 +1806,23 @@ function initLangSelector() {
     if (e.key === 'Escape') langWrapper.classList.remove('open');
   });
 
-  // Aplicar idioma guardado
-  aplicarIdioma(idiomaActual);
+  // ── Prioridad: URL > localStorage > español ──
+  const urlLang = detectarIdiomaPorURL();
+  const langFinal = urlLang || localStorage.getItem('timbo_idioma') || 'es';
+  aplicarIdioma(langFinal);
+
+  // ── Manejar botón "atrás" del navegador ──
+  window.addEventListener('popstate', () => {
+    const urlLang = detectarIdiomaPorURL();
+    if (urlLang) aplicarIdioma(urlLang);
+  });
 }
+
+// Exponer globalmente por si se llama desde HTML
+window.aplicarIdioma = aplicarIdioma;
+window.t = t;
+window.initLangSelector = initLangSelector;
+window.detectarIdiomaPorURL = detectarIdiomaPorURL;
 
 // Iniciar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', initLangSelector);
