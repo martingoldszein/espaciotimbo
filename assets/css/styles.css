@@ -2807,7 +2807,52 @@ footer nav ul a:hover {
   padding: 0.7rem;
   font-size: 0.9rem;
 }
+/* ═══════════════════════════════════════════════════════════════
+   CARRITO · CAMPOS DE CONTACTO
+   ═══════════════════════════════════════════════════════════════ */
+.carrito-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(33, 56, 69, 0.1);
+}
 
+.carrito-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.carrito-dato label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #213845;
+  letter-spacing: 0.02em;
+}
+
+.carrito-dato input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(33, 56, 69, 0.18);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  background: #fff;
+  color: #213845;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carrito-dato input:focus {
+  outline: none;
+  border-color: #E39881;
+  box-shadow: 0 0 0 3px rgba(227, 152, 129, 0.15);
+}
+
+.carrito-dato input::placeholder {
+  color: rgba(33, 56, 69, 0.4);
+}
 /* Notificación */
 .notificacion {
   position: fixed;

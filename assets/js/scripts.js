@@ -863,6 +863,34 @@ function enviarPedido() {
     return;
   }
 
+  const nombre  = (document.getElementById('carrito-nombre')?.value || '').trim();
+  const email   = (document.getElementById('carrito-email')?.value || '').trim();
+  const celular = (document.getElementById('carrito-celular')?.value || '').trim();
+
+  // Validación básica
+  if (!nombre) {
+    mostrarNotificacion('⚠️ Por favor, ingresá tu nombre y apellido');
+    document.getElementById('carrito-nombre')?.focus();
+    return;
+  }
+  if (!email) {
+    mostrarNotificacion('⚠️ Por favor, ingresá tu email');
+    document.getElementById('carrito-email')?.focus();
+    return;
+  }
+  // Validación simple de email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    mostrarNotificacion('⚠️ El email no parece válido');
+    document.getElementById('carrito-email')?.focus();
+    return;
+  }
+  if (!celular) {
+    mostrarNotificacion('⚠️ Por favor, ingresá tu celular');
+    document.getElementById('carrito-celular')?.focus();
+    return;
+  }
+
   let mensaje = '📦 NUEVO PEDIDO - ESPACIO TIMBÓ\n';
   mensaje += '═'.repeat(40) + '\n\n';
   mensaje += '🔹 PRODUCTOS SOLICITADOS:\n';
@@ -879,9 +907,9 @@ function enviarPedido() {
   mensaje += `💰 TOTAL DEL PEDIDO: $${calcularTotal()}\n\n`;
   mensaje += '═'.repeat(40) + '\n';
   mensaje += '📋 DATOS DE CONTACTO:\n';
-  mensaje += '  • Nombre completo: \n';
-  mensaje += '  • Correo electrónico: \n';
-  mensaje += '  • Teléfono/WhatsApp: \n';
+  mensaje += `  • Nombre y apellido: ${nombre}\n`;
+  mensaje += `  • Email: ${email}\n`;
+  mensaje += `  • Celular: ${celular}\n`;
   mensaje += '  • Método de pago preferido: \n\n';
   mensaje += '📝 OBSERVACIONES:\n  • \n\n';
   mensaje += '═'.repeat(40) + '\n';
@@ -892,9 +920,9 @@ function enviarPedido() {
 
   const asunto = encodeURIComponent('📦 Nuevo pedido de productos - Espacio Timbó');
   const cuerpo = encodeURIComponent(mensaje);
-  const email = 'espaciotimbo.uy@gmail.com';
+  const emailDestino = 'espaciotimbo.uy@gmail.com';
 
-  window.location.href = `mailto:${email}?subject=${asunto}&body=${cuerpo}`;
+  window.location.href = `mailto:${emailDestino}?subject=${asunto}&body=${cuerpo}`;
 
   const panel = document.getElementById('carrito-panel-header');
   if (panel) panel.hidden = true;
