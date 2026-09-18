@@ -213,7 +213,7 @@ body {
 }
 .hamburger span {
   width: 22px;
-  height: 1.5px;
+  height: 2px;
   background: var(--bosque);
   display: block;
   transition: all 0.3s;
@@ -1830,7 +1830,7 @@ footer nav ul a:hover {
   .form-note,
   .contacto-dato,
   .section-body-quote {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     line-height: 1.45;
   }
   .section-title {

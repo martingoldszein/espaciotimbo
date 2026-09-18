@@ -77,9 +77,14 @@
 }
 </script>
   <title>Espacio Timbó</title>
+
+
+
+
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
+  <link rel="preload" as="font" type="font/woff2"
     href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -97,7 +102,7 @@
   <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="#">
-      <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150">
+      <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150" loading="lazy">
     </a>
 
     <ul>
@@ -181,7 +186,7 @@
   <!-- QUÉ ES -->
   <section id="que-es" class="section-light">
     <div class="que-es">
-      <img class="que-es-img" src="assets/images/espacio.jpg" alt="Vista general Espacio Timbó">
+      <img class="que-es-img" src="assets/images/espacio.jpg" alt="Vista general Espacio Timbó" loading="lazy">
       <div class="que-es-text">
         <p class="section-eyebrow">— Qué es</p>
         <h2 class="section-title">Un proyecto<br><em>regenerativo</em></h2>
@@ -225,15 +230,15 @@
         </div>
       </div>
       <div class="glamping-slideshow" aria-label="Galería automática de glamping">
-        <div class="glamping-slide is-active"><img class="glamping-img-wide" src="assets/images/h1.jpg"
+        <div class="glamping-slide is-active"><img class="glamping-img-wide" src="assets/images/h1.jpg" loading="lazy"
             alt="Huerta, yurta y jardín exterior"></div>
-        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h2.jpg"
+        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h2.jpg" loading="lazy"
             alt="Interior de la yurta con cocina y lectura"></div>
-        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h3.jpg"
+        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h3.jpg" loading="lazy"
             alt="Playa de Santa Ana al atardecer"></div>
-        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h4.jpg"
+        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h4.jpg" loading="lazy"
             alt="Talleres y eventos en Espacio Timbó"></div>
-        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h5.jpg"
+        <div class="glamping-slide"><img class="glamping-img-wide" src="assets/images/h5.jpg" loading="lazy"
             alt="Círculo de aprendizaje en yurta"></div>
       </div>
     </div>
@@ -289,15 +294,44 @@
         </div>
         <div class="yurta-detail-photo">
           <div class="yurta-slideshow" data-start-index="0">
-            <div class="yurta-slide is-active"><img src="assets/images/canelon/Canelon01.jpg" alt="Yurta Canelón 01">
-            </div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon02.jpg" alt="Yurta Canelón 02"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelón 08"></div>
-            <div class="yurta-slide"><img src="assets/images/canelon/Canelon09.jpg" alt="Yurta Canelón 09"></div>
+            <div class="yurta-slide is-active"><img src="assets/images/canelon/Canelon01.jpg" alt="Yurta Canelón 01"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon02.jpg" alt="Yurta Canelón 02"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelon 08"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon02.jpg" alt="Yurta Canelón 02"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
+                loading="lazy"></div>
+            <div class=" yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelón 08"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon03.jpg" alt="Yurta Canelón 03"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon04.jpg" alt="Yurta Canelón 04"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon06.jpg" alt="Yurta Canelón 06"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.jpg" alt="Yurta Canelón 07"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.jpg" alt="Yurta Canelón 08"
+                loading="lazy"></div>
+            <div class="yurta-slide"><img src="assets/images/canelon/Canelon09.jpg" alt="Yurta Canelón 09"
+                loading="lazy"></div>
             <div class="yurta-slide-controls">
               <button type="button" class="yurta-slide-btn prev"><i
                   class="fa-solid fa-circle-chevron-left"></i></button>
@@ -721,7 +755,6 @@
         <!-- RESEÑA 1 -->
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
-            <div class="avatar-placeholder">F</div>
             <div class="info-huésped">
               <span class="nombre">Ana</span>
               <span class="fecha">Enero 2026</span>
@@ -736,7 +769,6 @@
         <!-- RESEÑA 2 -->
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
-            <div class="avatar-placeholder">F</div>
             <div class="info-huésped">
               <span class="nombre">Carlos</span>
               <span class="fecha">Diciembre 2025</span>
@@ -752,7 +784,6 @@
         <div class="tarjeta-resena">
           <div class="perfil-huésped">
             <!-- Si no tienes foto de perfil, usa un placeholder -->
-            <div class="avatar-placeholder">F</div>
             <div class="info-huésped">
               <span class="nombre">Familia Pérez</span>
               <span class="fecha">Noviembre 2025</span>
