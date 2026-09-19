@@ -147,18 +147,18 @@ body {
   display: block;
   letter-spacing: 0.2em;
 }
-#nav ul {
+#nav > ul {
   list-style: none;
   display: flex;
   gap: 2.5rem;
   align-items: center;
 }
-#nav ul li {
+#nav > ul > li {
   position: relative;
   display: flex;
   align-items: center;
 }
-#nav ul a {
+#nav > ul > li > a {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -170,7 +170,7 @@ body {
   font-weight: 900;
   transition: color 0.2s;
 }
-#nav ul a::after {
+#nav > ul > li > a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -182,10 +182,10 @@ body {
   border-radius: 0;
   transition: width 0.22s ease;
 }
-#nav ul a.active::after {
+#nav > ul > li > a.active::after {
   width: 100%;
 }
-#nav ul a:hover {
+#nav > ul > li > a:hover {
   color: var(--tierra);
 }
 .nav-reservar {
@@ -1775,13 +1775,13 @@ footer nav ul a:hover {
   #nav {
     padding: 1rem 1.4rem;
   }
-  #nav ul {
+  #nav > ul {
     display: none;
   }
   .hamburger {
     display: flex;
   }
-  #nav.open ul {
+  #nav.open > ul {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -1793,15 +1793,15 @@ footer nav ul a:hover {
     border-top: 1px solid var(--linea);
     gap: 1.2rem;
   }
-  #nav.open ul a {
+  #nav.open > ul > li > a {
     text-decoration: none;
     color: var(--bosque-2);
   }
-  #nav.open ul a::after {
+  #nav.open > ul > li > a::after {
     display: none !important;
     width: 0 !important;
   }
-  #nav.open ul a.active {
+  #nav.open > ul > li > a.active {
     color: var(--tierra);
   }
   .hero-slide-1 {
