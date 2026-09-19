@@ -106,21 +106,21 @@
     </ul>
 
     <!-- Contenedor para íconos de la derecha (idioma + carrito + hamburguesa) -->
+    <!-- Selector de idioma (fuera de nav-actions para que flote libremente) -->
+    <div class="nav-lang" id="navLang">
+      <button class="nav-lang-btn" id="navLangBtn" aria-label="Cambiar idioma" aria-expanded="false">
+        <i class="fas fa-globe"></i>
+        <span id="navLangCurrent">ES</span>
+        <i class="fas fa-chevron-down nav-lang-arrow"></i>
+      </button>
+      <ul class="nav-lang-menu" id="navLangMenu">
+        <li><button data-lang="es" class="nav-lang-opt active">🇪🇸 Español</button></li>
+        <li><button data-lang="en" class="nav-lang-opt">🇬🇧 English</button></li>
+      </ul>
+    </div>
+
+    <!-- Contenedor para íconos de la derecha (carrito + hamburguesa) -->
     <div class="nav-actions">
-
-      <!-- Selector de idioma -->
-      <div class="nav-lang" id="navLang">
-        <button class="nav-lang-btn" id="navLangBtn" aria-label="Cambiar idioma" aria-expanded="false">
-          <i class="fas fa-globe"></i>
-          <span id="navLangCurrent">ES</span>
-          <i class="fas fa-chevron-down nav-lang-arrow"></i>
-        </button>
-        <ul class="nav-lang-menu" id="navLangMenu">
-          <li><button data-lang="es" class="nav-lang-opt active">🇪🇸 Español</button></li>
-          <li><button data-lang="en" class="nav-lang-opt">🇬🇧 English</button></li>
-        </ul>
-      </div>
-
       <!-- Ícono del carrito -->
       <a href="#" class="nav-carrito" onclick="toggleCarrito(event)" aria-label="Abrir carrito">
         <i class="fas fa-shopping-cart"></i>

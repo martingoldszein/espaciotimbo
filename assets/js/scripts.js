@@ -1853,6 +1853,15 @@ function initLangSelector() {
     if (urlLang) aplicarIdioma(urlLang);
   });
 }
+// Cerrar el menú de idioma al hacer scroll en móvil
+window.addEventListener('scroll', () => {
+  const langWrapper = document.getElementById('navLang');
+  if (langWrapper && langWrapper.classList.contains('open')) {
+    langWrapper.classList.remove('open');
+    const btn = document.getElementById('navLangBtn');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
+}, { passive: true });
 
 // Exponer globalmente por si se llama desde HTML
 window.aplicarIdioma = aplicarIdioma;

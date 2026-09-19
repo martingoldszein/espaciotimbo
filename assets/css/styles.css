@@ -4062,11 +4062,13 @@ footer nav ul a:hover {
   }
 }
 /* ═══════════════════════════════════════════════════════════════
-   SELECTOR DE IDIOMA
+   SELECTOR DE IDIOMA · VERSIÓN ÚNICA Y DEFINITIVA
    ═══════════════════════════════════════════════════════════════ */
+
 .nav-lang {
   position: relative;
   margin-right: 8px;
+  z-index: 6000;
 }
 
 .nav-lang-btn {
@@ -4100,209 +4102,6 @@ footer nav ul a:hover {
   transform: rotate(180deg);
 }
 
-.nav-lang-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 140px;
-  background: #fff;
-  border: 1px solid rgba(33, 56, 69, 0.1);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(33, 56, 69, 0.12);
-  padding: 6px;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: all 0.2s ease;
-  z-index: 1001;
-}
-
-.nav-lang.open .nav-lang-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.nav-lang-opt {
-  display: block;
-  width: 100%;
-  padding: 8px 10px;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 13px;
-  text-align: left;
-  color: #213845;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.nav-lang-opt:hover {
-  background: rgba(33, 56, 69, 0.06);
-}
-
-.nav-lang-opt.active {
-  background: rgba(227, 152, 129, 0.15);
-  font-weight: 600;
-}
-
-/* En móvil, el menú se alinea a la derecha */
-@media (max-width: 900px) {
-  .nav-lang-menu {
-    right: 0;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SELECTOR DE IDIOMA · AJUSTES PARA MÓVIL
-   ═══════════════════════════════════════════════════════════════ */
-
-/* Base (desktop) — ya la tenés, pero la repito por si acaso */
-.nav-lang {
-  position: relative;
-  margin-right: 8px;
-  z-index: 1002; /* aseguramos que quede por encima del nav */
-}
-
-.nav-lang-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 160px;
-  background: #fff;
-  border: 1px solid rgba(33, 56, 69, 0.1);
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(33, 56, 69, 0.12);
-  padding: 6px;
-  list-style: none;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: all 0.2s ease;
-  z-index: 1003; /* por encima del resto */
-  pointer-events: none; /* evita clics cuando está cerrado */
-}
-
-.nav-lang.open .nav-lang-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  pointer-events: auto; /* reactiva clics cuando está abierto */
-}
-
-/* ── AJUSTE MÓVIL ── */
-@media (max-width: 900px) {
-
-  /* El contenedor de acciones debe estar por encima del menú hamburguesa */
-  .nav-actions {
-    position: relative;
-    z-index: 1001;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* El botón del idioma: que sea táctil y cómodo */
-  .nav-lang-btn {
-    padding: 8px 12px;
-    font-size: 13px;
-    min-height: 40px;
-    min-width: 56px;
-    justify-content: center;
-    gap: 4px;
-  }
-
-  /* En móvil, el texto del idioma puede ir oculto para ahorrar espacio */
-  .nav-lang-btn #navLangCurrent {
-    display: inline-block;
-  }
-
-  /* El menú desplegable en móvil: alineado a la derecha del botón,
-     sin salirse de la pantalla */
-  .nav-lang-menu {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    left: auto;
-    min-width: 180px;
-    max-width: calc(100vw - 24px);
-    z-index: 2000;
-  }
-
-  /* Botones del menú: más grandes para dedos */
-  .nav-lang-opt {
-    padding: 12px 14px;
-    font-size: 15px;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Aseguramos que el nav entero no tape el menú */
-  #nav {
-    z-index: 1000;
-  }
-
-  /* Cuando el menú hamburguesa está abierto, el menú de idioma no debe
-     quedar detrás. Le damos un z-index aún más alto al wrapper. */
-  #nav.open .nav-lang {
-    z-index: 3000;
-  }
-
-  #nav.open .nav-lang-menu {
-    z-index: 3001;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SELECTOR DE IDIOMA · VERSIÓN ROBUSTA (desktop + móvil)
-   ═══════════════════════════════════════════════════════════════ */
-
-/* El wrapper del idioma debe tener su propio contexto de apilamiento */
-.nav-lang {
-  position: relative;
-  margin-right: 8px;
-  z-index: 5000; /* muy alto para que gane siempre */
-  isolation: isolate; /* crea un nuevo stacking context */
-}
-
-.nav-lang-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  background: transparent;
-  border: 1px solid rgba(33, 56, 69, 0.18);
-  border-radius: 999px;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: #213845;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.nav-lang-btn:hover {
-  background: rgba(33, 56, 69, 0.06);
-  border-color: rgba(33, 56, 69, 0.35);
-}
-
-.nav-lang-arrow {
-  font-size: 9px;
-  transition: transform 0.2s ease;
-}
-
-.nav-lang.open .nav-lang-arrow {
-  transform: rotate(180deg);
-}
-
-/* El menú desplegable: posición absoluta respecto al botón */
 .nav-lang-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -4315,20 +4114,14 @@ footer nav ul a:hover {
   padding: 6px;
   list-style: none;
   margin: 0;
-
-  /* Estado cerrado */
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
   pointer-events: none;
-
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-
-  /* Aseguramos que se dibuje por encima de TODO */
   z-index: 9999;
 }
 
-/* Estado abierto */
 .nav-lang.open .nav-lang-menu {
   opacity: 1;
   visibility: visible;
@@ -4363,22 +4156,19 @@ footer nav ul a:hover {
 /* ── MÓVIL ── */
 @media (max-width: 900px) {
 
-  /* El contenedor de acciones: que no recorte nada */
+  /* Aseguramos que .nav-actions no recorte el menú */
   .nav-actions {
     position: relative;
-    z-index: 5000;
-    overflow: visible !important; /* clave: evita que se corte el menú */
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    z-index: 6000;
+    overflow: visible !important;
   }
 
-  /* El nav entero: overflow visible para que el menú pueda salir */
+  /* El nav no debe recortar */
   #nav {
     overflow: visible !important;
   }
 
-  /* El botón del idioma: más cómodo al tacto */
+  /* El botón del idioma más cómodo en móvil */
   .nav-lang-btn {
     padding: 8px 12px;
     font-size: 13px;
@@ -4387,7 +4177,7 @@ footer nav ul a:hover {
     justify-content: center;
   }
 
-  /* El menú desplegable en móvil */
+  /* El menú en móvil */
   .nav-lang-menu {
     top: calc(100% + 10px);
     right: 0;
@@ -4397,7 +4187,6 @@ footer nav ul a:hover {
     z-index: 9999;
   }
 
-  /* Opciones más grandes para dedos */
   .nav-lang-opt {
     padding: 12px 14px;
     font-size: 15px;
@@ -4406,13 +4195,28 @@ footer nav ul a:hover {
     align-items: center;
     gap: 8px;
   }
+}
+/* Asegura que el nav distribuya bien sus 3 hijos */
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
 
-  /* Si el menú hamburguesa está abierto, el idioma sigue por encima */
-  #nav.open .nav-lang {
-    z-index: 6000;
-  }
+#nav > .nav-logo {
+  flex-shrink: 0;
+}
 
-  #nav.open .nav-lang-menu {
-    z-index: 10000;
-  }
+#nav > ul {
+  flex: 1;
+  justify-content: center;
+}
+
+#nav > .nav-lang {
+  flex-shrink: 0;
+}
+
+#nav > .nav-actions {
+  flex-shrink: 0;
 }
