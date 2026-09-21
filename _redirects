@@ -7,3 +7,7 @@
 /reservas/en/*   /index.html   200
 /reservas/es     /index.html   200
 /reservas/es/*   /index.html   200
+
+/reservas/     /reservas    301
+/reservas/en/  /reservas/en 301
+/reservas/es/  /reservas/es 301
