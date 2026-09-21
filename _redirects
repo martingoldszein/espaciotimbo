@@ -2,3 +2,8 @@
 /en/*    /index.html   200
 /es      /index.html   200
 /es/*    /index.html   200
+
+/reservas/en      /index.html#reservas/en   200
+/reservas/en/*      /index.html#reservas/en/*     200
+/reservas/es      /index.html#reservas/es   200
+/reservas/es/*      /index.html#reservas/es/*     200
