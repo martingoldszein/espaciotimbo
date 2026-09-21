@@ -1583,7 +1583,11 @@ var TRADUCCIONES = {
     "carrito.vacio": "El carrito está vacío",
     "carrito.total": "Total:",
     "carrito.enviar": "Enviar pedido por email",
-    "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
+    "carrito.nombre": "Nombre y apellido",
+    "carrito.email": "Email",
+    "carrito.celular": "Celular",
+    "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay",
+
   },
   en: {
     "nav.proyecto": "The Project",
@@ -1731,6 +1735,9 @@ var TRADUCCIONES = {
     "carrito.vacio": "Your cart is empty",
     "carrito.total": "Total:",
     "carrito.enviar": "Send order by email",
+    "carrito.nombre": "Full name",
+    "carrito.email": "Email",
+    "carrito.celular": "Phone",
     "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
   }
 };
@@ -1873,21 +1880,39 @@ window.detectarIdiomaPorURL = detectarIdiomaPorURL;
 document.addEventListener('DOMContentLoaded', initLangSelector);
 
 
-/* ─── AUTO-SCROLL A RESERVAS SI LA URL LO INDICA ─── */
-(function () {
-  const path = window.location.pathname;
-  const isReservas = path.includes('/reservas/');
 
-  if (!isReservas) return;
+/* ─── MODAL DE PEDIDO ─── */
+function abrirModalPedido() {
+  if (carrito.length === 0) {
+    mostrarNotificacion('⚠️ El carrito está vacío');
+    return;
+  }
+  // Cerrar el carrito
+  const panel = document.getElementById('carrito-panel-header');
+  if (panel) panel.hidden = true;
 
-  // Esperamos a que el DOM esté listo
-  window.addEventListener('load', function () {
-    const target = document.getElementById('reservas');
-    if (!target) return;
+  // Abrir el modal
+  const modal = document.getElementById('modal-pedido');
+  if (modal) modal.hidden = false;
 
-    // Pequeño delay para que se asienten los estilos
-    setTimeout(function () {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 400);
-  });
-})();
+  // Focus en el primer campo
+  setTimeout(() => {
+    const input = document.getElementById('carrito-nombre');
+    if (input) input.focus();
+  }, 100);
+}
+
+function cerrarModalPedido() {
+  const modal = document.getElementById('modal-pedido');
+  if (modal) modal.hidden = true;
+}
+
+// Cerrar modal con ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('modal-pedido');
+    if (modal && !modal.hidden) {
+      modal.hidden = true;
+    }
+  }
+});
