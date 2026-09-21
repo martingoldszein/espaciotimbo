@@ -1871,3 +1871,23 @@ window.detectarIdiomaPorURL = detectarIdiomaPorURL;
 
 // Iniciar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', initLangSelector);
+
+
+/* ─── AUTO-SCROLL A RESERVAS SI LA URL LO INDICA ─── */
+(function () {
+  const path = window.location.pathname;
+  const isReservas = path.includes('/reservas/');
+
+  if (!isReservas) return;
+
+  // Esperamos a que el DOM esté listo
+  window.addEventListener('load', function () {
+    const target = document.getElementById('reservas');
+    if (!target) return;
+
+    // Pequeño delay para que se asienten los estilos
+    setTimeout(function () {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
+  });
+})();
