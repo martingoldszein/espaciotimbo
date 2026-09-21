@@ -218,7 +218,6 @@ body {
   display: block;
   transition: all 0.3s;
 }
-
 /* ── HERO ── */
 .hero {
   height: 100vh;
@@ -228,101 +227,146 @@ body {
   align-items: flex-end;
   overflow: hidden;
 }
+
 .hero-slides {
   position: absolute;
   inset: 0;
 }
+
 .hero-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: none;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 1.4s ease-in-out;
+  will-change: transform, opacity;
 }
+
+/* Ken Burns: la imagen activa se agranda lentamente */
+.hero-slide.is-active {
+  opacity: 1;
+  animation: kenBurns 9s ease-out forwards;
+}
+
+/* Variación del zoom para que no sea siempre igual */
+.hero-slide:nth-child(2).is-active { animation-name: kenBurns2; }
+.hero-slide:nth-child(3).is-active { animation-name: kenBurns3; }
+.hero-slide:nth-child(4).is-active { animation-name: kenBurns4; }
+.hero-slide:nth-child(5).is-active { animation-name: kenBurns5; }
+.hero-slide:nth-child(6).is-active { animation-name: kenBurns6; }
+
+@keyframes kenBurns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1%, -1%); }
+}
+@keyframes kenBurns2 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.15) translate(1%, -1%); }
+}
+@keyframes kenBurns3 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.10) translate(-1%, 1%); }
+}
+@keyframes kenBurns4 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.13) translate(1%, 1%); }
+}
+@keyframes kenBurns5 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.14) translate(-0.5%, 0.5%); }
+}
+@keyframes kenBurns6 {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.11) translate(0.5%, -0.5%); }
+}
+
+/* Imágenes de fondo de cada slide (mantené las tuyas) */
 .hero-slide-1 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide1.jpg");
 }
 .hero-slide-2 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide2.jpg");
 }
 .hero-slide-3 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide3.jpg");
 }
 .hero-slide-4 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide4.jpg");
 }
 .hero-slide-5 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide5.jpg");
 }
 .hero-slide-6 {
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("../images/slide6.jpg");
 }
 
-.hero-slide.is-active {
-  opacity: 1;
-}
+/* Overlay general del hero (más suave que antes) */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.15);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
   pointer-events: none;
 }
+
 .hero-content {
   position: relative;
   z-index: 2;
   padding: 0 3rem 4rem;
   max-width: 800px;
 }
-.hero-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(242, 234, 216, 0.7);
-  margin-bottom: 1.2rem;
-}
-.hero-title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3.2rem, 7vw, 6rem);
-  font-weight: 300;
-  line-height: 1.05;
-  color: var(--blanco);
-  margin-bottom: 1.5rem;
-}
-.hero-title em {
-  font-style: italic;
-  font-weight: 300;
-}
+
+/* Fade in escalonado: la frase y los botones aparecen con delay */
 .hero-quote {
   font-family: "Cormorant Garamond", serif;
   font-size: 2rem;
   font-style: italic;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.95);
   max-width: 560px;
   line-height: 1.6;
-  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  border-left: 2px solid rgba(255, 255, 255, 0.6);
   padding-left: 1.2rem;
   margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
 }
+
 .hero-cta {
   display: inline-flex;
   gap: 1rem;
   flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards;
 }
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botones del hero (mantené los tuyos) */
 .btn {
   display: inline-block;
   padding: 0.85rem 2rem;
@@ -351,6 +395,65 @@ body {
 }
 .btn-outline:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── DOTS DEL HERO ─── */
+.hero-dots {
+  position: absolute;
+  bottom: 0rem;
+  left: 3rem;
+  z-index: 3;
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.hero-dot.is-active {
+  background: #fff;
+  width: 24px;
+  border-radius: 999px;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-dots {
+    bottom: 1.2rem;
+    gap: 0.4rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .hero-dot.is-active {
+    width: 18px;
+  }
+
+  .hero-content {
+    padding: 0 1.4rem 5rem;
+  }
 }
 
 /* ── SECCIONES BASE ── */

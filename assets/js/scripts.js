@@ -224,17 +224,76 @@ window.addEventListener('scroll', () => {
 /* ═══════════════════════════════════════════════════════════════
    7. SLIDESHOWS (HERO + GLAMPING + YURTAS)
    ═══════════════════════════════════════════════════════════════ */
+/* ─── HERO SLIDESHOW CON DOTS + KEN BURNS ─── */
 function setupHeroSlideshow() {
   const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
   if (!slides.length) return;
+
   let currentIndex = 0;
-  slides[currentIndex].classList.add('is-active');
-  setInterval(() => {
+  let intervalId = null;
+
+  function goToSlide(index) {
+    // Quitar is-active del slide anterior
     slides[currentIndex].classList.remove('is-active');
-    currentIndex = (currentIndex + 1) % slides.length;
-    slides[currentIndex].classList.add('is-active');
-  }, 4500);
+    dots[currentIndex]?.classList.remove('is-active');
+
+    // Actualizar índice
+    currentIndex = (index + slides.length) % slides.length;
+
+    // Activar el nuevo slide
+    // ⚠️ Truco: forzamos reflow para reiniciar la animación Ken Burns
+    const newSlide = slides[currentIndex];
+    newSlide.style.animation = 'none';
+    void newSlide.offsetWidth; // reflow
+    newSlide.style.animation = '';
+    newSlide.classList.add('is-active');
+
+    dots[currentIndex]?.classList.add('is-active');
+  }
+
+  function startAutoplay() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, 6500); // 6.5s por slide (más que antes, porque el Ken Burns dura 9s)
+  }
+
+  // Click en los dots
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      startAutoplay(); // reiniciar el timer
+    });
+  });
+
+  // Pausar autoplay cuando el usuario hace hover sobre el hero
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    heroSection.addEventListener('mouseenter', () => {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = null;
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      startAutoplay();
+    });
+  }
+
+  // Pausar autoplay cuando la pestaña no está visible (ahorra recursos)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = null;
+    } else {
+      startAutoplay();
+    }
+  });
+
+  // Arrancar
+  startAutoplay();
 }
+
+window.addEventListener('load', setupHeroSlideshow);
 
 function setupGlampingSlideshow() {
   const slides = document.querySelectorAll('.glamping-slide');
