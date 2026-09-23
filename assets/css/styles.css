@@ -801,6 +801,9 @@ section {
     );
   opacity: 0.9;
 }
+.servicio-placeholder img {
+  width: 100%;
+ }
 .servicio-content {
   display: flex;
   flex-direction: column;
@@ -1176,7 +1179,7 @@ section {
 
 /* ── RESERVAS ── */
 .reservas {
-  background: #8b6b4769);
+  background: #8b6b4769;
   padding: 7rem 3rem;
 }
 .reservas-inner {

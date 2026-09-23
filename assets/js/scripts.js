@@ -7,23 +7,26 @@
    1. DATOS · TALLERES Y EVENTOS
    ═══════════════════════════════════════════════════════════════ */
 const TALLERES_EVENTOS = [
-  /* Descomentá y editá estos talleres cuando quieras mostrarlos:
+
   {
     tipo: "experiencia",
-    titulo: "Retiro Vivencial: Retorno al Origen",
-    desc: "• Ceremonia de Rapé, Rezo de Tabaco y Cantos Ancestrales alrededor del Fuego\n• Limpieza e Inmersión con Sahumos\n• Ceremonia con Plantas Maestras",
-    fecha: "Sábado 19 de Septiembre",
-    hora: "10:00 hs",
-    duracion: "1 día",
+    titulo: "PAISAJISMO CON PLANTAS NATIVAS",
+    desc: "¿Cómo podemos crear jardines y paisajes más vivos, diversos y conectados con nuestro territorio? Te invitamos a compartir una charla con Alejandro Fuster, paisajista y técnico forestal de Colonia, para acercarnos al mundo de las plantas nativas y sus posibilidades en el diseño del paisaje. Una oportunidad para aprender, intercambiar conocimientos y descubrir cómo las especies de nuestro territorio pueden convertirse en protagonistas de jardines que atraigan vida, biodiversidad y belleza. ",
+    fecha: "Viernes 25 de Septiembre",
+    hora: "17:00 hs — 18:00 hs",
+    duracion: "1",
     cupos: "0",
     precio: "",
-    precio_nota: "por persona · incluye almuerzo",
+    precio_nota: "Entrada libre ",
     badge: "nuevo",
     agotado: false,
     linkURL: "https://www.instagram.com/p/DagfVcWlZD7/?img_index=1",
-    imagen: "../assets/images/experiencia1.png",
+    imagen: "../assets/images/paisajismo.jpg",
     whatsapp: true
-  },
+  }
+
+
+  ,
   {
     tipo: "taller",
     titulo: "Bioconstrucción Natural",
@@ -36,10 +39,10 @@ const TALLERES_EVENTOS = [
     precio_nota: "por persona · fin de semana completo",
     badge: null,
     agotado: false,
-    imagen: null,
+    imagen: "../assets/images/exposicion.jpg",
     whatsapp: true
   },
-  */
+   /* Descomentá y editá estos talleres cuando quieras mostrarlos:*/
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1499,7 +1502,7 @@ var TRADUCCIONES = {
   es: {
     "nav.proyecto": "El Proyecto",
     "nav.glamping": "Glamping",
-    "nav.servicios": "Servicios",
+    "nav.servicios": "Experiencias",
     "nav.talleres": "Talleres",
     "nav.catalogo": "Catálogo",
     "nav.quienes": "Quiénes somos",
@@ -1533,7 +1536,7 @@ var TRADUCCIONES = {
     "glamping.yurta2.li2": "Baño privado y calefacción para noches frescas",
     "glamping.yurta2.li3": "Espacio exterior para contemplar el paisaje",
     "glamping.yurta2.li4": "Ambiente íntimo para una estadía tranquila",
-    "serv.eyebrow": "— Servicios & Experiencias",
+    "serv.eyebrow": "— Experiencias",
     "serv.title": "Un espacio vivo de<br><em>aprendizaje y cultura</em>",
     "serv.p": "Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.",
     "serv.1.t": "Talleres & Experiencias Regenerativas",
@@ -1651,7 +1654,7 @@ var TRADUCCIONES = {
   en: {
     "nav.proyecto": "The Project",
     "nav.glamping": "Glamping",
-    "nav.servicios": "Services",
+    "nav.servicios": "Experiences",
     "nav.talleres": "Workshops",
     "nav.catalogo": "Catalog",
     "nav.quienes": "About us",
@@ -1685,7 +1688,7 @@ var TRADUCCIONES = {
     "glamping.yurta2.li2": "Private bathroom and heating for cool nights",
     "glamping.yurta2.li3": "Outdoor space to contemplate the landscape",
     "glamping.yurta2.li4": "Intimate atmosphere for a quiet stay",
-    "serv.eyebrow": "— Services & Experiences",
+    "serv.eyebrow": "— Experiences",
     "serv.title": "A living space of<br><em>learning and culture</em>",
     "serv.p": "We develop proposals that integrate nature, regeneration, learning, culture and well-being, strengthening the bond between people and the territory.",
     "serv.1.t": "Regenerative Workshops & Experiences",
