@@ -1176,7 +1176,7 @@ section {
 
 /* ── RESERVAS ── */
 .reservas {
-  background: var(--bosque-2);
+  background: var(--tierra);
   padding: 7rem 3rem;
 }
 .reservas-inner {
@@ -2766,6 +2766,10 @@ footer nav ul a:hover {
   font-weight: 500;
   color: #3a2a1a;
   margin: 0;
+}
+
+.carrito-panel-header .carrito-header-panel  button {
+ border: none;
 }
 
 /* Lista de productos (flexible, con scroll) */
