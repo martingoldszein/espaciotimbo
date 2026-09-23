@@ -1627,10 +1627,10 @@ section {
   border-radius: 1px;
 }
 .cal-leyenda-dot.libre {
-  background: rgba(109, 191, 126, 0.5);
+  background: rgba(109, 191, 126, 1);
 }
 .cal-leyenda-dot.ocupado {
-  background: rgba(139, 107, 71, 0.4);
+  background: rgba(139, 107, 71, 1);
 }
 .ical-nota {
   margin-top: 1.2rem;
