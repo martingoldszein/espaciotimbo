@@ -1176,7 +1176,7 @@ section {
 
 /* ── RESERVAS ── */
 .reservas {
-  background: var(--tierra);
+  background: #8b6b4769);
   padding: 7rem 3rem;
 }
 .reservas-inner {
@@ -1488,7 +1488,7 @@ section {
   gap: 1.5rem;
 }
 .calendario-widget {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(242, 234, 216, 0.1);
   padding: 1.5rem;
   border-radius: 5px;
@@ -1630,7 +1630,7 @@ section {
   background: rgba(109, 191, 126, 1);
 }
 .cal-leyenda-dot.ocupado {
-  background: rgba(139, 107, 71, 1);
+  background: red;
 }
 .ical-nota {
   margin-top: 1.2rem;
