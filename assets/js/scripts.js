@@ -1557,17 +1557,17 @@ var TRADUCCIONES = {
     "serv.title": "Un espacio vivo de<br><em>aprendizaje y cultura</em>",
     "serv.p": "Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.",
     "serv.1.t": "Talleres & Experiencias Regenerativas",
-    "serv.1.d": "Diseñamos y facilitamos talleres, recorridos y experiencias vinculadas a la permacultura, bioconstrucción, huerta agroecológica, saneamiento ecológico, plantas medicinales, regeneración de ecosistemas y prácticas de vida sustentable.",
+    "serv.1.d": "Diseñamos y facilitamos talleres y experiencias inspirados en los diferentes pétalos de la Permacultura: bioconstrucción, huerta agroecológica, agricultura sintropica, saneamiento ecológico de aguas residuales, plantas medicinales, ecología de las relaciones y otros saberes que nos ayudan a vivir de manera más consciente y en vínculo con nuestro entorno.",
     "serv.2.t": "Actividades Culturales y Artísticas",
-    "serv.2.d": "Promovemos encuentros culturales, exposiciones, proyecciones, conversatorios, talleres creativos y actividades que fortalecen el tejido comunitario y el intercambio de saberes.",
-    "serv.3.t": " CAMBIAR Bosque-Huerta Agroecológica",
-    "serv.3.d": "Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.2.d": "Creamos espacios para el encuentro entre arte, cultura y naturaleza. Organizamos talleres, exposiciones, encuentros y experiencias que despiertan la creatividad, fortalecen los vínculos y nos invitan a mirar el mundo desde nuevas perspectivas.",
+    "serv.3.t": "Bosque-Huerta Agroecológica",
+    "serv.3.d": "Nuestra huerta es también un espacio de aprendizaje. Podés recorrerla, conocer cómo cultivamos, cosechar alimentos y, cuando la propuesta lo permite, poner las manos en la tierra y participar activamente de sus procesos.",
     "serv.4.t": "Voluntariado",
-    "serv.4.d": "CAMBIAR Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.4.d": "Recibimos personas de diferentes lugares interesadas en compartir y aprender junto a nosotros. Buscamos especialmente voluntari@s con experiencia o interés en permacultura, bioconstrucción y huerta agroecológica, que quieran involucrarse en las distintas tareas y procesos del proyecto.",
     "serv.5.t": "Visitas guiadas",
-    "serv.5.d": "CAMBIAR Espacio de encuentro con productos artesanales, alimentos locales y emprendimientos de economía local y consumo consciente.",
+    "serv.5.d": "Abrimos las puertas de Timbó para quienes quieran conocer de cerca nuestra experiencia. Realizamos recorridos por el espacio y conversaciones sobre permacultura, diseño regenerativo y las prácticas que hemos desarrollado a lo largo de estos años.",
     "serv.6.t": "Café & Tienda Consciente",
-    "serv.6.d": "Espacio de encuentro donde promovemos productos artesanales, alimentos locales y emprendimientos afines a los valores de sostenibilidad, comercio justo y economía regenerativa.",
+    "serv.6.d": "Próximamente inauguraremos nuestro café cultural: un nuevo espacio de encuentro y una plataforma para propuestas culturales y regenerativas. La tienda ofrecerá una selección de productos locales, artesanales y naturales, buscando promover formas de consumo más conscientes y responsables, al mismo tiempo que apoyamos la economía local y solidaria.",
     "tall.eyebrow": "— Talleres & Eventos",
     "tall.title": "Próximas<br><em>experiencias</em>",
     "tall.p": "Talleres, encuentros y experiencias para conectar con la tierra, los saberes y la comunidad. Cupos limitados.",
@@ -1577,9 +1577,9 @@ var TRADUCCIONES = {
     "tall.filtro.experiencia": "Experiencias",
     "tall.empty": "Por el momento no hay talleres ni eventos programados. Seguinos en Instagram para enterarte de las próximas actividades.",
     "tall.empty.cat": "No hay actividades programadas en esta categoría por el momento.",
-    "cat.eyebrow": "— Productos",
+    "cat.eyebrow": "— HERBARIOS TIMBÓ",
     "cat.title": "Nuestro<br><em>catálogo</em>",
-    "cat.p": "Productos elaborados con amor y respeto por la naturaleza. <br> Hechos a mano con ingredientes naturales y procesos artesanales.",
+    "cat.p": "Productos elaborados con amor y respeto por la naturaleza. <br> Hechos a mano con plantas medicinales de nuestra huerta.",
     "cat.buscar": "Buscar:",
     "cat.buscar.ph": "Nombre o descripción...",
     "cat.categoria": "Categoría:",
@@ -1608,8 +1608,8 @@ var TRADUCCIONES = {
     "cat.no.disponible": "No disponible",
     "quienes.eyebrow": "— Quiénes somos",
     "quienes.title": "Julia &<br><em>Martín</em>",
-    "quienes.p1": "Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio.",
-    "quienes.p2": "Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza.",
+    "quienes.p1": "Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio, integrando permacultura, bioconstrucción, turismo regenerativo, educación ambiental y cultura.",
+    "quienes.p2": "Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza. Espacio Timbó es un laboratorio vivo de experimentación, donde buscamos demostrar que es posible regenerar los ecosistemas mientras fortalecemos los vínculos humanos y comunitarios.",
     "quienes.quote": '"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."',
     "res.eyebrow": "— Reseñas",
     "res.title": " Lo que dicen nuestros <br><em>huéspedes</em>",
@@ -1668,7 +1668,7 @@ var TRADUCCIONES = {
     "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay",
 
   },
-  en: {
+   en: {
     "nav.proyecto": "The Project",
     "nav.glamping": "Glamping",
     "nav.servicios": "Experiences",
@@ -1676,50 +1676,77 @@ var TRADUCCIONES = {
     "nav.catalogo": "Catalog",
     "nav.quienes": "About us",
     "nav.reservar": "Book now",
+
     "hero.quote": '"Regenerating the land is also regenerating the way we inhabit it."',
     "hero.cta1": "Book your stay",
     "hero.cta2": "Discover the project",
-    "que.eyebrow": "— What is it",
+
+    "que.eyebrow": "— What is ESPACIO TIMBÓ",                          // ← ACTUALIZADO (antes: "— What is it")
     "que.title": "A <em>regenerative</em><br>project",
-    "que.p1": "Espacio Timbó is a regenerative project located on the coast of Colonia, Uruguay, that integrates lodging, education, art, permaculture and ecological design. It was born with the purpose of contributing to the ecosocial regeneration of the territory we inhabit, promoting ways of life in harmony with nature.",
-    "que.p2": "Our space is designed under permaculture and regeneration principles, incorporating natural building, organic farming, ecological sanitation systems, responsible waste management and gardens that promote biodiversity.",
-    "que.p3": "Every element of the place seeks to demonstrate that it is possible to inhabit consciously, reducing impacts and generating benefits for the land and the community.",
+    "que.p1": "Espacio Timbó is a regenerative project located on the coast of Colonia, Uruguay, that integrates lodging, education, art, permaculture and ecological design. It was born with the purpose of contributing to the ecosocial regeneration of the territory we inhabit, promoting ways of life in harmony with nature and strengthening the bond between people and their environment.",  // ← ACTUALIZADO (agregado: "and strengthening the bond...")
+    "que.p2": "Our space is designed under permaculture and regeneration principles, incorporating natural building, organic farming, ecological sanitation systems, responsible waste management and gardens that promote biodiversity. Every element of the place seeks to demonstrate that it is possible to inhabit consciously, reducing impacts and generating benefits for the land and the community.",  // ← ACTUALIZADO (fusionado p2+p3 del original)
+    "que.p3": "Between the forest, the river and Santa Ana beach, we offer lodging experiences in yurts built with natural materials, as well as workshops, gatherings and activities related to caring for nature, community learning and integral well-being.",  // ← NUEVO
+    "que.p4": "More than a tourist destination, Espacio Timbó is an invitation to reconnect with the rhythms of nature, enjoy simplicity and actively participate in building a more regenerative future.",  // ← NUEVO
+
     "frase": '"We put life at the center to regenerate the territory we inhabit and the bond we have with it."',
-    "glamping.eyebrow": "— Inhabiting nature",
-    "glamping.title": "Regenerative<br><em>Glamping</em>",
-    "glamping.p1": "Between the forest, the river and Santa Ana beach, we offer lodging experiences in yurts handcrafted with natural and recyclable materials.",
-    "glamping.p2": "We have two yurts equipped with a kitchen and private bathroom, heating, ventilation and outdoor spaces to rest, contemplate nature and share around the fire.",
-    "glamping.p3": "The experience includes exploring the forest and river of Santa Ana, enjoying the beach, visiting the agroecological garden and participating in regenerative practice workshops.",
+
+    "glamping.eyebrow": "— Inhabiting nature",                          // ← ACTUALIZADO (guión normal)
+    "glamping.title": "Regenerative<br><em>Glamping</em>",              // ← ACTUALIZADO (sin espacio inicial)
+    "glamping.p1": "Our lodging offers the experience of inhabiting a yurt in a natural environment designed from permaculture, regenerated over the past 7 years through agroforestry gardens, native species and ecological restoration practices.",  // ← ACTUALIZADO
+    "glamping.p2": "We have two yurts handcrafted with natural and recyclable materials, equipped with a kitchen and private bathroom, heating, ventilation and outdoor spaces to rest, contemplate nature and share around the fire.",
+    "glamping.p3": "Every detail has been thoughtfully designed, integrating local crafts and handmade objects that reflect our commitment to beauty, simplicity and conscious consumption.",  // ← NUEVO
+    "glamping.p4": "The experience includes the possibility of exploring the forest and river of Santa Ana, enjoying the beach, visiting the agroecological garden, taking part in workshops and learning about regenerative practices that are part of the project's daily life.",  // ← NUEVO
+    "glamping.p5": "More than a place to stay, we offer an experience of deep connection with nature, where every visit contributes to the care and regeneration of the place.",  // ← NUEVO
     "glamping.cta": "Check availability",
-    "glamping.yurta1.title": "Ceibo Yurt",
-    "glamping.yurta1.p1": "A more open and luminous lodging experience, ideal for sharing moments of pause and observation.",
-    "glamping.yurta1.p2": "Its design favors ventilation, rest and connection with the natural surroundings.",
-    "glamping.yurta1.li1": "Cozy design with natural ventilation",
-    "glamping.yurta1.li2": "Rest and reading area in a quiet environment",
+
+    "glamping.yurta1.title": "Ceibo Yurt",                              // ← ACTUALIZADO (era "Yurta Ceibo")
+    "glamping.yurta1.p1": "A circular, warm and welcoming refuge, handcrafted with natural materials and details that celebrate the beauty of handmade things.",  // ← ACTUALIZADO
+    "glamping.yurta1.p2": "Its movable skylight allows you to open the roof and contemplate the sky and the stars from inside.",  // ← ACTUALIZADO
+    "glamping.yurta1.p3": "A space to rest, connect with nature and enjoy a different experience.",  // ← NUEVO
+    "glamping.yurta1.li1": "Kitchen and private bathroom",              // ← ACTUALIZADO
+    "glamping.yurta1.li2": "Wood stove + air conditioning",             // ← ACTUALIZADO
     "glamping.yurta1.li3": "Private bathroom with attention to detail",
-    "glamping.yurta1.li4": "View of the garden and nearby forest",
-    "glamping.yurta2.title": "Canelón Yurt",
-    "glamping.yurta2.p1": "A warm and serene refuge designed for two people, with a slow rhythm and a view towards the forest.",
-    "glamping.yurta2.p2": "The proposal combines rest, reading and direct connection with nature from a simple and elegant base.",
-    "glamping.yurta2.li1": "Compact kitchen with essential equipment",
-    "glamping.yurta2.li2": "Private bathroom and heating for cool nights",
-    "glamping.yurta2.li3": "Outdoor space to contemplate the landscape",
-    "glamping.yurta2.li4": "Intimate atmosphere for a quiet stay",
+    "glamping.yurta1.li4": "Skylight to observe the sky",               // ← ACTUALIZADO
+    "glamping.yurta1.li5": "Ecological water sanitation system",        // ← NUEVO
+    "glamping.yurta1.li6": "Composting area",                            // ← NUEVO
+    "glamping.yurta1.li7": "Garden with fire pit and pergola",           // ← ACTUALIZADO
+    "glamping.yurta1.li8": "Bedding and towels included",                // ← NUEVO
+
+    "glamping.yurta2.title": "Canelón Yurt",                            // ← ACTUALIZADO
+    "glamping.yurta2.p1": "A circular refuge with a rustic and simple spirit, handcrafted with natural and recycled materials, in direct contact with nature.",  // ← ACTUALIZADO
+    "glamping.yurta2.p2": "Capacity up to 4 people.",                    // ← NUEVO
+    "glamping.yurta2.li1": "Kitchen and private dry toilet",             // ← ACTUALIZADO
+    "glamping.yurta2.li2": "Wood stove + fan",                           // ← ACTUALIZADO
+    "glamping.yurta2.li3": "Skylight to observe the sky",                // ← NUEVO
+    "glamping.yurta2.li4": "Ecological water sanitation system",         // ← NUEVO
+    "glamping.yurta2.li5": "Composting area",                             // ← NUEVO
+    "glamping.yurta2.li6": "Outdoor garden with grill and pergola",      // ← ACTUALIZADO
+    "glamping.yurta2.li7": "Bedding and towels included",                 // ← NUEVO
+    "glamping.yurta2.p3": "A place to slow down, live simply and enjoy outdoor life.",  // ← NUEVO
+
+    /* ═══ EXPERIENCES · EN ═══ */
     "serv.eyebrow": "— Experiences",
     "serv.title": "A living space of<br><em>learning and culture</em>",
     "serv.p": "We develop proposals that integrate nature, regeneration, learning, culture and well-being, strengthening the bond between people and the territory.",
+
     "serv.1.t": "Regenerative Workshops & Experiences",
-    "serv.1.d": "Workshops and tours related to permaculture, natural building, agroecological gardening, medicinal plants and ecosystem regeneration.",
+    "serv.1.d": "We design and facilitate workshops and experiences inspired by the different petals of Permaculture: natural building, agroecological gardening, syntropic agriculture, ecological wastewater sanitation, medicinal plants, the ecology of relationships and other knowledge that helps us live more consciously and in connection with our environment.",  // ← ACTUALIZADO (traducción completa)
+
     "serv.2.t": "Cultural and Artistic Activities",
-    "serv.2.d": "Cultural gatherings, exhibitions, talks and creative workshops that strengthen the community fabric and the exchange of knowledge.",
+    "serv.2.d": "We create spaces for the encounter between art, culture and nature. We organize workshops, exhibitions, gatherings and experiences that awaken creativity, strengthen bonds and invite us to look at the world from new perspectives.",  // ← ACTUALIZADO
+
     "serv.3.t": "Agroecological Forest-Garden",
-    "serv.3.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.3.d": "Our garden is also a learning space. You can walk through it, learn how we grow, harvest food and, when the proposal allows, put your hands in the soil and actively take part in its processes.",  // ← ACTUALIZADO
+
     "serv.4.t": "Volunteering",
-    "serv.4.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.4.d": "We welcome people from different places interested in sharing and learning alongside us. We especially look for volunteers with experience or interest in permaculture, natural building and agroecological gardening, who want to get involved in the different tasks and processes of the project.",  // ← ACTUALIZADO
+
     "serv.5.t": "Guided visits",
-    "serv.5.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.5.d": "We open the doors of Timbó to those who want to learn about our experience up close. We lead tours of the space and conversations about permaculture, regenerative design and the practices we have developed over the years.",  // ← ACTUALIZADO
+
     "serv.6.t": "Conscious Café & Shop",
-    "serv.6.d": "A meeting space with artisanal products, local food and local economy and conscious consumption ventures.",
+    "serv.6.d": "We will soon open our cultural café: a new meeting space and a platform for cultural and regenerative proposals. The shop will offer a selection of local, artisanal and natural products, seeking to promote more conscious and responsible forms of consumption, while supporting the local and solidarity economy.",  // ← ACTUALIZADO
+
     "tall.eyebrow": "— Workshops & Events",
     "tall.title": "Upcoming<br><em>experiences</em>",
     "tall.p": "Workshops, gatherings and experiences to connect with the land, knowledge and community. Limited spots.",
@@ -1729,9 +1756,10 @@ var TRADUCCIONES = {
     "tall.filtro.experiencia": "Experiences",
     "tall.empty": "There are no workshops or events scheduled at the moment. Follow us on Instagram to find out about upcoming activities.",
     "tall.empty.cat": "No activities scheduled in this category at the moment.",
-    "cat.eyebrow": "— Products",
+
+    "cat.eyebrow": "— TIMBÓ HERBARIUM",                                // ← ACTUALIZADO (era "— Products")
     "cat.title": "Our<br><em>catalog</em>",
-    "cat.p": "Products made with love and respect for nature. <br> Handmade with natural ingredients and artisanal processes.",
+    "cat.p": "Products made with love and respect for nature. <br> Handmade with medicinal plants from our garden.",  // ← ACTUALIZADO (era "natural ingredients and artisanal processes")
     "cat.buscar": "Search:",
     "cat.buscar.ph": "Name or description...",
     "cat.categoria": "Category:",
@@ -1758,14 +1786,18 @@ var TRADUCCIONES = {
     "cat.stock": "Out of stock",
     "cat.agregar": "Add",
     "cat.no.disponible": "Not available",
+
+    /* ═══ ABOUT US · EN ═══ */
     "quienes.eyebrow": "— About us",
     "quienes.title": "Julia &<br><em>Martín</em>",
-    "quienes.p1": "Espacio Timbó was born in 2019 as a family life project driven by the desire to find more conscious and regenerative ways of inhabiting the world. Since then, we have dedicated our time and energy to designing, building and caring for this territory.",
-    "quienes.p2": "We believe in a way of life based on simplicity, self-sufficiency, the recovery of traditional knowledge and crafts, and continuous learning alongside nature.",
+    "quienes.p1": "Espacio Timbó was born in 2019 as a family life project driven by the desire to find more conscious and regenerative ways of inhabiting the world. Since then, we have dedicated our time and energy to designing, building and caring for this territory, integrating permaculture, natural building, regenerative tourism, environmental education and culture.",  // ← ACTUALIZADO
+    "quienes.p2": "We believe in a way of life based on simplicity, self-sufficiency, the recovery of traditional knowledge and crafts, and continuous learning alongside nature. Espacio Timbó is a living laboratory of experimentation, where we seek to demonstrate that it is possible to regenerate ecosystems while strengthening human and community bonds.",  // ← ACTUALIZADO
     "quienes.quote": '"A life project born from the desire to live in coherence with our values."',
+
     "res.eyebrow": "— Reviews",
     "res.title": "What our<br><em>guests</em> say",
     "res.btn": "See all reviews",
+
     "reservas.eyebrow": "— Bookings",
     "reservas.title": "Plan<br><em>your experience</em>",
     "reservas.checkin": "Check-in / Check-out",
@@ -1808,8 +1840,10 @@ var TRADUCCIONES = {
     "reservas.pago.p": "To confirm your booking, a <strong>50% deposit in advance</strong> is required. The remaining balance is paid at check-in. Once we receive your request, we will send you the amount and the corresponding payment link.",
     "reservas.pago.nota": "You can indicate your preferred method in the message or select it above, before sending the request.",
     "reservas.success": "Thank you for your booking! We will reply soon to confirm availability.",
+
     "contacto.eyebrow": "— Contact",
     "contacto.title": "Let's talk",
+
     "carrito.t": "🛒 Your Cart",
     "carrito.vacio": "Your cart is empty",
     "carrito.total": "Total:",
@@ -1817,6 +1851,7 @@ var TRADUCCIONES = {
     "carrito.nombre": "Full name",
     "carrito.email": "Email",
     "carrito.celular": "Phone",
+
     "footer.copy": "© 2025 Espacio Timbó · Santa Ana, Colonia, Uruguay"
   }
 };
