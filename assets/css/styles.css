@@ -537,6 +537,7 @@ section {
   line-height: 1.75;
   color: var(--gris);
   max-width: 56ch;
+  margin-bottom: 1.5rem;
 }
 .divider {
   width: 48px;

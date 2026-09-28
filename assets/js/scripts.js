@@ -8,7 +8,7 @@
    ═══════════════════════════════════════════════════════════════ */
 const TALLERES_EVENTOS = [
 
-  {
+ /*  {
     tipo: "experiencia",
     titulo: "PAISAJISMO CON PLANTAS NATIVAS",
     desc: "¿Cómo podemos crear jardines y paisajes más vivos, diversos y conectados con nuestro territorio? Te invitamos a compartir una charla con Alejandro Fuster, paisajista y técnico forestal de Colonia, para acercarnos al mundo de las plantas nativas y sus posibilidades en el diseño del paisaje. Una oportunidad para aprender, intercambiar conocimientos y descubrir cómo las especies de nuestro territorio pueden convertirse en protagonistas de jardines que atraigan vida, biodiversidad y belleza. ",
@@ -42,7 +42,7 @@ const TALLERES_EVENTOS = [
     imagen: "../assets/images/exposicion.jpg",
     whatsapp: true
   },
-   /* Descomentá y editá estos talleres cuando quieras mostrarlos:*/
+   Descomentá y editá estos talleres cuando quieras mostrarlos:*/
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1512,30 +1512,47 @@ var TRADUCCIONES = {
     "hero.cta2": "Conocer el proyecto",
     "que.eyebrow": "— Qué es ESPACIO TIMBÓ",
     "que.title": "Un proyecto<br><em>regenerativo</em>",
-    "que.p1": "Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la naturaleza.",
-    "que.p2": "Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad.",
-    "que.p3": "Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.",
+    "que.p1": "Espacio Timbó es un proyecto regenerativo ubicado en la costa de Colonia, Uruguay, que integra alojamiento, educación, arte, permacultura y diseño ecológico. Nació con el propósito de contribuir a la regeneración ecosocial del territorio que habitamos, promoviendo formas de vida en armonía con la naturaleza y fortaleciendo el vínculo entre las personas y su entorno.",
+    "que.p2": "Nuestro espacio está diseñado bajo principios de permacultura y regeneración, incorporando bioconstrucción, huerta orgánica, sistemas de saneamiento ecológico, manejo responsable de residuos y jardines que promueven la biodiversidad. Cada elemento del lugar busca demostrar que es posible habitar de manera consciente, reduciendo impactos y generando beneficios para la tierra y la comunidad.",
+    "que.p3": "Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento en yurtas construidas con materiales naturales, así como talleres, encuentros y actividades vinculadas al cuidado de la naturaleza, el aprendizaje comunitario y el bienestar integral.",
+    "que.p4": "Más que un destino turístico, Espacio Timbó es una invitación a reconectar con los ritmos de la naturaleza, disfrutar de la simplicidad y participar activamente en la construcción de un futuro más regenerativo.",
     "frase": '"Ponemos la vida en el centro para regenerar el territorio que habitamos y el vínculo que tenemos con él."',
     "glamping.eyebrow": "- Habitar la naturaleza",
     "glamping.title": " Glamping<br><em>Regenerativo</em>",
-    "glamping.p1": "Entre el bosque, el río y la playa de Santa Ana, ofrecemos experiencias de alojamiento en yurtas construidas artesanalmente con materiales naturales y reciclables.",
-    "glamping.p2": "Contamos con dos yurtas equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.",
-    "glamping.p3": "La experiencia incluye recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica y participar en talleres de prácticas regenerativas.",
+    "glamping.p1": " Nuestro alojamiento ofrece la experiencia de habitar una yurta en un entorno natural diseñado desde la permacultura y que ha sido regenerado desde hace 7 años mediante jardines agroforestales, especies nativas y prácticas de restauración ecológica.",
+    "glamping.p2": "Contamos con dos yurtas construidas artesanalmente con materiales naturales y reciclables, equipadas con cocina y baño privado, calefacción, ventilación y espacios exteriores para descansar, contemplar la naturaleza y compartir alrededor del fuego.",
+    "glamping.p3": "Cada detalle ha sido pensado con cuidado, integrando artesanías locales y objetos elaborados a mano que reflejan nuestro compromiso con la belleza, la simplicidad y el consumo consciente.",
+       "glamping.p4": "La experiencia incluye la posibilidad de recorrer el bosque y el río de Santa Ana, disfrutar de la playa, visitar la huerta agroecológica, participar en talleres y conocer prácticas regenerativas que forman parte de la vida cotidiana del proyecto.",
+    "glamping.p5": "Más que un alojamiento, proponemos una experiencia de conexión profunda con la naturaleza, donde cada visita contribuye al cuidado y regeneración del lugar.",
     "glamping.cta": "Ver disponibilidad",
     "glamping.yurta1.title": "Yurta Ceibo",
-    "glamping.yurta1.p1": "Una experiencia de alojamiento más abierta y luminosa, ideal para compartir momentos de pausa y observación.",
-    "glamping.yurta1.p2": "Su diseño favorece la ventilación, el descanso y el encuentro con el entorno natural que la rodea.",
-    "glamping.yurta1.li1": "Diseño acogedor con ventilación natural",
-    "glamping.yurta1.li2": "Zona de descanso y lectura en entorno tranquilo",
+    "glamping.yurta1.p1": "Un refugio circular, cálido y acogedor, construido artesanalmente con materiales naturales y detalles que celebran la belleza de lo hecho a mano.",
+    "glamping.yurta1.p2": "Su claraboya móvil permite abrir el techo y contemplar el cielo y las estrellas desde el interior.",
+    "glamping.yurta1.p3": "Un espacio para descansar, conectar con la naturaleza y disfrutar de una experiencia diferente.",
+    "glamping.yurta1.li1": "Cocina y baño privado",
+    "glamping.yurta1.li2": "Estufa a leña + aire acondicionado",
     "glamping.yurta1.li3": "Baño privado con atención al detalle",
-    "glamping.yurta1.li4": "Vista al conjunto de huerta y bosque cercano",
+    "glamping.yurta1.li4": "Claraboya para observar el cielo",
+    "glamping.yurta1.li5": "Sistema ecológico de saneamiento de aguas",
+    "glamping.yurta1.li6": "Zona de compostaje",
+    "glamping.yurta1.li7": "Jardín con fogón y pérgola",
+    "glamping.yurta1.li8": "Ropa de cama y toallas incluidas",
     "glamping.yurta2.title": "Yurta Canelón",
-    "glamping.yurta2.p1": "Un refugio cálido y sereno pensado para dos personas, con un ritmo pausado y una mirada hacia el bosque.",
-    "glamping.yurta2.p2": "La propuesta combina descanso, lectura y conexión directa con la naturaleza desde una base sencilla y elegante.",
-    "glamping.yurta2.li1": "Cocina compacta con equipamiento esencial",
-    "glamping.yurta2.li2": "Baño privado y calefacción para noches frescas",
-    "glamping.yurta2.li3": "Espacio exterior para contemplar el paisaje",
-    "glamping.yurta2.li4": "Ambiente íntimo para una estadía tranquila",
+    "glamping.yurta2.p1": "Un refugio circular de espíritu rústico y sencillo, construido artesanalmente con materiales naturales y reciclados, en contacto directo con la naturaleza.",
+    "glamping.yurta2.p2": "Capacidad hasta 4 personas.",
+    "glamping.yurta2.li1": "Cocina y baño seco privado",
+    "glamping.yurta2.li2": "Estufa a leña + ventilador",
+    "glamping.yurta2.li3": "Claraboya para observar el cielo",
+    "glamping.yurta2.li4": "Sistema ecológico de saneamiento de aguas",
+    "glamping.yurta2.li5": "Zona de compostaje",
+    "glamping.yurta2.li6": "Jardín exterior con parrilla y pérgola",
+    "glamping.yurta2.li7": "Ropa de cama y toallas incluidas",
+
+    "glamping.yurta2.p3": "Un lugar para bajar el ritmo, habitar con sencillez y disfrutar de la vida al aire libre.",
+
+
+
+
     "serv.eyebrow": "— Experiencias",
     "serv.title": "Un espacio vivo de<br><em>aprendizaje y cultura</em>",
     "serv.p": "Desarrollamos propuestas que integran naturaleza, regeneración, aprendizaje, cultura y bienestar, fortaleciendo el vínculo entre las personas y el territorio.",
