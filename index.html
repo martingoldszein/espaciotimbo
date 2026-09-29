@@ -251,12 +251,24 @@
   <!-- HERO -->
   <section class="hero" id="inicio">
     <div class="hero-slides" aria-hidden="true">
-      <div class="hero-slide hero-slide-1 is-active"></div>
-      <div class="hero-slide hero-slide-2"></div>
-      <div class="hero-slide hero-slide-3"></div>
-      <div class="hero-slide hero-slide-4"></div>
-      <div class="hero-slide hero-slide-5"></div>
-      <div class="hero-slide hero-slide-6"></div>
+      <div class="hero-slide hero-slide-1 is-active">
+        <div class="hero-slide-bg"></div>
+      </div>
+      <div class="hero-slide hero-slide-2">
+        <div class="hero-slide-bg"></div>
+      </div>
+      <div class="hero-slide hero-slide-3">
+        <div class="hero-slide-bg"></div>
+      </div>
+      <div class="hero-slide hero-slide-4">
+        <div class="hero-slide-bg"></div>
+      </div>
+      <div class="hero-slide hero-slide-5">
+        <div class="hero-slide-bg"></div>
+      </div>
+      <div class="hero-slide hero-slide-6">
+        <div class="hero-slide-bg"></div>
+      </div>
     </div>
 
     <div class="hero-overlay"></div>
@@ -816,16 +828,18 @@
       <div class="quienes-bios">
         <div>
           <p class="bio-nombre">Julia Mendoza</p>
-          <p class="bio-rol">Antropóloga · Permacultora · Fotógrafa</p>
-          <p class="bio-texto">Antropóloga y politóloga graduada en la Universidad de los Andes (Colombia), con Maestría
+          <p class="bio-rol" data-i18n="bio.rol.julia">Antropóloga · Permacultora · Fotógrafa</p>
+          <p class="bio-texto" data-i18n="bio.text.julia">Antropóloga y politóloga graduada en la Universidad de los
+            Andes (Colombia), con Maestría
             en Medio Ambiente en la Universidad Complutense de Madrid. Trabajó en investigación socioambiental con el
             Instituto Humboldt, FAO y el Programa Mundial de Alimentos. Desde 2019 impulsa Espacio Timbó integrando
             permacultura, bioconstrucción y diseño agroforestal.</p>
         </div>
         <div>
           <p class="bio-nombre">Martín Goldszein</p>
-          <p class="bio-rol">Permacultor · Carpintero · Diseñador</p>
-          <p class="bio-texto">Permacultor, carpintero, herrero y constructor principal de la infraestructura de Espacio
+          <p class="bio-rol" data-i18n="bio.rol.martin">Permacultor · Carpintero · Diseñador</p>
+          <p class="bio-texto" data-i18n="bio.text.martin">Permacultor, carpintero, herrero y constructor principal de
+            la infraestructura de Espacio
             Timbó. Diseñador gráfico y programador web de formación, con experiencia en electricidad, sanitaria y
             soluciones para proyectos sustentables. Ha participado en voluntariados y aprendizajes vinculados a la
             permacultura en Latinoamérica.</p>
@@ -1071,7 +1085,8 @@
       <h2 class="section-title contacto-title" data-i18n="contacto.title">Hablemos</h2>
       <div class="divider"></div>
       <div class="contacto-datos">
-        <a href="https://maps.app.goo.gl/pYwv2KDHUouxFxEA6" target="_blank" class="contacto-dato">
+        <a href="https://maps.app.goo.gl/pYwv2KDHUouxFxEA6" target="_blank" class="contacto-dato"
+          data-i18n="contacto.map">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -1130,6 +1145,49 @@
     class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp a Espacio Timbó">
     <i class="fab fa-whatsapp" style="font-size: 24px;"></i>
   </a>
+  <!-- ═══════════════════════════════════════════════════════
+     MODAL DE PRODUCTO
+     ═══════════════════════════════════════════════════════ -->
+  <div class="modal-producto" id="modal-producto" hidden>
+    <div class="modal-producto-overlay" data-cerrar-modal></div>
+
+    <div class="modal-producto-contenido" role="dialog" aria-modal="true" aria-labelledby="modal-prod-nombre">
+      <!-- Botón cerrar -->
+      <button class="modal-producto-cerrar" type="button" aria-label="Cerrar" data-cerrar-modal>✕</button>
+
+      <div class="modal-producto-grid">
+        <!-- ── Columna izquierda: slideshow ── -->
+        <div class="modal-prod-slideshow">
+          <div class="modal-prod-slides" id="modal-prod-slides">
+            <!-- JS inyecta los slides -->
+          </div>
+
+          <!-- Botones prev/next -->
+          <button class="modal-prod-nav prev" type="button" aria-label="Anterior" id="modal-prod-prev">‹</button>
+          <button class="modal-prod-nav next" type="button" aria-label="Siguiente" id="modal-prod-next">›</button>
+
+          <!-- Dots de paginado -->
+          <div class="modal-prod-dots" id="modal-prod-dots"></div>
+        </div>
+
+        <!-- ── Columna derecha: info ── -->
+        <div class="modal-prod-info">
+          <span class="modal-prod-categoria" id="modal-prod-categoria"></span>
+          <h2 class="modal-prod-nombre" id="modal-prod-nombre"></h2>
+          <p class="modal-prod-precio" id="modal-prod-precio"></p>
+          <div class="modal-prod-divider"></div>
+          <p class="modal-prod-descripcion" id="modal-prod-descripcion"></p>
+
+          <div class="modal-prod-footer">
+            <button class="modal-prod-agregar" id="modal-prod-agregar" type="button">
+              <i class="fas fa-plus"></i> Agregar al carrito
+            </button>
+            <span class="modal-prod-stock" id="modal-prod-stock"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

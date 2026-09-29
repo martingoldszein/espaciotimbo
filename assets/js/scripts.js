@@ -60,7 +60,11 @@ const OCUPADOS_ICAL = {
    3. DATOS · PRODUCTOS DEL CATÁLOGO
    ═══════════════════════════════════════════════════════════════ */
 const PRODUCTOS_BASE = [
-  { id: 1,  nombre: 'Aceite de Cannabis',                                categoria: 'aceites',  precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.',                       imagen: 'assets/images/productos/aceite-calendula.jpg',   stock: false },
+  { id: 1,  nombre: 'Aceite de Cannabis',categoria: 'aceites',  precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.',                       imagen: 'assets/images/productos/aceite-calendula.jpg',   stock: false },
+
+
+
+
   { id: 5,  nombre: 'Pomada de Caléndula & Cannabis',                    categoria: 'pomadas',  precio: 380, descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.',                        imagen: 'assets/images/productos/pomada-calendula.jpg',   stock: true  },
   { id: 9,  nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela', categoria: 'jabones',  precio: 280, descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.',                              imagen: 'assets/images/productos/jabon-lavanda.jpg',      stock: true  },
   { id: 13, nombre: 'Tintura de MBURUCUYÁ',                              categoria: 'tinturas', precio: 320, descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.',                     imagen: 'assets/images/productos/tintura-propoleo.jpg',   stock: true  },
@@ -236,53 +240,51 @@ function setupHeroSlideshow() {
   let currentIndex = 0;
   let intervalId = null;
 
-  function goToSlide(index) {
-    // Quitar is-active del slide anterior
-    slides[currentIndex].classList.remove('is-active');
-    dots[currentIndex]?.classList.remove('is-active');
+  // Estado inicial
+  slides.forEach((s, i) => s.classList.toggle('is-active', i === 0));
+  dots.forEach((d, i) => d.classList.toggle('is-active', i === 0));
 
-    // Actualizar índice
-    currentIndex = (index + slides.length) % slides.length;
+function goToSlide(index) {
+  const next = (index + slides.length) % slides.length;
+  if (next === currentIndex) return;
 
-    // Activar el nuevo slide
-    // ⚠️ Truco: forzamos reflow para reiniciar la animación Ken Burns
-    const newSlide = slides[currentIndex];
-    newSlide.style.animation = 'none';
-    void newSlide.offsetWidth; // reflow
-    newSlide.style.animation = '';
-    newSlide.classList.add('is-active');
+  // 1. Desactivar el slide actual
+  slides[currentIndex].classList.remove('is-active');
+  dots[currentIndex]?.classList.remove('is-active');
 
-    dots[currentIndex]?.classList.add('is-active');
-  }
+  currentIndex = next;
+
+  // 2. Activar el siguiente slide
+  slides[currentIndex].classList.add('is-active');
+  dots[currentIndex]?.classList.add('is-active');
+
+  // 3. 🔑 CLAVE: Forzar un reflow para limpiar el estado residual
+  //    Esto hace que el navegador "olvide" cualquier transformación
+  //    del slide anterior y arranque la animación desde cero.
+  void slides[currentIndex].offsetWidth;
+}
 
   function startAutoplay() {
     if (intervalId) clearInterval(intervalId);
-    intervalId = setInterval(() => {
-      goToSlide(currentIndex + 1);
-    }, 6500); // 6.5s por slide (más que antes, porque el Ken Burns dura 9s)
+    intervalId = setInterval(() => goToSlide(currentIndex + 1), 6500);
   }
 
-  // Click en los dots
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
       goToSlide(i);
-      startAutoplay(); // reiniciar el timer
+      startAutoplay();
     });
   });
 
-  // Pausar autoplay cuando el usuario hace hover sobre el hero
   const heroSection = document.querySelector('.hero');
   if (heroSection) {
     heroSection.addEventListener('mouseenter', () => {
       if (intervalId) clearInterval(intervalId);
       intervalId = null;
     });
-    heroSection.addEventListener('mouseleave', () => {
-      startAutoplay();
-    });
+    heroSection.addEventListener('mouseleave', startAutoplay);
   }
 
-  // Pausar autoplay cuando la pestaña no está visible (ahorra recursos)
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       if (intervalId) clearInterval(intervalId);
@@ -292,11 +294,10 @@ function setupHeroSlideshow() {
     }
   });
 
-  // Arrancar
   startAutoplay();
 }
 
-window.addEventListener('load', setupHeroSlideshow);
+
 
 function setupGlampingSlideshow() {
   const slides = document.querySelectorAll('.glamping-slide');
@@ -775,7 +776,10 @@ function renderizarProductos() {
         </button>`;
 
     return `
-      <div class="producto-card ${stockClass}" data-id="${p.id}">
+      <div class="producto-card ${stockClass}" data-id="${p.id}"
+        onclick="abrirModalProducto(${p.id})"
+        role="button" tabindex="0"
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirModalProducto(${p.id});}">
         <div class="producto-imagen">
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/images/productos/placeholder.jpg'">
           ${stockBadge}
@@ -1290,6 +1294,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // Formulario de reservas
   initFormReservas();
 
+  // modal productos
+  initModalProductoListeners();
+
   // ── Listeners de filtros del catálogo ──
   const inputFiltro = document.getElementById('filtroTexto');
   const selectOrden = document.getElementById('filtroOrden');
@@ -1611,6 +1618,12 @@ var TRADUCCIONES = {
     "quienes.p1": "Espacio Timbó nació en 2019 como un proyecto de vida familiar impulsado por el deseo de encontrar formas más conscientes y regenerativas de habitar el mundo. Desde entonces, hemos dedicado nuestro tiempo y energía a diseñar, construir y cuidar este territorio, integrando permacultura, bioconstrucción, turismo regenerativo, educación ambiental y cultura.",
     "quienes.p2": "Creemos en una forma de vida basada en la simplicidad, la autosuficiencia, la recuperación de saberes y oficios tradicionales, y el aprendizaje continuo junto a la naturaleza. Espacio Timbó es un laboratorio vivo de experimentación, donde buscamos demostrar que es posible regenerar los ecosistemas mientras fortalecemos los vínculos humanos y comunitarios.",
     "quienes.quote": '"Un proyecto de vida que nace del deseo de vivir en coherencia con nuestros valores."',
+    "bio.rol.julia": "Antropóloga · Permacultora · Fotógrafa",
+    "bio.text.julia": "Antropóloga y politóloga graduada en la Universidad de los Andes (Colombia), con Maestría en Medio Ambiente en la Universidad Complutense de Madrid. Trabajó en investigación socioambiental con el Instituto Humboldt, FAO y el Programa Mundial de Alimentos. Desde 2019 impulsa Espacio Timbó integrando permacultura, bioconstrucción y diseño agroforestal.",
+    "bio.rol.martin": "Permacultor · Carpintero · Diseñador",
+    "bio.text.martin": "Permacultor, carpintero, herrero y constructor principal de la infraestructura de Espacio Timbó. Diseñador gráfico y programador web de formación, con experiencia en electricidad, sanitaria y soluciones para proyectos sustentables. Ha participado en voluntariados y aprendizajes vinculados a la permacultura en Latinoamérica.",
+
+
     "res.eyebrow": "— Reseñas",
     "res.title": " Lo que dicen nuestros <br><em>huéspedes</em>",
     "res.btn": "Ver todas las reseñas",
@@ -1658,6 +1671,7 @@ var TRADUCCIONES = {
     "reservas.success": "¡Gracias por tu reserva! Te responderemos pronto para confirmar disponibilidad.",
     "contacto.eyebrow": "— Contacto",
     "contacto.title": "Hablemos",
+        "contacto.map": "Estamos ubicados en Balneario Santa Ana, Colonia. </br>         A 20 km. de Colonia del Sacramento, a 1 hora de Buenos Aires y a 2 horas de Montevideo.6",
     "carrito.t": "🛒 Tu Carrito",
     "carrito.vacio": "El carrito está vacío",
     "carrito.total": "Total:",
@@ -1793,7 +1807,10 @@ var TRADUCCIONES = {
     "quienes.p1": "Espacio Timbó was born in 2019 as a family life project driven by the desire to find more conscious and regenerative ways of inhabiting the world. Since then, we have dedicated our time and energy to designing, building and caring for this territory, integrating permaculture, natural building, regenerative tourism, environmental education and culture.",  // ← ACTUALIZADO
     "quienes.p2": "We believe in a way of life based on simplicity, self-sufficiency, the recovery of traditional knowledge and crafts, and continuous learning alongside nature. Espacio Timbó is a living laboratory of experimentation, where we seek to demonstrate that it is possible to regenerate ecosystems while strengthening human and community bonds.",  // ← ACTUALIZADO
     "quienes.quote": '"A life project born from the desire to live in coherence with our values."',
-
+    "bio.rol.julia": "Anthropologist · Permaculturist · Photographer",
+    "bio.text.julia": "Anthropologist and politologist graduated in the University of the Andes (Colombia), with a Master in Medio Ambiente in the Universidad Complutense de Madrid. Worked in socio-environmental research with the Instituto Humboldt, FAO and the Programa Mundial de Alimentos. Since 2019, he has been leading Espacio Timbó by integrating permaculture, bioconstruction and agroforestry design.",
+    "bio.rol.martin": "Permaculturist · Carpenter · Designer",
+    "bio.text.martin": "Permaculturist, carpenter, herdsman and main constructor of the infrastructure of Espacio Timbó. Graphic designer and web programmer with experience in electricity, sanitary and sustainable solutions for sustainable projects. He has participated in voluntary and learning activities linked to permaculture in Latin America.",
     "res.eyebrow": "— Reviews",
     "res.title": "What our<br><em>guests</em> say",
     "res.btn": "See all reviews",
@@ -1843,7 +1860,7 @@ var TRADUCCIONES = {
 
     "contacto.eyebrow": "— Contact",
     "contacto.title": "Let's talk",
-
+    "contacto.map": "We are located in Balneario Santa Ana, Colonia. </br> A 20 km. from Colonia del Sacramento, 1 hour from Buenos Aires and 2 hours from Montevideo.",
     "carrito.t": "🛒 Your Cart",
     "carrito.vacio": "Your cart is empty",
     "carrito.total": "Total:",
@@ -2030,3 +2047,186 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+/* ═══════════════════════════════════════════════════════════════
+   MODAL DE PRODUCTO · Slideshow manual + Add to cart
+   ═══════════════════════════════════════════════════════════════ */
+const modalProdState = {
+  producto: null,
+  slideActual: 0,
+  totalSlides: 0
+};
+
+function abrirModalProducto(productoId) {
+  const lista = (window.productos && window.productos.length) ? window.productos : PRODUCTOS_BASE;
+  const producto = lista.find(p => p.id === productoId);
+  if (!producto) return;
+
+  modalProdState.producto = producto;
+  modalProdState.slideActual = 0;
+
+  // Imágenes: si tiene array `imagenes`, usarlas; si no, solo la principal
+  const imagenes = (producto.imagenes && producto.imagenes.length)
+    ? producto.imagenes
+    : [producto.imagen];
+
+  modalProdState.totalSlides = imagenes.length;
+
+  // ── Render slides ──
+  const slidesEl = document.getElementById('modal-prod-slides');
+  if (slidesEl) {
+    slidesEl.innerHTML = imagenes.map((src, i) => `
+      <div class="modal-prod-slide ${i === 0 ? 'is-active' : ''}" data-index="${i}">
+        <img src="${src}" alt="${producto.nombre} - imagen ${i + 1}"
+             onerror="this.src='assets/images/productos/placeholder.jpg'">
+      </div>
+    `).join('');
+  }
+
+  // ── Render dots ──
+  const dotsEl = document.getElementById('modal-prod-dots');
+  if (dotsEl) {
+    if (imagenes.length > 1) {
+      dotsEl.hidden = false;
+      dotsEl.innerHTML = imagenes.map((_, i) => `
+        <button class="modal-prod-dot ${i === 0 ? 'is-active' : ''}"
+                type="button" data-dot="${i}" aria-label="Ir a imagen ${i + 1}"></button>
+      `).join('');
+    } else {
+      dotsEl.hidden = true;
+      dotsEl.innerHTML = '';
+    }
+  }
+
+  // ── Mostrar/ocultar flechas si hay 1 sola imagen ──
+  const prevBtn = document.getElementById('modal-prod-prev');
+  const nextBtn = document.getElementById('modal-prod-next');
+  const mostrarNav = imagenes.length > 1;
+  if (prevBtn) prevBtn.hidden = !mostrarNav;
+  if (nextBtn) nextBtn.hidden = !mostrarNav;
+
+  // ── Rellenar info ──
+  document.getElementById('modal-prod-categoria').textContent = producto.categoria || '';
+  document.getElementById('modal-prod-nombre').textContent = producto.nombre || '';
+  document.getElementById('modal-prod-precio').textContent = `$${producto.precio}`;
+
+  // Descripción larga si existe, si no la corta
+  const descLarga = producto.descripcionLarga || producto.descripcion || '';
+  document.getElementById('modal-prod-descripcion').textContent = descLarga;
+
+  // ── Stock / botón agregar ──
+  const btnAgregar = document.getElementById('modal-prod-agregar');
+  const stockEl = document.getElementById('modal-prod-stock');
+  const tieneStock = producto.stock !== false;
+
+  if (btnAgregar) {
+    btnAgregar.disabled = !tieneStock;
+    btnAgregar.innerHTML = tieneStock
+      ? '<i class="fas fa-plus"></i> Agregar al carrito'
+      : '<i class="fas fa-times"></i> No disponible';
+    btnAgregar.onclick = () => {
+      agregarAlCarrito(producto.id);
+    };
+  }
+
+  if (stockEl) {
+    stockEl.textContent = tieneStock ? '✓ Disponible' : 'Sin stock';
+    stockEl.classList.toggle('ok', tieneStock);
+  }
+
+  // ── Abrir modal ──
+  const modal = document.getElementById('modal-producto');
+  if (modal) {
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function cerrarModalProducto() {
+  const modal = document.getElementById('modal-producto');
+  if (modal) modal.hidden = true;
+  document.body.style.overflow = '';
+  modalProdState.producto = null;
+  modalProdState.slideActual = 0;
+}
+
+function irASlideModal(index) {
+  const slides = document.querySelectorAll('#modal-prod-slides .modal-prod-slide');
+  const dots = document.querySelectorAll('#modal-prod-dots .modal-prod-dot');
+  if (!slides.length) return;
+
+  const total = slides.length;
+  const nuevo = (index + total) % total;
+
+  slides[modalProdState.slideActual]?.classList.remove('is-active');
+  dots[modalProdState.slideActual]?.classList.remove('is-active');
+
+  modalProdState.slideActual = nuevo;
+
+  slides[nuevo]?.classList.add('is-active');
+  dots[nuevo]?.classList.add('is-active');
+}
+function initModalProductoListeners() {
+  // ── Cerrar modal: click en cualquier elemento con [data-cerrar-modal] ──
+  document.addEventListener('click', (e) => {
+    // Cerrar con botón ✕, overlay, o cualquier [data-cerrar-modal]
+    if (e.target.closest('[data-cerrar-modal]')) {
+      cerrarModalProducto();
+      return;
+    }
+
+    // Flechas y dots del modal (delegación)
+    const modal = document.getElementById('modal-producto');
+    if (!modal || modal.hidden) return;
+
+    if (e.target.closest('#modal-prod-prev')) {
+      irASlideModal(modalProdState.slideActual - 1);
+      return;
+    }
+    if (e.target.closest('#modal-prod-next')) {
+      irASlideModal(modalProdState.slideActual + 1);
+      return;
+    }
+    const dot = e.target.closest('[data-dot]');
+    if (dot) {
+      irASlideModal(parseInt(dot.dataset.dot));
+      return;
+    }
+
+    // Cerrar si hacen click en el overlay (fuera del contenido)
+    if (e.target.classList.contains('modal-producto-overlay')) {
+      cerrarModalProducto();
+    }
+  });
+
+  // ── Teclado: ESC cierra, ← → navegan ──
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('modal-producto');
+    if (!modal || modal.hidden) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      cerrarModalProducto();
+    }
+    if (e.key === 'ArrowLeft')  irASlideModal(modalProdState.slideActual - 1);
+    if (e.key === 'ArrowRight') irASlideModal(modalProdState.slideActual + 1);
+  });
+
+  // ── Swipe táctil ──
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    const modal = document.getElementById('modal-producto');
+    if (!modal || modal.hidden) return;
+    if (!e.target.closest('.modal-prod-slideshow')) return;
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const modal = document.getElementById('modal-producto');
+    if (!modal || modal.hidden) return;
+    if (!e.target.closest('.modal-prod-slideshow')) return;
+    const delta = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) < 40) return;
+    if (delta < 0) irASlideModal(modalProdState.slideActual + 1);
+    else irASlideModal(modalProdState.slideActual - 1);
+  }, { passive: true });
+}
