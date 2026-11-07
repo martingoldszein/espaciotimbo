@@ -429,6 +429,8 @@
             <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-06.jpg" alt="Yurta Ceibo 06"></div>
             <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-07.jpg" alt="Yurta Ceibo 07"></div>
             <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-08.jpg" alt="Yurta Ceibo 08"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-09.jpg" alt="Yurta Ceibo 07"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-10.jpg" alt="Yurta Ceibo 08"></div>
             <div class="yurta-slide-controls">
               <button type="button" class="yurta-slide-btn prev"><i
                   class="fa-solid fa-circle-chevron-left"></i></button>
@@ -659,14 +661,7 @@
               <label class="filtro-label" for="filtroCategoria" data-i18n="cat.categoria">Categoría:</label>
               <div class="filtro-orden">
                 <select id="filtroCategoria">
-                  <option value="todos" data-i18n="cat.cat.todos">Todas las categorías</option>
-                  <option value="aceites" data-i18n="cat.cat.aceites">Aceites</option>
-                  <option value="pomadas" data-i18n="cat.cat.pomadas">Pomadas</option>
-                  <option value="jabones" data-i18n="cat.cat.jabones">Jabones</option>
-                  <option value="tinturas" data-i18n="cat.cat.tinturas">Tinturas</option>
-                  <option value="sahunos" data-i18n="cat.cat.sahunos">Sahúmos</option>
-                  <option value="hierbas" data-i18n="cat.cat.hierbas">Hierbas Medicinales</option>
-                  <option value="semillas" data-i18n="cat.cat.semillas">Semillas y Plantines</option>
+                  <!-- Las opciones se generan dinámicamente con JS -->
                 </select>
               </div>
             </div>
@@ -719,7 +714,18 @@
         </button>
       </div>
     </div>
-
+    <!-- ⬇️ ACÁ VA LA SECCIÓN DE CATEGORÍAS ⬇️ -->
+    <div class="admin-categorias">
+      <div class="admin-categorias-header">
+        <h3><i class="fas fa-tags"></i> Categorías</h3>
+        <button class="admin-btn-small" onclick="agregarCategoria()">
+          <i class="fas fa-plus"></i> Nueva categoría
+        </button>
+      </div>
+      <div class="admin-categorias-list" id="adminCategoriasList">
+        <!-- Generado por JS -->
+      </div>
+    </div>
     <div class="admin-toolbar">
       <div class="admin-search">
         <input type="text" id="adminSearch" placeholder="🔍 Buscar productos..." oninput="filtrarAdmin()">
@@ -728,6 +734,53 @@
         <span>Total: <strong id="adminTotal">0</strong></span>
         <span>Con stock: <strong id="adminStock">0</strong></span>
         <span>Sin stock: <strong id="adminSinStock">0</strong></span>
+      </div>
+    </div>
+    <!-- Sección de categorías -->
+    <div class="admin-categorias">
+      <div class="admin-categorias-header">
+        <h3><i class="fas fa-tags"></i> Categorías</h3>
+        <button class="admin-btn-small" onclick="agregarCategoria()">
+          <i class="fas fa-plus"></i> Nueva categoría
+        </button>
+      </div>
+      <div class="admin-categorias-list" id="adminCategoriasList">
+        <!-- Generado por JS -->
+      </div>
+    </div>
+
+    <!-- Modal para editar/crear categoría -->
+    <div id="editCategoriaModal" class="modal-overlay" hidden>
+      <div class="edit-container">
+        <div class="edit-card">
+          <div class="edit-header">
+            <h2 id="editCategoriaTitle">✏️ Editar categoría</h2>
+            <button class="edit-close" onclick="cerrarEditCategoria()">✕</button>
+          </div>
+          <form id="editCategoriaForm" onsubmit="guardarCategoria(event)">
+            <input type="hidden" id="editCategoriaId">
+            <div class="edit-grid">
+              <div class="edit-field">
+                <label for="editCategoriaEs">Nombre en español *</label>
+                <input type="text" id="editCategoriaEs" required>
+              </div>
+              <div class="edit-field">
+                <label for="editCategoriaEn">Nombre en inglés</label>
+                <input type="text" id="editCategoriaEn">
+              </div>
+              <div class="edit-field">
+                <label for="editCategoriaOrden">Orden</label>
+                <input type="number" id="editCategoriaOrden" min="1" step="1" value="99">
+              </div>
+            </div>
+            <div class="edit-actions">
+              <button type="button" class="btn-secondary" onclick="cerrarEditCategoria()">Cancelar</button>
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-save"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -767,13 +820,7 @@
             <div class="edit-field">
               <label for="editCategoria">Categoría *</label>
               <select id="editCategoria" required>
-                <option value="aceites">Aceites</option>
-                <option value="pomadas">Pomadas</option>
-                <option value="jabones">Jabones</option>
-                <option value="tinturas">Tinturas</option>
-                <option value="sahunos">Sahúmos</option>
-                <option value="hierbas">Hierbas Medicinales</option>
-                <option value="semillas">Semillas y Plantines</option>
+                <!-- Generado por JS -->
               </select>
             </div>
             <div class="edit-field">
@@ -1145,38 +1192,42 @@
     class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp a Espacio Timbó">
     <i class="fab fa-whatsapp" style="font-size: 24px;"></i>
   </a>
-  <!-- ═══════════════════════════════════════════════════════
-     MODAL DE PRODUCTO
-     ═══════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════
+     MODAL DE PRODUCTO · Slideshow manual + Agregar al carrito
+     ═══════════════════════════════════════════════════════════ -->
   <div class="modal-producto" id="modal-producto" hidden>
     <div class="modal-producto-overlay" data-cerrar-modal></div>
 
     <div class="modal-producto-contenido" role="dialog" aria-modal="true" aria-labelledby="modal-prod-nombre">
+
       <!-- Botón cerrar -->
       <button class="modal-producto-cerrar" type="button" aria-label="Cerrar" data-cerrar-modal>✕</button>
 
       <div class="modal-producto-grid">
-        <!-- ── Columna izquierda: slideshow ── -->
+
+        <!-- ─── Columna izquierda: slideshow ─── -->
         <div class="modal-prod-slideshow">
           <div class="modal-prod-slides" id="modal-prod-slides">
-            <!-- JS inyecta los slides -->
+            <!-- JS inyecta los slides aquí -->
           </div>
 
-          <!-- Botones prev/next -->
-          <button class="modal-prod-nav prev" type="button" aria-label="Anterior" id="modal-prod-prev">‹</button>
-          <button class="modal-prod-nav next" type="button" aria-label="Siguiente" id="modal-prod-next">›</button>
+          <button class="modal-prod-nav prev" type="button" aria-label="Imagen anterior" id="modal-prod-prev">‹</button>
 
-          <!-- Dots de paginado -->
+          <button class="modal-prod-nav next" type="button" aria-label="Imagen siguiente"
+            id="modal-prod-next">›</button>
+
           <div class="modal-prod-dots" id="modal-prod-dots"></div>
         </div>
 
-        <!-- ── Columna derecha: info ── -->
+        <!-- ─── Columna derecha: info ─── -->
         <div class="modal-prod-info">
           <span class="modal-prod-categoria" id="modal-prod-categoria"></span>
           <h2 class="modal-prod-nombre" id="modal-prod-nombre"></h2>
           <p class="modal-prod-precio" id="modal-prod-precio"></p>
+
           <div class="modal-prod-divider"></div>
-          <p class="modal-prod-descripcion" id="modal-prod-descripcion"></p>
+
+          <div class="modal-prod-descripcion" id="modal-prod-descripcion"></div>
 
           <div class="modal-prod-footer">
             <button class="modal-prod-agregar" id="modal-prod-agregar" type="button">
@@ -1185,6 +1236,7 @@
             <span class="modal-prod-stock" id="modal-prod-stock"></span>
           </div>
         </div>
+
       </div>
     </div>
   </div>

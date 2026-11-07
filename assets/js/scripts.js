@@ -60,27 +60,261 @@ const OCUPADOS_ICAL = {
    3. DATOS · PRODUCTOS DEL CATÁLOGO
    ═══════════════════════════════════════════════════════════════ */
 const PRODUCTOS_BASE = [
-  { id: 1,  nombre: 'Aceite de Cannabis',categoria: 'aceites',  precio: 450, descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.',                       imagen: 'assets/images/productos/aceite-calendula.jpg',   stock: false },
-
-
-
-
-  { id: 5,  nombre: 'Pomada de Caléndula & Cannabis',                    categoria: 'pomadas',  precio: 380, descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.',                        imagen: 'assets/images/productos/pomada-calendula.jpg',   stock: true  },
-  { id: 9,  nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela', categoria: 'jabones',  precio: 280, descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.',                              imagen: 'assets/images/productos/jabon-lavanda.jpg',      stock: true  },
-  { id: 13, nombre: 'Tintura de MBURUCUYÁ',                              categoria: 'tinturas', precio: 320, descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.',                     imagen: 'assets/images/productos/tintura-propoleo.jpg',   stock: true  },
-  { id: 14, nombre: 'Tintura de MILENRAMA',                              categoria: 'tinturas', precio: 350, descripcion: 'Tintura de equinácea para reforzar defensas.',                                                   imagen: 'assets/images/productos/tintura-equipacea.jpg',  stock: true  },
-  { id: 15, nombre: 'Tintura de ARTEMISIA',                              categoria: 'tinturas', precio: 310, descripcion: 'Tintura de ajo, antibiótico natural.',                                                           imagen: 'assets/images/productos/tintura-ajo.jpg',        stock: false },
-  { id: 16, nombre: 'Sahúmo de Salvia',                                  categoria: 'sahunos',  precio: 250, descripcion: 'Sahúmo de salvia blanca para limpieza energética.',                                              imagen: 'assets/images/productos/sahumo-salvia.jpg',      stock: true  },
-  { id: 17, nombre: 'Sahúmo de Palo Santo',                              categoria: 'sahunos',  precio: 300, descripcion: 'Palo Santo para aromaterapia y meditación.',                                                     imagen: 'assets/images/productos/sahumo-palo.jpg',        stock: true  },
-  { id: 18, nombre: 'Sahúmo de Romero',                                  categoria: 'sahunos',  precio: 230, descripcion: 'Sahúmo de romero para claridad mental.',                                                         imagen: 'assets/images/productos/sahumo-romero.jpg',      stock: false },
-  { id: 19, nombre: 'Manzanilla',                                        categoria: 'hierbas',  precio: 180, descripcion: 'Flores de manzanilla secas, digestivas y relajantes.',                                           imagen: 'assets/images/productos/hierba-manzanilla.jpg',   stock: true  },
-  { id: 20, nombre: 'Menta',                                             categoria: 'hierbas',  precio: 160, descripcion: 'Hojas de menta secas, aromáticas y digestivas.',                                                 imagen: 'assets/images/productos/hierba-menta.jpg',       stock: true  },
-  { id: 21, nombre: 'Hipérico',                                          categoria: 'hierbas',  precio: 200, descripcion: 'Planta de hipérico seca, para infusiones calmantes.',                                            imagen: 'assets/images/productos/hierba-hiperico.jpg',    stock: false },
-  { id: 22, nombre: 'Romero',                                            categoria: 'hierbas',  precio: 170, descripcion: 'Romero seco, estimulante y antioxidante.',                                                       imagen: 'assets/images/productos/hierba-romero.jpg',      stock: true  },
-  { id: 23, nombre: 'Semillas de Aromáticas (mix)',                      categoria: 'semillas', precio: 220, descripcion: 'Mix de semillas de albahaca, perejil, cilantro y eneldo.',                                       imagen: 'assets/images/productos/semillas-aromaticas.jpg',stock: true  },
-  { id: 24, nombre: 'Plantín de Lavanda',                                categoria: 'semillas', precio: 350, descripcion: 'Plantín de lavanda para tu jardín o maceta.',                                                    imagen: 'assets/images/productos/plantin-lavanda.jpg',    stock: true  },
-  { id: 25, nombre: 'Semillas de Caléndula',                             categoria: 'semillas', precio: 190, descripcion: 'Semillas de caléndula, flor medicinal y ornamental.',                                            imagen: 'assets/images/productos/semillas-calendula.jpg', stock: false },
-  { id: 26, nombre: 'Plantín de Romero',                                 categoria: 'semillas', precio: 320, descripcion: 'Plantín de romero para cultivar en casa.',                                                       imagen: 'assets/images/productos/plantin-romero.jpg',     stock: true  }
+  {
+    id: 1,
+    nombre: 'Aceite de Cannabis',
+    categoria: 'aceites',
+    precio: 450,
+    descripcion: 'Aceite macerado de caléndula, ideal para pieles sensibles y irritadas.',
+    descripcionLarga: 'Aceite elaborado artesanalmente mediante maceración lenta de flores de caléndula y cannabis en aceite de oliva orgánico, durante al menos 40 días al sol.\n\nEs un aceite nutritivo y calmante, ideal para pieles sensibles, irritadas o con tendencia a la sequedad. Ayuda a reducir inflamaciones, calmar rojeces y promover la regeneración natural de la piel.\n\nModo de uso: aplicar unas gotas sobre la zona deseada con un suave masaje, hasta que se absorba por completo. Puede usarse en rostro, cuerpo y manos.\n\nIngredientes: aceite de oliva orgánico, flores de caléndula, flores de cannabis, vitamina E natural.\n\nContenido: 30 ml.',
+    imagen: 'assets/images/productos/aceite-calendula.jpg',
+    imagenes: [
+      'assets/images/productos/aceite-calendula.jpg',
+      'assets/images/productos/aceite-calendula-2.jpg',
+      'assets/images/productos/aceite-calendula-3.jpg'
+    ],
+    stock: false
+  },
+  {
+    id: 5,
+    nombre: 'Pomada de Caléndula & Cannabis',
+    categoria: 'pomadas',
+    precio: 380,
+    descripcion: 'Pomada cicatrizante con caléndula y propóleo, para heridas y rozaduras.',
+    descripcionLarga: 'Pomada artesanal elaborada con cera de abejas, manteca de karité, aceite de caléndula y extracto de cannabis. Enriquecida con propóleo, conocido por sus propiedades antibacterianas y regeneradoras.\n\nEs un bálsamo protector y cicatrizante, ideal para heridas leves, rozaduras, piel agrietada, eccemas y picaduras de insectos. Su textura es densa pero se funde al contacto con la piel.\n\nModo de uso: aplicar una capa fina sobre la zona limpia y seca, 2 a 3 veces por día.\n\nIngredientes: cera de abejas, manteca de karité, aceite de oliva, caléndula, cannabis, propóleo, vitamina E.\n\nContenido: 50 g.',
+    imagen: 'assets/images/productos/pomada-calendula.jpg',
+    imagenes: [
+      'assets/images/productos/pomada-calendula.jpg',
+      'assets/images/productos/pomada-calendula-2.jpg',
+      'assets/images/productos/pomada-calendula-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 9,
+    nombre: 'Jabón artesanal de Cannabis · Milenrama · Marcela',
+    categoria: 'jabones',
+    precio: 280,
+    descripcion: 'Jabón artesanal con aceite de oliva y lavanda, suave y aromático.',
+    descripcionLarga: 'Jabón elaborado por saponificación en frío, con aceite de oliva orgánico como base principal. Combina cannabis, milenrama y marcela, tres plantas con propiedades calmantes y regeneradoras para la piel.\n\nSu espuma es cremosa y suave, ideal para pieles sensibles o con tendencia a la irritación. El aroma es herbal y fresco, con un toque floral aportado por la milenrama.\n\nModo de uso: frotar entre las manos húmedas hasta obtener espuma, aplicar sobre la piel y enjuagar con abundante agua.\n\nIngredientes: aceite de oliva, aceite de coco, manteca de karité, cannabis, milenrama, marcela, aceites esenciales.\n\nContenido: 100 g.',
+    imagen: 'assets/images/productos/jabon-lavanda.jpg',
+    imagenes: [
+      'assets/images/productos/jabon-lavanda.jpg',
+      'assets/images/productos/jabon-lavanda-2.jpg',
+      'assets/images/productos/jabon-lavanda-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 13,
+    nombre: 'Tintura de MBURUCUYÁ',
+    categoria: 'tinturas',
+    precio: 320,
+    descripcion: 'Tintura madre de propóleo, antibacteriano y reforzador del sistema inmune.',
+    descripcionLarga: 'Tintura madre de mburucuyá (passiflora), elaborada a partir de hojas y flores frescas maceradas en alcohol de cereal. Es conocida por sus propiedades ansiolíticas y sedantes suaves.\n\nAyuda a calmar estados de nerviosismo, ansiedad leve y dificultades para dormir. También se utiliza como relajante natural en momentos de estrés.\n\nModo de uso: 20 a 30 gotas, 2 o 3 veces por día, diluidas en agua o infusión. Consultar con un profesional antes de su uso en embarazo o lactancia.\n\nIngredientes: hojas y flores de mburucuyá, alcohol de cereal 60°, agua purificada.\n\nContenido: 30 ml.',
+    imagen: 'assets/images/productos/tintura-mburucuya.jpg',
+    imagenes: [
+      'assets/images/productos/tintura-mburucuya-1.jpg',
+      'assets/images/productos/tintura-mburucuya-2.jpg',
+      'assets/images/productos/tintura-mburucuya-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 14,
+    nombre: 'Tintura de MILENRAMA',
+    categoria: 'tinturas',
+    precio: 350,
+    descripcion: 'Tintura de equinácea para reforzar defensas.',
+    descripcionLarga: 'Tintura madre de milenrama (achillea millefolium), elaborada con flores frescas maceradas en alcohol de cereal. Es una planta tradicionalmente utilizada por sus propiedades antiinflamatorias y digestivas.\n\nAyuda a regular el ciclo menstrual, aliviar cólicos y mejorar la digestión. También se usa como tónico circulatorio y para calmar inflamaciones internas.\n\nModo de uso: 20 a 30 gotas, 2 veces por día, diluidas en agua. Consultar con un profesional antes de su uso prolongado.\n\nIngredientes: flores de milenrama, alcohol de cereal 60°, agua purificada.\n\nContenido: 30 ml.',
+    imagen: 'assets/images/productos/tintura-equipacea.jpg',
+    imagenes: [
+      'assets/images/productos/tintura-equipacea.jpg',
+      'assets/images/productos/tintura-equipacea-2.jpg',
+      'assets/images/productos/tintura-equipacea-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 15,
+    nombre: 'Tintura de ARTEMISIA',
+    categoria: 'tinturas',
+    precio: 310,
+    descripcion: 'Tintura de ajo, antibiótico natural.',
+    descripcionLarga: 'Tintura madre de artemisia (ajenjo), elaborada con hojas frescas maceradas en alcohol de cereal. Es una planta amarga con propiedades digestivas, antiparasitarias y tónicas del sistema digestivo.\n\nTradicionalmente utilizada para estimular el apetito, mejorar digestiones pesadas y como apoyo en procesos de limpieza intestinal.\n\nModo de uso: 15 a 20 gotas, 2 veces por día, diluidas en agua, preferentemente antes de las comidas. Consultar con un profesional antes de su uso.\n\nIngredientes: hojas de artemisia, alcohol de cereal 60°, agua purificada.\n\nContenido: 30 ml.',
+    imagen: 'assets/images/productos/tintura-ajo.jpg',
+    imagenes: [
+      'assets/images/productos/tintura-ajo.jpg',
+      'assets/images/productos/tintura-ajo-2.jpg',
+      'assets/images/productos/tintura-ajo-3.jpg'
+    ],
+    stock: false
+  },
+  {
+    id: 16,
+    nombre: 'Sahúmo de Salvia',
+    categoria: 'sahunos',
+    precio: 250,
+    descripcion: 'Sahúmo de salvia blanca para limpieza energética.',
+    descripcionLarga: 'Sahúmo artesanal de salvia blanca, atado a mano con hilo de algodón. La salvia blanca es una planta tradicionalmente utilizada por pueblos originarios para la limpieza energética de espacios y personas.\n\nSu humo se utiliza para purificar ambientes, disipar energías densas y preparar el espacio para la meditación o el trabajo espiritual.\n\nModo de uso: encender un extremo, apagar la llama y dejar que el humo se disperse por el ambiente. Apagar sobre un recipiente resistente al calor.\n\nContenido: 1 atado de aproximadamente 10 cm de largo.',
+    imagen: 'assets/images/productos/sahumo-salvia.jpg',
+    imagenes: [
+      'assets/images/productos/sahumo-salvia.jpg',
+      'assets/images/productos/sahumo-salvia-2.jpg',
+      'assets/images/productos/sahumo-salvia-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 17,
+    nombre: 'Sahúmo de Palo Santo',
+    categoria: 'sahunos',
+    precio: 300,
+    descripcion: 'Palo Santo para aromaterapia y meditación.',
+    descripcionLarga: 'Sahúmo elaborado con astillas de palo santo (bursera graveolens), recolectadas de árboles caídos naturalmente. Su aroma es dulce, amaderado y ligeramente cítrico.\n\nEs utilizado para limpiar energías, atraer buenas vibras y crear un ambiente sereno. Ideal para meditación, yoga o simplemente para perfumar el hogar.\n\nModo de uso: encender un extremo, apagar la llama y dejar que el humo se disperse. Apagar sobre un recipiente resistente al calor.\n\nContenido: 1 atado de aproximadamente 10 cm de largo.',
+    imagen: 'assets/images/productos/sahumo-palo.jpg',
+    imagenes: [
+      'assets/images/productos/sahumo-palo.jpg',
+      'assets/images/productos/sahumo-palo-2.jpg',
+      'assets/images/productos/sahumo-palo-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 18,
+    nombre: 'Sahúmo de Romero',
+    categoria: 'sahunos',
+    precio: 230,
+    descripcion: 'Sahúmo de romero para claridad mental.',
+    descripcionLarga: 'Sahúmo artesanal de romero, atado a mano con hilo de algodón. El romero es una planta asociada a la claridad mental, la memoria y la protección.\n\nSu humo se utiliza para limpiar el ambiente, estimular la concentración y renovar la energía de un espacio antes de estudiar o trabajar.\n\nModo de uso: encender un extremo, apagar la llama y dejar que el humo se disperse por el ambiente. Apagar sobre un recipiente resistente al calor.\n\nContenido: 1 atado de aproximadamente 10 cm de largo.',
+    imagen: 'assets/images/productos/sahumo-romero.jpg',
+    imagenes: [
+      'assets/images/productos/sahumo-romero.jpg',
+      'assets/images/productos/sahumo-romero-2.jpg',
+      'assets/images/productos/sahumo-romero-3.jpg'
+    ],
+    stock: false
+  },
+  {
+    id: 19,
+    nombre: 'Manzanilla',
+    categoria: 'hierbas',
+    precio: 180,
+    descripcion: 'Flores de manzanilla secas, digestivas y relajantes.',
+    descripcionLarga: 'Flores de manzanilla (matricaria chamomilla) cultivadas en nuestra huerta agroecológica y secadas a baja temperatura para conservar sus propiedades.\n\nEs una planta suave, ideal para calmar el sistema digestivo y favorecer el descanso. Su infusión es aromática, ligeramente dulce y muy reconfortante.\n\nModo de uso: 1 cucharada por taza de agua caliente, dejar reposar 5 a 7 minutos, colar y beber. Se puede tomar hasta 3 veces por día.\n\nPresentación: bolsa de 30 g de flores secas.',
+    imagen: 'assets/images/productos/hierba-manzanilla.jpg',
+    imagenes: [
+      'assets/images/productos/hierba-manzanilla.jpg',
+      'assets/images/productos/hierba-manzanilla-2.jpg',
+      'assets/images/productos/hierba-manzanilla-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 20,
+    nombre: 'Menta',
+    categoria: 'hierbas',
+    precio: 160,
+    descripcion: 'Hojas de menta secas, aromáticas y digestivas.',
+    descripcionLarga: 'Hojas de menta (mentha spicata) cultivadas sin agroquímicos y secadas a la sombra para preservar su aroma fresco y sus aceites esenciales.\n\nEs una planta refrescante y digestiva, ideal para después de las comidas. Su infusión ayuda a aliviar la pesadez estomacal y refrescar el aliento.\n\nModo de uso: 1 cucharada por taza de agua caliente, dejar reposar 5 minutos, colar y beber.\n\nPresentación: bolsa de 30 g de hojas secas.',
+    imagen: 'assets/images/productos/hierba-menta.jpg',
+    imagenes: [
+      'assets/images/productos/hierba-menta.jpg',
+      'assets/images/productos/hierba-menta-2.jpg',
+      'assets/images/productos/hierba-menta-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 21,
+    nombre: 'Hipérico',
+    categoria: 'hierbas',
+    precio: 200,
+    descripcion: 'Planta de hipérico seca, para infusiones calmantes.',
+    descripcionLarga: 'Hipérico (hypericum perforatum) cultivado en nuestra huerta y secado a baja temperatura. Es una planta tradicionalmente utilizada por sus propiedades antidepresivas suaves y calmantes.\n\nSu infusión ayuda a mejorar el ánimo, reducir la ansiedad y favorecer un descanso reparador. Se recomienda consultar con un profesional antes de su uso prolongado.\n\nModo de uso: 1 cucharada por taza de agua caliente, dejar reposar 7 minutos, colar y beber, preferentemente por la noche.\n\nPresentación: bolsa de 30 g de planta seca.',
+    imagen: 'assets/images/productos/hierba-hiperico.jpg',
+    imagenes: [
+      'assets/images/productos/hierba-hiperico.jpg',
+      'assets/images/productos/hierba-hiperico-2.jpg',
+      'assets/images/productos/hierba-hiperico-3.jpg'
+    ],
+    stock: false
+  },
+  {
+    id: 22,
+    nombre: 'Romero',
+    categoria: 'hierbas',
+    precio: 170,
+    descripcion: 'Romero seco, estimulante y antioxidante.',
+    descripcionLarga: 'Romero (rosmarinus officinalis) cultivado en nuestra huerta agroecológica, cosechado a mano y secado a la sombra.\n\nEs una planta estimulante y antioxidante, ideal para infusiones que ayudan a mejorar la concentración, la circulación y la digestión. Su aroma es intenso y resinoso.\n\nModo de uso: 1 cucharada por taza de agua caliente, dejar reposar 5 a 7 minutos, colar y beber.\n\nPresentación: bolsa de 30 g de hojas secas.',
+    imagen: 'assets/images/productos/hierba-romero.jpg',
+    imagenes: [
+      'assets/images/productos/hierba-romero.jpg',
+      'assets/images/productos/hierba-romero-2.jpg',
+      'assets/images/productos/hierba-romero-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 23,
+    nombre: 'Semillas de Aromáticas (mix)',
+    categoria: 'semillas',
+    precio: 220,
+    descripcion: 'Mix de semillas de albahaca, perejil, cilantro y eneldo.',
+    descripcionLarga: 'Mix de semillas de aromáticas seleccionadas para huerta o maceta: albahaca, perejil, cilantro y eneldo. Todas variedades de fácil germinación y rápido crecimiento.\n\nIdeal para empezar tu propio huerto de aromáticas en casa, balcón o terraza. Cada sobre contiene semillas suficientes para una temporada completa.\n\nModo de uso: sembrar en sustrato fértil y húmedo, a 0,5 cm de profundidad, en un lugar con buena luz. Mantener húmedo hasta la germinación (7 a 14 días).\n\nContenido: sobre con mix de semillas para aproximadamente 20 plantas.',
+    imagen: 'assets/images/productos/semillas-aromaticas.jpg',
+    imagenes: [
+      'assets/images/productos/semillas-aromaticas.jpg',
+      'assets/images/productos/semillas-aromaticas-2.jpg',
+      'assets/images/productos/semillas-aromaticas-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 24,
+    nombre: 'Plantín de Lavanda',
+    categoria: 'semillas',
+    precio: 350,
+    descripcion: 'Plantín de lavanda para tu jardín o maceta.',
+    descripcionLarga: 'Plantín de lavanda (lavandula angustifolia) cultivado en maceta de vivero, listo para trasplantar a jardín o maceta definitiva.\n\nEs una planta perenne, aromática y muy resistente. Sus flores atraen polinizadores y pueden usarse frescas o secas para sahumerios, infusiones y aromaterapia.\n\nModo de uso: trasplantar en un lugar con buena exposición solar y suelo bien drenado. Regar con moderación, evitando encharcamientos.\n\nPresentación: plantín en maceta de 10 cm de diámetro.',
+    imagen: 'assets/images/productos/plantin-lavanda.jpg',
+    imagenes: [
+      'assets/images/productos/plantin-lavanda.jpg',
+      'assets/images/productos/plantin-lavanda-2.jpg',
+      'assets/images/productos/plantin-lavanda-3.jpg'
+    ],
+    stock: true
+  },
+  {
+    id: 25,
+    nombre: 'Semillas de Caléndula',
+    categoria: 'semillas',
+    precio: 190,
+    descripcion: 'Semillas de caléndula, flor medicinal y ornamental.',
+    descripcionLarga: 'Semillas de caléndula (calendula officinalis), flor medicinal y ornamental de fácil cultivo. Florece durante gran parte del año y atrae abejas y mariposas al jardín.\n\nSus flores pueden usarse frescas o secas para elaborar aceites, pomadas e infusiones con propiedades calmantes y regeneradoras de la piel.\n\nModo de uso: sembrar directamente en tierra o maceta, a 1 cm de profundidad, en un lugar con buena luz. Germina en 7 a 14 días.\n\nContenido: sobre con aproximadamente 30 semillas.',
+    imagen: 'assets/images/productos/semillas-calendula.jpg',
+    imagenes: [
+      'assets/images/productos/semillas-calendula.jpg',
+      'assets/images/productos/semillas-calendula-2.jpg',
+      'assets/images/productos/semillas-calendula-3.jpg'
+    ],
+    stock: false
+  },
+  {
+    id: 26,
+    nombre: 'Plantín de Romero',
+    categoria: 'semillas',
+    precio: 320,
+    descripcion: 'Plantín de romero para cultivar en casa.',
+    descripcionLarga: 'Plantín de romero (rosmarinus officinalis) cultivado en maceta de vivero, listo para trasplantar a jardín, huerta o maceta definitiva.\n\nEs una planta perenne, aromática y muy resistente, ideal para huertas urbanas y jardines de bajo mantenimiento. Puede usarse en la cocina, para infusiones o como planta ornamental.\n\nModo de uso: trasplantar en un lugar con buena exposición solar y suelo bien drenado. Regar con moderación, evitando encharcamientos.\n\nPresentación: plantín en maceta de 10 cm de diámetro.',
+    imagen: 'assets/images/productos/plantin-romero.jpg',
+    imagenes: [
+      'assets/images/productos/plantin-romero.jpg',
+      'assets/images/productos/plantin-romero-2.jpg',
+      'assets/images/productos/plantin-romero-3.jpg'
+    ],
+    stock: true
+  }
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -716,6 +950,47 @@ function ordenarProductos(arr, orden) {
     default:            return copia;
   }
 }
+/* ═══════════════════════════════════════════════════════════════
+   FILTRO DE CATEGORÍAS DINÁMICO
+   Solo muestra categorías que tienen al menos un producto
+   ═══════════════════════════════════════════════════════════════ */
+function renderizarFiltroCategorias() {
+  const select = document.getElementById('filtroCategoria');
+  if (!select) return;
+
+  const lista = (window.productos && window.productos.length) ? window.productos : PRODUCTOS_BASE;
+
+  // Categorías que tienen al menos un producto
+  const categoriasConProductos = [...new Set(lista.map(p => p.categoria).filter(Boolean))];
+
+  // Filtrar las categorías administradas que tienen productos
+  const categoriasVisibles = categoriasAdmin
+    .filter(cat => categoriasConProductos.includes(cat.id))
+    .sort((a, b) => (a.orden || 99) - (b.orden || 99));
+
+  const seleccionActual = filtros.categoria || 'todos';
+
+  const opciones = [
+    `<option value="todos" data-i18n="cat.cat.todos">Todas las categorías</option>`,
+    ...categoriasVisibles.map(cat => {
+      const etiqueta = idiomaActual === 'en'
+        ? (cat.label_en || cat.label_es)
+        : cat.label_es;
+      return `<option value="${cat.id}" data-i18n="cat.cat.${cat.id}">${etiqueta}</option>`;
+    })
+  ];
+
+  select.innerHTML = opciones.join('');
+
+  if (categoriasVisibles.some(c => c.id === seleccionActual) || seleccionActual === 'todos') {
+    select.value = seleccionActual;
+  } else {
+    filtros.categoria = 'todos';
+    select.value = 'todos';
+    renderizarProductos();
+  }
+}
+
 
 function renderizarProductos() {
   const grid = document.getElementById('catalogo-grid');
@@ -1040,12 +1315,17 @@ function cargarProductosDesdeStorage() {
 function guardarProductosEnStorage() {
   localStorage.setItem('productos_timbo', JSON.stringify(productosAdmin));
   window.productos = [...productosAdmin];
+  renderizarFiltroCategorias(); // ← NUEVO
   renderizarProductos();
 }
 
 function abrirAdmin() {
   if (!adminLogueado) return;
   cargarProductosDesdeStorage();
+    cargarProductosDesdeStorage();
+  cargarCategoriasDesdeStorage();        // ← NUEVO
+  renderizarAdminCategorias();            // ← NUEVO
+  renderizarSelectCategorias();           // ← NUEVO (opcional)
   const panel = document.getElementById('adminPanel');
   if (panel) {
     panel.hidden = false;
@@ -1263,12 +1543,20 @@ function initFormReservas() {
   });
 }
 
+
+
+
+
+
 /* ═══════════════════════════════════════════════════════════════
    15. INICIALIZACIÓN GENERAL
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function () {
   // Productos: base o storage
   cargarProductosDesdeStorage();
+  cargarCategoriasDesdeStorage();
+  // Renderizar filtro de categorías dinámicamente
+  renderizarFiltroCategorias();
 
   // Render catálogo + carrito
   renderizarProductos();
@@ -1931,6 +2219,7 @@ function aplicarIdioma(lang) {
   if (typeof renderEventos === 'function') renderEventos('todos');
   if (typeof renderizarProductos === 'function') renderizarProductos();
   if (typeof actualizarCarrito === 'function') actualizarCarrito();
+  if (typeof renderizarFiltroCategorias === 'function') renderizarFiltroCategorias();
   if (typeof renderCalendario === 'function') renderCalendario();
 
   // Cerrar menú
@@ -2047,6 +2336,11 @@ document.addEventListener('keydown', function(e) {
     }
   }
 });
+
+
+
+
+
 /* ═══════════════════════════════════════════════════════════════
    MODAL DE PRODUCTO · Slideshow manual + Add to cart
    ═══════════════════════════════════════════════════════════════ */
@@ -2229,4 +2523,219 @@ function initModalProductoListeners() {
     if (delta < 0) irASlideModal(modalProdState.slideActual + 1);
     else irASlideModal(modalProdState.slideActual - 1);
   }, { passive: true });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   19. ADMINISTRACIÓN DE CATEGORÍAS
+   ═══════════════════════════════════════════════════════════════ */
+
+// Categorías por defecto (para primera vez)
+const CATEGORIAS_BASE = [
+  { id: 'aceites',   label_es: 'Aceites',               label_en: 'Oils',              orden: 1 },
+  { id: 'pomadas',   label_es: 'Pomadas',               label_en: 'Ointments',         orden: 2 },
+  { id: 'jabones',   label_es: 'Jabones',               label_en: 'Soaps',             orden: 3 },
+  { id: 'tinturas',  label_es: 'Tinturas',              label_en: 'Tinctures',         orden: 4 },
+  { id: 'sahunos',   label_es: 'Sahúmos',               label_en: 'Smudge sticks',     orden: 5 },
+  { id: 'hierbas',   label_es: 'Hierbas Medicinales',   label_en: 'Medicinal Herbs',   orden: 6 },
+  { id: 'semillas',  label_es: 'Semillas y Plantines',  label_en: 'Seeds and Seedlings', orden: 7 }
+];
+
+let categoriasAdmin = [];
+
+/* ─── Cargar categorías desde localStorage ─── */
+function cargarCategoriasDesdeStorage() {
+  const stored = localStorage.getItem('categorias_timbo');
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      categoriasAdmin = Array.isArray(parsed) && parsed.length ? parsed : [...CATEGORIAS_BASE];
+    } catch (e) {
+      categoriasAdmin = [...CATEGORIAS_BASE];
+    }
+  } else {
+    categoriasAdmin = [...CATEGORIAS_BASE];
+  }
+  // Ordenar por campo orden
+  categoriasAdmin.sort((a, b) => (a.orden || 99) - (b.orden || 99));
+}
+
+/* ─── Guardar categorías en localStorage ─── */
+function guardarCategoriasEnStorage() {
+  localStorage.setItem('categorias_timbo', JSON.stringify(categoriasAdmin));
+  renderizarFiltroCategorias();   // Actualiza el filtro del catálogo
+  renderizarAdminCategorias();    // Actualiza la lista del admin
+}
+
+/* ─── Generar un ID a partir del nombre ─── */
+function generarIdCategoria(label) {
+  return label
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')  // Quitar acentos
+    .replace(/[^a-z0-9]+/g, '-')       // Reemplazar no-alfanuméricos por guiones
+    .replace(/^-+|-+$/g, '');          // Quitar guiones extremos
+}
+
+/* ─── Renderizar la lista de categorías en el admin ─── */
+function renderizarAdminCategorias() {
+  const list = document.getElementById('adminCategoriasList');
+  if (!list) return;
+
+  if (!categoriasAdmin.length) {
+    list.innerHTML = '<p style="color:#8a7a6a;font-size:0.85rem;">No hay categorías. Creá la primera.</p>';
+    return;
+  }
+
+  list.innerHTML = categoriasAdmin.map(cat => `
+    <div class="admin-categoria-chip">
+      <span>${cat.label_es}</span>
+      <span class="chip-id">(${cat.id})</span>
+      <div class="chip-actions">
+        <button onclick="editarCategoria('${cat.id}')" title="Editar">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="delete" onclick="eliminarCategoria('${cat.id}')" title="Eliminar">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ─── Abrir modal para nueva categoría ─── */
+function agregarCategoria() {
+  const title = document.getElementById('editCategoriaTitle');
+  if (title) title.textContent = '➕ Nueva categoría';
+  const form = document.getElementById('editCategoriaForm');
+  if (form) form.reset();
+  const idField = document.getElementById('editCategoriaId');
+  if (idField) idField.value = '';
+  const ordenField = document.getElementById('editCategoriaOrden');
+  if (ordenField) ordenField.value = (categoriasAdmin.length + 1);
+  const modal = document.getElementById('editCategoriaModal');
+  if (modal) modal.hidden = false;
+}
+
+/* ─── Abrir modal para editar categoría existente ─── */
+function editarCategoria(id) {
+  const cat = categoriasAdmin.find(c => c.id === id);
+  if (!cat) return;
+
+  const title = document.getElementById('editCategoriaTitle');
+  if (title) title.textContent = `✏️ Editar: ${cat.label_es}`;
+  const idField = document.getElementById('editCategoriaId');
+  if (idField) idField.value = cat.id;
+  const esField = document.getElementById('editCategoriaEs');
+  if (esField) esField.value = cat.label_es || '';
+  const enField = document.getElementById('editCategoriaEn');
+  if (enField) enField.value = cat.label_en || '';
+  const ordenField = document.getElementById('editCategoriaOrden');
+  if (ordenField) ordenField.value = cat.orden || 99;
+
+  const modal = document.getElementById('editCategoriaModal');
+  if (modal) modal.hidden = false;
+}
+
+/* ─── Guardar categoría (nueva o editada) ─── */
+function guardarCategoria(event) {
+  event.preventDefault();
+
+  const idOriginal = document.getElementById('editCategoriaId').value.trim();
+  const label_es = document.getElementById('editCategoriaEs').value.trim();
+  const label_en = document.getElementById('editCategoriaEn').value.trim();
+  const orden = parseInt(document.getElementById('editCategoriaOrden').value) || 99;
+
+  if (!label_es) {
+    mostrarNotificacion('⚠️ El nombre en español es obligatorio');
+    return;
+  }
+
+  if (idOriginal) {
+    // Editar existente
+    const index = categoriasAdmin.findIndex(c => c.id === idOriginal);
+    if (index !== -1) {
+      categoriasAdmin[index] = { ...categoriasAdmin[index], label_es, label_en, orden };
+      // Actualizar también las traducciones en memoria
+      actualizarTraduccionesCategoria(idOriginal, label_es, label_en);
+    }
+    mostrarNotificacion(`✅ Categoría "${label_es}" actualizada`);
+  } else {
+    // Crear nueva
+    const idNuevo = generarIdCategoria(label_es);
+    if (categoriasAdmin.some(c => c.id === idNuevo)) {
+      mostrarNotificacion('⚠️ Ya existe una categoría con ese nombre');
+      return;
+    }
+    categoriasAdmin.push({ id: idNuevo, label_es, label_en, orden });
+    actualizarTraduccionesCategoria(idNuevo, label_es, label_en);
+    mostrarNotificacion(`✅ Categoría "${label_es}" creada`);
+  }
+
+  // Ordenar por orden
+  categoriasAdmin.sort((a, b) => (a.orden || 99) - (b.orden || 99));
+
+  guardarCategoriasEnStorage();
+  cerrarEditCategoria();
+}
+
+/* ─── Eliminar categoría ─── */
+function eliminarCategoria(id) {
+  const cat = categoriasAdmin.find(c => c.id === id);
+  if (!cat) return;
+
+  // Verificar si hay productos en esa categoría
+  const lista = (window.productos && window.productos.length) ? window.productos : PRODUCTOS_BASE;
+  const productosEnCat = lista.filter(p => p.categoria === id);
+
+  let mensaje = `¿Eliminar la categoría "${cat.label_es}"?`;
+  if (productosEnCat.length > 0) {
+    mensaje += `\n\n⚠️ Hay ${productosEnCat.length} producto(s) en esta categoría. Se quedarán sin categoría asignada.`;
+  }
+
+  if (!confirm(mensaje)) return;
+
+  // Quitar categoría del array
+  categoriasAdmin = categoriasAdmin.filter(c => c.id !== id);
+
+  // Quitar la categoría de los productos que la tenían
+  if (productosEnCat.length > 0) {
+    productosAdmin = productosAdmin.map(p =>
+      p.categoria === id ? { ...p, categoria: '' } : p
+    );
+    window.productos = [...productosAdmin];
+    localStorage.setItem('productos_timbo', JSON.stringify(productosAdmin));
+  }
+
+  guardarCategoriasEnStorage();
+  mostrarNotificacion(`🗑️ Categoría "${cat.label_es}" eliminada`);
+}
+
+/* ─── Cerrar modal de categoría ─── */
+function cerrarEditCategoria() {
+  const modal = document.getElementById('editCategoriaModal');
+  if (modal) modal.hidden = true;
+}
+
+/* ─── Actualizar traducciones en memoria ─── */
+function actualizarTraduccionesCategoria(id, label_es, label_en) {
+  const clave = `cat.cat.${id}`;
+  if (!TRADUCCIONES.es[clave]) TRADUCCIONES.es[clave] = label_es;
+  else TRADUCCIONES.es[clave] = label_es;
+
+  if (!TRADUCCIONES.en) TRADUCCIONES.en = {};
+  TRADUCCIONES.en[clave] = label_en || label_es;
+}
+function renderizarSelectCategorias() {
+  const selects = [
+    document.getElementById('editCategoria'),
+    document.getElementById('filtroCategoria')
+  ];
+  // Solo el del modal de edición
+  const editSelect = document.getElementById('editCategoria');
+  if (!editSelect) return;
+
+  editSelect.innerHTML = categoriasAdmin
+    .sort((a, b) => (a.orden || 99) - (b.orden || 99))
+    .map(cat => `<option value="${cat.id}">${cat.label_es}</option>`)
+    .join('');
 }

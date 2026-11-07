@@ -41,7 +41,16 @@ body {
   color: var(--negro);
   overflow-x: hidden;
 }
-
+img {
+  image-rendering: -webkit-optimize-contrast; /* Chrome/Safari/Edge */
+}
+.producto-imagen img,
+.modal-prod-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 /* ── NAV ── */
 #nav {
   position: fixed;
@@ -2303,8 +2312,16 @@ footer nav ul a:hover {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+    will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .producto-card:hover .producto-imagen img { transform: scale(1.05); }
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
 .badge-sin-stock {
   position: absolute;
   top: 12px;
@@ -3544,10 +3561,10 @@ footer nav ul a:hover {
     padding-right: 10px;
   }
 }
+/* ═══════════════════════════════════════════════════════════════
+   MODAL DE PRODUCTO · Slideshow manual + Info + Add to cart
+   ═══════════════════════════════════════════════════════════════ */
 
-/* ═══════════════════════════════════════════════════════════
-   MODAL DE PRODUCTO
-   ═══════════════════════════════════════════════════════════ */
 .modal-producto {
   position: fixed;
   inset: 0;
@@ -3557,8 +3574,11 @@ footer nav ul a:hover {
   justify-content: center;
   padding: 1.5rem;
 }
+
+/* ⚠️ CRÍTICO: sin esto, `hidden` no funciona porque display:flex gana */
 .modal-producto[hidden] { display: none !important; }
 
+/* ── Overlay con blur ── */
 .modal-producto-overlay {
   position: absolute;
   inset: 0;
@@ -3567,6 +3587,7 @@ footer nav ul a:hover {
   animation: modalFadeIn 0.3s ease;
 }
 
+/* ── Contenedor principal ── */
 .modal-producto-contenido {
   position: relative;
   background: #fffdf7;
@@ -3589,6 +3610,7 @@ footer nav ul a:hover {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* ── Botón cerrar (✕) ── */
 .modal-producto-cerrar {
   position: absolute;
   top: 1rem;
@@ -3614,6 +3636,7 @@ footer nav ul a:hover {
   transform: rotate(90deg);
 }
 
+/* ── Grid: slideshow izquierda, info derecha ── */
 .modal-producto-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3621,7 +3644,7 @@ footer nav ul a:hover {
   max-height: 92vh;
 }
 
-/* ── Slideshow ── */
+/* ═══ SLIDESHOW ═══ */
 .modal-prod-slideshow {
   position: relative;
   background: #e8e0d4;
@@ -3649,11 +3672,16 @@ footer nav ul a:hover {
 .modal-prod-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: contain;
+  background: #f5efe2;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Nav prev/next */
+/* ── Flechas prev/next ── */
 .modal-prod-nav {
   position: absolute;
   top: 50%;
@@ -3682,7 +3710,7 @@ footer nav ul a:hover {
 .modal-prod-nav.prev { left: 1rem; }
 .modal-prod-nav.next { right: 1rem; }
 
-/* Dots */
+/* ── Dots de paginado ── */
 .modal-prod-dots {
   position: absolute;
   bottom: 1rem;
@@ -3713,7 +3741,7 @@ footer nav ul a:hover {
   border-radius: 999px;
 }
 
-/* ── Info ── */
+/* ═══ INFO ═══ */
 .modal-prod-info {
   padding: 3rem 2.5rem 2.5rem;
   display: flex;
@@ -3764,8 +3792,10 @@ footer nav ul a:hover {
   margin: 0 0 2rem;
   flex: 1;
 }
+.modal-prod-descripcion p { margin: 0 0 1rem; }
+.modal-prod-descripcion p:last-child { margin-bottom: 0; }
 
-/* Footer */
+/* ── Footer con botón ── */
 .modal-prod-footer {
   margin-top: auto;
   padding-top: 1.5rem;
@@ -3818,7 +3848,10 @@ footer nav ul a:hover {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .modal-producto { padding: 0; align-items: flex-end; }
+  .modal-producto {
+    padding: 0;
+    align-items: flex-end;
+  }
 
   .modal-producto-contenido {
     max-width: 100%;
@@ -3855,5 +3888,87 @@ footer nav ul a:hover {
   .modal-prod-footer { gap: 0.6rem; }
   .modal-prod-agregar { padding: 0.8rem 1.4rem; font-size: 0.8rem; }
 
-  .modal-producto-cerrar { top: 0.7rem; right: 0.7rem; width: 36px; height: 36px; }
+  .modal-producto-cerrar {
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 36px;
+    height: 36px;
+  }
+}
+/* ═══════════════════════════════════════════════════════════════
+   ADMIN · CATEGORÍAS
+   ═══════════════════════════════════════════════════════════════ */
+.admin-categorias {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.admin-categorias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-categorias-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #3a2a1a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-categorias-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.admin-categoria-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: #f0ebe2;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: #5a4a3a;
+}
+
+.admin-categoria-chip .chip-id {
+  font-size: 0.7rem;
+  color: #8a7a6a;
+  font-family: monospace;
+}
+
+.admin-categoria-chip .chip-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.admin-categoria-chip button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #8a7a6a;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.admin-categoria-chip button:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #3a2a1a;
+}
+
+.admin-categoria-chip button.delete:hover {
+  color: #c0392b;
+  background: #fde8e8;
 }
