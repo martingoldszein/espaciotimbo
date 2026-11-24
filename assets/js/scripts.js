@@ -482,7 +482,9 @@ function setupHeroSlideshow() {
 
   function loadSlideImage(slide) {
     const background = slide.querySelector('.hero-slide-bg');
-    const src = background?.dataset.src;
+    const mobileSrc = background?.dataset.mobileSrc;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const src = isMobile && mobileSrc ? mobileSrc : background?.dataset.src;
     if (!background || !src) return Promise.resolve(true);
     if (pendingSlideLoads.has(background)) return pendingSlideLoads.get(background);
 
