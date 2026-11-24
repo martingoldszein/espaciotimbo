@@ -971,7 +971,7 @@ function renderizarFiltroCategorias() {
   const seleccionActual = filtros.categoria || 'todos';
 
   const opciones = [
-    `<option value="todos" data-i18n="cat.cat.todos">Todas las categorías</option>`,
+    `<option value="todos" data-i18n="cat.cat.todos">${t('cat.cat.todos')}</option>`,
     ...categoriasVisibles.map(cat => {
       const etiqueta = idiomaActual === 'en'
         ? (cat.label_en || cat.label_es)
@@ -1552,6 +1552,8 @@ function initFormReservas() {
    15. INICIALIZACIÓN GENERAL
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function () {
+  initLangSelector({ renderComponents: false });
+
   // Productos: base o storage
   cargarProductosDesdeStorage();
   cargarCategoriasDesdeStorage();
@@ -1725,7 +1727,8 @@ if (sidebarToggle && sidebar) {
    ═══════════════════════════════════════════════════════════════ */
 (function initLenisScroll() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (prefersReducedMotion || !hasFinePointer) return;
 
   // Evitar doble inicialización
   if (window.__lenisInitialized) return;
@@ -2174,7 +2177,7 @@ function detectarIdiomaPorURL() {
   return null;
 }
 
-function aplicarIdioma(lang) {
+function aplicarIdioma(lang, { renderComponents = true } = {}) {
   idiomaActual = lang;
   localStorage.setItem('timbo_idioma', lang);
 
@@ -2215,19 +2218,20 @@ function aplicarIdioma(lang) {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
 
-  // Re-renderizar componentes dinámicos
-  if (typeof renderEventos === 'function') renderEventos('todos');
-  if (typeof renderizarProductos === 'function') renderizarProductos();
-  if (typeof actualizarCarrito === 'function') actualizarCarrito();
-  if (typeof renderizarFiltroCategorias === 'function') renderizarFiltroCategorias();
-  if (typeof renderCalendario === 'function') renderCalendario();
+  if (renderComponents) {
+    if (typeof renderEventos === 'function') renderEventos('todos');
+    if (typeof renderizarProductos === 'function') renderizarProductos();
+    if (typeof actualizarCarrito === 'function') actualizarCarrito();
+    if (typeof renderizarFiltroCategorias === 'function') renderizarFiltroCategorias();
+    if (typeof renderCalendario === 'function') renderCalendario();
+  }
 
   // Cerrar menú
   const langWrapper = document.getElementById('navLang');
   if (langWrapper) langWrapper.classList.remove('open');
 }
 
-function initLangSelector() {
+function initLangSelector({ renderComponents = true } = {}) {
   const langWrapper = document.getElementById('navLang');
   const langBtn = document.getElementById('navLangBtn');
   const langMenu = document.getElementById('navLangMenu');
@@ -2272,7 +2276,7 @@ function initLangSelector() {
   // Prioridad: URL > localStorage > español
   const urlLang = detectarIdiomaPorURL();
   const langFinal = urlLang || localStorage.getItem('timbo_idioma') || 'es';
-  aplicarIdioma(langFinal);
+  aplicarIdioma(langFinal, { renderComponents });
 
   // Botón atrás del navegador
   window.addEventListener('popstate', () => {
@@ -2295,11 +2299,6 @@ window.aplicarIdioma = aplicarIdioma;
 window.t = t;
 window.initLangSelector = initLangSelector;
 window.detectarIdiomaPorURL = detectarIdiomaPorURL;
-
-// Iniciar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', initLangSelector);
-
-
 
 /* ─── MODAL DE PEDIDO ─── */
 function abrirModalPedido() {
