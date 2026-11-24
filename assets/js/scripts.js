@@ -473,30 +473,55 @@ function setupHeroSlideshow() {
 
   let currentIndex = 0;
   let intervalId = null;
+  let slideChangeRequest = 0;
+  const pendingSlideLoads = new WeakMap();
 
   // Estado inicial
   slides.forEach((s, i) => s.classList.toggle('is-active', i === 0));
   dots.forEach((d, i) => d.classList.toggle('is-active', i === 0));
 
-function goToSlide(index) {
-  const next = (index + slides.length) % slides.length;
-  if (next === currentIndex) return;
+  function loadSlideImage(slide) {
+    const background = slide.querySelector('.hero-slide-bg');
+    const src = background?.dataset.src;
+    if (!background || !src) return Promise.resolve(true);
+    if (pendingSlideLoads.has(background)) return pendingSlideLoads.get(background);
 
-  // 1. Desactivar el slide actual
-  slides[currentIndex].classList.remove('is-active');
-  dots[currentIndex]?.classList.remove('is-active');
+    const loading = new Promise(resolve => {
+      const image = new Image();
+      image.onload = () => {
+        background.style.backgroundImage =
+          `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("${src}")`;
+        delete background.dataset.src;
+        resolve(true);
+      };
+      image.onerror = () => {
+        console.error(`No se pudo cargar la imagen del hero: ${src}`);
+        resolve(false);
+      };
+      image.src = src;
+    });
 
-  currentIndex = next;
+    pendingSlideLoads.set(background, loading);
+    return loading;
+  }
 
-  // 2. Activar el siguiente slide
-  slides[currentIndex].classList.add('is-active');
-  dots[currentIndex]?.classList.add('is-active');
+  function goToSlide(index) {
+    const next = (index + slides.length) % slides.length;
+    const request = ++slideChangeRequest;
+    if (next === currentIndex) return;
 
-  // 3. 🔑 CLAVE: Forzar un reflow para limpiar el estado residual
-  //    Esto hace que el navegador "olvide" cualquier transformación
-  //    del slide anterior y arranque la animación desde cero.
-  void slides[currentIndex].offsetWidth;
-}
+    loadSlideImage(slides[next]).then(loaded => {
+      if (!loaded || request !== slideChangeRequest) return;
+
+      slides[currentIndex].classList.remove('is-active');
+      dots[currentIndex]?.classList.remove('is-active');
+
+      currentIndex = next;
+      slides[currentIndex].classList.add('is-active');
+      dots[currentIndex]?.classList.add('is-active');
+      void slides[currentIndex].offsetWidth;
+    });
+  }
 
   function startAutoplay() {
     if (intervalId) clearInterval(intervalId);

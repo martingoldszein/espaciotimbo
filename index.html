@@ -75,12 +75,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="font" type="font/woff2"
+  <link rel="preload" as="image" href="/assets/images/slide1.webp" fetchpriority="high">
+  <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap"
-    rel="stylesheet">
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap">
+  </noscript>
   <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preload" as="style"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+  </noscript>
   <script>
     (function () {
       var path = window.location.pathname;
@@ -107,7 +117,8 @@
   <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="#">
-      <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150" loading="lazy">
+      <img src="assets/images/logo_negro.png" alt="Logo de Espacio Timbó" class="logo" width="150" loading="eager"
+        fetchpriority="low" decoding="async">
     </a>
 
     <ul>
@@ -252,22 +263,25 @@
   <section class="hero" id="inicio">
     <div class="hero-slides" aria-hidden="true">
       <div class="hero-slide hero-slide-1 is-active">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg">
+          <img class="hero-slide-image" src="/assets/images/slide1.webp" alt="" fetchpriority="high" loading="eager"
+            decoding="async">
+        </div>
       </div>
       <div class="hero-slide hero-slide-2">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg" data-src="/assets/images/slide2.webp"></div>
       </div>
       <div class="hero-slide hero-slide-3">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg" data-src="/assets/images/slide3.webp"></div>
       </div>
       <div class="hero-slide hero-slide-4">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg" data-src="/assets/images/slide4.webp"></div>
       </div>
       <div class="hero-slide hero-slide-5">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg" data-src="/assets/images/slide5.webp"></div>
       </div>
       <div class="hero-slide hero-slide-6">
-        <div class="hero-slide-bg"></div>
+        <div class="hero-slide-bg" data-src="/assets/images/slide6.webp"></div>
       </div>
     </div>
 
@@ -297,7 +311,8 @@
   <!-- QUÉ ES -->
   <section id="que-es" class="section-light">
     <div class="que-es">
-      <img class="que-es-img" src="assets/images/espacio.webp" alt="Vista general Espacio Timbó" loading="lazy">
+      <img class="que-es-img" src="assets/images/espacio.webp" alt="Vista general Espacio Timbó" loading="lazy"
+        decoding="async">
       <div class="que-es-text">
         <p class="section-eyebrow" data-i18n="que.eyebrow">— Qué es ESPACIO TIMBÓ</p>
         <h2 class="section-title" data-i18n="que.title">Un proyecto<br><em>regenerativo</em></h2>
@@ -421,16 +436,26 @@
         </div>
         <div class="yurta-detail-photo">
           <div class="yurta-slideshow" data-start-index="0">
-            <div class="yurta-slide is-active"><img src="assets/images/ceibo/Ceibo-01.webp" alt="Yurta Ceibo 01"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-02.webp" alt="Yurta Ceibo 02"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-03.webp" alt="Yurta Ceibo 03"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-04.webp" alt="Yurta Ceibo 04"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-05.webp" alt="Yurta Ceibo 05"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-06.webp" alt="Yurta Ceibo 06"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-07.webp" alt="Yurta Ceibo 07"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-08.webp" alt="Yurta Ceibo 08"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-09.webp" alt="Yurta Ceibo 07"></div>
-            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-10.webp" alt="Yurta Ceibo 08"></div>
+            <div class="yurta-slide is-active"><img src="assets/images/ceibo/Ceibo-01.webp" alt="Yurta Ceibo 01"
+                loading="lazy" decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-02.webp" alt="Yurta Ceibo 02" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-03.webp" alt="Yurta Ceibo 03" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-04.webp" alt="Yurta Ceibo 04" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-05.webp" alt="Yurta Ceibo 05" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-06.webp" alt="Yurta Ceibo 06" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-07.webp" alt="Yurta Ceibo 07" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-08.webp" alt="Yurta Ceibo 08" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-09.webp" alt="Yurta Ceibo 07" loading="lazy"
+                decoding="async"></div>
+            <div class="yurta-slide"><img src="assets/images/ceibo/Ceibo-10.webp" alt="Yurta Ceibo 08" loading="lazy"
+                decoding="async"></div>
             <div class="yurta-slide-controls">
               <button type="button" class="yurta-slide-btn prev"><i
                   class="fa-solid fa-circle-chevron-left"></i></button>
@@ -464,19 +489,19 @@
         <div class="yurta-detail-photo">
           <div class="yurta-slideshow" data-start-index="0">
             <div class="yurta-slide is-active"><img src="assets/images/canelon/Canelon01.webp" alt="Yurta Canelón 01"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon02.webp" alt="Yurta Canelón 02"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon03.webp" alt="Yurta Canelón 03"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon04.webp" alt="Yurta Canelón 04"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon06.webp" alt="Yurta Canelón 06"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon07.webp" alt="Yurta Canelón 07"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide"><img src="assets/images/canelon/Canelon08.webp" alt="Yurta Canelón 08"
-                fetchpriority="high"></div>
+                loading="lazy" decoding="async"></div>
             <div class="yurta-slide-controls">
               <button type="button" class="yurta-slide-btn prev"><i
                   class="fa-solid fa-circle-chevron-left"></i></button>
@@ -503,7 +528,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp1.webp" alt="Placeholder">
+              <img src="assets/images/exp1.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -516,7 +541,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp2.webp" alt="Placeholder">
+              <img src="assets/images/exp2.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -529,7 +554,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp3.webp" alt="Placeholder">
+              <img src="assets/images/exp3.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -542,7 +567,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp4.webp" alt="Placeholder">
+              <img src="assets/images/exp4.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -555,7 +580,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp5.webp" alt="Placeholder">
+              <img src="assets/images/exp5.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -568,7 +593,7 @@
         <article class="servicio-item">
           <div class="servicio-visual">
             <div class="servicio-placeholder">
-              <img src="assets/images/exp6.webp" alt="Placeholder">
+              <img src="assets/images/exp6.webp" alt="Placeholder" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="servicio-content">
@@ -585,12 +610,14 @@
   <!-- GALERÍA -->
   <div class="galeria-strip">
     <div class="galeria-track">
-      <div><img src="assets/images/eventos.webp" alt="Talleres y eventos en Espacio Timbó"></div>
-      <div><img src="assets/images/taller.webp" alt="Círculo de aprendizaje en yurta"></div>
-      <div aria-hidden="true"><img src="assets/images/playa.webp" alt=""></div>
-      <div aria-hidden="true"><img src="assets/images/triptych2.webp" alt=""></div>
-      <div aria-hidden="true"><img src="assets/images/eventos.webp" alt=""></div>
-      <div aria-hidden="true"><img src="assets/images/taller.webp" alt=""></div>
+      <div><img src="assets/images/eventos.webp" alt="Talleres y eventos en Espacio Timbó" loading="lazy"
+          decoding="async"></div>
+      <div><img src="assets/images/taller.webp" alt="Círculo de aprendizaje en yurta" loading="lazy"
+          decoding="async"></div>
+      <div aria-hidden="true"><img src="assets/images/playa.webp" alt="" loading="lazy" decoding="async"></div>
+      <div aria-hidden="true"><img src="assets/images/triptych2.webp" alt="" loading="lazy" decoding="async"></div>
+      <div aria-hidden="true"><img src="assets/images/eventos.webp" alt="" loading="lazy" decoding="async"></div>
+      <div aria-hidden="true"><img src="assets/images/taller.webp" alt="" loading="lazy" decoding="async"></div>
     </div>
   </div>
 
@@ -870,7 +897,8 @@
           <p class="section-body section-body-quote" data-i18n="quienes.quote">"Un proyecto de vida que nace del deseo
             de vivir en coherencia con nuestros valores."</p>
         </div>
-        <img class="quienes-foto" src="assets/images/quienes.webp" alt="Julia y Martín">
+        <img class="quienes-foto" src="assets/images/quienes.webp" alt="Julia y Martín" loading="lazy"
+          decoding="async">
       </div>
       <div class="quienes-bios">
         <div>
@@ -1071,14 +1099,17 @@
                   <div class="pago-form-buttons">
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'MercadoPago')"
                       aria-label="MercadoPago">
-                      <img class="pago-icon" src="assets/images/mp.png" alt="MercadoPago" width="32" height="32">
+                      <img class="pago-icon" src="assets/images/mp.png" alt="MercadoPago" width="32" height="32"
+                        loading="lazy" decoding="async">
                     </button>
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'PREX')" aria-label="PREX">
-                      <img class="pago-icon" src="assets/images/prex.png" alt="PREX" width="32" height="32">
+                      <img class="pago-icon" src="assets/images/prex.png" alt="PREX" width="32" height="32"
+                        loading="lazy" decoding="async">
                     </button>
                     <button type="button" class="pago-form-btn" onclick="elegirPago(this, 'PayPal')"
                       aria-label="PayPal">
-                      <img class="pago-icon" src="assets/images/paypal.webp" alt="PayPal" width="32" height="32">
+                      <img class="pago-icon" src="assets/images/paypal.webp" alt="PayPal" width="32" height="32"
+                        loading="lazy" decoding="async">
                     </button>
                   </div>
                   <input type="hidden" id="metodo-pago" name="metodo_pago">
@@ -1172,7 +1203,8 @@
 
   <!-- FOOTER -->
   <footer>
-    <img src="assets/images/logo.png" alt="Logo de Espacio Timbó" class="logo" width="150">
+    <img src="assets/images/logo.png" alt="Logo de Espacio Timbó" class="logo" width="150" loading="lazy"
+      decoding="async">
     <span class="copy" data-i18n="footer.copy">© 2026 Espacio Timbó · Santa Ana, Colonia, Uruguay</span>
   </footer>
 
